@@ -1,0 +1,44 @@
+{
+  "name": "knn",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx watch api/server.ts",
+    "build": "tsc -p tsconfig.json",
+    "build:frontend": "cd frontend && npm run build",
+    "deploy:frontend": "cd frontend && npm run deploy",
+    "deploy:backend": "npm run build && pm2 reload ecosystem.config.js",
+    "deploy": "npm run deploy:frontend && npm run deploy:backend",
+    "start": "node dist/api/server.js",
+    "lint": "eslint ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@eslint/js": "^9.32.0",
+    "@types/bcrypt": "^6.0.0",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^4.17.23",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/morgan": "^1.9.10",
+    "@types/node": "^24.2.0",
+    "@types/sqlite3": "^5.1.0",
+    "eslint": "^9.32.0",
+    "tsx": "^4.20.3",
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.39.0"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "better-sqlite3": "^12.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^4.21.2",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.1",
+    "sqlite3": "^5.1.7"
+  }
+}

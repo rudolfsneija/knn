@@ -8,6 +8,8 @@ interface Prece {
   name: string;
   description: string;
   price?: number;
+  category?: string;
+  available: boolean;
   image_url?: string;
   created_at: string;
   images?: Array<{
@@ -101,19 +103,44 @@ export function PreceDetail() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {(prece.main_image?.url || prece.image_url) && (
-            <div>
-              <img
-                src={prece.main_image?.url || prece.image_url}
-                alt={prece.name}
-                className="w-full object-contain rounded-lg shadow-lg"
-              />
+            <div className="relative flex justify-center">
+              <div className="relative">
+                <img
+                  src={prece.main_image?.url || prece.image_url}
+                  alt={prece.name}
+                  className="max-w-full h-auto object-contain rounded-lg shadow-lg"
+                />
+              </div>
             </div>
           )}
 
           <div className={prece.main_image?.url || prece.image_url ? '' : 'lg:col-span-2'}>
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-              {prece.name}
-            </h1>
+            {prece.category && (
+              <div className="mb-2">
+                <span className="text-xs font-medium text-primary-600 uppercase tracking-wide">
+                  {prece.category}
+                </span>
+              </div>
+            )}
+            
+            <div className="flex items-start justify-between mb-6">
+              <h1 className="text-3xl md:text-4xl font-bold text-gray-900 flex-1">
+                {prece.name}
+              </h1>
+              {!prece.available && !(prece.main_image?.url || prece.image_url) && (
+                <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium ml-4 flex-shrink-0">
+                  Nav pieejams
+                </span>
+              )}
+            </div>
+
+            {!prece.available && (
+              <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+                <p className="text-red-800 font-medium">
+                  Šis produkts pašlaik nav pieejams. Lūdzu, sazinieties ar mums, lai uzzinātu par pieejamību.
+                </p>
+              </div>
+            )}
 
             {prece.price !== undefined && prece.price !== null && (
               <div className="mb-8">
@@ -124,7 +151,6 @@ export function PreceDetail() {
             )}
 
             <div className="mb-8">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">Apraksts</h2>
               <div className="prose prose-lg max-w-none">
                 <div className="whitespace-pre-wrap text-gray-700 leading-relaxed">
                   {prece.description}
@@ -135,20 +161,18 @@ export function PreceDetail() {
             <div>
               <a
                 href="/sazinai"
-                className="block w-full bg-primary-800 text-white py-3 px-6 rounded-lg font-semibold hover:bg-primary-900 transition-colors text-center"
-              >
-                Pieprasīt piedāvājumu
-              </a>
-            </div>
-
-            <div className="mt-8 pt-8 border-t border-gray-200">
-              <p className="text-sm text-gray-500">
-                Pievienots: {new Date(prece.created_at).toLocaleDateString('lv-LV', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric'
+                className={`block w-full py-3 px-6 rounded-lg font-semibold transition-colors text-center ${
+                  prece.available 
+                    ? 'bg-primary-800 text-white hover:bg-primary-900' 
+                    : 'bg-gray-400 text-gray-700 cursor-not-allowed'
+                }`}
+                {...(!prece.available && { 
+                  onClick: (e) => e.preventDefault(),
+                  'aria-disabled': true 
                 })}
-              </p>
+              >
+                {prece.available ? 'Pieprasīt piedāvājumu' : 'Nav pieejams'}
+              </a>
             </div>
           </div>
         </div>

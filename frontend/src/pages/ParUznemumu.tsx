@@ -1,4 +1,4 @@
-import { Check } from 'lucide-react';
+import { Check, Award, Users } from 'lucide-react';
 
 export function ParUznemumu() {
   return (
@@ -8,104 +8,166 @@ export function ParUznemumu() {
         <div className="text-center mb-16">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Par uzņēmumu</h1>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            KNN ir uzticams partneris biznesa attīstībā ar ilggadēju pieredzi un profesionālu komandu
+            KNN serviss - jūsu uzticamais partneris kiberdrošības risinājumos. Latvijā reģistrēts uzņēmums, kas specializējas kiberdrošības risinājumos 
+              uzņēmumiem, pašnodarbinātajiem un privātpersonām.
           </p>
         </div>
 
-        {/* Company Story */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
-          <div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">Mūsu stāsts</h2>
-            <div className="space-y-4 text-gray-700">
-              <p>
-                KNN tika dibināts ar mērķi sniegt kvalitatīvus un inovatīvus risinājumus uzņēmumiem 
-                dažādās nozarēs. Mūsu komanda apvieno ilggadēju pieredzi ar mūsdienīgām tehnoloģijām.
-              </p>
-              <p>
-                Mēs ticam, ka katrs klients ir unikāls, tāpēc piedāvājam individuāli pielāgotus 
-                risinājumus, kas atbilst specifiski jūsu biznesa vajadzībām.
-              </p>
-              <p>
-                Mūsu misija ir palīdzēt uzņēmumiem sasniegt savus mērķus, nodrošinot profesionālu 
-                atbalstu un kvalitatīvus pakalpojumus.
-              </p>
+        {/* Kas ir KNN Serviss */}
+        {/* <div className="mb-16">
+          <h2 className="text-3xl font-bold text-gray-900 mb-6">Kas ir KNN Serviss?</h2>
+          <div className="bg-gray-50 p-8 rounded-lg">
+            <p className="text-lg text-gray-700 leading-relaxed">
+              KNN serviss ir Latvijā reģistrēts uzņēmums, kas specializējas kiberdrošības risinājumos 
+              uzņēmumiem, pašnodarbinātajiem un privātpersonām.
+            </p>
+          </div>
+        </div> */}
+
+        {/* Mūsu pieredze */}
+        <div className="mb-16">
+          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Mūsu pieredze</h2>
+          <div className="grid s:grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="bg-white border border-gray-200 p-6 rounded-lg shadow-sm">
+              <div className="flex items-start">
+                <Check className="w-6 h-6 text-primary-800 mr-3 mt-1 flex-shrink-0" />
+                <span className="text-gray-700">Datortīklu un datorsistēmu administrēšana</span>
+              </div>
             </div>
+            <div className="bg-white border border-gray-200 p-6 rounded-lg shadow-sm">
+              <div className="flex items-start">
+                <Check className="w-6 h-6 text-primary-800 mr-3 mt-1 flex-shrink-0" />
+                <span className="text-gray-700">Virtualizēto un Node sistēmu uzstādīšana un uzturēšana</span>
+              </div>
+            </div>
+            <div className="bg-white border border-gray-200 p-6 rounded-lg shadow-sm">
+              <div className="flex items-start">
+                <Check className="w-6 h-6 text-primary-800 mr-3 mt-1 flex-shrink-0" />
+                <span className="text-gray-700">Uzņēmumā uzstādīto sistēmu monitorings un automātiskā ziņošana</span>
+              </div>
+            </div>
+            <div className="bg-white border border-gray-200 p-6 rounded-lg shadow-sm">
+              <div className="flex items-start">
+                <Check className="w-6 h-6 text-primary-800 mr-3 mt-1 flex-shrink-0" />
+                <span className="text-gray-700">Iestādes iekārtu žurnālierakstu un auditāciju pierakstu centralizēta vākšana</span>
+              </div>
+            </div>
+            <div className="bg-white border border-gray-200 p-6 rounded-lg shadow-sm">
+              <div className="flex items-start">
+                <Check className="w-6 h-6 text-primary-800 mr-3 mt-1 flex-shrink-0" />
+                <span className="text-gray-700">Drošības politiku izstrāde un ieviešana iestādēs</span>
+              </div>
+            </div>
+            <div className="bg-white border border-gray-200 p-6 rounded-lg shadow-sm">
+              <div className="flex items-start">
+                <Check className="w-6 h-6 text-primary-800 mr-3 mt-1 flex-shrink-0" />
+                <span className="text-gray-700">Lietotājdokumentu automatizēšana specifiskām vajadzībām</span>
+              </div>
+            </div>
+            <div className="bg-white border border-gray-200 p-6 rounded-lg shadow-sm">
+              <div className="flex items-start">
+                <Check className="w-6 h-6 text-primary-800 mr-3 mt-1 flex-shrink-0" />
+                <span className="text-gray-700">Mājaslapu izstrāde ar iespēju automatizēt dokumentu aizpildi</span>
+              </div>
+            </div>
+            <div className="bg-white border border-gray-200 p-6 rounded-lg shadow-sm">
+              <div className="flex items-start">
+                <Check className="w-6 h-6 text-primary-800 mr-3 mt-1 flex-shrink-0" />
+                <span className="text-gray-700">Datortehnikas, biroja tehnikas un serveriekārtu iestatīšana un apkalpošana</span>
+              </div>
+            </div>
+            <div className="bg-white border border-gray-200 p-6 rounded-lg shadow-sm">
+              <div className="flex items-start">
+                <Check className="w-6 h-6 text-primary-800 mr-3 mt-1 flex-shrink-0" />
+                <span className="text-gray-700">Biznesa videi paredzētās bezvadu tīkla risinājumu uzstādīšana un uzturēšana</span>
+              </div>
+            </div>
+            <div className="bg-white border border-gray-200 p-6 rounded-lg shadow-sm">
+              <div className="flex items-start">
+                <Check className="w-6 h-6 text-primary-800 mr-3 mt-1 flex-shrink-0" />
+                <span className="text-gray-700">Videonovērošanas sistēmu uzstādīšana, konfigurēšana un automatizācija</span>
+              </div>
+            </div>
+            <div className="bg-white border border-gray-200 p-6 rounded-lg shadow-sm">
+              <div className="flex items-start">
+                <Check className="w-6 h-6 text-primary-800 mr-3 mt-1 flex-shrink-0" />
+                <span className="text-gray-700">Ēkas vadības sistēmas (BMS) izstrāde mazajiem un vidēji lielajiem objektiem</span>
+              </div>
+            </div>
+            <div className="bg-white border border-gray-200 p-6 rounded-lg shadow-sm">
+              <div className="flex items-start">
+                <Check className="w-6 h-6 text-primary-800 mr-3 mt-1 flex-shrink-0" />
+                <span className="text-gray-700">Darbinieku IT jomas un kiberdrošības apmācība</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Sertifikāti */}
+        <div className="mb-16">
+          <div className="text-center mb-8">
+            <Award className="w-12 h-12 text-primary-800 mx-auto mb-4" />
+            <h2 className="text-3xl font-bold text-gray-900">Sertifikāti</h2>
           </div>
           <div className="bg-gray-50 p-8 rounded-lg">
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">Mūsu vērtības</h3>
-            <ul className="space-y-3">
-              <li className="flex items-start">
-                <Check className="w-6 h-6 text-primary-800 mr-3 mt-0.5" />
-                <span><strong>Kvalitāte</strong> - Mēs nekad necompromitējam kvalitāti</span>
-              </li>
-              <li className="flex items-start">
-                <Check className="w-6 h-6 text-primary-800 mr-3 mt-0.5" />
-                <span><strong>Inovācijas</strong> - Vienmēr meklējam jaunus risinājumus</span>
-              </li>
-              <li className="flex items-start">
-                <Check className="w-6 h-6 text-primary-800 mr-3 mt-0.5" />
-                <span><strong>Uzticamība</strong> - Esam uzticami partneri ilgtermiņā</span>
-              </li>
-              <li className="flex items-start">
-                <Check className="w-6 h-6 text-primary-800 mr-3 mt-0.5" />
-                <span><strong>Klientu orientācija</strong> - Klienta vajadzības ir mūsu prioritāte</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        {/* Stats */}
-        <div className="bg-primary-800 text-white rounded-lg p-8 mb-16">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
-            <div>
-              <div className="text-3xl font-bold mb-2">10+</div>
-              <div className="text-primary-100">Gadi pieredzē</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold mb-2">200+</div>
-              <div className="text-primary-100">Projekti</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold mb-2">150+</div>
-              <div className="text-primary-100">Klienti</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold mb-2">24/7</div>
-              <div className="text-primary-100">Atbalsts</div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="flex items-center p-4 bg-white rounded-lg shadow-sm">
+                <Award className="w-8 h-8 text-primary-800 mr-4 flex-shrink-0" />
+                <span className="font-medium text-gray-900">Juniper Networks Certified Associate, Junos (JNCIA-Junos)</span>
+              </div>
+              <div className="flex items-center p-4 bg-white rounded-lg shadow-sm">
+                <Award className="w-8 h-8 text-primary-800 mr-4 flex-shrink-0" />
+                <span className="font-medium text-gray-900">AWS Certified Cloud Practitioner</span>
+              </div>
+              <div className="flex items-center p-4 bg-white rounded-lg shadow-sm">
+                <Award className="w-8 h-8 text-primary-800 mr-4 flex-shrink-0" />
+                <span className="font-medium text-gray-900">CCNA</span>
+              </div>
+              <div className="flex items-center p-4 bg-white rounded-lg shadow-sm">
+                <Award className="w-8 h-8 text-primary-800 mr-4 flex-shrink-0" />
+                <span className="font-medium text-gray-900">MikroTik Certified Network Associate (MTCNA)</span>
+              </div>
+              <div className="flex items-center p-4 bg-white rounded-lg shadow-sm md:col-span-2">
+                <Award className="w-8 h-8 text-primary-800 mr-4 flex-shrink-0" />
+                <span className="font-medium text-gray-900">MikroTik Certified Routing Engineer (MTCRE)</span>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Team */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">Mūsu komanda</h2>
-          <p className="text-lg text-gray-600">
-            Profesionāļi ar plašu pieredzi dažādās jomās
-          </p>
+        {/* Sadarbības partneri */}
+        <div className="mb-16">
+          <div className="text-center mb-8">
+            <Users className="w-12 h-12 text-primary-800 mx-auto mb-4" />
+            <h2 className="text-3xl font-bold text-gray-900">Sadarbības partneri</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-white border border-gray-200 p-6 rounded-lg shadow-sm text-center">
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">NEIJA T</h3>
+              <p className="text-gray-700">
+                Kvadraciklu būve, kā arī motoru, amortizatoru serviss ar bagātu pieredzi motosportā.
+              </p>
+            </div>
+            <div className="bg-white border border-gray-200 p-6 rounded-lg shadow-sm text-center">
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">Maksikoms</h3>
+              <p className="text-gray-700">
+                SIA Maksikoms tika nodibināta 1998. gadā ar mērķi sniegt augstas kvalitātes IT pakalpojumus 
+                korporatīvajiem klientiem. Uzņēmuma veidotie IT risinājumi ļauj mūsu klientiem optimizēt darbu, 
+                ietaupīt laiku un līdzekļus dažādu uzdevumu risināšanā.
+              </p>
+            </div>
+            <div className="bg-white border border-gray-200 p-6 rounded-lg shadow-sm text-center">
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">FINSEL</h3>
+              <p className="text-gray-700">
+                SIA FINSEL ir profesionāls grāmatvedības uzņēmums, kas piedāvā plašu pakalpojumu klāstu, 
+                tostarp grāmatvedības uzskaiti, nodokļu konsultācijas un finanšu analīzi. Mūsu komanda 
+                apvieno pieredzi un zināšanas, lai nodrošinātu klientiem individuālus risinājumus.
+              </p>
+            </div>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-          <div className="text-center">
-            <div className="w-32 h-32 bg-gray-300 rounded-full mx-auto mb-4"></div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">Jānis Bērziņš</h3>
-            <p className="text-gray-600 mb-2">Vadītājs</p>
-            <p className="text-sm text-gray-500">15 gadi pieredzē biznesa konsultācijās</p>
-          </div>
-          <div className="text-center">
-            <div className="w-32 h-32 bg-gray-300 rounded-full mx-auto mb-4"></div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">Līga Kalnēja</h3>
-            <p className="text-gray-600 mb-2">IT vadītāja</p>
-            <p className="text-sm text-gray-500">Eksperience tehnoloģiju risinājumos</p>
-          </div>
-          <div className="text-center">
-            <div className="w-32 h-32 bg-gray-300 rounded-full mx-auto mb-4"></div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">Māris Ozols</h3>
-            <p className="text-gray-600 mb-2">Projektu vadītājs</p>
-            <p className="text-sm text-gray-500">Specializējas lielu projektu vadībā</p>
-          </div>
-        </div>
-
-        {/* Poga */}
+        {/* Call to Action */}
         <div className="bg-gray-50 rounded-lg p-8 text-center">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">
             Gatavi sākt sadarbību?

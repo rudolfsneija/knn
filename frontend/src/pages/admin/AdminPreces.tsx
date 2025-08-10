@@ -163,7 +163,7 @@ export function AdminPreces() {
       });
 
       await Promise.all(uploadPromises);
-      fetchPreces(); // Refresh to show uploaded images
+      // Don't fetch here - let the calling function handle the refresh
     } catch (error) {
       console.error('Error uploading images:', error);
       if (axios.isAxiosError(error)) {
@@ -220,11 +220,15 @@ export function AdminPreces() {
         await uploadImages(produktId, selectedImages);
       }
 
+      // Reset form and refresh data
       setFormData({ name: '', description: '', price: '', category: '', available: true, featured: false });
       setSelectedImages(null);
       setShowForm(false);
       setEditingId(null);
-      fetchPreces();
+      setShowCategoryInput(false); // Reset category input state
+      
+      // Refresh products and categories
+      await fetchPreces();
     } catch (error) {
       console.error('Error saving prece:', error);
       if (axios.isAxiosError(error)) {
@@ -256,7 +260,8 @@ export function AdminPreces() {
     
     // Check if the category exists in the dropdown or if we need to show input
     const categoryExists = existingCategories.includes(prece.category || '');
-    setShowCategoryInput(!categoryExists && (prece.category || '') !== '');
+    const hasCategory = (prece.category || '') !== '';
+    setShowCategoryInput(!categoryExists && hasCategory);
   };
 
   const handleDelete = async (id: number) => {
@@ -436,10 +441,11 @@ export function AdminPreces() {
                       {existingCategories.length > 0 ? (
                         <div className="space-y-2">
                           <select
-                            value={showCategoryInput ? 'new' : formData.category}
+                            value={showCategoryInput ? 'new' : (formData.category || '')}
                             onChange={handleCategoryChange}
                             className="admin-input w-full"
                           >
+                            <option value="">-- Izvēlieties kategoriju --</option>
                             {existingCategories.map((category) => (
                               <option key={category} value={category}>
                                 {category}
@@ -463,7 +469,7 @@ export function AdminPreces() {
                           type="text"
                           value={formData.category}
                           onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                          className="admin-input"
+                          className="admin-input w-full"
                           placeholder="Produkta kategorija"
                         />
                       )}

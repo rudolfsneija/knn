@@ -4,9 +4,15 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
-            <h3 className="text-lg font-semibold mb-4">KNN</h3>
+            <div className="mb-4">
+              <img 
+                src="/knn-small-logo.svg" 
+                alt="KNN Logo" 
+                className="h-24"
+              />
+            </div>
             <p className="text-secondary-100">
-              Uzticams partneris jūsu biznesa attīstībai
+              Mūsu darbs - Jūsu drošība
             </p>
           </div>
           
@@ -24,7 +30,6 @@ export function Footer() {
             <h3 className="text-lg font-semibold mb-4">Kontakti</h3>
             <p className="text-secondary-100">
               E-pasts: info@knn.lv<br />
-              Tālrunis: +371 20000000
             </p>
           </div>
         </div>

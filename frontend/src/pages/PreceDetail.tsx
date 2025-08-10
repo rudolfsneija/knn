@@ -7,9 +7,29 @@ interface Prece {
   id: number;
   name: string;
   description: string;
-  price: number;
+  price?: number;
   image_url?: string;
   created_at: string;
+  images?: Array<{
+    id: number;
+    uuid: string;
+    url: string;
+    original_name: string;
+    file_size: number;
+    width: number;
+    height: number;
+    is_main: boolean;
+  }>;
+  main_image?: {
+    id: number;
+    uuid: string;
+    url: string;
+    original_name: string;
+    file_size: number;
+    width: number;
+    height: number;
+    is_main: boolean;
+  };
 }
 
 export function PreceDetail() {
@@ -80,26 +100,28 @@ export function PreceDetail() {
         </Link>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {prece.image_url && (
+          {(prece.main_image?.url || prece.image_url) && (
             <div>
               <img
-                src={prece.image_url}
+                src={prece.main_image?.url || prece.image_url}
                 alt={prece.name}
-                className="w-full h-96 object-cover rounded-lg shadow-lg"
+                className="w-full object-contain rounded-lg shadow-lg"
               />
             </div>
           )}
 
-          <div className={prece.image_url ? '' : 'lg:col-span-2'}>
+          <div className={prece.main_image?.url || prece.image_url ? '' : 'lg:col-span-2'}>
             <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
               {prece.name}
             </h1>
 
-            <div className="mb-8">
-              <span className="text-4xl font-bold text-primary-800">
-                €{prece.price.toFixed(2)}
-              </span>
-            </div>
+            {prece.price !== undefined && prece.price !== null && (
+              <div className="mb-8">
+                <span className="text-4xl font-bold text-primary-800">
+                  €{prece.price.toFixed(2)}
+                </span>
+              </div>
+            )}
 
             <div className="mb-8">
               <h2 className="text-xl font-semibold text-gray-900 mb-4">Apraksts</h2>
@@ -110,15 +132,12 @@ export function PreceDetail() {
               </div>
             </div>
 
-            <div className="space-y-4">
-              <button className="w-full bg-primary-800 text-white py-3 px-6 rounded-lg font-semibold hover:bg-primary-900 transition-colors">
-                Pieprasīt piedāvājumu
-              </button>
+            <div>
               <a
                 href="/sazinai"
-                className="block w-full border-2 border-primary-800 text-primary-800 py-3 px-6 rounded-lg font-semibold hover:bg-primary-50 transition-colors text-center"
+                className="block w-full bg-primary-800 text-white py-3 px-6 rounded-lg font-semibold hover:bg-primary-900 transition-colors text-center"
               >
-                Sazināties par šo preci
+                Pieprasīt piedāvājumu
               </a>
             </div>
 

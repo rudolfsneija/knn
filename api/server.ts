@@ -3,6 +3,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import { config } from 'dotenv';
+import * as path from 'path';
 import { initDatabase } from './db/database';
 import { errorHandler } from './middleware/errorHandler';
 
@@ -11,6 +12,7 @@ import userRoutes from './routes/userRoutes';
 import authRoutes from './routes/authRoutes';
 import aktualitatesRoutes from './routes/aktualitatesRoutes';
 import produktiRoutes from './routes/produktiRoutes';
+import imageRoutes from './routes/imageRoutes';
 
 // Load environment variables
 if (process.env.NODE_ENV === 'development') {
@@ -45,11 +47,17 @@ app.get('/health', (req, res) => {
   });
 });
 
+// Serve test upload page
+app.get('/test-upload', (req, res) => {
+  res.sendFile(path.join(process.cwd(), 'test-upload.html'));
+});
+
 // API Routes
 app.use('/api/users', userRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/aktualitates', aktualitatesRoutes);
 app.use('/api/produkti', produktiRoutes);
+app.use('/api', imageRoutes);
 
 // 404 handler - use a more specific pattern instead of *
 app.all('*', (req, res) => {

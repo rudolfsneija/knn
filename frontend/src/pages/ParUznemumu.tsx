@@ -105,7 +105,7 @@ export function ParUznemumu() {
           </div>
         </div>
 
-        {/* CTA */}
+        {/* Poga */}
         <div className="bg-gray-50 rounded-lg p-8 text-center">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">
             Gatavi sākt sadarbību?

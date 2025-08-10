@@ -1,4 +1,4 @@
-import { CheckCircle, Zap, Users } from 'lucide-react';
+import { FileText, GraduationCap, Wifi, Cctv } from 'lucide-react';
 
 export function Home() {
   return (
@@ -31,57 +31,54 @@ export function Home() {
         </div>
       </div>
 
-      {/* Features Section */}
+      {/* Pakalpojumi Section */}
       <div className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Mūsu pakalpojumi
+              Pakalpojumi
             </h2>
-            {/* <p className="text-lg text-gray-600">
-              Profesionāli risinājumi jūsu uzņēmuma vajadzībām
-            </p> */}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="text-center p-6 bg-secondary-100 rounded-lg">
               <div className="w-16 h-16 bg-primary-800 rounded-full mx-auto mb-4 flex items-center justify-center">
-                <CheckCircle className="w-8 h-8 text-white" />
+                <FileText className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-xl font-semibold mb-2">NKL prasību realizēšana</h3>
-              {/* <p className="text-gray-600">
-                Mēs nodrošinām augstāko kvalitāti visos mūsu pakalpojumos
-              </p> */}
+              <p className="text-gray-600">
+                Nodrošinām obligāto minimālo kiberdrošības prasību ieviešanu un dokumentu kārtošanu visu veidu uzņēmumos.
+              </p>
             </div>
 
             <div className="text-center p-6 bg-secondary-100 rounded-lg">
               <div className="w-16 h-16 bg-primary-800 rounded-full mx-auto mb-4 flex items-center justify-center">
-                <Zap className="w-8 h-8 text-white" />
+                <GraduationCap className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">Uzņēmumu IT drošība</h3>
-              {/* <p className="text-gray-600">
-                Ātri un efektīvi risinājumi jūsu biznesa vajadzībām
-              </p> */}
+              <h3 className="text-xl font-semibold mb-2">IT drošības apmācības</h3>
+              <p className="text-gray-600">
+                Nodrošinām IT drošības apmācības darbiniekiem, koncentrējoties uz svarīgākajiem mūsdienu kiberdrošības aspektiem.
+              </p>
             </div>
 
             <div className="text-center p-6 bg-secondary-100 rounded-lg">
               <div className="w-16 h-16 bg-primary-800 rounded-full mx-auto mb-4 flex items-center justify-center">
-                <Users className="w-8 h-8 text-white" />
+                <Wifi className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">Biznesa Wi-Fi risinājumi</h3>
-              {/* <p className="text-gray-600">
-                Nepārtraukts klientu atbalsts un profesionālas konsultācijas
-              </p> */}
+              <h3 className="text-xl font-semibold mb-2">Bezvadu Wi-Fi risinājumi</h3>
+              <p className="text-gray-600">
+                Piedāvājam modernu industrijas bezvada tīkla risinājumu, kurš aptver vairākas drošības iespējas un aktuālākās tehniskās iespējas plašam klientu lokam.
+              </p>
             </div>
 
             <div className="text-center p-6 bg-secondary-100 rounded-lg">
               <div className="w-16 h-16 bg-primary-800 rounded-full mx-auto mb-4 flex items-center justify-center">
-                <Users className="w-8 h-8 text-white" />
+                <Cctv className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-xl font-semibold mb-2">Videonovērošanas sistēmas</h3>
-              {/* <p className="text-gray-600">
-                Nepārtraukts klientu atbalsts un profesionālas konsultācijas
-              </p> */}
+              <p className="text-gray-600">
+                Nodarbojamies ar videonovērošanas sistēmu izplatīšanu, uzstādīšanu un nomu dažāda veida objektiem.
+              </p>
             </div>
           </div>
         </div>

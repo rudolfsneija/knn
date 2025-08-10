@@ -107,3 +107,36 @@ export interface UpdateProduktsRequest {
   available?: boolean;
   featured?: boolean;
 }
+
+// Image interfaces
+export interface ImageRecord {
+  id: number;
+  uuid: string;
+  original_name: string;
+  file_name: string;
+  file_path: string;
+  file_size: number;
+  mime_type: string;
+  width: number;
+  height: number;
+  entity_type: 'produkti' | 'aktualitates';
+  entity_id: number;
+  is_main: boolean;
+  admin_id: number;
+  created_at: string;
+}
+
+export interface ImageUploadResponse {
+  success: boolean;
+  data?: {
+    id: number;
+    uuid: string;
+    url: string;
+    original_name: string;
+    file_size: number;
+    width: number;
+    height: number;
+    is_main: boolean;
+  };
+  error?: string;
+}

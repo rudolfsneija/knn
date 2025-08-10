@@ -2,6 +2,7 @@ import express from 'express';
 import { query, queryAll, run } from '../db/database';
 import { requireAuth } from '../middleware/auth';
 import { Produkts, CreateProduktsRequest, UpdateProduktsRequest } from '../types';
+import { getEntityImages, getImageUrl } from '../utils/imageUpload';
 
 const router = express.Router();
 
@@ -44,11 +45,29 @@ router.get('/', async (req, res) => {
 
     const produkti = await queryAll(sql, params);
     
-    // Parse JSON fields
-    const parsedProdukti = produkti.map(product => ({
-      ...product,
-      gallery_urls: product.gallery_urls ? JSON.parse(product.gallery_urls) : [],
-      specifications: product.specifications ? JSON.parse(product.specifications) : {}
+    // Parse JSON fields and add images
+    const parsedProdukti = await Promise.all(produkti.map(async product => {
+      const images = await getEntityImages('produkti', product.id);
+      const formattedImages = images.map(img => ({
+        id: img.id,
+        uuid: img.uuid,
+        url: getImageUrl(img.file_path),
+        original_name: img.original_name,
+        file_size: img.file_size,
+        width: img.width,
+        height: img.height,
+        is_main: Boolean(img.is_main),
+      }));
+
+      return {
+        ...product,
+        available: Boolean(product.available),
+        featured: Boolean(product.featured),
+        gallery_urls: product.gallery_urls ? JSON.parse(product.gallery_urls) : [],
+        specifications: product.specifications ? JSON.parse(product.specifications) : {},
+        images: formattedImages,
+        main_image: formattedImages.find(img => img.is_main) || formattedImages[0] || null,
+      };
     }));
     
     res.json({
@@ -83,11 +102,26 @@ router.get('/:id', async (req, res) => {
       });
     }
 
+    // Get images for this product
+    const images = await getEntityImages('produkti', product.id);
+    const formattedImages = images.map(img => ({
+      id: img.id,
+      uuid: img.uuid,
+      url: getImageUrl(img.file_path),
+      original_name: img.original_name,
+      file_size: img.file_size,
+      width: img.width,
+      height: img.height,
+      is_main: Boolean(img.is_main),
+    }));
+
     // Parse JSON fields
     const parsedProduct = {
       ...product,
       gallery_urls: product.gallery_urls ? JSON.parse(product.gallery_urls) : [],
-      specifications: product.specifications ? JSON.parse(product.specifications) : {}
+      specifications: product.specifications ? JSON.parse(product.specifications) : {},
+      images: formattedImages,
+      main_image: formattedImages.find(img => img.is_main) || formattedImages[0] || null,
     };
 
     res.json({
@@ -199,7 +233,7 @@ router.put('/:id', requireAuth, async (req, res) => {
       UPDATE produkti 
       SET name = COALESCE(?, name),
           description = COALESCE(?, description),
-          price = COALESCE(?, price),
+          price = ?,
           category = COALESCE(?, category),
           image_url = COALESCE(?, image_url),
           gallery_urls = COALESCE(?, gallery_urls),
@@ -211,7 +245,7 @@ router.put('/:id', requireAuth, async (req, res) => {
     `, [
       name, 
       description, 
-      price, 
+      price !== undefined ? price : null,
       category, 
       image_url,
       gallery_urls ? JSON.stringify(gallery_urls) : null,

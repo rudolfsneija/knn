@@ -2,6 +2,7 @@ import express from 'express';
 import { query, queryAll, run } from '../db/database';
 import { requireAuth } from '../middleware/auth';
 import { Aktualitate, CreateAktualitateRequest, UpdateAktualitateRequest } from '../types';
+import { getEntityImages, getImageUrl } from '../utils/imageUpload';
 
 const router = express.Router();
 
@@ -27,10 +28,32 @@ router.get('/', async (req, res) => {
 
     const aktualitates = await queryAll(sql, params);
     
+    // Add images to each aktualitate
+    const aktualitatesWithImages = await Promise.all(aktualitates.map(async aktualitate => {
+      const images = await getEntityImages('aktualitates', aktualitate.id);
+      const formattedImages = images.map(img => ({
+        id: img.id,
+        uuid: img.uuid,
+        url: getImageUrl(img.file_path),
+        original_name: img.original_name,
+        file_size: img.file_size,
+        width: img.width,
+        height: img.height,
+        is_main: Boolean(img.is_main),
+      }));
+
+      return {
+        ...aktualitate,
+        published: Boolean(aktualitate.published),
+        images: formattedImages,
+        main_image: formattedImages.find(img => img.is_main) || formattedImages[0] || null,
+      };
+    }));
+    
     res.json({
       success: true,
-      count: aktualitates.length,
-      data: aktualitates
+      count: aktualitatesWithImages.length,
+      data: aktualitatesWithImages
     });
   } catch (error) {
     console.error('Error fetching aktualitates:', error);
@@ -59,9 +82,28 @@ router.get('/:id', async (req, res) => {
       });
     }
 
+    // Get images for this aktualitate
+    const images = await getEntityImages('aktualitates', aktualitate.id);
+    const formattedImages = images.map(img => ({
+      id: img.id,
+      uuid: img.uuid,
+      url: getImageUrl(img.file_path),
+      original_name: img.original_name,
+      file_size: img.file_size,
+      width: img.width,
+      height: img.height,
+      is_main: Boolean(img.is_main),
+    }));
+
+    const aktualitateWithImages = {
+      ...aktualitate,
+      images: formattedImages,
+      main_image: formattedImages.find(img => img.is_main) || formattedImages[0] || null,
+    };
+
     res.json({
       success: true,
-      data: aktualitate
+      data: aktualitateWithImages
     });
   } catch (error) {
     console.error('Error fetching aktualitate:', error);

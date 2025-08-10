@@ -133,6 +133,27 @@ async function createTables(): Promise<void> {
     )
   `);
 
+  // Images table for storing uploaded images with metadata
+  await runAsync(`
+    CREATE TABLE IF NOT EXISTS images (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      uuid VARCHAR(36) UNIQUE NOT NULL,
+      original_name VARCHAR(255) NOT NULL,
+      file_name VARCHAR(255) NOT NULL,
+      file_path VARCHAR(500) NOT NULL,
+      file_size INTEGER NOT NULL,
+      mime_type VARCHAR(100) NOT NULL,
+      width INTEGER,
+      height INTEGER,
+      entity_type VARCHAR(50) NOT NULL, -- 'produkts' or 'aktualitates'
+      entity_id INTEGER NOT NULL,
+      is_main BOOLEAN DEFAULT 0, -- Main image for the entity
+      admin_id INTEGER NOT NULL,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (admin_id) REFERENCES users(id) ON DELETE CASCADE
+    )
+  `);
+
   // Create indexes for better performance
   await runAsync(`CREATE INDEX IF NOT EXISTS idx_users_email ON users(email)`);
   await runAsync(`CREATE INDEX IF NOT EXISTS idx_users_username ON users(username)`);
@@ -142,6 +163,9 @@ async function createTables(): Promise<void> {
   await runAsync(`CREATE INDEX IF NOT EXISTS idx_produkti_available ON produkti(available)`);
   await runAsync(`CREATE INDEX IF NOT EXISTS idx_produkti_featured ON produkti(featured)`);
   await runAsync(`CREATE INDEX IF NOT EXISTS idx_produkti_category ON produkti(category)`);
+  await runAsync(`CREATE INDEX IF NOT EXISTS idx_images_entity ON images(entity_type, entity_id)`);
+  await runAsync(`CREATE INDEX IF NOT EXISTS idx_images_uuid ON images(uuid)`);
+  await runAsync(`CREATE INDEX IF NOT EXISTS idx_images_admin_id ON images(admin_id)`);
 
   console.log('Database tables created successfully');
 }

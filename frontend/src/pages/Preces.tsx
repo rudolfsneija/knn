@@ -6,9 +6,29 @@ interface Prece {
   id: number;
   name: string;
   description: string;
-  price: number;
+  price?: number;
   image_url?: string;
   created_at: string;
+  images?: Array<{
+    id: number;
+    uuid: string;
+    url: string;
+    original_name: string;
+    file_size: number;
+    width: number;
+    height: number;
+    is_main: boolean;
+  }>;
+  main_image?: {
+    id: number;
+    uuid: string;
+    url: string;
+    original_name: string;
+    file_size: number;
+    width: number;
+    height: number;
+    is_main: boolean;
+  };
 }
 
 export function Preces() {
@@ -60,38 +80,31 @@ export function Preces() {
             <p className="text-gray-600 text-lg">Pašlaik nav pieejamas preces.</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
             {preces.map((prece) => (
-              <div key={prece.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                {prece.image_url && (
+              <Link 
+                key={prece.id} 
+                to={`/preces/${prece.id}`}
+                className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow block"
+              >
+                {(prece.main_image?.url || prece.image_url) && (
                   <img
-                    src={prece.image_url}
+                    src={prece.main_image?.url || prece.image_url}
                     alt={prece.name}
-                    className="w-full h-48 object-cover"
+                    className="w-full object-contain"
                   />
                 )}
                 <div className="p-6">
-                  <h2 className="text-xl font-semibold text-gray-900 mb-2">
+                  <h2 className="text-xl font-semibold text-gray-900">
                     {prece.name}
                   </h2>
-                  <p className="text-gray-600 mb-4 line-clamp-3">
-                    {prece.description.length > 150
-                      ? `${prece.description.substring(0, 150)}...`
-                      : prece.description}
-                  </p>
-                  <div className="flex justify-between items-center">
+                  {prece.price !== undefined && prece.price !== null && (
                     <span className="text-2xl font-bold text-primary-800">
                       €{prece.price.toFixed(2)}
                     </span>
-                    <Link
-                      to={`/preces/${prece.id}`}
-                      className="bg-primary-800 text-white px-4 py-2 rounded-lg hover:bg-primary-900 transition-colors"
-                    >
-                      Skatīt detaļas
-                    </Link>
-                  </div>
+                  )}
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         )}

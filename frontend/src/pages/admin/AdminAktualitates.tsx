@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { useTheme } from '../../contexts/ThemeContext';
@@ -8,8 +8,30 @@ interface Aktualitate {
   id: number;
   title: string;
   content: string;
+  excerpt?: string;
   image_url?: string;
+  published: boolean;
   created_at: string;
+  images?: Array<{
+    id: number;
+    uuid: string;
+    url: string;
+    original_name: string;
+    file_size: number;
+    width: number;
+    height: number;
+    is_main: boolean;
+  }>;
+  main_image?: {
+    id: number;
+    uuid: string;
+    url: string;
+    original_name: string;
+    file_size: number;
+    width: number;
+    height: number;
+    is_main: boolean;
+  } | null;
 }
 
 export function AdminAktualitates() {
@@ -23,25 +45,43 @@ export function AdminAktualitates() {
   const [formData, setFormData] = useState({
     title: '',
     content: '',
-    image_url: ''
+    excerpt: '',
+    published: false
   });
+  const [selectedImages, setSelectedImages] = useState<FileList | null>(null);
+
+  // Cleanup object URLs to prevent memory leaks
+  useEffect(() => {
+    return () => {
+      if (selectedImages) {
+        Array.from(selectedImages).forEach(file => {
+          URL.revokeObjectURL(URL.createObjectURL(file));
+        });
+      }
+    };
+  }, [selectedImages]);
 
   // Set admin theme when component mounts
   useEffect(() => {
     setTheme('admin');
   }, [setTheme]);
 
-  useEffect(() => {
-    if (!user) {
-      navigate('/admin/login');
-      return;
-    }
-    fetchAktualitates();
-  }, [user, navigate]);
-
-  const fetchAktualitates = async () => {
+  const fetchAktualitates = useCallback(async () => {
     try {
-      const response = await axios.get('/api/aktualitates');
+      const token = localStorage.getItem('admin-token');
+      console.log('Auth token:', token ? 'Present' : 'Missing');
+      
+      if (!token) {
+        console.error('No authentication token found');
+        navigate('/admin/login');
+        return;
+      }
+
+      const response = await axios.get('/api/aktualitates', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
       if (response.data.success) {
         setAktualitates(response.data.data);
       } else {
@@ -49,25 +89,79 @@ export function AdminAktualitates() {
       }
     } catch (error) {
       console.error('Error fetching aktualitātes:', error);
+      if (axios.isAxiosError(error) && (error.response?.status === 401 || error.response?.status === 403)) {
+        console.error('Authentication failed, removing token and redirecting to login');
+        localStorage.removeItem('admin-token');
+        localStorage.removeItem('admin-user');
+        navigate('/admin/login');
+      }
     } finally {
       setLoading(false);
+    }
+  }, [navigate]);
+
+  useEffect(() => {
+    if (!user) {
+      navigate('/admin/login');
+      return;
+    }
+    fetchAktualitates();
+  }, [user, navigate, fetchAktualitates]);  const uploadImages = async (aktualitateId: number, files: FileList) => {
+    try {
+      const token = localStorage.getItem('admin-token');
+      const uploadPromises = Array.from(files).map(async (file, index) => {
+        const formData = new FormData();
+        formData.append('image', file);
+        formData.append('isMain', index === 0 ? 'true' : 'false'); // First image is main
+
+        return axios.post(`/api/aktualitates/${aktualitateId}/images`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${token}`
+          }
+        });
+      });
+
+      await Promise.all(uploadPromises);
+      fetchAktualitates(); // Refresh to show uploaded images
+    } catch (error) {
+      console.error('Error uploading images:', error);
+      alert('Kļūda augšupielādējot attēlus');
     }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
+      const token = localStorage.getItem('admin-token');
+      const headers = {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      };
+
+      let aktualitateId: number;
+      
       if (editingId) {
-        await axios.put(`/api/aktualitates/${editingId}`, formData);
+        await axios.put(`/api/aktualitates/${editingId}`, formData, { headers });
+        aktualitateId = editingId;
       } else {
-        await axios.post('/api/aktualitates', formData);
+        const response = await axios.post('/api/aktualitates', formData, { headers });
+        aktualitateId = response.data.data.id;
       }
-      setFormData({ title: '', content: '', image_url: '' });
+
+      // Upload images if any are selected
+      if (selectedImages && selectedImages.length > 0) {
+        await uploadImages(aktualitateId, selectedImages);
+      }
+
+      setFormData({ title: '', content: '', excerpt: '', published: false });
+      setSelectedImages(null);
       setShowForm(false);
       setEditingId(null);
       fetchAktualitates();
     } catch (error) {
       console.error('Error saving aktualitāte:', error);
+      alert('Kļūda saglabājot aktualitāti');
     }
   };
 
@@ -75,7 +169,8 @@ export function AdminAktualitates() {
     setFormData({
       title: aktualitate.title,
       content: aktualitate.content,
-      image_url: aktualitate.image_url || ''
+      excerpt: aktualitate.excerpt || '',
+      published: aktualitate.published
     });
     setEditingId(aktualitate.id);
     setShowForm(true);
@@ -84,16 +179,23 @@ export function AdminAktualitates() {
   const handleDelete = async (id: number) => {
     if (window.confirm('Vai tiešām vēlaties dzēst šo aktualitāti?')) {
       try {
-        await axios.delete(`/api/aktualitates/${id}`);
+        const token = localStorage.getItem('admin-token');
+        await axios.delete(`/api/aktualitates/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
         fetchAktualitates();
       } catch (error) {
         console.error('Error deleting aktualitāte:', error);
+        alert('Kļūda dzēšot aktualitāti');
       }
     }
   };
 
   const resetForm = () => {
-    setFormData({ title: '', content: '', image_url: '' });
+    setFormData({ title: '', content: '', excerpt: '', published: false });
+    setSelectedImages(null);
     setEditingId(null);
     setShowForm(false);
   };
@@ -151,7 +253,8 @@ export function AdminAktualitates() {
                 onClick={() => {
                   setShowForm(false);
                   setEditingId(null);
-                  setFormData({ title: '', content: '', image_url: '' });
+                  setFormData({ title: '', content: '', excerpt: '', published: false });
+                  setSelectedImages(null);
                 }}
                 className="text-admin-text-secondary hover:text-admin-text-primary transition-colors"
               >
@@ -161,60 +264,177 @@ export function AdminAktualitates() {
           </div>
 
           {showForm && (
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-admin-text-secondary mb-2">
-                  Virsraksts *
-                </label>
-                <input
-                  type="text"
-                  required
-                  value={formData.title}
-                  onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                  className="admin-input"
-                />
-              </div>
+            <form onSubmit={handleSubmit} className="mt-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                {/* Left Column - Form Fields */}
+                <div className="space-y-6">
+                  {/* Title Field - Full Width */}
+                  <div>
+                    <label className="block text-sm font-medium text-admin-text-secondary mb-2">
+                      Virsraksts *
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={formData.title}
+                      onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                      className="admin-input w-full"
+                    />
+                  </div>
 
-              <div>
-                <label className="block text-sm font-medium text-admin-text-secondary mb-2">
-                  Saturs *
-                </label>
-                <textarea
-                  required
-                  rows={6}
-                  value={formData.content}
-                  onChange={(e) => setFormData({ ...formData, content: e.target.value })}
-                  className="admin-input"
-                />
-              </div>
+                  {/* Content Field - Full Width */}
+                  <div>
+                    <label className="block text-sm font-medium text-admin-text-secondary mb-2">
+                      Saturs *
+                    </label>
+                    <textarea
+                      required
+                      rows={6}
+                      value={formData.content}
+                      onChange={(e) => setFormData({ ...formData, content: e.target.value })}
+                      className="admin-input w-full resize-none"
+                    />
+                  </div>
 
-              <div>
-                <label className="block text-sm font-medium text-admin-text-secondary mb-2">
-                  Attēla URL
-                </label>
-                <input
-                  type="url"
-                  value={formData.image_url}
-                  onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
-                  className="admin-input"
-                  placeholder="https://example.com/image.jpg"
-                />
-              </div>
+                  {/* Excerpt Field - Full Width */}
+                  <div>
+                    <label className="block text-sm font-medium text-admin-text-secondary mb-2">
+                      Īss apraksts (excerpt)
+                    </label>
+                    <textarea
+                      rows={2}
+                      value={formData.excerpt}
+                      onChange={(e) => setFormData({ ...formData, excerpt: e.target.value })}
+                      className="admin-input w-full resize-none"
+                      placeholder="Īss aktualitātes apraksts priekšskatījumam"
+                    />
+                  </div>
 
-              <div className="flex space-x-4">
-                <button
-                  type="submit"
-                  className="admin-button-primary"
-                >
-                  {editingId ? 'Atjaunināt' : 'Pievienot'}
-                </button>
-                <button
-                  type="button"
-                  onClick={resetForm}
-                  className="admin-button-secondary"
-                >
-                  Atcelt
-                </button>
+                  <div className="flex flex-col sm:flex-row sm:space-x-6 space-y-4 sm:space-y-0">
+                    <label className="flex items-center">
+                      <input
+                        type="checkbox"
+                        checked={formData.published}
+                        onChange={(e) => setFormData({ ...formData, published: e.target.checked })}
+                        className="mr-2 h-4 w-4"
+                      />
+                      <span className="text-sm font-medium text-admin-text-secondary">
+                        Publicēt uzreiz
+                      </span>
+                    </label>
+                  </div>
+
+                  <div className="flex space-x-4 pt-4">
+                    <button
+                      type="submit"
+                      className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-medium transition-colors"
+                    >
+                      {editingId ? 'Atjaunināt' : 'Pievienot'}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={resetForm}
+                      className="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg font-medium transition-colors"
+                    >
+                      Atcelt
+                    </button>
+                  </div>
+                </div>
+
+                {/* Right Column - Images */}
+                <div className="space-y-6">
+                  <div>
+                    <label className="block text-sm font-medium text-admin-text-secondary mb-2">
+                      Attēli
+                    </label>
+                    <input
+                      type="file"
+                      multiple
+                      accept="image/*"
+                      onChange={(e) => setSelectedImages(e.target.files)}
+                      className="admin-input w-full"
+                    />
+                    <p className="text-sm text-admin-text-secondary mt-1">
+                      Var izvēlēties vairākus attēlus. Pirmais būs galvenais attēls.
+                    </p>
+                  </div>
+
+                  {/* Image Previews */}
+                  {selectedImages && selectedImages.length > 0 && (
+                    <div>
+                      <h4 className="text-sm font-medium text-admin-text-secondary mb-3">
+                        Izvēlētie attēli:
+                      </h4>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        {Array.from(selectedImages).map((file, index) => (
+                          <div key={index} className="relative group">
+                            <div className="aspect-square rounded-lg overflow-hidden border-2 border-admin-border">
+                              <img
+                                src={URL.createObjectURL(file)}
+                                alt={`Preview ${index + 1}`}
+                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
+                              />
+                            </div>
+                            {index === 0 && (
+                              <span className="absolute top-2 left-2 bg-admin-accent-primary text-white text-xs px-2 py-1 rounded-full font-medium">
+                                Galvenais
+                              </span>
+                            )}
+                            <p className="text-xs text-admin-text-secondary mt-2 truncate px-1">
+                              {file.name}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Existing Images Preview for Edit Mode */}
+                  {editingId && aktualitates.find(a => a.id === editingId)?.images && aktualitates.find(a => a.id === editingId)!.images!.length > 0 && (
+                    <div>
+                      <h4 className="text-sm font-medium text-admin-text-secondary mb-3">
+                        Esošie attēli:
+                      </h4>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        {aktualitates.find(a => a.id === editingId)!.images!.map((image, index) => (
+                          <div key={image.id} className="relative group">
+                            <div className="aspect-square rounded-lg overflow-hidden border-2 border-admin-border">
+                              <img
+                                src={image.url}
+                                alt={`Existing ${index + 1}`}
+                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
+                              />
+                            </div>
+                            {image.is_main && (
+                              <span className="absolute top-2 left-2 bg-admin-accent-primary text-white text-xs px-2 py-1 rounded-full font-medium">
+                                Galvenais
+                              </span>
+                            )}
+                            <p className="text-xs text-admin-text-secondary mt-2 truncate px-1">
+                              {image.original_name}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Legacy image_url Preview for Edit Mode */}
+                  {editingId && aktualitates.find(a => a.id === editingId)?.image_url && !aktualitates.find(a => a.id === editingId)?.images?.length && (
+                    <div>
+                      <h4 className="text-sm font-medium text-admin-text-secondary mb-3">
+                        Esošais attēls (legacy):
+                      </h4>
+                      <div className="aspect-square rounded-lg overflow-hidden border-2 border-admin-border max-w-xs">
+                        <img
+                          src={aktualitates.find(a => a.id === editingId)!.image_url}
+                          alt="Legacy image"
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
             </form>
           )}
@@ -240,33 +460,76 @@ export function AdminAktualitates() {
             <div className="divide-y divide-admin-border">
               {aktualitates.map((aktualitate) => (
                 <div key={aktualitate.id} className="p-6">
-                  <div className="flex justify-between items-start">
-                    <div className="flex-1">
-                      <h4 className="text-lg font-medium text-admin-text-primary mb-2">
-                        {aktualitate.title}
-                      </h4>
-                      <p className="text-admin-text-secondary mb-2 line-clamp-2">
-                        {aktualitate.content.length > 200
-                          ? `${aktualitate.content.substring(0, 200)}...`
-                          : aktualitate.content}
-                      </p>
-                      <p className="text-sm text-admin-text-secondary">
-                        {new Date(aktualitate.created_at).toLocaleDateString('lv-LV')}
-                      </p>
-                    </div>
-                    <div className="ml-4 flex space-x-2">
-                      <button
-                        onClick={() => handleEdit(aktualitate)}
-                        className="text-blue-600 hover:text-blue-800 px-3 py-1 rounded"
-                      >
-                        Rediģēt
-                      </button>
-                      <button
-                        onClick={() => handleDelete(aktualitate.id)}
-                        className="text-red-600 hover:text-red-800 px-3 py-1 rounded"
-                      >
-                        Dzēst
-                      </button>
+                  <div className="flex flex-col lg:flex-row lg:items-start gap-6">
+                    {/* Article Image */}
+                    {(aktualitate.main_image || aktualitate.image_url) && (
+                      <div className="w-full lg:w-48 h-48 flex-shrink-0">
+                        <img
+                          src={aktualitate.main_image?.url || aktualitate.image_url}
+                          alt={aktualitate.title}
+                          className="w-full h-full object-cover rounded-lg border-2 border-admin-border"
+                        />
+                      </div>
+                    )}
+                    
+                    {/* Article Details */}
+                    <div className="flex-1 min-w-0">
+                      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-4">
+                        <div className="flex-1 min-w-0">
+                          <div className="flex flex-wrap items-center gap-3 mb-2">
+                            <h4 className="text-xl font-semibold text-admin-text-primary truncate">
+                              {aktualitate.title}
+                            </h4>
+                          </div>
+                          
+                          <div className="flex flex-wrap gap-2 mb-3">
+                            {aktualitate.published ? (
+                              <span className="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full font-medium">
+                                Publicēts
+                              </span>
+                            ) : (
+                              <span className="bg-yellow-100 text-yellow-800 text-sm px-3 py-1 rounded-full font-medium">
+                                Melnraksts
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                        
+                        {/* Action Buttons */}
+                        <div className="flex space-x-3 flex-shrink-0">
+                          <button
+                            onClick={() => handleEdit(aktualitate)}
+                            className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-medium transition-colors"
+                          >
+                            Rediģēt
+                          </button>
+                          <button
+                            onClick={() => handleDelete(aktualitate.id)}
+                            className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-medium transition-colors"
+                          >
+                            Dzēst
+                          </button>
+                        </div>
+                      </div>
+                      
+                      <div className="space-y-3">
+                        <p className="text-admin-text-secondary leading-relaxed">
+                          {aktualitate.excerpt || (aktualitate.content.length > 300
+                            ? `${aktualitate.content.substring(0, 200)}...`
+                            : aktualitate.content)}
+                        </p>
+                        
+                        <div className="flex flex-wrap items-center gap-4 text-sm text-admin-text-secondary">
+                          <span>
+                            {new Date(aktualitate.created_at).toLocaleDateString('lv-LV')}
+                          </span>
+                          {aktualitate.images && aktualitate.images.length > 0 && (
+                            <span>
+                              {aktualitate.images.length} attēl{aktualitate.images.length === 1 ? 's' : 'i'}
+                            </span>
+                          )}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>

@@ -6,8 +6,30 @@ interface Aktualitate {
   id: number;
   title: string;
   content: string;
+  excerpt?: string;
   image_url?: string;
+  published: boolean;
   created_at: string;
+  images?: Array<{
+    id: number;
+    uuid: string;
+    url: string;
+    original_name: string;
+    file_size: number;
+    width: number;
+    height: number;
+    is_main: boolean;
+  }>;
+  main_image?: {
+    id: number;
+    uuid: string;
+    url: string;
+    original_name: string;
+    file_size: number;
+    width: number;
+    height: number;
+    is_main: boolean;
+  };
 }
 
 export function Aktualitates() {
@@ -22,7 +44,9 @@ export function Aktualitates() {
     try {
       const response = await axios.get('/api/aktualitates');
       if (response.data.success) {
-        setAktualitates(response.data.data);
+        // Filter to only show published articles
+        const publishedAktualitates = response.data.data.filter((aktualitate: Aktualitate) => aktualitate.published);
+        setAktualitates(publishedAktualitates);
       } else {
         console.error('API Error:', response.data.error);
       }
@@ -50,7 +74,7 @@ export function Aktualitates() {
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Aktualitātes</h1>
           <p className="text-lg text-gray-600">
-            Sekojiet līdzi jaunākajām ziņām un atjauninājumiem
+            Sekojiet līdzi jaunākajām ziņām un jaunumiem.
           </p>
         </div>
 
@@ -62,9 +86,9 @@ export function Aktualitates() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {aktualitates.map((aktualitate) => (
               <div key={aktualitate.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                {aktualitate.image_url && (
+                {(aktualitate.main_image?.url || aktualitate.image_url) && (
                   <img
-                    src={aktualitate.image_url}
+                    src={aktualitate.main_image?.url || aktualitate.image_url}
                     alt={aktualitate.title}
                     className="w-full h-48 object-cover"
                   />
@@ -74,9 +98,9 @@ export function Aktualitates() {
                     {aktualitate.title}
                   </h2>
                   <p className="text-gray-600 mb-4 line-clamp-3">
-                    {aktualitate.content.length > 150
+                    {aktualitate.excerpt || (aktualitate.content.length > 150
                       ? `${aktualitate.content.substring(0, 150)}...`
-                      : aktualitate.content}
+                      : aktualitate.content)}
                   </p>
                   <div className="flex justify-between items-center">
                     <span className="text-sm text-gray-500">

@@ -36,7 +36,7 @@ export function Footer() {
         
         <div className="border-t border-secondary-500 mt-8 pt-8 text-center">
           <p className="text-secondary-100">
-            © {new Date().getFullYear()} KNN. Visas tiesības aizsargātas.
+            © {new Date().getFullYear()} KNN Serviss. Visas tiesības aizsargātas.
           </p>
         </div>
       </div>

@@ -1,6 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import api from '../config/api';
-import { AuthContext, type User } from './AuthContextDefinition';
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import axios from 'axios';
+
+interface User {
+  id: number;
+  username: string;
+}
+
+interface AuthContextType {
+  user: User | null;
+  login: (username: string, password: string) => Promise<boolean>;
+  logout: () => void;
+  isLoading: boolean;
+}
+
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
@@ -8,33 +21,37 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const token = localStorage.getItem('admin-token');
-    if (token) {
-      // Token is automatically added by interceptor
-      // Verify token validity using the correct endpoint
-      api.get('/api/users/me')
-        .then(response => {
-          setUser(response.data.data);
-        })
-        .catch(() => {
-          localStorage.removeItem('admin-token');
-        })
-        .finally(() => {
-          setIsLoading(false);
-        });
-    } else {
-      setIsLoading(false);
+    const userData = localStorage.getItem('admin-user');
+    
+    if (token && userData) {
+      try {
+        const parsedUser = JSON.parse(userData);
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        setUser(parsedUser);
+      } catch (error) {
+        localStorage.removeItem('admin-token');
+        localStorage.removeItem('admin-user');
+        delete axios.defaults.headers.common['Authorization'];
+      }
     }
+    setIsLoading(false);
   }, []);
 
   const login = async (username: string, password: string): Promise<boolean> => {
     try {
-      const response = await api.post('/api/auth/login', { username, password });
-      const { token, user } = response.data.data;
+      const response = await axios.post('/api/auth/login', { username, password });
       
-      localStorage.setItem('admin-token', token);
-      setUser(user);
-      
-      return true;
+      if (response.data.success) {
+        const { token, user } = response.data.data;
+        
+        localStorage.setItem('admin-token', token);
+        localStorage.setItem('admin-user', JSON.stringify(user));
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        setUser(user);
+        return true;
+      } else {
+        return false;
+      }
     } catch (error) {
       console.error('Login failed:', error);
       return false;
@@ -43,6 +60,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const logout = () => {
     localStorage.removeItem('admin-token');
+    localStorage.removeItem('admin-user');
+    delete axios.defaults.headers.common['Authorization'];
     setUser(null);
   };
 
@@ -54,4 +73,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+}
+
+export function useAuth() {
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
 }

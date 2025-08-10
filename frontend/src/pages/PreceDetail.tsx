@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import api from '../config/api';
+import { ChevronLeft } from 'lucide-react';
+import axios from 'axios';
 
 interface Prece {
   id: number;
@@ -25,8 +26,13 @@ export function PreceDetail() {
 
   const fetchPrece = async (id: string) => {
     try {
-      const response = await api.get(`/api/produkti/${id}`);
-      setPrece(response.data.data);
+      const response = await axios.get(`/api/produkti/${id}`);
+      if (response.data.success) {
+        setPrece(response.data.data);
+      } else {
+        console.error('API Error:', response.data.error);
+        setError('Prece netika atrasta');
+      }
     } catch (error) {
       console.error('Error fetching prece:', error);
       setError('Prece netika atrasta');
@@ -39,7 +45,7 @@ export function PreceDetail() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600 mx-auto"></div>
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary-800 mx-auto"></div>
           <p className="mt-4 text-gray-600">Ielādē preci...</p>
         </div>
       </div>
@@ -53,7 +59,7 @@ export function PreceDetail() {
           <h1 className="text-2xl font-bold text-gray-900 mb-4">Prece netika atrasta</h1>
           <Link
             to="/preces"
-            className="text-blue-600 hover:text-blue-800 font-medium"
+            className="text-primary-800 hover:text-primary-900 font-medium"
           >
             ← Atgriezties pie precēm
           </Link>
@@ -67,11 +73,9 @@ export function PreceDetail() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <Link
           to="/preces"
-          className="inline-flex items-center text-blue-600 hover:text-blue-800 mb-8"
+          className="inline-flex items-center text-primary-800 hover:text-primary-900 mb-8"
         >
-          <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
+          <ChevronLeft className="w-5 h-5 mr-2" />
           Atgriezties pie precēm
         </Link>
 
@@ -92,7 +96,7 @@ export function PreceDetail() {
             </h1>
 
             <div className="mb-8">
-              <span className="text-4xl font-bold text-blue-600">
+              <span className="text-4xl font-bold text-primary-800">
                 €{prece.price.toFixed(2)}
               </span>
             </div>
@@ -107,12 +111,12 @@ export function PreceDetail() {
             </div>
 
             <div className="space-y-4">
-              <button className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+              <button className="w-full bg-primary-800 text-white py-3 px-6 rounded-lg font-semibold hover:bg-primary-900 transition-colors">
                 Pieprasīt piedāvājumu
               </button>
               <a
                 href="/sazinai"
-                className="block w-full border-2 border-blue-600 text-blue-600 py-3 px-6 rounded-lg font-semibold hover:bg-blue-50 transition-colors text-center"
+                className="block w-full border-2 border-primary-800 text-primary-800 py-3 px-6 rounded-lg font-semibold hover:bg-primary-50 transition-colors text-center"
               >
                 Sazināties par šo preci
               </a>

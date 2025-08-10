@@ -1,166 +1,341 @@
-# KNN API
+# KNN Full-Stack Application
 
-A basic Express.js backend with SQLite database.
+A modern full-stack web application built with React frontend and Express.js backend, featuring content management for news (aktualitātes) and products (produkti).
 
-## Features
+## 🏗️ Architecture Overview
 
-- ✅ Express.js server with TypeScript
-- ✅ SQLite database with promisified queries
-- ✅ User authentication (basic implementation)
-- ✅ CRUD operations for users
-- ✅ Error handling middleware
-- ✅ Security middleware (Helmet, CORS)
-- ✅ Request logging (Morgan)
-- ✅ Environment configuration
+This project consists of:
+- **Backend API**: Express.js + TypeScript + SQLite
+- **Frontend**: React + TypeScript + Vite + TailwindCSS
+- **Database**: SQLite with better-sqlite3
+- **Authentication**: JWT-based auth system
+- **Deployment**: PM2 + Nginx reverse proxy
 
-## Setup
+## 📁 Project Structure
 
-1. Install dependencies:
+```
+/var/www/knn/
+├── api/                     # Backend API (Express + TypeScript)
+│   ├── server.ts           # Main server entry point
+│   ├── db/
+│   │   └── database.ts     # Database connection & schema
+│   ├── middleware/
+│   │   ├── auth.ts         # JWT authentication middleware
+│   │   └── errorHandler.ts # Global error handler
+│   ├── routes/
+│   │   ├── authRoutes.ts   # Login/register/logout
+│   │   ├── userRoutes.ts   # User profile management
+│   │   ├── aktualitatesRoutes.ts # News/updates CRUD
+│   │   └── produktiRoutes.ts     # Products CRUD
+│   ├── types/
+│   │   └── index.ts        # TypeScript type definitions
+│   └── utils/
+│       └── auth.ts         # JWT utility functions
+├── frontend/               # Frontend React app
+│   ├── src/
+│   │   ├── App.tsx         # Main app component
+│   │   ├── main.tsx        # React entry point
+│   │   ├── components/     # Reusable UI components
+│   │   │   ├── Layout.tsx
+│   │   │   ├── Navigation.tsx
+│   │   │   └── Footer.tsx
+│   │   ├── contexts/       # React contexts
+│   │   │   └── AuthContext.tsx
+│   │   └── pages/          # Route components
+│   │       ├── Home.tsx
+│   │       ├── Aktualitates.tsx    # News listing
+│   │       ├── AktualitateDetail.tsx
+│   │       ├── Preces.tsx          # Products listing
+│   │       ├── PreceDetail.tsx
+│   │       ├── Pakalpojumi.tsx     # Services page
+│   │       ├── ParUznemumu.tsx     # About company
+│   │       ├── Sazinai.tsx         # Contact form
+│   │       └── admin/              # Admin panel
+│   │           ├── AdminLogin.tsx
+│   │           ├── AdminDashboard.tsx
+│   │           ├── AdminAktualitates.tsx
+│   │           └── AdminPreces.tsx
+│   ├── public/             # Static assets (favicon, images)
+│   └── package.json        # Frontend dependencies
+├── frontend_dist/          # Built frontend (production)
+├── dist/                   # Built backend (production)
+├── logs/                   # Application logs
+├── database.sqlite         # SQLite database file
+├── package.json           # Backend dependencies & scripts
+├── tsconfig.json          # TypeScript config (backend)
+├── deploy.sh              # Automated deployment script
+└── ecosystem.config.js    # PM2 configuration
+```
+
+## 🖼️ Static Files & Assets
+
+### For Images and Media Files:
+
+1. **Frontend Assets**: Place in `frontend/public/`
+   - Company logos: `frontend/public/logo.png`
+   - Product images: `frontend/public/products/`
+   - General images: `frontend/public/images/`
+
+2. **User Uploaded Content**: Store externally or create a dedicated uploads directory
+   - Recommended: Use cloud storage (AWS S3, Cloudinary, etc.)
+   - Alternative: Create `/var/www/knn/uploads/` and serve via Express
+
+3. **Static Asset URLs in Database**:
+   - Store relative paths in `image_url` fields
+   - Example: `/images/product-1.jpg` or `https://cdn.example.com/image.jpg`
+
+### Example Upload Directory Setup:
 ```bash
+mkdir -p /var/www/knn/uploads/{products,news,users}
+```
+
+Add to `api/server.ts`:
+```javascript
+// Serve static files
+app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
+```
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js (v18+ recommended)
+- npm or yarn
+- PM2 (for production)
+- Nginx (for production)
+
+### Development Setup
+
+1. **Clone and install backend dependencies**:
+```bash
+cd /var/www/knn
 npm install
 ```
 
-2. Copy environment variables:
+2. **Install frontend dependencies**:
 ```bash
-cp .env.example .env
+cd frontend
+npm install
 ```
 
-3. Update the `.env` file with your configuration.
+3. **Environment Configuration**:
+Create `.env` file in project root:
+```env
+PORT=3000
+JWT_SECRET=your-super-secure-jwt-secret-key
+NODE_ENV=development
+ALLOWED_ORIGINS=http://localhost:5173,http://localhost:3000
+DOMAIN=test.knn.lv
+```
 
-## Development
+4. **Start Development Servers**:
 
-Start the development server with hot reloading:
+Backend (API server with hot reload):
 ```bash
 npm run dev
 ```
 
-The server will start on `http://localhost:3000` (or the port specified in your `.env` file).
+Frontend (Vite dev server):
+```bash
+cd frontend
+npm run dev
+```
 
-## Production
+The application will be available at:
+- Frontend: `http://localhost:5173`
+- Backend API: `http://localhost:3000`
+- API Health Check: `http://localhost:3000/health`
 
-### Quick Deployment
-Use the automated deployment script:
+## 🏭 Production Deployment
+
+### Automated Deployment
 ```bash
 ./deploy.sh
 ```
 
 ### Manual Deployment
-Build and start the production server:
 ```bash
+# Build backend
 npm run build
-npm start
-```
 
-### Production Domain
-The API is deployed at: `https://test.knn.lv`
+# Build frontend
+cd frontend
+npm run build
+cd ..
 
-### PM2 Process Management
-```bash
-# Start the application
+# Start with PM2
 pm2 start ecosystem.config.js
-
-# Restart the application
-pm2 restart knn-api
-
-# View logs
-pm2 logs knn-api
-
-# Monitor resources
-pm2 monit
+pm2 save
 ```
 
-## API Endpoints
+### Production URL
+- **API**: `https://test.knn.lv`
+- **Health Check**: `https://test.knn.lv/health`
 
-### Health Check
-- `GET /health` - Server health check
+## 📡 API Endpoints
 
 ### Authentication
-- `POST /api/auth/register` - Register a new user
-- `POST /api/auth/login` - Login user
-- `POST /api/auth/logout` - Logout user
+| Method | Endpoint | Description | Auth Required |
+|--------|----------|-------------|---------------|
+| POST | `/api/auth/register` | Register new user | No |
+| POST | `/api/auth/login` | User login | No |
+| POST | `/api/auth/logout` | User logout | No |
 
-### Users
-- `GET /api/users` - Get all users
-- `GET /api/users/:id` - Get user by ID
-- `POST /api/users` - Create a new user
-- `PUT /api/users/:id` - Update user
-- `DELETE /api/users/:id` - Delete user
+### User Management
+| Method | Endpoint | Description | Auth Required |
+|--------|----------|-------------|---------------|
+| GET | `/api/users/me` | Get current user profile | Yes |
+| PUT | `/api/users/me` | Update user profile | Yes |
 
-## Example Requests
+### News/Updates (Aktualitātes)
+| Method | Endpoint | Description | Auth Required |
+|--------|----------|-------------|---------------|
+| GET | `/api/aktualitates` | Get all news (published) | No |
+| GET | `/api/aktualitates/:id` | Get specific news item | No |
+| POST | `/api/aktualitates` | Create news (admin) | Yes |
+| PUT | `/api/aktualitates/:id` | Update news (admin) | Yes |
+| DELETE | `/api/aktualitates/:id` | Delete news (admin) | Yes |
 
-### Register a new user
-```bash
-curl -X POST http://localhost:3000/api/auth/register \
-  -H "Content-Type: application/json" \
-  -d '{
-    "username": "johndoe",
-    "email": "john@example.com",
-    "password": "password123",
-    "first_name": "John",
-    "last_name": "Doe"
-  }'
-```
+### Products (Produkti)
+| Method | Endpoint | Description | Auth Required |
+|--------|----------|-------------|---------------|
+| GET | `/api/produkti` | Get all products | No |
+| GET | `/api/produkti/:id` | Get specific product | No |
+| POST | `/api/produkti` | Create product (admin) | Yes |
+| PUT | `/api/produkti/:id` | Update product (admin) | Yes |
+| DELETE | `/api/produkti/:id` | Delete product (admin) | Yes |
 
-### Login
-```bash
-curl -X POST http://localhost:3000/api/auth/login \
-  -H "Content-Type: application/json" \
-  -d '{
-    "username": "johndoe",
-    "password": "password123"
-  }'
-```
+### System
+| Method | Endpoint | Description | Auth Required |
+|--------|----------|-------------|---------------|
+| GET | `/health` | Server health check | No |
 
-### Get all users
-```bash
-curl http://localhost:3000/api/users
-```
-
-## Database Schema
+## 📊 Database Schema
 
 ### Users Table
-- `id` - Primary key (INTEGER, AUTOINCREMENT)
-- `username` - Unique username (VARCHAR(50), NOT NULL)
-- `email` - Unique email (VARCHAR(100), NOT NULL)
-- `password_hash` - Password hash (VARCHAR(255), NOT NULL)
-- `first_name` - First name (VARCHAR(50))
-- `last_name` - Last name (VARCHAR(50))
-- `created_at` - Creation timestamp (DATETIME, DEFAULT CURRENT_TIMESTAMP)
-- `updated_at` - Update timestamp (DATETIME, DEFAULT CURRENT_TIMESTAMP)
-
-### Posts Table
-- `id` - Primary key (INTEGER, AUTOINCREMENT)
-- `title` - Post title (VARCHAR(255), NOT NULL)
-- `content` - Post content (TEXT)
-- `user_id` - Foreign key to users table (INTEGER, NOT NULL)
-- `created_at` - Creation timestamp (DATETIME, DEFAULT CURRENT_TIMESTAMP)
-- `updated_at` - Update timestamp (DATETIME, DEFAULT CURRENT_TIMESTAMP)
-
-## Security Notes
-
-⚠️ **This is a basic implementation for development purposes. For production, you should:**
-
-1. Use proper password hashing (bcrypt)
-2. Implement JWT authentication
-3. Add input validation and sanitization
-4. Implement rate limiting
-5. Use HTTPS
-6. Add proper logging and monitoring
-7. Implement proper error handling
-8. Add API documentation (Swagger/OpenAPI)
-
-## File Structure
-
+```sql
+CREATE TABLE users (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  username VARCHAR(50) UNIQUE NOT NULL,
+  email VARCHAR(100) UNIQUE NOT NULL,
+  password_hash VARCHAR(255) NOT NULL,
+  first_name VARCHAR(50),
+  last_name VARCHAR(50),
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
 ```
-api/
-├── db/
-│   └── database.ts          # Database connection and queries
-├── middleware/
-│   └── errorHandler.ts      # Error handling middleware
-├── routes/
-│   ├── authRoutes.ts        # Authentication routes
-│   └── userRoutes.ts        # User CRUD routes
-├── types/
-│   └── index.ts             # TypeScript type definitions
-└── server.ts                # Main server file
+
+### Aktualitātes (News) Table
+```sql
+CREATE TABLE aktualitates (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  title VARCHAR(255) NOT NULL,
+  content TEXT NOT NULL,
+  excerpt TEXT,
+  image_url VARCHAR(500),
+  published BOOLEAN DEFAULT 0,
+  admin_id INTEGER NOT NULL,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (admin_id) REFERENCES users(id)
+);
 ```
+
+### Produkti (Products) Table
+```sql
+CREATE TABLE produkti (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name VARCHAR(255) NOT NULL,
+  description TEXT,
+  price DECIMAL(10,2),
+  category VARCHAR(100),
+  image_url VARCHAR(500),
+  gallery_urls TEXT, -- JSON array
+  specifications TEXT, -- JSON object
+  available BOOLEAN DEFAULT 1,
+  featured BOOLEAN DEFAULT 0,
+  admin_id INTEGER NOT NULL,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (admin_id) REFERENCES users(id)
+);
+```
+
+## 🔧 Development Workflow
+
+### Adding New Features
+1. **Backend**: Create routes in `api/routes/`, add types in `api/types/`
+2. **Frontend**: Add components in `frontend/src/components/` or pages in `frontend/src/pages/`
+3. **Database**: Update schema in `api/db/database.ts`
+
+### Building & Testing
+```bash
+# Backend build
+npm run build
+
+# Frontend build
+cd frontend && npm run build
+
+# Linting
+npm run lint          # Backend
+cd frontend && npm run lint  # Frontend
+```
+
+### PM2 Management
+```bash
+pm2 status           # View running processes
+pm2 logs knn-api     # View logs
+pm2 restart knn-api  # Restart application
+pm2 monit           # Monitor resources
+```
+
+## 🔐 Security Features
+
+- ✅ JWT Authentication
+- ✅ Password hashing with bcrypt
+- ✅ CORS configuration
+- ✅ Security headers (Helmet)
+- ✅ Request logging (Morgan)
+- ✅ Input validation
+- ✅ HTTPS ready (with Nginx)
+
+## 📚 Tech Stack
+
+**Backend:**
+- Express.js 4.21.2
+- TypeScript 5.9.2
+- SQLite + better-sqlite3
+- JWT authentication
+- bcrypt password hashing
+
+**Frontend:**
+- React 19.1.1
+- TypeScript 5.8.3
+- Vite 5.4.11
+- TailwindCSS 3.4.17
+- React Router 6.26.1
+- Axios for API calls
+
+**DevOps:**
+- PM2 process manager
+- Nginx reverse proxy
+- SSL/TLS encryption
+- Automated deployment scripts
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+1. **Build Fails**: Make sure TypeScript configs are properly separated for frontend/backend
+2. **CORS Errors**: Update `ALLOWED_ORIGINS` in `.env`
+3. **Database Locked**: Check if multiple processes are accessing SQLite
+4. **PM2 Issues**: Use `pm2 kill` and restart if needed
+
+### Logs Location
+- PM2 Logs: `~/.pm2/logs/`
+- Application Logs: `/var/www/knn/logs/`
+- Nginx Logs: `/var/log/nginx/`
+
+## 📞 Support
+
+For technical support or questions about the codebase, check the logs and ensure all dependencies are properly installed.

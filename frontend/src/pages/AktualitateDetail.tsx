@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import api from '../config/api';
+import { ChevronLeft } from 'lucide-react';
+import axios from 'axios';
 
 interface Aktualitate {
   id: number;
@@ -24,8 +25,13 @@ export function AktualitateDetail() {
 
   const fetchAktualitate = async (id: string) => {
     try {
-      const response = await api.get(`/api/aktualitates/${id}`);
-      setAktualitate(response.data.data);
+      const response = await axios.get(`/api/aktualitates/${id}`);
+      if (response.data.success) {
+        setAktualitate(response.data.data);
+      } else {
+        console.error('API Error:', response.data.error);
+        setError('Aktualitāte netika atrasta');
+      }
     } catch (error) {
       console.error('Error fetching aktualitāte:', error);
       setError('Aktualitāte netika atrasta');
@@ -38,7 +44,7 @@ export function AktualitateDetail() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600 mx-auto"></div>
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary-800 mx-auto"></div>
           <p className="mt-4 text-gray-600">Ielādē aktualitāti...</p>
         </div>
       </div>
@@ -52,7 +58,7 @@ export function AktualitateDetail() {
           <h1 className="text-2xl font-bold text-gray-900 mb-4">Aktualitāte netika atrasta</h1>
           <Link
             to="/aktualitates"
-            className="text-blue-600 hover:text-blue-800 font-medium"
+            className="text-primary-800 hover:text-primary-900 font-medium"
           >
             ← Atgriezties pie aktualitātēm
           </Link>
@@ -66,11 +72,9 @@ export function AktualitateDetail() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <Link
           to="/aktualitates"
-          className="inline-flex items-center text-blue-600 hover:text-blue-800 mb-8"
+          className="inline-flex items-center text-primary-800 hover:text-primary-900 mb-8"
         >
-          <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
+          <ChevronLeft className="w-5 h-5 mr-2" />
           Atgriezties pie aktualitātēm
         </Link>
 

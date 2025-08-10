@@ -1,3 +1,5 @@
+import { Check } from 'lucide-react';
+
 export function ParUznemumu() {
   return (
     <div className="bg-white min-h-screen">
@@ -33,27 +35,19 @@ export function ParUznemumu() {
             <h3 className="text-xl font-semibold text-gray-900 mb-4">Mūsu vērtības</h3>
             <ul className="space-y-3">
               <li className="flex items-start">
-                <svg className="w-6 h-6 text-blue-600 mr-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
+                <Check className="w-6 h-6 text-primary-800 mr-3 mt-0.5" />
                 <span><strong>Kvalitāte</strong> - Mēs nekad necompromitējam kvalitāti</span>
               </li>
               <li className="flex items-start">
-                <svg className="w-6 h-6 text-blue-600 mr-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
+                <Check className="w-6 h-6 text-primary-800 mr-3 mt-0.5" />
                 <span><strong>Inovācijas</strong> - Vienmēr meklējam jaunus risinājumus</span>
               </li>
               <li className="flex items-start">
-                <svg className="w-6 h-6 text-blue-600 mr-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
+                <Check className="w-6 h-6 text-primary-800 mr-3 mt-0.5" />
                 <span><strong>Uzticamība</strong> - Esam uzticami partneri ilgtermiņā</span>
               </li>
               <li className="flex items-start">
-                <svg className="w-6 h-6 text-blue-600 mr-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
+                <Check className="w-6 h-6 text-primary-800 mr-3 mt-0.5" />
                 <span><strong>Klientu orientācija</strong> - Klienta vajadzības ir mūsu prioritāte</span>
               </li>
             </ul>
@@ -61,23 +55,23 @@ export function ParUznemumu() {
         </div>
 
         {/* Stats */}
-        <div className="bg-blue-600 text-white rounded-lg p-8 mb-16">
+        <div className="bg-primary-800 text-white rounded-lg p-8 mb-16">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
             <div>
               <div className="text-3xl font-bold mb-2">10+</div>
-              <div className="text-blue-100">Gadi pieredzē</div>
+              <div className="text-primary-100">Gadi pieredzē</div>
             </div>
             <div>
               <div className="text-3xl font-bold mb-2">200+</div>
-              <div className="text-blue-100">Projekti</div>
+              <div className="text-primary-100">Projekti</div>
             </div>
             <div>
               <div className="text-3xl font-bold mb-2">150+</div>
-              <div className="text-blue-100">Klienti</div>
+              <div className="text-primary-100">Klienti</div>
             </div>
             <div>
               <div className="text-3xl font-bold mb-2">24/7</div>
-              <div className="text-blue-100">Atbalsts</div>
+              <div className="text-primary-100">Atbalsts</div>
             </div>
           </div>
         </div>
@@ -121,7 +115,7 @@ export function ParUznemumu() {
           </p>
           <a
             href="/sazinai"
-            className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors inline-block"
+            className="bg-primary-800 text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary-900 transition-colors inline-block"
           >
             Sazināties ar mums
           </a>

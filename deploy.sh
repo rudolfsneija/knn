@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# KNN API Deployment Script
-echo "🚀 Starting deployment for KNN API..."
+# KNN Deployment Script - Deploy code changes to production
+echo "🚀 Deploying code changes to production..."
 
 # Colors for output
 RED='\033[0;31m'
@@ -28,62 +28,47 @@ if [ ! -f "package.json" ]; then
     exit 1
 fi
 
-# Install dependencies
-print_status "Installing dependencies..."
-npm install
-
-# Build the TypeScript code
-print_status "Building TypeScript code..."
+# Build the backend TypeScript code
+print_status "Building backend API..."
 npm run build
 
 if [ $? -ne 0 ]; then
-    print_error "Build failed!"
+    print_error "Backend build failed!"
     exit 1
 fi
 
-# Create logs directory
-print_status "Creating logs directory..."
-mkdir -p logs
+# Build the frontend
+print_status "Building frontend..."
+cd frontend
+npm run build
 
-# Copy Nginx configuration (requires sudo)
-print_status "Setting up Nginx configuration..."
-echo "You may need to run these commands manually with sudo:"
-echo "sudo cp nginx-site-config /etc/nginx/sites-available/test.knn.lv"
-echo "sudo ln -s /etc/nginx/sites-available/test.knn.lv /etc/nginx/sites-enabled/"
-echo "sudo nginx -t"
-echo "sudo systemctl reload nginx"
-
-# PM2 operations
-print_status "Managing PM2 process..."
-
-# Check if PM2 is installed
-if ! command -v pm2 &> /dev/null; then
-    print_warning "PM2 not found. Installing globally..."
-    npm install -g pm2
+if [ $? -ne 0 ]; then
+    print_error "Frontend build failed!"
+    exit 1
 fi
 
-# Start or restart the application
+# Deploy frontend to production directory
+print_status "Deploying frontend to production..."
+cd ..
+rm -rf frontend_dist/*
+cp -r frontend/dist/* frontend_dist/
+
+# Restart the API server with PM2
+print_status "Restarting API server..."
 if pm2 list | grep -q "knn-api"; then
-    print_status "Restarting existing PM2 process..."
-    pm2 restart ecosystem.config.js
+    pm2 restart knn-api
 else
-    print_status "Starting new PM2 process..."
+    print_warning "PM2 process 'knn-api' not found. Starting new process..."
     pm2 start ecosystem.config.js
 fi
 
-# Save PM2 configuration
-pm2 save
-
-# Show PM2 status
-pm2 status
-
 print_status "Deployment complete! 🎉"
-print_status "Your API should be available at:"
-print_status "- Local: http://localhost:3000/health"
-print_status "- Production: https://test.knn.lv/health"
-
-print_warning "Don't forget to:"
-print_warning "1. Update your SSL certificate paths in nginx-site-config"
-print_warning "2. Copy the Nginx configuration to /etc/nginx/sites-available/"
-print_warning "3. Enable the site and reload Nginx"
-print_warning "4. Set up PM2 startup: pm2 startup"
+print_status "Your application is now live at: https://test.knn.lv"
+print_status ""
+print_status "✅ Backend API updated and restarted"
+print_status "✅ Frontend updated with latest changes"
+print_status ""
+print_warning "If you made changes to:"
+print_warning "- Environment variables → Restart PM2 manually"
+print_warning "- Database schema → Run migrations if needed"
+print_warning "- Dependencies → Run 'npm install' first"

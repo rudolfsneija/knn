@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import api from '../config/api';
+import axios from 'axios';
 
 interface Aktualitate {
   id: number;
@@ -20,8 +20,12 @@ export function Aktualitates() {
 
   const fetchAktualitates = async () => {
     try {
-      const response = await api.get('/api/aktualitates');
-      setAktualitates(response.data.data);
+      const response = await axios.get('/api/aktualitates');
+      if (response.data.success) {
+        setAktualitates(response.data.data);
+      } else {
+        console.error('API Error:', response.data.error);
+      }
     } catch (error) {
       console.error('Error fetching aktualitātes:', error);
     } finally {
@@ -33,7 +37,7 @@ export function Aktualitates() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600 mx-auto"></div>
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary-800 mx-auto"></div>
           <p className="mt-4 text-gray-600">Ielādē aktualitātes...</p>
         </div>
       </div>
@@ -80,7 +84,7 @@ export function Aktualitates() {
                     </span>
                     <Link
                       to={`/aktualitates/${aktualitate.id}`}
-                      className="text-blue-600 hover:text-blue-800 font-medium"
+                      className="text-primary-800 hover:text-primary-900 font-medium"
                     >
                       Lasīt vairāk →
                     </Link>

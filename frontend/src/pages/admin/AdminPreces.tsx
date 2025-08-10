@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../../hooks/useAuth';
-import api from '../../config/api';
+import { useAuth } from '../../contexts/AuthContext';
+import { useTheme } from '../../contexts/ThemeContext';
+import axios from 'axios';
 
 interface Prece {
   id: number;
@@ -14,6 +15,7 @@ interface Prece {
 
 export function AdminPreces() {
   const { user, logout } = useAuth();
+  const { setTheme } = useTheme();
   const navigate = useNavigate();
   const [preces, setPreces] = useState<Prece[]>([]);
   const [loading, setLoading] = useState(true);
@@ -26,6 +28,11 @@ export function AdminPreces() {
     image_url: ''
   });
 
+  // Set admin theme when component mounts
+  useEffect(() => {
+    setTheme('admin');
+  }, [setTheme]);
+
   useEffect(() => {
     if (!user) {
       navigate('/admin/login');
@@ -36,8 +43,12 @@ export function AdminPreces() {
 
   const fetchPreces = async () => {
     try {
-      const response = await api.get('/api/produkti');
-      setPreces(response.data.data);
+      const response = await axios.get('/api/produkti');
+      if (response.data.success) {
+        setPreces(response.data.data);
+      } else {
+        console.error('API Error:', response.data.error);
+      }
     } catch (error) {
       console.error('Error fetching preces:', error);
     } finally {
@@ -54,9 +65,9 @@ export function AdminPreces() {
       };
       
       if (editingId) {
-        await api.put(`/api/produkti/${editingId}`, submitData);
+        await axios.put(`/api/produkti/${editingId}`, submitData);
       } else {
-        await api.post('/api/produkti', submitData);
+        await axios.post('/api/produkti', submitData);
       }
       setFormData({ name: '', description: '', price: '', image_url: '' });
       setShowForm(false);
@@ -81,7 +92,7 @@ export function AdminPreces() {
   const handleDelete = async (id: number) => {
     if (window.confirm('Vai tiešām vēlaties dzēst šo preci?')) {
       try {
-        await api.delete(`/api/produkti/${id}`);
+        await axios.delete(`/api/produkti/${id}`);
         fetchPreces();
       } catch (error) {
         console.error('Error deleting prece:', error);
@@ -100,18 +111,18 @@ export function AdminPreces() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-admin-bg-primary">
       {/* Header */}
-      <header className="bg-white shadow">
+      <header className="bg-admin-bg-secondary shadow-admin">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-6">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">Produkti</h1>
+              <h1 className="text-3xl font-bold text-admin-text-primary">Produkti</h1>
             </div>
             <div className="flex items-center space-x-4">
               <Link
                 to="/admin"
-                className="text-gray-600 hover:text-gray-900"
+                className="text-admin-text-secondary hover:text-admin-text-primary transition-colors"
               >
                 ← Atpakaļ uz paneli
               </Link>
@@ -120,7 +131,7 @@ export function AdminPreces() {
                   logout();
                   navigate('/admin/login');
                 }}
-                className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors"
+                className="admin-button-danger"
               >
                 Iziet
               </button>
@@ -131,34 +142,32 @@ export function AdminPreces() {
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Add/Edit Form */}
-        <div className="bg-white rounded-lg shadow mb-8">
-          <div className="px-6 py-4 border-b border-gray-200">
-            <div className="flex justify-between items-center">
-              <h2 className="text-xl font-semibold text-gray-900">
-                {showForm ? (editingId ? 'Rediģēt produktu' : 'Pievienot produktu') : 'Pārvaldīt produktus'}
-              </h2>
-              {!showForm ? (
-                <button
-                  onClick={() => setShowForm(true)}
-                  className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors"
-                >
-                  Pievienot jaunu
-                </button>
-              ) : (
-                <button
-                  onClick={resetForm}
-                  className="text-gray-600 hover:text-gray-900"
-                >
-                  Atcelt
-                </button>
-              )}
-            </div>
+        <div className="admin-card p-6 mb-8">
+          <div className="flex justify-between items-center">
+            <h2 className="text-xl font-semibold text-admin-text-primary">
+              {showForm ? (editingId ? 'Rediģēt produktu' : 'Pievienot produktu') : 'Pārvaldīt produktus'}
+            </h2>
+            {!showForm ? (
+              <button
+                onClick={() => setShowForm(true)}
+                className="admin-button-primary"
+              >
+                Pievienot jaunu
+              </button>
+            ) : (
+              <button
+                onClick={resetForm}
+                className="text-admin-text-secondary hover:text-admin-text-primary transition-colors"
+              >
+                Atcelt
+              </button>
+            )}
           </div>
 
           {showForm && (
-            <form onSubmit={handleSubmit} className="p-6 space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-admin-text-secondary mb-2">
                   Nosaukums *
                 </label>
                 <input
@@ -166,12 +175,12 @@ export function AdminPreces() {
                   required
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                  className="admin-input"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-admin-text-secondary mb-2">
                   Apraksts *
                 </label>
                 <textarea
@@ -179,12 +188,12 @@ export function AdminPreces() {
                   rows={4}
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                  className="admin-input"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-admin-text-secondary mb-2">
                   Cena (EUR) *
                 </label>
                 <input
@@ -194,19 +203,19 @@ export function AdminPreces() {
                   required
                   value={formData.price}
                   onChange={(e) => setFormData({ ...formData, price: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                  className="admin-input"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-admin-text-secondary mb-2">
                   Attēla URL
                 </label>
                 <input
                   type="url"
                   value={formData.image_url}
                   onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                  className="admin-input"
                   placeholder="https://example.com/image.jpg"
                 />
               </div>
@@ -214,14 +223,14 @@ export function AdminPreces() {
               <div className="flex space-x-4">
                 <button
                   type="submit"
-                  className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-colors"
+                  className="admin-button-success"
                 >
                   {editingId ? 'Atjaunināt' : 'Pievienot'}
                 </button>
                 <button
                   type="button"
                   onClick={resetForm}
-                  className="border border-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-50 transition-colors"
+                  className="admin-button-secondary"
                 >
                   Atcelt
                 </button>
@@ -231,41 +240,41 @@ export function AdminPreces() {
         </div>
 
         {/* Preces List */}
-        <div className="bg-white rounded-lg shadow">
-          <div className="px-6 py-4 border-b border-gray-200">
-            <h3 className="text-lg font-medium text-gray-900">
+        <div className="admin-card">
+          <div className="px-6 py-4 border-b border-admin-border">
+            <h3 className="text-lg font-medium text-admin-text-primary">
               Esošie produkti ({preces.length})
             </h3>
           </div>
 
           {loading ? (
             <div className="p-6 text-center">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-600 mx-auto"></div>
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-admin-accent-success mx-auto"></div>
             </div>
           ) : preces.length === 0 ? (
-            <div className="p-6 text-center text-gray-500">
+            <div className="p-6 text-center text-admin-text-secondary">
               Nav pievienots neviens produkts
             </div>
           ) : (
-            <div className="divide-y divide-gray-200">
+            <div className="divide-y divide-admin-border">
               {preces.map((prece) => (
                 <div key={prece.id} className="p-6">
                   <div className="flex justify-between items-start">
                     <div className="flex-1">
                       <div className="flex items-center mb-2">
-                        <h4 className="text-lg font-medium text-gray-900 mr-4">
+                        <h4 className="text-lg font-medium text-admin-text-primary mr-4">
                           {prece.name}
                         </h4>
-                        <span className="text-xl font-bold text-green-600">
+                        <span className="text-xl font-bold text-admin-accent-success">
                           €{prece.price.toFixed(2)}
                         </span>
                       </div>
-                      <p className="text-gray-600 mb-2 line-clamp-2">
+                      <p className="text-admin-text-secondary mb-2 line-clamp-2">
                         {prece.description.length > 200
                           ? `${prece.description.substring(0, 200)}...`
                           : prece.description}
                       </p>
-                      <p className="text-sm text-gray-500">
+                      <p className="text-sm text-admin-text-secondary">
                         {new Date(prece.created_at).toLocaleDateString('lv-LV')}
                       </p>
                     </div>

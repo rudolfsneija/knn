@@ -1,3 +1,5 @@
+import { Check } from 'lucide-react';
+
 export function Pakalpojumi() {
   const services = [
     {
@@ -35,9 +37,7 @@ export function Pakalpojumi() {
               <ul className="space-y-2">
                 {service.features.map((feature, featureIndex) => (
                   <li key={featureIndex} className="flex items-center text-gray-700">
-                    <svg className="w-5 h-5 text-blue-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
+                    <Check className="w-5 h-5 text-primary-800 mr-3" />
                     {feature}
                   </li>
                 ))}
@@ -46,7 +46,7 @@ export function Pakalpojumi() {
           ))}
         </div>
 
-        <div className="bg-blue-50 rounded-lg p-8 text-center">
+        <div className="bg-secondary-100 rounded-lg p-8 text-center">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">
             Nepieciešama individuāla konsultācija?
           </h2>
@@ -55,7 +55,7 @@ export function Pakalpojumi() {
           </p>
           <a
             href="/sazinai"
-            className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors inline-block"
+            className="bg-primary-800 text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary-900 transition-colors inline-block"
           >
             Pieprasīt konsultāciju
           </a>

@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Layout } from './components/Layout';
+import { ProtectedRoute } from './components/ProtectedRoute';
 import { Home } from './pages/Home';
 import { Aktualitates } from './pages/Aktualitates';
 import { AktualitateDetail } from './pages/AktualitateDetail';
@@ -13,32 +14,47 @@ import { AdminDashboard } from './pages/admin/AdminDashboard';
 import { AdminAktualitates } from './pages/admin/AdminAktualitates';
 import { AdminPreces } from './pages/admin/AdminPreces';
 import { AuthProvider } from './contexts/AuthContext';
+import { ThemeProvider } from './contexts/ThemeContext';
 
 function App() {
   return (
-    <AuthProvider>
-      <Router>
-        <Routes>
-          {/* Public routes */}
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route path="aktualitates" element={<Aktualitates />} />
-            <Route path="aktualitates/:id" element={<AktualitateDetail />} />
-            <Route path="pakalpojumi" element={<Pakalpojumi />} />
-            <Route path="preces" element={<Preces />} />
-            <Route path="preces/:id" element={<PreceDetail />} />
-            <Route path="par-uznemumu" element={<ParUznemumu />} />
-            <Route path="sazinai" element={<Sazinai />} />
-          </Route>
+    <ThemeProvider>
+      <AuthProvider>
+        <Router>
+          <Routes>
+            {/* Public routes */}
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Home />} />
+              <Route path="aktualitates" element={<Aktualitates />} />
+              <Route path="aktualitates/:id" element={<AktualitateDetail />} />
+              <Route path="pakalpojumi" element={<Pakalpojumi />} />
+              <Route path="preces" element={<Preces />} />
+              <Route path="preces/:id" element={<PreceDetail />} />
+              <Route path="par-uznemumu" element={<ParUznemumu />} />
+              <Route path="sazinai" element={<Sazinai />} />
+            </Route>
 
-          {/* Admin routes */}
-          <Route path="/admin/login" element={<AdminLogin />} />
-          <Route path="/admin" element={<AdminDashboard />} />
-          <Route path="/admin/aktualitates" element={<AdminAktualitates />} />
-          <Route path="/admin/preces" element={<AdminPreces />} />
-        </Routes>
-      </Router>
-    </AuthProvider>
+            {/* Admin routes */}
+            <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/admin" element={
+              <ProtectedRoute>
+                <AdminDashboard />
+              </ProtectedRoute>
+            } />
+            <Route path="/admin/aktualitates" element={
+              <ProtectedRoute>
+                <AdminAktualitates />
+              </ProtectedRoute>
+            } />
+            <Route path="/admin/preces" element={
+              <ProtectedRoute>
+                <AdminPreces />
+              </ProtectedRoute>
+            } />
+          </Routes>
+        </Router>
+      </AuthProvider>
+    </ThemeProvider>
   );
 }
 

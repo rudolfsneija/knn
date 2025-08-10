@@ -13,7 +13,11 @@ import aktualitatesRoutes from './routes/aktualitatesRoutes';
 import produktiRoutes from './routes/produktiRoutes';
 
 // Load environment variables
-config();
+if (process.env.NODE_ENV === 'development') {
+  config({ path: '.env.development' });
+} else {
+  config();
+}
 
 const app = express();
 const PORT = Number(process.env.PORT) || 3000;

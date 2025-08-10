@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import api from '../config/api';
+import axios from 'axios';
 
 interface Prece {
   id: number;
@@ -21,8 +21,12 @@ export function Preces() {
 
   const fetchPreces = async () => {
     try {
-      const response = await api.get('/api/produkti');
-      setPreces(response.data.data);
+      const response = await axios.get('/api/produkti');
+      if (response.data.success) {
+        setPreces(response.data.data);
+      } else {
+        console.error('API Error:', response.data.error);
+      }
     } catch (error) {
       console.error('Error fetching preces:', error);
     } finally {
@@ -34,7 +38,7 @@ export function Preces() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600 mx-auto"></div>
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary-800 mx-auto"></div>
           <p className="mt-4 text-gray-600">Ielādē preces...</p>
         </div>
       </div>
@@ -76,12 +80,12 @@ export function Preces() {
                       : prece.description}
                   </p>
                   <div className="flex justify-between items-center">
-                    <span className="text-2xl font-bold text-blue-600">
+                    <span className="text-2xl font-bold text-primary-800">
                       €{prece.price.toFixed(2)}
                     </span>
                     <Link
                       to={`/preces/${prece.id}`}
-                      className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+                      className="bg-primary-800 text-white px-4 py-2 rounded-lg hover:bg-primary-900 transition-colors"
                     >
                       Skatīt detaļas
                     </Link>

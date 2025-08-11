@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { Wifi, ArrowRight } from 'lucide-react';
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import { WifiQuizBanner } from "../components/WifiQuizBanner";
 
 interface Prece {
   id: number;
@@ -35,11 +35,10 @@ interface Prece {
 }
 
 export function Preces() {
-  const navigate = useNavigate();
   const [preces, setPreces] = useState<Prece[]>([]);
   const [loading, setLoading] = useState(true);
   const [categories, setCategories] = useState<string[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
 
   useEffect(() => {
     fetchPreces();
@@ -48,19 +47,19 @@ export function Preces() {
 
   const fetchPreces = async (category?: string) => {
     try {
-      let url = '/api/produkti';
-      if (category && category !== 'all') {
+      let url = "/api/produkti";
+      if (category && category !== "all") {
         url += `?category=${encodeURIComponent(category)}`;
       }
-      
+
       const response = await axios.get(url);
       if (response.data.success) {
         setPreces(response.data.data);
       } else {
-        console.error('API Error:', response.data.error);
+        console.error("API Error:", response.data.error);
       }
     } catch (error) {
-      console.error('Error fetching preces:', error);
+      console.error("Error fetching preces:", error);
     } finally {
       setLoading(false);
     }
@@ -68,17 +67,22 @@ export function Preces() {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get('/api/produkti');
+      const response = await axios.get("/api/produkti");
       if (response.data.success) {
-        const uniqueCategories = Array.from(new Set(
-          response.data.data
-            .map((prece: Prece) => prece.category)
-            .filter((category: string | undefined) => category && category.trim() !== '')
-        )).sort();
+        const uniqueCategories = Array.from(
+          new Set(
+            response.data.data
+              .map((prece: Prece) => prece.category)
+              .filter(
+                (category: string | undefined) =>
+                  category && category.trim() !== ""
+              )
+          )
+        ).sort();
         setCategories(uniqueCategories as string[]);
       }
     } catch (error) {
-      console.error('Error fetching categories:', error);
+      console.error("Error fetching categories:", error);
     }
   };
 
@@ -107,39 +111,18 @@ export function Preces() {
         </div>
 
         {/* Wi-Fi Quiz Banner */}
-        <div className="mb-8 bg-gradient-to-r from-primary-800 to-primary-900 rounded-xl p-6 text-white">
-          <div className="flex flex-col md:flex-row items-center justify-between">
-            <div className="flex items-center mb-4 md:mb-0">
-              <Wifi className="w-12 h-12 mr-4 flex-shrink-0" />
-              <div>
-                <h2 className="text-xl md:text-2xl font-bold mb-2">
-                  Neesat pārliecināts par Wi-Fi risinājumu?
-                </h2>
-                <p className="text-primary-100 text-sm md:text-base">
-                  Izmantojiet mūsu ekspertu izveidoto palīgu, lai atrastu ideālo bezvadu tīkla risinājumu jūsu vajadzībām.
-                </p>
-              </div>
-            </div>
-            <button
-              onClick={() => navigate('/bezvadu-tikla-konfigurators')}
-              className="bg-white text-primary-800 hover:bg-primary-50 font-semibold py-3 px-6 rounded-lg transition-colors flex items-center flex-shrink-0"
-            >
-              Sākt palīgu
-              <ArrowRight className="w-5 h-5 ml-2" />
-            </button>
-          </div>
-        </div>
+        <WifiQuizBanner className="mb-8" />
 
         {/* Category Filter */}
         {categories.length > 0 && (
           <div className="mb-8">
             <div className="flex flex-wrap justify-center gap-2">
               <button
-                onClick={() => handleCategoryChange('all')}
+                onClick={() => handleCategoryChange("all")}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                  selectedCategory === 'all'
-                    ? 'bg-primary-800 text-white'
-                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                  selectedCategory === "all"
+                    ? "bg-primary-800 text-white"
+                    : "bg-secondary-200 text-gray-700 hover:bg-secondary-300"
                 }`}
               >
                 Visas preces
@@ -150,8 +133,8 @@ export function Preces() {
                   onClick={() => handleCategoryChange(category)}
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                     selectedCategory === category
-                      ? 'bg-primary-800 text-white'
-                      : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                      ? "bg-primary-800 text-white"
+                      : "bg-secondary-200 text-gray-700 hover:bg-secondary-300"
                   }`}
                 >
                   {category}
@@ -164,14 +147,13 @@ export function Preces() {
         {preces.length === 0 ? (
           <div className="text-center py-12">
             <p className="text-gray-600 text-lg">
-              {selectedCategory === 'all' 
-                ? 'Pašlaik nav pieejamas preces.' 
-                : `Nav pieejamas preces kategorijā "${selectedCategory}".`
-              }
+              {selectedCategory === "all"
+                ? "Pašlaik nav pieejamas preces."
+                : `Nav pieejamas preces kategorijā "${selectedCategory}".`}
             </p>
-            {selectedCategory !== 'all' && (
+            {selectedCategory !== "all" && (
               <button
-                onClick={() => handleCategoryChange('all')}
+                onClick={() => handleCategoryChange("all")}
                 className="mt-4 text-primary-800 hover:text-primary-900 font-medium"
               >
                 Skatīt visas preces
@@ -181,10 +163,12 @@ export function Preces() {
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
             {preces.map((prece) => (
-              <Link 
-                key={prece.id} 
+              <Link
+                key={prece.id}
                 to={`/preces/${prece.id}`}
-                className={`bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow block flex flex-col h-full ${!prece.available ? 'opacity-75' : ''}`}
+                className={`bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow block flex flex-col h-full ${
+                  !prece.available ? "opacity-75" : ""
+                }`}
               >
                 {(prece.main_image?.url || prece.image_url) && (
                   <div className="relative">
@@ -207,13 +191,14 @@ export function Preces() {
                     <h2 className="text-xl font-semibold text-gray-900 flex-1 min-h-[3rem] leading-6">
                       {prece.name}
                     </h2>
-                    {!prece.available && !(prece.main_image?.url || prece.image_url) && (
-                      <span className="bg-red-100 text-red-800 text-xs px-2 py-1 rounded-full font-medium ml-2 flex-shrink-0">
-                        Nav pieejams
-                      </span>
-                    )}
+                    {!prece.available &&
+                      !(prece.main_image?.url || prece.image_url) && (
+                        <span className="bg-red-100 text-red-800 text-xs px-2 py-1 rounded-full font-medium ml-2 flex-shrink-0">
+                          Nav pieejams
+                        </span>
+                      )}
                   </div>
-                  
+
                   <div className="mt-auto">
                     {prece.price !== undefined && prece.price !== null && (
                       <span className="text-2xl font-bold text-primary-800">

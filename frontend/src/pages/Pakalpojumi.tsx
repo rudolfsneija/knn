@@ -62,7 +62,7 @@ export function Pakalpojumi() {
           {services.map((service, index) => {
             const IconComponent = service.icon;
             return (
-              <div key={index} className="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition-shadow">
+              <div key={index} className="bg-secondary-100 rounded-lg shadow-lg p-8 hover:shadow-xl transition-shadow">
                 <div className="w-16 h-16 bg-primary-800 rounded-full mx-auto mb-6 flex items-center justify-center">
                   <IconComponent className="w-8 h-8 text-white" />
                 </div>

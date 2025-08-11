@@ -66,7 +66,7 @@ const questions: Question[] = [
   {
     id: 'hasPlans',
     type: 'select',
-    title: 'Plānojums un dokumentācija',
+    title: 'Plānojums',
     question: 'Vai Jums ir ēkas plānojums?',
     options: [
       { value: 'yes', label: 'Jā' },
@@ -181,10 +181,10 @@ const questions: Question[] = [
       { value: 'photo_video', label: 'Foto/video pārsūtīšana' },
       { value: 'streaming', label: 'Tiešsaistes saturs' },
       { value: 'sensors_building', label: 'Sensori un/vai ēkas vadības sistēmas' },
-      { value: 'internal_systems', label: 'Pastāvīgi pieslēgts pie iekšējām sistēmām (datubāzes, monitorings)' },
+      { value: 'internal_systems', label: 'Pastāvīgi pieslēgts pie iekšējām sistēmām' },
       { value: 'email_music', label: 'E-pastu un mūzika' },
       { value: 'messaging', label: 'Sarakstīšanās tiešsaistēs' },
-      { value: 'outdoor', label: 'Ārtelpā nodrošināt tīklu' }
+      { value: 'outdoor', label: 'Nodrošināt tīklu ārtelpās' }
     ],
     validation: (value) => Array.isArray(value) && value.length > 0
   },
@@ -476,7 +476,7 @@ export function BezvaduTiklaKonfigurators() {
             </h1>
           </div>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Atbildiet uz jautājumiem, lai mēs varētu piedāvāt jums vispiemērotāko Ruckus bezvadu tīkla risinājumu.
+            Atbildiet uz jautājumiem, lai mēs varētu piedāvāt jums vispiemērotāko bezvadu tīkla risinājumu.
           </p>
         </div>
 
@@ -484,7 +484,7 @@ export function BezvaduTiklaKonfigurators() {
         <div className="mb-12">
           <div className="flex items-center justify-between mb-4">
             <span className="text-sm font-medium text-gray-700">
-              Solis {quizState.step} no {totalSteps}: {currentQuestion?.title || ''}
+              {quizState.step} no {totalSteps}: {currentQuestion?.title || ''}
             </span>
             <span className="text-sm text-gray-500">
               {Math.round(((quizState.step - 1) / (totalSteps - 1)) * 100)}% pabeigts

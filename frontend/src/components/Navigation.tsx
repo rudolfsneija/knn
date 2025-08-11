@@ -21,7 +21,7 @@ export function Navigation() {
           <div className="flex items-center">
             <Link to="/" className="flex items-center cursor-pointer">
               <img 
-                src="/knn-small-logo-red.svg" 
+                src="/logo/knn-small-logo-red.svg" 
                 alt="KNN Logo" 
                 className="h-16 w-16"
               />

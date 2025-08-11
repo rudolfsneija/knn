@@ -6,7 +6,7 @@ export function Footer() {
           <div>
             <div className="mb-4">
               <img 
-                src="/knn-small-logo.svg" 
+                src="/logo/knn-small-logo.svg" 
                 alt="KNN Logo" 
                 className="h-24"
               />

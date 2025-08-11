@@ -57,6 +57,7 @@ export interface CreateAktualitateRequest {
   excerpt?: string;
   image_url?: string;
   published?: boolean;
+  created_at?: string;
 }
 
 export interface UpdateAktualitateRequest {
@@ -65,6 +66,7 @@ export interface UpdateAktualitateRequest {
   excerpt?: string;
   image_url?: string;
   published?: boolean;
+  created_at?: string;
 }
 
 // Produkti (Products) interfaces

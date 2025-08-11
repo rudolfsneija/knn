@@ -85,7 +85,11 @@ export function Aktualitates() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {aktualitates.map((aktualitate) => (
-              <div key={aktualitate.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+              <Link
+                key={aktualitate.id}
+                to={`/aktualitates/${aktualitate.id}`}
+                className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer block"
+              >
                 {(aktualitate.main_image?.url || aktualitate.image_url) && (
                   <img
                     src={aktualitate.main_image?.url || aktualitate.image_url}
@@ -106,15 +110,12 @@ export function Aktualitates() {
                     <span className="text-sm text-gray-500">
                       {new Date(aktualitate.created_at).toLocaleDateString('lv-LV')}
                     </span>
-                    <Link
-                      to={`/aktualitates/${aktualitate.id}`}
-                      className="text-primary-800 hover:text-primary-900 font-medium"
-                    >
+                    <span className="text-primary-800 hover:text-primary-900 font-medium">
                       Lasīt vairāk →
-                    </Link>
+                    </span>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         )}

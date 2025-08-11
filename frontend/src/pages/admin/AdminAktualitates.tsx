@@ -46,6 +46,7 @@ export function AdminAktualitates() {
     title: '',
     content: '',
     excerpt: '',
+    created_at: '',
     published: false
   });
   const [selectedImages, setSelectedImages] = useState<FileList | null>(null);
@@ -154,7 +155,7 @@ export function AdminAktualitates() {
         await uploadImages(aktualitateId, selectedImages);
       }
 
-      setFormData({ title: '', content: '', excerpt: '', published: false });
+      setFormData({ title: '', content: '', excerpt: '', created_at: '', published: false });
       setSelectedImages(null);
       setShowForm(false);
       setEditingId(null);
@@ -170,6 +171,7 @@ export function AdminAktualitates() {
       title: aktualitate.title,
       content: aktualitate.content,
       excerpt: aktualitate.excerpt || '',
+      created_at: aktualitate.created_at.split('T')[0],
       published: aktualitate.published
     });
     setEditingId(aktualitate.id);
@@ -194,7 +196,7 @@ export function AdminAktualitates() {
   };
 
   const resetForm = () => {
-    setFormData({ title: '', content: '', excerpt: '', published: false });
+    setFormData({ title: '', content: '', excerpt: '', created_at: '', published: false });
     setSelectedImages(null);
     setEditingId(null);
     setShowForm(false);
@@ -253,7 +255,7 @@ export function AdminAktualitates() {
                 onClick={() => {
                   setShowForm(false);
                   setEditingId(null);
-                  setFormData({ title: '', content: '', excerpt: '', published: false });
+                  setFormData({ title: '', content: '', excerpt: '', created_at: '', published: false });
                   setSelectedImages(null);
                 }}
                 className="text-admin-text-secondary hover:text-admin-text-primary transition-colors"
@@ -289,7 +291,7 @@ export function AdminAktualitates() {
                     </label>
                     <textarea
                       required
-                      rows={6}
+                      rows={12}
                       value={formData.content}
                       onChange={(e) => setFormData({ ...formData, content: e.target.value })}
                       className="admin-input w-full resize-none"
@@ -299,7 +301,7 @@ export function AdminAktualitates() {
                   {/* Excerpt Field - Full Width */}
                   <div>
                     <label className="block text-sm font-medium text-admin-text-secondary mb-2">
-                      Īss apraksts (excerpt)
+                      Īss apraksts
                     </label>
                     <textarea
                       rows={2}
@@ -308,6 +310,22 @@ export function AdminAktualitates() {
                       className="admin-input w-full resize-none"
                       placeholder="Īss aktualitātes apraksts priekšskatījumam"
                     />
+                  </div>
+
+                  {/* Created At Date Field */}
+                  <div>
+                    <label className="block text-sm font-medium text-admin-text-secondary mb-2">
+                      Datums
+                    </label>
+                    <input
+                      type="date"
+                      value={formData.created_at}
+                      onChange={(e) => setFormData({ ...formData, created_at: e.target.value })}
+                      className="admin-input w-full"
+                    />
+                    <p className="text-sm text-admin-text-secondary mt-1">
+                      Ja nav norādīts, tiks izmantots šodienas datums
+                    </p>
                   </div>
 
                   <div className="flex flex-col sm:flex-row sm:space-x-6 space-y-4 sm:space-y-0">
@@ -319,7 +337,7 @@ export function AdminAktualitates() {
                         className="mr-2 h-4 w-4"
                       />
                       <span className="text-sm font-medium text-admin-text-secondary">
-                        Publicēt uzreiz
+                        Publicēts
                       </span>
                     </label>
                   </div>
@@ -463,7 +481,7 @@ export function AdminAktualitates() {
                   <div className="flex flex-col lg:flex-row lg:items-start gap-6">
                     {/* Article Image */}
                     {(aktualitate.main_image || aktualitate.image_url) && (
-                      <div className="w-full lg:w-48 h-48 flex-shrink-0">
+                      <div className="w-full lg:w-36 h-36 flex-shrink-0">
                         <img
                           src={aktualitate.main_image?.url || aktualitate.image_url}
                           alt={aktualitate.title}

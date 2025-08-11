@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { Wifi, ArrowRight } from 'lucide-react';
 
 interface Prece {
   id: number;
@@ -34,6 +35,7 @@ interface Prece {
 }
 
 export function Preces() {
+  const navigate = useNavigate();
   const [preces, setPreces] = useState<Prece[]>([]);
   const [loading, setLoading] = useState(true);
   const [categories, setCategories] = useState<string[]>([]);
@@ -101,10 +103,31 @@ export function Preces() {
     <div className="bg-white min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Mūsu preces</h1>
-          {/* <p className="text-lg text-gray-600">
-            Atklājiet mūsu produktu klāstu, kas palīdzēs jūsu biznesam
-          </p> */}
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">Preces</h1>
+        </div>
+
+        {/* Wi-Fi Quiz Banner */}
+        <div className="mb-8 bg-gradient-to-r from-primary-800 to-primary-900 rounded-xl p-6 text-white">
+          <div className="flex flex-col md:flex-row items-center justify-between">
+            <div className="flex items-center mb-4 md:mb-0">
+              <Wifi className="w-12 h-12 mr-4 flex-shrink-0" />
+              <div>
+                <h2 className="text-xl md:text-2xl font-bold mb-2">
+                  Neesat pārliecināts par Wi-Fi risinājumu?
+                </h2>
+                <p className="text-primary-100 text-sm md:text-base">
+                  Izmantojiet mūsu ekspertu izveidoto palīgu, lai atrastu ideālo bezvadu tīkla risinājumu jūsu vajadzībām.
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={() => navigate('/bezvadu-tikla-konfigurators')}
+              className="bg-white text-primary-800 hover:bg-primary-50 font-semibold py-3 px-6 rounded-lg transition-colors flex items-center flex-shrink-0"
+            >
+              Sākt palīgu
+              <ArrowRight className="w-5 h-5 ml-2" />
+            </button>
+          </div>
         </div>
 
         {/* Category Filter */}
@@ -119,7 +142,7 @@ export function Preces() {
                     : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
                 }`}
               >
-                Visi produkti
+                Visas preces
               </button>
               {categories.map((category) => (
                 <button

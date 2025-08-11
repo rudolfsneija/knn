@@ -5,7 +5,7 @@ export function Home() {
     <div className="bg-white">
       {/* Hero Section */}
       <div className="relative bg-gradient-to-br from-primary-800 to-primary-900 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
           <div className="text-center">
             <h1 className="text-2xl md:text-4xl font-bold mb-6">
               Laipni lūgti KNN Serviss mājaslapā
@@ -31,8 +31,39 @@ export function Home() {
         </div>
       </div>
 
+      {/* Wi-Fi Quiz Section */}
+      <div className="py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-gradient-to-r from-primary-800 to-primary-900 rounded-xl p-8 text-white">
+            <div className="flex flex-col lg:flex-row items-center justify-between">
+              <div className="flex items-center mb-6 lg:mb-0">
+                <Wifi className="w-16 h-16 mr-6 flex-shrink-0" />
+                <div>
+                  <h2 className="text-2xl lg:text-3xl font-bold mb-3">
+                    Nepieciešama palīdzība Wi-Fi risinājuma izvēlē?
+                  </h2>
+                  <p className="text-primary-100 text-lg leading-relaxed">
+                    Izmantojiet mūsu ekspertu izveidoto interaktīvo palīgu, lai ātri un viegli atrastu 
+                    ideālo Ruckus bezvadu tīkla risinājumu jūsu konkrētajām vajadzībām.
+                  </p>
+                </div>
+              </div>
+              <a
+                href="/bezvadu-tikla-konfigurators"
+                className="bg-white text-primary-800 hover:bg-primary-50 font-semibold py-4 px-8 rounded-lg transition-colors flex items-center flex-shrink-0 text-lg"
+              >
+                Sākt palīgu
+                <svg className="w-6 h-6 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Pakalpojumi Section */}
-      <div className="py-20">
+      <div className="py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">

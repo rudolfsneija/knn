@@ -118,7 +118,7 @@ router.get('/:id', async (req, res) => {
 router.post('/', requireAuth, async (req, res) => {
   try {
     const admin = (req as any).user;
-    const { title, content, excerpt, image_url, published }: CreateAktualitateRequest = req.body;
+    const { title, content, excerpt, image_url, published, created_at }: CreateAktualitateRequest = req.body;
 
     if (!title || !content) {
       return res.status(400).json({
@@ -128,9 +128,9 @@ router.post('/', requireAuth, async (req, res) => {
     }
 
     const result = await run(`
-      INSERT INTO aktualitates (title, content, excerpt, image_url, published, admin_id) 
-      VALUES (?, ?, ?, ?, ?, ?)
-    `, [title, content, excerpt || null, image_url || null, published ? 1 : 0, admin.userId]);
+      INSERT INTO aktualitates (title, content, excerpt, image_url, published, admin_id, created_at) 
+      VALUES (?, ?, ?, ?, ?, ?, COALESCE(?, CURRENT_TIMESTAMP))
+    `, [title, content, excerpt || null, image_url || null, published ? 1 : 0, admin.userId, created_at]);
 
     const newAktualitate = await query(`
       SELECT a.*, u.username as admin_username 
@@ -158,7 +158,7 @@ router.put('/:id', requireAuth, async (req, res) => {
   try {
     const admin = (req as any).user;
     const { id } = req.params;
-    const { title, content, excerpt, image_url, published }: UpdateAktualitateRequest = req.body;
+    const { title, content, excerpt, image_url, published, created_at }: UpdateAktualitateRequest = req.body;
 
     // Check if aktualitate exists and belongs to admin
     const existingAktualitate = await query(
@@ -188,9 +188,10 @@ router.put('/:id', requireAuth, async (req, res) => {
           excerpt = COALESCE(?, excerpt),
           image_url = COALESCE(?, image_url),
           published = COALESCE(?, published),
+          created_at = COALESCE(?, created_at),
           updated_at = CURRENT_TIMESTAMP
       WHERE id = ?
-    `, [title, content, excerpt, image_url, published !== undefined ? (published ? 1 : 0) : null, id]);
+    `, [title, content, excerpt, image_url, published !== undefined ? (published ? 1 : 0) : null, created_at, id]);
 
     const updatedAktualitate = await query(`
       SELECT a.*, u.username as admin_username 

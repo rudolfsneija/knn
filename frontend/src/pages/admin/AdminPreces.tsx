@@ -410,7 +410,7 @@ export function AdminPreces() {
                     </label>
                     <textarea
                       required
-                      rows={6}
+                      rows={12}
                       value={formData.description}
                       onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                       className="admin-input w-full resize-none"
@@ -640,7 +640,7 @@ export function AdminPreces() {
                   <div className="flex flex-col lg:flex-row lg:items-start gap-6">
                     {/* Product Image */}
                     {(prece.main_image || prece.image_url) && (
-                      <div className="w-full lg:w-48 h-48 flex-shrink-0">
+                      <div className="w-full lg:w-36 h-36 flex-shrink-0">
                         <img
                           src={prece.main_image?.url || prece.image_url}
                           alt={prece.name}

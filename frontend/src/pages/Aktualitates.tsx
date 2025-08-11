@@ -88,7 +88,7 @@ export function Aktualitates() {
               <Link
                 key={aktualitate.id}
                 to={`/aktualitates/${aktualitate.id}`}
-                className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer block"
+                className="bg-secondary-100 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer block"
               >
                 {(aktualitate.main_image?.url || aktualitate.image_url) && (
                   <img

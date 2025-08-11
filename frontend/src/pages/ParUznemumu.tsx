@@ -16,25 +16,43 @@ const musuPieredze = [
 ];
 
 const sertifikati = [
-  "Juniper Networks Certified Associate, Junos (JNCIA-Junos)",
-  "AWS Certified Cloud Practitioner",
-  "CCNA",
-  "MikroTik Certified Network Associate (MTCNA)",
-  "MikroTik Certified Routing Engineer (MTCRE)"
+  {
+    name: "Juniper Networks Certified Associate, Junos (JNCIA-Junos)",
+    logo: "/logo/JNCIA-Junos.png"
+  },
+  {
+    name: "AWS Certified Cloud Practitioner",
+    logo: "/logo/AWS_Certified_Cloud_Practitioner.png"
+  },
+  {
+    name: "CCNA",
+    logo: "/logo/Cisco_CCNA.png"
+  },
+  {
+    name: "MikroTik Certified Network Associate (MTCNA)",
+    logo: "/logo/MTCNA.png"
+  },
+  {
+    name: "MikroTik Certified Routing Engineer (MTCRE)",
+    logo: "/logo/MTCRE.png"
+  }
 ];
 
 const sadarbribasPartneri = [
   {
     name: "NEIJA T",
-    description: "Kvadraciklu būve, kā arī motoru, amortizatoru serviss ar bagātu pieredzi motosportā."
+    description: "Neija Racing Quads specializējas motokrosa kvadraciklu būvē, apkopē, detaļu ražošanā un izplatībā. Vairāk nekā 30 gadu pieredze motosportā. Neija Racing Quads būvētie kvadracikli ir guvuši sasniegumus Eiropas mērogā.",
+    logo: "/logo/neija-logo.png"
   },
   {
     name: "Maksikoms",
-    description: "SIA Maksikoms tika nodibināta 1998. gadā ar mērķi sniegt augstas kvalitātes IT pakalpojumus korporatīvajiem klientiem. Uzņēmuma veidotie IT risinājumi ļauj mūsu klientiem optimizēt darbu, ietaupīt laiku un līdzekļus dažādu uzdevumu risināšanā."
+    description: "SIA Maksikoms tika nodibināta 1998. gadā ar mērķi sniegt augstas kvalitātes IT pakalpojumus korporatīvajiem klientiem. Uzņēmuma veidotie IT risinājumi ļauj mūsu klientiem optimizēt darbu, ietaupīt laiku un līdzekļus dažādu uzdevumu risināšanā.",
+    logo: "/logo/maksikoms.png"
   },
   {
     name: "FINSEL",
-    description: "SIA FINSEL ir profesionāls grāmatvedības uzņēmums, kas piedāvā plašu pakalpojumu klāstu, tostarp grāmatvedības uzskaiti, nodokļu konsultācijas un finanšu analīzi. Mūsu komanda apvieno pieredzi un zināšanas, lai nodrošinātu klientiem individuālus risinājumus."
+    description: "SIA FINSEL ir profesionāls grāmatvedības uzņēmums, kas piedāvā plašu pakalpojumu klāstu, tostarp grāmatvedības uzskaiti, nodokļu konsultācijas un finanšu analīzi. Mūsu komanda apvieno pieredzi un zināšanas, lai nodrošinātu klientiem individuālus risinājumus.",
+    logo: "/logo/finsel.png"
   }
 ];
 
@@ -83,12 +101,18 @@ export function ParUznemumu() {
               {sertifikati.map((sertifikats, index) => (
                 <div 
                   key={index}
-                  className={`flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow ${
+                  className={`flex items-center p-4 bg-white rounded-lg shadow-sm ${
                     index === sertifikati.length - 1 && sertifikati.length % 2 !== 0 ? 'md:col-span-2' : ''
                   }`}
                 >
-                  <Award className="w-6 h-6 text-primary-800 mr-3 flex-shrink-0" />
-                  <span className="font-medium text-gray-900 text-sm">{sertifikats}</span>
+                  <div className="w-20 h-20 mr-4 flex-shrink-0 flex items-center justify-center">
+                    <img 
+                      src={sertifikats.logo} 
+                      alt={sertifikats.name}
+                      className="max-w-full max-h-full object-contain"
+                    />
+                  </div>
+                  <span className="font-medium text-gray-900 text-sm">{sertifikats.name}</span>
                 </div>
               ))}
             </div>
@@ -105,8 +129,15 @@ export function ParUznemumu() {
             {sadarbribasPartneri.map((partneris, index) => (
               <div 
                 key={index}
-                className="bg-secondary-100 p-6 rounded-lg shadow-sm text-center hover:shadow-md transition-shadow"
+                className="bg-secondary-100 p-6 rounded-lg shadow-sm text-center"
               >
+                <div className="w-32 h-32 mx-auto mb-4 flex items-center justify-center">
+                  <img 
+                    src={partneris.logo} 
+                    alt={partneris.name}
+                    className="max-w-full max-h-full object-contain"
+                  />
+                </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-4">{partneris.name}</h3>
                 <p className="text-gray-700 text-sm leading-relaxed">{partneris.description}</p>
               </div>

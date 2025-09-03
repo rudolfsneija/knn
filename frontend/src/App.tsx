@@ -14,6 +14,10 @@ import { AdminLogin } from './pages/admin/AdminLogin';
 import { AdminDashboard } from './pages/admin/AdminDashboard';
 import { AdminAktualitates } from './pages/admin/AdminAktualitates';
 import { AdminPreces } from './pages/admin/AdminPreces';
+import { NklPrasibuRealizesana } from './pages/services/NklPrasibuRealizesana';
+import { ItDrosibasApmacibas } from './pages/services/ItDrosibasApmacibas';
+import { BezvaduWifiRisinajumi } from './pages/services/BezvaduWifiRisinajumi';
+import { VideonoveroSistemas } from './pages/services/VideonoveroSistemas';
 import { AuthProvider } from './contexts/AuthContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 
@@ -29,6 +33,10 @@ function App() {
               <Route path="aktualitates" element={<Aktualitates />} />
               <Route path="aktualitates/:id" element={<AktualitateDetail />} />
               <Route path="pakalpojumi" element={<Pakalpojumi />} />
+              <Route path="pakalpojumi/nkl-prasibu-realizesana" element={<NklPrasibuRealizesana />} />
+              <Route path="pakalpojumi/it-drosibas-apmacibas" element={<ItDrosibasApmacibas />} />
+              <Route path="pakalpojumi/bezvadu-wifi-risinajumi" element={<BezvaduWifiRisinajumi />} />
+              <Route path="pakalpojumi/videonovero-sistemas" element={<VideonoveroSistemas />} />
               <Route path="preces" element={<Preces />} />
               <Route path="preces/:id" element={<PreceDetail />} />
               <Route path="bezvadu-tikla-konfigurators" element={<BezvaduTiklaKonfigurators />} />

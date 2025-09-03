@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { FileText, GraduationCap, Wifi, Cctv } from "lucide-react";
+import { Link } from "react-router-dom";
 import { WifiQuizBanner } from "../components/WifiQuizBanner";
 import axios from "axios";
 
@@ -43,7 +44,7 @@ export function Home() {
 
   const fetchRecentAktualitates = async () => {
     try {
-      const response = await axios.get('/api/aktualitates');
+      const response = await axios.get("/api/aktualitates");
       if (response.data.success) {
         // Filter to only show published articles and take the 3 most recent
         const publishedAktualitates = response.data.data
@@ -51,10 +52,10 @@ export function Home() {
           .slice(0, 3);
         setAktualitates(publishedAktualitates);
       } else {
-        console.error('API Error:', response.data.error);
+        console.error("API Error:", response.data.error);
       }
     } catch (error) {
-      console.error('Error fetching aktualitātes:', error);
+      console.error("Error fetching aktualitātes:", error);
     } finally {
       setLoading(false);
     }
@@ -106,58 +107,91 @@ export function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="text-center p-6 bg-secondary-100 rounded-lg">
+            <Link
+              to="/pakalpojumi/nkl-prasibu-realizesana"
+              className="text-center p-6 bg-secondary-100 rounded-lg hover:shadow-lg transition-all duration-300 block"
+            >
               <div className="w-16 h-16 bg-primary-800 rounded-full mx-auto mb-4 flex items-center justify-center">
                 <FileText className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-xl font-semibold mb-2">
                 NKL prasību realizēšana
               </h3>
-              <p className="text-gray-600">
+              <p className="text-gray-600 mb-4">
                 Nodrošinām obligāto minimālo kiberdrošības prasību ieviešanu un
                 dokumentu kārtošanu visu veidu uzņēmumos.
               </p>
-            </div>
+              <div className="text-right">
+                <span className="text-primary-800 hover:text-primary-900 font-medium">
+                  Uzzināt vairāk →
+                </span>
+              </div>
+            </Link>
 
-            <div className="text-center p-6 bg-secondary-100 rounded-lg">
+            <Link
+              to="/pakalpojumi/it-drosibas-apmacibas"
+              className="text-center p-6 bg-secondary-100 rounded-lg hover:shadow-lg transition-all duration-300 block"
+            >
               <div className="w-16 h-16 bg-primary-800 rounded-full mx-auto mb-4 flex items-center justify-center">
                 <GraduationCap className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-xl font-semibold mb-2">
                 IT drošības apmācības
               </h3>
-              <p className="text-gray-600">
+              <p className="text-gray-600 mb-4">
                 Nodrošinām IT drošības apmācības darbiniekiem, koncentrējoties
                 uz svarīgākajiem mūsdienu kiberdrošības aspektiem.
               </p>
-            </div>
+              <div className="text-right">
+                <span className="text-primary-800 hover:text-primary-900 font-medium">
+                  Uzzināt vairāk →
+                </span>
+              </div>
+            </Link>
 
-            <div className="text-center p-6 bg-secondary-100 rounded-lg">
+            <Link
+              to="/pakalpojumi/bezvadu-wifi-risinajumi"
+              className="text-center p-6 bg-secondary-100 rounded-lg hover:shadow-lg transition-all duration-300 block"
+            >
               <div className="w-16 h-16 bg-primary-800 rounded-full mx-auto mb-4 flex items-center justify-center">
                 <Wifi className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-xl font-semibold mb-2">
                 Bezvadu Wi-Fi risinājumi
               </h3>
-              <p className="text-gray-600">
+              <p className="text-gray-600 mb-4">
                 Piedāvājam modernu industrijas bezvada tīkla risinājumu, kurš
                 aptver vairākas drošības iespējas un aktuālākās tehniskās
                 iespējas plašam klientu lokam.
               </p>
-            </div>
+              <div className="text-right">
+                <span className="text-primary-800 hover:text-primary-900 font-medium">
+                  Uzzināt vairāk →
+                </span>
+              </div>
+            </Link>
 
-            <div className="text-center p-6 bg-secondary-100 rounded-lg">
+            <Link
+              to="/pakalpojumi/videonovero-sistemas"
+              className="text-center p-6 bg-secondary-100 rounded-lg hover:shadow-lg transition-all duration-300 block"
+            >
               <div className="w-16 h-16 bg-primary-800 rounded-full mx-auto mb-4 flex items-center justify-center">
                 <Cctv className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-xl font-semibold mb-2">
                 Videonovērošanas sistēmas
               </h3>
-              <p className="text-gray-600">
-                Nodarbojamies ar videonovērošanas sistēmu izplatīšanu,
-                uzstādīšanu un nomu dažāda veida objektiem.
+              <p className="text-gray-600 mb-4">
+                Videonovērošanas sistēmu izplatīšana, uzstādīšana un noma dažāda
+                veida objektiem. 
               </p>
-            </div>
+
+              <div className="text-right">
+                <span className="text-primary-800 hover:text-primary-900 font-medium">
+                  Uzzināt vairāk →
+                </span>
+              </div>
+            </Link>
           </div>
         </div>
       </div>
@@ -178,7 +212,9 @@ export function Home() {
             </div>
           ) : aktualitates.length === 0 ? (
             <div className="text-center py-12">
-              <p className="text-gray-600 text-lg">Pašlaik nav pieejamas aktualitātes.</p>
+              <p className="text-gray-600 text-lg">
+                Pašlaik nav pieejamas aktualitātes.
+              </p>
             </div>
           ) : (
             <>
@@ -191,7 +227,9 @@ export function Home() {
                   >
                     {(aktualitate.main_image?.url || aktualitate.image_url) && (
                       <img
-                        src={aktualitate.main_image?.url || aktualitate.image_url}
+                        src={
+                          aktualitate.main_image?.url || aktualitate.image_url
+                        }
                         alt={aktualitate.title}
                         className="w-full h-48 object-cover"
                       />
@@ -201,13 +239,16 @@ export function Home() {
                         {aktualitate.title}
                       </h3>
                       <p className="text-gray-600 mb-4 line-clamp-3">
-                        {aktualitate.excerpt || (aktualitate.content.length > 120
-                          ? `${aktualitate.content.substring(0, 120)}...`
-                          : aktualitate.content)}
+                        {aktualitate.excerpt ||
+                          (aktualitate.content.length > 120
+                            ? `${aktualitate.content.substring(0, 120)}...`
+                            : aktualitate.content)}
                       </p>
                       <div className="flex justify-between items-center">
                         <span className="text-sm text-gray-500">
-                          {new Date(aktualitate.created_at).toLocaleDateString('lv-LV')}
+                          {new Date(aktualitate.created_at).toLocaleDateString(
+                            "lv-LV"
+                          )}
                         </span>
                         <span className="text-primary-800 hover:text-primary-900 font-medium">
                           Lasīt vairāk →
@@ -217,7 +258,7 @@ export function Home() {
                   </a>
                 ))}
               </div>
-              
+
               {/* <div className="text-center">
                 <a
                   href="/aktualitates"

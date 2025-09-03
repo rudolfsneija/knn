@@ -1,4 +1,5 @@
 import { FileText, GraduationCap, Wifi, Cctv, Check } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export function Pakalpojumi() {
   const services = [
@@ -6,6 +7,7 @@ export function Pakalpojumi() {
       title: "NKL prasību realizēšana",
       description: "Nodrošinām obligāto minimālo kiberdrošības prasību ieviešanu un dokumentu kārtošanu visu veidu uzņēmumos",
       icon: FileText,
+      path: "/pakalpojumi/nkl-prasibu-realizesana",
       features: [
         "Kiberdrošības politiku izstrāde", 
         "Riska novērtējuma dokumentācija", 
@@ -17,6 +19,7 @@ export function Pakalpojumi() {
       title: "IT drošības apmācības",
       description: "Nodrošinām IT drošības apmācības darbiniekiem, koncentrējoties uz svarīgākajiem mūsdienu kiberdrošības aspektiem",
       icon: GraduationCap,
+      path: "/pakalpojumi/it-drosibas-apmacibas",
       features: [
         "Darbinieku kiberdrošības apmācības", 
         "Phishing un sociālās inženierijas izglītība", 
@@ -28,6 +31,7 @@ export function Pakalpojumi() {
       title: "Bezvadu Wi-Fi risinājumi",
       description: "Piedāvājam modernu industrijas bezvada tīkla risinājumu, kurš aptver vairākas drošības iespējas un aktuālākās tehniskās iespējas plašam klientu lokam",
       icon: Wifi,
+      path: "/pakalpojumi/bezvadu-wifi-risinajumi",
       features: [
         "Uzņēmuma Wi-Fi tīklu projektēšana", 
         "Drošu bezvadu tīklu ieviešana", 
@@ -39,6 +43,7 @@ export function Pakalpojumi() {
       title: "Videonovērošanas sistēmas",
       description: "Nodarbojamies ar videonovērošanas sistēmu izplatīšanu, uzstādīšanu un nomu dažāda veida objektiem",
       icon: Cctv,
+      path: "/pakalpojumi/videonovero-sistemas",
       features: [
         "Videonovērošanas sistēmu projektēšana", 
         "Profesionāla uzstādīšana un konfigurācija", 
@@ -59,7 +64,11 @@ export function Pakalpojumi() {
           {services.map((service, index) => {
             const IconComponent = service.icon;
             return (
-              <div key={index} className="bg-secondary-100 rounded-lg shadow-lg p-8 hover:shadow-xl transition-shadow">
+              <Link 
+                key={index} 
+                to={service.path}
+                className="bg-secondary-100 rounded-lg shadow-lg p-8 hover:shadow-xl transition-all duration-300  block"
+              >
                 <div className="w-16 h-16 bg-primary-800 rounded-full mx-auto mb-6 flex items-center justify-center">
                   <IconComponent className="w-8 h-8 text-white" />
                 </div>
@@ -73,7 +82,12 @@ export function Pakalpojumi() {
                     </li>
                   ))}
                 </ul>
+                              <div className="text-right">
+                <span className="text-primary-800 hover:text-primary-900 font-medium">
+                  Uzzināt vairāk →
+                </span>
               </div>
+              </Link>
             );
           })}
         </div>

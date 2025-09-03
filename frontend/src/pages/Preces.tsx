@@ -200,11 +200,16 @@ export function Preces() {
                   </div>
 
                   <div className="mt-auto">
-                    {prece.price !== undefined && prece.price !== null && (
-                      <span className="text-2xl font-bold text-primary-800">
-                        €{prece.price.toFixed(2)}
+                    <div className="flex items-end justify-between">
+                      <span className="text-sm text-primary-800 hover:text-primary-900 font-medium">
+                        Skatīt preci →
                       </span>
-                    )}
+                      {prece.price !== undefined && prece.price !== null && (
+                        <span className="text-2xl font-bold text-primary-800">
+                          €{prece.price.toFixed(2)}
+                        </span>
+                      )}
+                    </div>
                   </div>
                 </div>
               </Link>

@@ -23,7 +23,7 @@ export function Navigation() {
               <img 
                 src="/logo/knn-small-logo-red.svg" 
                 alt="KNN Logo" 
-                className="h-16 w-16"
+                className="h-24 w-24"
               />
             </Link>
           </div>

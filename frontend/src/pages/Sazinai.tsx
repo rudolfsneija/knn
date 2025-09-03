@@ -185,11 +185,29 @@ export function Sazinai() {
             </div>
 
             <div className="mt-8 p-6 bg-secondary-50 rounded-lg">
+              <h3 className="font-semibold text-gray-900 mb-4">Rekvizīti</h3>
+              <div className="space-y-2 text-sm">
+                <p className="text-gray-700">
+                  <span className="font-medium">Nosaukums:</span> SIA KNN Serviss
+                </p>
+                <p className="text-gray-700">
+                  <span className="font-medium">Reģ.Nr.:</span> 40203604036
+                </p>
+                {/* <p className="text-gray-700">
+                  <span className="font-medium">E-pasts:</span> info@knn.lv
+                </p> */}
+                <p className="text-gray-700">
+                  <span className="font-medium">Juridiskā adrese:</span> Rožu iela 12, Ozolnieki, Ozolnieku pag., Jelgavas nov., LV-3018
+                </p>
+              </div>
+            </div>
+{/* 
+            <div className="mt-8 p-6 bg-secondary-50 rounded-lg">
               <h3 className="font-semibold text-gray-900 mb-2">Ātra atbilde</h3>
               <p className="text-gray-600 text-sm">
                 Mēs cenšamies atbildēt uz visiem jautājumiem 24 stundu laikā.
               </p>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

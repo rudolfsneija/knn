@@ -1,7 +1,9 @@
-import { useState } from "react";
-import { Mail } from "lucide-react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
+import { Mail, Send } from "lucide-react";
 
 export function Sazinai() {
+  const [searchParams] = useSearchParams();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -9,6 +11,16 @@ export function Sazinai() {
     subject: "",
     message: "",
   });
+
+  useEffect(() => {
+    const topic = searchParams.get('topic');
+    if (topic) {
+      setFormData(prev => ({
+        ...prev,
+        subject: topic
+      }));
+    }
+  }, [searchParams]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState("");
 
@@ -52,7 +64,7 @@ export function Sazinai() {
           {/* Contact Form */}
           <div>
             <h2 className="text-2xl font-bold text-gray-900 mb-6">
-              Sūtīt ziņojumu
+              Sazinies ar mums
             </h2>
 
             {submitMessage && (
@@ -132,8 +144,10 @@ export function Sazinai() {
                 >
                   <option value="">Izvēlēties tēmu</option>
                   <option value="konsultacijas">Konsultācijas</option>
-                  <option value="it-risinajumi">IT risinājumi</option>
-                  <option value="projektu-vadiba">Projektu vadība</option>
+                  <option value="nkl-prasibu-realizesana">NKL prasību realizēšana</option>
+                  <option value="it-drosibas-apmacibas">IT drošības apmācības</option>
+                  <option value="bezvadu-wifi-risinajumi">Wi-Fi risinājumi</option>
+                  <option value="videonovero-sistemas">Videonovērošanas sistēmas</option>
                   <option value="preces">Jautājums par precēm</option>
                   <option value="cits">Cits jautājums</option>
                 </select>
@@ -161,9 +175,10 @@ export function Sazinai() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-primary-800 text-white py-3 px-6 rounded-lg font-semibold hover:bg-primary-900 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="w-full bg-primary-800 text-white py-3 px-6 rounded-lg font-semibold hover:bg-primary-900 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center"
               >
                 {isSubmitting ? "Sūta..." : "Sūtīt ziņojumu"}
+                {!isSubmitting && <Send className="w-5 h-5 ml-2" />}
               </button>
             </form>
           </div>

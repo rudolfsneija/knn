@@ -58,7 +58,7 @@ export function BezvaduWifiRisinajumi() {
           <div className="w-24 h-24 bg-primary-800 rounded-full mx-auto mb-6 flex items-center justify-center">
             <Wifi className="w-12 h-12 text-white" />
           </div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Bezvadu Wi-Fi risinājumi</h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">Wi-Fi risinājumi</h1>
           <p className="text-xl text-gray-600 max-w-4xl mx-auto">
             Bezvadu tīkla nodrošināšana ar Ruckus tehnoloģiju ir lieliska iespēja uzlabot klientu vai uzņēmuma bezvadu interneta pieredzi. Ruckus ir pazīstams ar savām augstas kvalitātes Wi-Fi risinājumiem, kas nodrošina stabilu savienojumu, lielu jaudu un drošību.
           </p>
@@ -151,7 +151,7 @@ export function BezvaduWifiRisinajumi() {
           <h2 className="text-2xl font-bold mb-4">Gatavi uzlabot savu Wi-Fi pieredzi ar Ruckus tehnoloģiju?</h2>
           <p className="mb-6">Sazinieties ar mums bezmaksas konsultācijai par Ruckus risinājumiem un to, kā mēs varam nodrošināt augstas kvalitātes bezvadu interneta savienojumu jūsu vajadzībām</p>
           <a
-            href="/sazinai"
+            href="/sazinai?topic=bezvadu-wifi-risinajumi"
             className="bg-white text-primary-800 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-block"
           >
             Pieprasīt konsultāciju

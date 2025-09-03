@@ -148,7 +148,7 @@ export function ItDrosibasApmacibas() {
           <h2 className="text-2xl font-bold mb-4">Gatavi uzlabot savu komandas kiberdrošības zināšanas?</h2>
           <p className="mb-6">Sazinieties ar mums, lai uzzinātu vairāk par mūsu piedāvātajām IT drošības apmācībām un kā mēs varam palīdzēt Jūsu uzņēmumam nodrošināt drošāku darba vidi.</p>
           <a
-            href="/sazinai"
+            href="/sazinai?topic=it-drosibas-apmacibas"
             className="bg-white text-primary-800 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-block"
           >
             Pieprasīt apmācības

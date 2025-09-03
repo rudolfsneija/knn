@@ -128,7 +128,7 @@ export function NklPrasibuRealizesana() {
           <h2 className="text-2xl font-bold mb-4">Gatavi sākt?</h2>
           <p className="mb-6">Sazinieties ar mums, lai uzsāktu NKL prasību ieviešanu jūsu uzņēmumā</p>
           <a
-            href="/sazinai"
+            href="/sazinai?topic=nkl-prasibu-realizesana"
             className="bg-white text-primary-800 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-block"
           >
             Sazināties ar mums

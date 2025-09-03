@@ -157,7 +157,7 @@ export function Home() {
                 <Wifi className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-xl font-semibold mb-2">
-                Bezvadu Wi-Fi risinājumi
+                Wi-Fi risinājumi
               </h3>
               <p className="text-gray-600 mb-4">
                 Piedāvājam modernu industrijas bezvada tīkla risinājumu, kurš

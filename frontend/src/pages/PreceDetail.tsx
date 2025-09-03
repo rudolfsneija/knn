@@ -160,7 +160,7 @@ export function PreceDetail() {
 
             <div>
               <a
-                href="/sazinai"
+                href="/sazinai?topic=preces"
                 className={`block w-full py-3 px-6 rounded-lg font-semibold transition-colors text-center ${
                   prece.available 
                     ? 'bg-primary-800 text-white hover:bg-primary-900' 

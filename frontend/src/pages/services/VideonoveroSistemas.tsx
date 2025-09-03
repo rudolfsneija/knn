@@ -1,12 +1,12 @@
 import { Cctv, Check, Eye, Shield, Monitor, Clock } from 'lucide-react';
 
 export function VideonoveroSistemas() {
-  const features = [
-    "Videonovērošanas sistēmu projektēšana", 
-    "Profesionāla uzstādīšana un konfigurācija", 
-    "Attālā piekļuve un monitorings", 
-    "Aprīkojuma noma un tehniskais atbalsts"
-  ];
+  // const features = [
+  //   "Videonovērošanas sistēmu projektēšana", 
+  //   "Profesionāla uzstādīšana un konfigurācija", 
+  //   "Attālā piekļuve un monitorings", 
+  //   "Aprīkojuma noma un tehniskais atbalsts"
+  // ];
 
   const solutions = [
     {
@@ -111,7 +111,7 @@ export function VideonoveroSistemas() {
         </div>
 
         {/* Features */}
-        <div className="mb-16">
+        {/* <div className="mb-16">
           <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Ko iekļauj mūsu pakalpojums</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {features.map((feature, index) => (
@@ -123,7 +123,7 @@ export function VideonoveroSistemas() {
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
 
         {/* Industries */}
         <div className="mb-16">
@@ -141,7 +141,7 @@ export function VideonoveroSistemas() {
         </div>
 
         {/* Benefits */}
-        <div className="mb-16 bg-gray-50 rounded-lg p-8">
+        <div className="mb-24 bg-secondary-100 rounded-lg p-8">
           <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">Sistēmu ieguvumi</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {benefits.map((benefit, index) => (
@@ -156,8 +156,8 @@ export function VideonoveroSistemas() {
         </div>
 
         {/* Process */}
-        <div className="mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Uzstādīšanas process</h2>
+        <div className="mb-24">
+          <h2 className="text-3xl font-bold text-gray-900 mb-16 text-center">Uzstādīšanas process</h2>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             <div className="text-center">
               <div className="w-16 h-16 bg-primary-800 rounded-full mx-auto mb-4 flex items-center justify-center">
@@ -201,7 +201,7 @@ export function VideonoveroSistemas() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="bg-white p-4 rounded-lg">
                 <Check className="w-6 h-6 text-primary-800 mx-auto mb-2" />
-                <span className="text-gray-900 font-medium">Ātri uzstādām</span>
+                <span className="text-gray-900 font-medium">Ātra uzstādīšana</span>
               </div>
               <div className="bg-white p-4 rounded-lg">
                 <Check className="w-6 h-6 text-primary-800 mx-auto mb-2" />
@@ -220,7 +220,7 @@ export function VideonoveroSistemas() {
           <h2 className="text-2xl font-bold mb-4">Gatavi uzstādīt videonovērošanas sistēmu?</h2>
           <p className="mb-6">Sazinieties ar mums bezmaksas konsultācijai un objekta apsekošanai</p>
           <a
-            href="/sazinai"
+            href="/sazinai?topic=videonovero-sistemas"
             className="bg-white text-primary-800 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-block"
           >
             Pieprasīt konsultāciju

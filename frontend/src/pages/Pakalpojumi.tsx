@@ -28,7 +28,7 @@ export function Pakalpojumi() {
       ]
     },
     {
-      title: "Bezvadu Wi-Fi risinājumi",
+      title: "Wi-Fi risinājumi",
       description: "Piedāvājam modernu industrijas bezvada tīkla risinājumu, kurš aptver vairākas drošības iespējas un aktuālākās tehniskās iespējas plašam klientu lokam",
       icon: Wifi,
       path: "/pakalpojumi/bezvadu-wifi-risinajumi",
@@ -100,7 +100,7 @@ export function Pakalpojumi() {
             Sazinieties ar mums, lai apspriestu jūsu specifiskās vajadzības
           </p>
           <a
-            href="/sazinai"
+            href="/sazinai?topic=konsultacijas"
             className="bg-primary-800 text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary-900 transition-colors inline-block"
           >
             Pieprasīt konsultāciju

@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
+import { Search } from './Search';
 
 export function Navigation() {
   const location = useLocation();
@@ -28,7 +29,7 @@ export function Navigation() {
             </Link>
           </div>
           
-          <div className="hidden md:flex items-center space-x-8 mx-auto">
+          <div className="hidden md:flex items-center space-x-8">
             {navigation.map((item) => (
               <Link
                 key={item.name}
@@ -42,6 +43,11 @@ export function Navigation() {
                 {item.name}
               </Link>
             ))}
+          </div>
+
+          {/* Desktop Search */}
+          <div className="hidden md:flex items-center">
+            <Search />
           </div>
 
           {/* Mobile menu button */}
@@ -63,6 +69,11 @@ export function Navigation() {
         {isMobileMenuOpen && (
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t border-gray-200">
+              {/* Mobile Search */}
+              <div className="px-3 py-2">
+                <Search isMobile={true} />
+              </div>
+              
               {navigation.map((item) => (
                 <Link
                   key={item.name}

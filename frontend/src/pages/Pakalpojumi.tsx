@@ -67,7 +67,7 @@ export function Pakalpojumi() {
               <Link 
                 key={index} 
                 to={service.path}
-                className="bg-secondary-100 rounded-lg shadow-lg p-8 hover:shadow-xl transition-all duration-300  block"
+                className="bg-secondary-100 rounded-lg shadow-lg p-8 hover:shadow-xl transition-all duration-200 block"
               >
                 <div className="w-16 h-16 bg-primary-800 rounded-full mx-auto mb-6 flex items-center justify-center">
                   <IconComponent className="w-8 h-8 text-white" />

@@ -9,6 +9,7 @@ import { Preces } from './pages/Preces';
 import { PreceDetail } from './pages/PreceDetail';
 import { ParUznemumu } from './pages/ParUznemumu';
 import { Sazinai } from './pages/Sazinai';
+import { SearchResults } from './pages/SearchResults';
 import { BezvaduTiklaKonfigurators } from './pages/BezvaduTiklaKonfigurators';
 import { AdminLogin } from './pages/admin/AdminLogin';
 import { AdminDashboard } from './pages/admin/AdminDashboard';
@@ -42,6 +43,7 @@ function App() {
               <Route path="bezvadu-tikla-konfigurators" element={<BezvaduTiklaKonfigurators />} />
               <Route path="par-uznemumu" element={<ParUznemumu />} />
               <Route path="sazinai" element={<Sazinai />} />
+              <Route path="search" element={<SearchResults />} />
             </Route>
 
             {/* Admin routes */}

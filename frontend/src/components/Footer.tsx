@@ -1,3 +1,5 @@
+import { Facebook, Youtube } from "lucide-react";
+
 export function Footer() {
   return (
     <footer className="bg-secondary-600 text-white">
@@ -27,10 +29,34 @@ export function Footer() {
           </div>
           
           <div>
-            <h3 className="text-lg font-semibold mb-4">Kontakti</h3>
-            <p className="text-secondary-100">
+            <h3 className="text-lg font-semibold mb-4">Kontaktinformācija</h3>
+            <p className="text-secondary-100 mb-4">
               E-pasts: info@knn.lv<br />
             </p>
+            
+            <div>
+              <h4 className="text-lg font-semibold mb-2">Sociālie tīkli</h4>
+              <div className="flex space-x-4">
+                <a 
+                  href="https://www.facebook.com/knnserviss" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-secondary-100 hover:text-white transition-colors"
+                  aria-label="Facebook"
+                >
+                  <Facebook className="w-8 h-8" />
+                </a>
+                <a 
+                  href="https://www.youtube.com/@KNNServiss" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-secondary-100 hover:text-white transition-colors"
+                  aria-label="YouTube"
+                >
+                  <Youtube className="w-8 h-8" />
+                </a>
+              </div>
+            </div>
           </div>
         </div>
         

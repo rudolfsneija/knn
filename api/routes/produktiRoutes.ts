@@ -6,6 +6,33 @@ import { getEntityImages, getImageUrl } from '../utils/imageUpload';
 
 const router = express.Router();
 
+// GET /api/produkti/categories - Get all unique categories (public endpoint)
+router.get('/categories', async (req, res) => {
+  try {
+    const categories = await queryAll(`
+      SELECT DISTINCT category 
+      FROM produkti 
+      WHERE category IS NOT NULL 
+        AND category != ''
+      ORDER BY category ASC
+    `);
+    
+    const categoryList = categories.map(row => row.category);
+    
+    res.json({
+      success: true,
+      count: categoryList.length,
+      data: categoryList
+    });
+  } catch (error) {
+    console.error('Error fetching categories:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to fetch categories'
+    });
+  }
+});
+
 // GET /api/produkti - Get all products (public endpoint)
 router.get('/', async (req, res) => {
   try {

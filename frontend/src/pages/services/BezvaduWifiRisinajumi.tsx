@@ -53,7 +53,7 @@ export function BezvaduWifiRisinajumi() {
   return (
     <div className="bg-white min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Hero Section */}
+        {/* Hero sekcija */}
         <div className="text-center mb-16">
           <div className="w-24 h-24 bg-primary-800 rounded-full mx-auto mb-6 flex items-center justify-center">
             <Wifi className="w-12 h-12 text-white" />
@@ -64,8 +64,43 @@ export function BezvaduWifiRisinajumi() {
           </p>
         </div>
 
-        {/* Wi-Fi Quiz Banner */}
+        {/* Wi-Fi Konfigurators */}
         <WifiQuizBanner className="mb-16" />
+
+        {/* Ruckus video */}
+        <div className="mb-16">
+          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Ruckus stāsts Dziesmu un Deju svētkos</h2>
+          <div className="mx-auto">
+            <div className="relative w-full h-0 pb-[52.75%] rounded-lg overflow-hidden shadow-lg">
+              <iframe
+                className="absolute top-0 left-0 w-full h-full"
+                src="https://www.youtube.com/embed/YJdfjW27gbM"
+                title="Ruckus stāsts Dziesmu un Deju svētko"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              ></iframe>
+            </div>
+          </div>
+        </div>
+
+        {/* Ruckus Wi-Fi risinājumi */}
+        <div className="mb-16 bg-secondary-100 rounded-lg p-8">
+          <div className="text-center mb-8">
+
+            <h2 className="text-3xl font-bold text-gray-900">Ruckus Wi-Fi risinājumi</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {technologies.map((technology, index) => (
+              <div key={index} className="bg-white p-6 rounded-lg shadow-sm">
+                <div className="flex items-start">
+                  <Check className="w-6 h-6 text-primary-800 mr-4 flex-shrink-0" />
+                  <span className="text-gray-900 font-medium">{technology}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
 
         {/* Solutions */}
         <div className="mb-16">
@@ -90,21 +125,6 @@ export function BezvaduWifiRisinajumi() {
           </div>
         </div>
 
-        {/* Technologies */}
-        <div className="mb-16 bg-secondary-100 rounded-lg p-8">
-          <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">Ruckus Wi-Fi risinājumi</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {technologies.map((technology, index) => (
-              <div key={index} className="bg-white p-6 rounded-lg shadow-sm">
-                <div className="flex items-start">
-                  <Check className="w-6 h-6 text-primary-800 mr-4 flex-shrink-0" />
-                  <span className="text-gray-900 font-medium">{technology}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
         {/* Features */}
         <div className="mb-16">
           <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Ko iekļauj mūsu pakalpojums</h2>
@@ -120,7 +140,7 @@ export function BezvaduWifiRisinajumi() {
           </div>
         </div>
 
-        {/* Equipment Rental Section */}
+        {/* Iekārtu īres pakalpojums */}
         <div className="mb-16 bg-secondary-100 rounded-lg p-8">
           <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">Iekārtu īres pakalpojums</h2>
           <div className="max-w-4xl mx-auto text-center">
@@ -131,7 +151,7 @@ export function BezvaduWifiRisinajumi() {
           </div>
         </div>
 
-        {/* Benefits */}
+        {/* Kāpēc izvēlēties mūsu risinājumus */}
         <div className="mb-16">
           <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Kāpēc izvēlēties mūsu risinājumus</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

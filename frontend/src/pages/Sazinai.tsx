@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import { Mail, Send } from "lucide-react";
+import { Mail, Send, Facebook, Youtube } from "lucide-react";
 
 export function Sazinai() {
   const [searchParams] = useSearchParams();
@@ -197,6 +197,40 @@ export function Sazinai() {
                   <p className="text-gray-600">info@knn.lv</p>
                 </div>
               </div>
+
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">
+              Sociālie tīkli
+            </h2>
+
+              <a 
+                href="https://www.facebook.com/knnserviss" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-start group cursor-pointer"
+              >
+                <Facebook className="w-6 h-6 text-primary-800 group-hover:text-primary-900 mr-4 mt-1 transition-colors" />
+                <div>
+                  <h3 className="font-semibold text-gray-900 group-hover:text-primary-800 mb-1 transition-colors">Facebook</h3>
+                  <p className="text-gray-600 group-hover:text-primary-800 transition-colors">
+                    knnserviss
+                  </p>
+                </div>
+              </a>
+
+              <a 
+                href="https://www.youtube.com/@KNNServiss" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-start group cursor-pointer"
+              >
+                <Youtube className="w-6 h-6 text-primary-800 group-hover:text-primary-900 mr-4 mt-1 transition-colors" />
+                <div>
+                  <h3 className="font-semibold text-gray-900 group-hover:text-primary-800 mb-1 transition-colors">YouTube</h3>
+                  <p className="text-gray-600 group-hover:text-primary-800 transition-colors">
+                    @KNNServiss
+                  </p>
+                </div>
+              </a>
             </div>
 
             <div className="mt-8 p-6 bg-secondary-50 rounded-lg">

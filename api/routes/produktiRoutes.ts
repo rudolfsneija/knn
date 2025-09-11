@@ -33,6 +33,51 @@ router.get('/categories', async (req, res) => {
   }
 });
 
+// GET /api/produkti/specification-keys - Get all unique specification keys (admin only)
+router.get('/specification-keys', requireAuth, async (req, res) => {
+  try {
+    const products = await queryAll(`
+      SELECT specifications 
+      FROM produkti 
+      WHERE specifications IS NOT NULL 
+        AND specifications != ''
+        AND specifications != '{}'
+    `);
+    
+    const allKeys = new Set<string>();
+    
+    // Extract all specification keys from all products
+    products.forEach(product => {
+      try {
+        const specs = JSON.parse(product.specifications);
+        if (specs && typeof specs === 'object') {
+          Object.keys(specs).forEach(key => {
+            if (key && key.trim() !== '') {
+              allKeys.add(key.trim());
+            }
+          });
+        }
+      } catch (error) {
+        console.warn('Failed to parse specifications for product:', error);
+      }
+    });
+    
+    const keysList = Array.from(allKeys).sort();
+    
+    res.json({
+      success: true,
+      count: keysList.length,
+      data: keysList
+    });
+  } catch (error) {
+    console.error('Error fetching specification keys:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to fetch specification keys'
+    });
+  }
+});
+
 // GET /api/produkti - Get all products (public endpoint)
 router.get('/', async (req, res) => {
   try {
@@ -232,7 +277,7 @@ router.put('/:id', requireAuth, async (req, res) => {
     const admin = (req as any).user;
     const { id } = req.params;
     const { 
-      name, description, price, category, image_url, 
+      name, description, price, category, sub_category, image_url, 
       gallery_urls, specifications, available, featured 
     }: UpdateProduktsRequest = req.body;
 
@@ -262,6 +307,7 @@ router.put('/:id', requireAuth, async (req, res) => {
           description = COALESCE(?, description),
           price = ?,
           category = COALESCE(?, category),
+          sub_category = COALESCE(?, sub_category),
           image_url = COALESCE(?, image_url),
           gallery_urls = COALESCE(?, gallery_urls),
           specifications = COALESCE(?, specifications),
@@ -273,16 +319,15 @@ router.put('/:id', requireAuth, async (req, res) => {
       name, 
       description, 
       price !== undefined ? price : null,
-      category, 
+      category,
+      sub_category, 
       image_url,
       gallery_urls ? JSON.stringify(gallery_urls) : null,
       specifications ? JSON.stringify(specifications) : null,
       available !== undefined ? (available ? 1 : 0) : null,
       featured !== undefined ? (featured ? 1 : 0) : null,
       id
-    ]);
-
-    const updatedProduct = await query(`
+    ]);    const updatedProduct = await query(`
       SELECT p.*, u.username as admin_username 
       FROM produkti p 
       LEFT JOIN users u ON p.admin_id = u.id 

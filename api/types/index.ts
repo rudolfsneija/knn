@@ -76,6 +76,7 @@ export interface Produkts {
   description?: string;
   price?: number;
   category?: string;
+  sub_category?: string;
   image_url?: string;
   gallery_urls?: string[]; // Will be stored as JSON in DB
   specifications?: Record<string, any>; // Will be stored as JSON in DB
@@ -91,6 +92,7 @@ export interface CreateProduktsRequest {
   description?: string;
   price?: number;
   category?: string;
+  sub_category?: string;
   image_url?: string;
   gallery_urls?: string[];
   specifications?: Record<string, any>;
@@ -103,6 +105,7 @@ export interface UpdateProduktsRequest {
   description?: string;
   price?: number;
   category?: string;
+  sub_category?: string;
   image_url?: string;
   gallery_urls?: string[];
   specifications?: Record<string, any>;

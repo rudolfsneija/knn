@@ -38,15 +38,33 @@ export function Sazinai() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitMessage("");
 
-    // Simulate form submission
-    setTimeout(() => {
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setSubmitMessage(data.message);
+        setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
+      } else {
+        setSubmitMessage(`Kļūda: ${data.error}`);
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
       setSubmitMessage(
-        "Paldies! Jūsu ziņojums ir nosūtīts. Mēs sazināsimies ar jums drīzumā."
+        "Neizdevās nosūtīt ziņojumu. Lūdzu, mēģiniet vēlāk vai sazinieties ar mums tieši pa e-pastu info@knn.lv"
       );
-      setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
+    } finally {
       setIsSubmitting(false);
-    }, 1000);
+    }
   };
 
   return (
@@ -68,8 +86,18 @@ export function Sazinai() {
             </h2>
 
             {submitMessage && (
-              <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
-                <p className="text-green-800">{submitMessage}</p>
+              <div className={`rounded-lg p-4 mb-6 ${
+                submitMessage.includes('Kļūda:') || submitMessage.includes('Neizdevās')
+                  ? 'bg-red-50 border border-red-200'
+                  : 'bg-green-50 border border-green-200'
+              }`}>
+                <p className={
+                  submitMessage.includes('Kļūda:') || submitMessage.includes('Neizdevās')
+                    ? 'text-red-800'
+                    : 'text-green-800'
+                }>
+                  {submitMessage}
+                </p>
               </div>
             )}
 
@@ -212,7 +240,7 @@ export function Sazinai() {
                 <div>
                   <h3 className="font-semibold text-gray-900 group-hover:text-primary-800 mb-1 transition-colors">Facebook</h3>
                   <p className="text-gray-600 group-hover:text-primary-800 transition-colors">
-                    knnserviss
+                    KNN Serviss
                   </p>
                 </div>
               </a>

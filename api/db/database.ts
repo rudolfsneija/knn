@@ -122,6 +122,7 @@ async function createTables(): Promise<void> {
       price DECIMAL(10,2),
       category VARCHAR(100),
       image_url VARCHAR(500),
+      sub_category VARCHAR(100), -- Optional sub-category for more specific classification
       gallery_urls TEXT, -- JSON array of image URLs
       specifications TEXT, -- JSON object for technical specs
       available BOOLEAN DEFAULT 1,
@@ -154,6 +155,19 @@ async function createTables(): Promise<void> {
     )
   `);
 
+  // Run migrations for existing databases
+  try {
+    // Add sub_category column if it doesn't exist (migration)
+    await runAsync(`ALTER TABLE produkti ADD COLUMN sub_category VARCHAR(100)`);
+    console.log('Added sub_category column to produkti table');
+  } catch (error: any) {
+    if (error.message && (error.message.includes('duplicate column') || error.message.includes('already exists'))) {
+      console.log('sub_category column already exists in produkti table');
+    } else {
+      console.warn('Error adding sub_category column (this is normal if column already exists):', error.message);
+    }
+  }
+
   // Create indexes for better performance
   await runAsync(`CREATE INDEX IF NOT EXISTS idx_users_email ON users(email)`);
   await runAsync(`CREATE INDEX IF NOT EXISTS idx_users_username ON users(username)`);
@@ -163,6 +177,7 @@ async function createTables(): Promise<void> {
   await runAsync(`CREATE INDEX IF NOT EXISTS idx_produkti_available ON produkti(available)`);
   await runAsync(`CREATE INDEX IF NOT EXISTS idx_produkti_featured ON produkti(featured)`);
   await runAsync(`CREATE INDEX IF NOT EXISTS idx_produkti_category ON produkti(category)`);
+  await runAsync(`CREATE INDEX IF NOT EXISTS idx_produkti_sub_category ON produkti(sub_category)`);
   await runAsync(`CREATE INDEX IF NOT EXISTS idx_images_entity ON images(entity_type, entity_id)`);
   await runAsync(`CREATE INDEX IF NOT EXISTS idx_images_uuid ON images(uuid)`);
   await runAsync(`CREATE INDEX IF NOT EXISTS idx_images_admin_id ON images(admin_id)`);

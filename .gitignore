@@ -6,6 +6,7 @@ uploads
 
 # Environment variables
 .env
+.env.development
 
 # Database
 database.sqlite

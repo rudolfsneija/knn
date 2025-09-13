@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { WifiQuizBanner } from "../components/WifiQuizBanner";
+import { AlnetConfiguratorBanner } from "../components/AlnetConfiguratorBanner";
 
 interface Prece {
   id: number;
@@ -112,8 +112,8 @@ export function Preces() {
           )} */}
         </div>
 
-        {/* Wi-Fi Quiz Banner */}
-        <WifiQuizBanner className="mb-8" />
+        {/* Alnet Configurator Banner */}
+        <AlnetConfiguratorBanner className="mb-8" />
 
         {/* Show categories if no category is selected */}
         {!selectedCategory && categories.length > 0 && (

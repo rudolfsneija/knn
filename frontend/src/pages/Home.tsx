@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { FileText, GraduationCap, Wifi, Cctv } from "lucide-react";
 import { Link } from "react-router-dom";
-import { WifiQuizBanner } from "../components/WifiQuizBanner";
 import axios from "axios";
 
 interface Aktualitate {
@@ -87,13 +86,6 @@ export function Home() {
               </a>
             </div>
           </div>
-        </div>
-      </div>
-
-      {/* Wi-Fi Quiz Section */}
-      <div className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <WifiQuizBanner />
         </div>
       </div>
 

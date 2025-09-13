@@ -1,5 +1,4 @@
 import { Wifi, Check, Headset, Wrench, RadioReceiver, BookOpen } from 'lucide-react';
-import { WifiQuizBanner } from '../../components/WifiQuizBanner';
 
 export function BezvaduWifiRisinajumi() {
   const features = [
@@ -63,9 +62,6 @@ export function BezvaduWifiRisinajumi() {
             Bezvadu tīkla nodrošināšana ar Ruckus tehnoloģiju ir lieliska iespēja uzlabot klientu vai uzņēmuma bezvadu interneta pieredzi. Ruckus ir pazīstams ar savām augstas kvalitātes Wi-Fi risinājumiem, kas nodrošina stabilu savienojumu, lielu jaudu un drošību.
           </p>
         </div>
-
-        {/* Wi-Fi Konfigurators */}
-        <WifiQuizBanner className="mb-16" />
 
         {/* Ruckus video */}
         <div className="mb-16">

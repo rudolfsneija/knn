@@ -11,7 +11,7 @@ import { PreceDetail } from './pages/PreceDetail';
 import { ParUznemumu } from './pages/ParUznemumu';
 import { Sazinai } from './pages/Sazinai';
 import { SearchResults } from './pages/SearchResults';
-import { BezvaduTiklaKonfigurators } from './pages/BezvaduTiklaKonfigurators';
+import { AlnetKonfigurators } from './pages/AlnetKonfigurators';
 import { AdminLogin } from './pages/admin/AdminLogin';
 import { AdminDashboard } from './pages/admin/AdminDashboard';
 import { AdminAktualitates } from './pages/admin/AdminAktualitates';
@@ -42,7 +42,7 @@ function App() {
               <Route path="pakalpojumi/videonovero-sistemas" element={<VideonoveroSistemas />} />
               <Route path="preces" element={<Preces />} />
               <Route path="preces/:id" element={<PreceDetail />} />
-              <Route path="bezvadu-tikla-konfigurators" element={<BezvaduTiklaKonfigurators />} />
+              <Route path="alnet-konfigurators" element={<AlnetKonfigurators />} />
               <Route path="par-uznemumu" element={<ParUznemumu />} />
               <Route path="sazinai" element={<Sazinai />} />
               <Route path="search" element={<SearchResults />} />

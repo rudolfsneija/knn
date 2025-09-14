@@ -7,12 +7,12 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:3002',  // Updated to 3002
+        target: 'http://localhost:3002',
         changeOrigin: true,
         secure: false,
       },
       '/health': {
-        target: 'http://localhost:3002',  // Health check endpoint
+        target: 'http://localhost:3002',
         changeOrigin: true,
         secure: false,
       }

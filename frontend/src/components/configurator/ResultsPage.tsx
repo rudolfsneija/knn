@@ -3,8 +3,6 @@ import {
   AlertCircle,
   Send,
   Home,
-  Camera,
-  Server,
   ShieldCheck,
   Plus,
 } from "lucide-react";
@@ -59,9 +57,6 @@ export function ResultsPage({
       !["netstation_4", "netstation_enterprise_4"].includes(r.product.id)
   );
 
-  const cameras: RecommendationItem[] = [];
-  const servers: RecommendationItem[] = [];
-
   const totalPrice = result.reduce((sum, item) => sum + item.totalPrice, 0);
   const notes = [
     "Cenas ir orientējošas un attiecas tikai uz licencēm",
@@ -71,11 +66,11 @@ export function ResultsPage({
   return (
     <div className="space-y-8">
       <div className="text-center">
-        <Check className="w-20 h-20 text-green-600 mx-auto mb-6" />
+        <Check className="w-20 h-20 text-success-700 mx-auto mb-6" />
         <h3 className="text-3xl font-semibold text-gray-900 mb-4">
           Konfiguratora rezultāti
         </h3>
-        <p className="text-xl text-gray-600 mb-8">
+        <p className="text-xl text-gray-600 mb-12">
           Mūsu sistēma ir analizējusi jūsu vajadzības un sagatavoja
           personalizētu risinājumu.
         </p>
@@ -83,8 +78,8 @@ export function ResultsPage({
 
       {/* Base License */}
       {primaryNetstation && (
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
-          <h4 className="font-semibold text-blue-900 mb-4 text-lg flex items-center">
+        <div>
+          <h4 className="font-semibold text-secondary-900 mb-4 ml-2 text-lg flex items-center">
             <ShieldCheck className="w-5 h-5 mr-2" />
             Pamata licence{totalNetstationLicenses > 1 ? "s" : ""}
           </h4>
@@ -136,8 +131,8 @@ export function ResultsPage({
 
       {/* Add-ons */}
       {addons.length > 0 && (
-        <div className="bg-green-50 border border-green-200 rounded-lg p-6">
-          <h4 className="font-semibold text-green-900 mb-4 text-lg flex items-center">
+        <div>
+          <h4 className="font-semibold text-secondary-900 mb-4 ml-2 text-lg flex items-center">
             <Plus className="w-5 h-5 mr-2" />
             Papildu licences ({addons.length})
           </h4>
@@ -174,80 +169,6 @@ export function ResultsPage({
         </div>
       )}
 
-      {/* Cameras */}
-      {cameras.length > 0 && (
-        <div className="bg-purple-50 border border-purple-200 rounded-lg p-6">
-          <h4 className="font-semibold text-purple-900 mb-4 text-lg flex items-center">
-            <Camera className="w-5 h-5 mr-2" />
-            Kameras ({cameras.length} veidi)
-          </h4>
-          <div className="space-y-3">
-            {cameras.map((camera: RecommendationItem, index: number) => (
-              <div key={index} className="bg-white rounded-lg p-4">
-                <div className="flex justify-between items-start">
-                  <div>
-                    <h5 className="font-medium text-gray-900">
-                      {camera.product.name}
-                    </h5>
-                    <p className="text-gray-600 text-sm">
-                      {camera.product.description}
-                    </p>
-                    <p className="text-purple-600 text-sm mt-1">
-                      {camera.reason}
-                    </p>
-                    <p className="text-gray-500 text-sm">
-                      Daudzums: {camera.quantity}
-                    </p>
-                  </div>
-                  <div className="text-right">
-                    <p className="font-medium text-gray-900">
-                      {camera.totalPrice > 0
-                        ? `€${formatPrice(camera.totalPrice)}+`
-                        : "Pēc pieprasījuma"}
-                    </p>
-                    <p className="text-xs text-gray-500">Orientējoša cena</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* Servers */}
-      {servers.length > 0 && (
-        <div className="bg-orange-50 border border-orange-200 rounded-lg p-6">
-          <h4 className="font-semibold text-orange-900 mb-4 text-lg flex items-center">
-            <Server className="w-5 h-5 mr-2" />
-            Serveri
-          </h4>
-          <div className="space-y-3">
-            {servers.map((server: RecommendationItem, index: number) => (
-              <div key={index} className="bg-white rounded-lg p-4">
-                <div className="flex justify-between items-start">
-                  <div>
-                    <h5 className="font-medium text-gray-900">
-                      {server.product.name}
-                    </h5>
-                    <p className="text-gray-600 text-sm">
-                      {server.product.description}
-                    </p>
-                    <p className="text-orange-600 text-sm mt-1">
-                      {server.reason}
-                    </p>
-                  </div>
-                  <div className="text-right">
-                    <p className="font-medium text-gray-900">
-                      Individuāla konfigurācija
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
       {/* Total Price */}
       <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
         <div className="flex justify-between items-center">
@@ -262,12 +183,12 @@ export function ResultsPage({
 
       {/* Notes */}
       {notes.length > 0 && (
-        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
+        <div className="bg-warning-50 border border-warning-200 rounded-lg p-6">
           <div className="flex items-start">
-            <AlertCircle className="w-6 h-6 text-yellow-600 mt-0.5 mr-4 flex-shrink-0" />
+            <AlertCircle className="w-6 h-6 text-warning-600 mt-0.5 mr-4 flex-shrink-0" />
             <div>
-              <h4 className="font-semibold text-yellow-900 mb-2">Svarīgi</h4>
-              <ul className="text-yellow-800 space-y-1">
+              <h4 className="font-semibold text-warning-900 mb-2">Svarīgi</h4>
+              <ul className="text-warning-800 space-y-1">
                 {notes.map((note: string, index: number) => (
                   <li key={index} className="text-sm">
                     • {note}
@@ -304,11 +225,11 @@ export function ResultsPage({
 
       {/* Contact form */}
       {showContactForm && (
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
-          <h4 className="font-semibold text-blue-900 mb-4 text-lg">
+        <div className="bg-info-50 border border-info-200 rounded-lg p-6">
+          <h4 className="font-semibold text-info-900 mb-4 text-lg">
             Jūsu kontaktinformācija
           </h4>
-          <p className="text-blue-800 mb-6 text-sm">
+          <p className="text-info-800 mb-6 text-sm">
             Lūdzu, ievadiet savus kontaktdatus, lai mēs varētu sazināties ar
             jums par detalizētu piedāvājumu.
           </p>

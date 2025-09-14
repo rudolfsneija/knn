@@ -4,18 +4,13 @@ interface ProgressIndicatorProps {
 }
 
 export function ProgressIndicator({ currentStep, totalSteps }: ProgressIndicatorProps) {
-  // Calculate progress so it only reaches 100% when all questions are completed
-  // On the last question, it should show ~90-95%, not 100%
-  const progressPercentage = Math.round((currentStep / totalSteps) * 90);
+  const progressPercentage = totalSteps > 1 ? Math.round(((currentStep - 1) / totalSteps) * 100) : 0;
 
   return (
     <div className="mb-12">
       <div className="flex items-center justify-between mb-4">
         <span className="text-sm text-gray-500">
           {progressPercentage}% pabeigts
-        </span>
-        <span className="text-sm font-medium text-gray-500">
-          {currentStep} / {totalSteps}
         </span>
       </div>
       <div className="bg-gray-200 rounded-full h-3">

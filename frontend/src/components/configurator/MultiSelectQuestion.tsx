@@ -47,7 +47,7 @@ export function MultiSelectQuestion({ question, currentValue, updateAnswer }: Mu
                 </div>
                 {option.tooltip && (
                   <div className="relative group ml-2">
-                    <Info className="w-4 h-4 text-gray-400 hover:text-gray-600" />
+                    <Info className="w-4 h-4 text-info-600 hover:text-info-700" />
                     <div className="absolute bottom-full right-0 mb-2 px-4 py-3 bg-gray-900 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-10 w-80 whitespace-normal">
                       {option.tooltip}
                       <div className="absolute top-full right-2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900"></div>

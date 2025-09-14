@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 interface Aktualitate {
   id: number;
@@ -42,16 +42,18 @@ export function Aktualitates() {
 
   const fetchAktualitates = async () => {
     try {
-      const response = await axios.get('/api/aktualitates');
+      const response = await axios.get("/api/aktualitates");
       if (response.data.success) {
         // Filter to only show published articles
-        const publishedAktualitates = response.data.data.filter((aktualitate: Aktualitate) => aktualitate.published);
+        const publishedAktualitates = response.data.data.filter(
+          (aktualitate: Aktualitate) => aktualitate.published
+        );
         setAktualitates(publishedAktualitates);
       } else {
-        console.error('API Error:', response.data.error);
+        console.error("API Error:", response.data.error);
       }
     } catch (error) {
-      console.error('Error fetching aktualitātes:', error);
+      console.error("Error fetching aktualitātes:", error);
     } finally {
       setLoading(false);
     }
@@ -72,7 +74,9 @@ export function Aktualitates() {
     <div className="bg-white min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Aktualitātes</h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+            Aktualitātes
+          </h1>
           <p className="text-lg text-gray-600">
             Sekojiet līdzi jaunākajām ziņām un jaunumiem.
           </p>
@@ -80,7 +84,9 @@ export function Aktualitates() {
 
         {aktualitates.length === 0 ? (
           <div className="text-center py-12">
-            <p className="text-gray-600 text-lg">Pašlaik nav pieejamas aktualitātes.</p>
+            <p className="text-gray-600 text-lg">
+              Pašlaik nav pieejamas aktualitātes.
+            </p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -102,13 +108,16 @@ export function Aktualitates() {
                     {aktualitate.title}
                   </h2>
                   <p className="text-gray-600 mb-4 line-clamp-3">
-                    {aktualitate.excerpt || (aktualitate.content.length > 150
-                      ? `${aktualitate.content.substring(0, 150)}...`
-                      : aktualitate.content)}
+                    {aktualitate.excerpt ||
+                      (aktualitate.content.length > 150
+                        ? `${aktualitate.content.substring(0, 150)}...`
+                        : aktualitate.content)}
                   </p>
                   <div className="flex justify-between items-center">
                     <span className="text-sm text-gray-500">
-                      {new Date(aktualitate.created_at).toLocaleDateString('lv-LV')}
+                      {new Date(aktualitate.created_at).toLocaleDateString(
+                        "lv-LV"
+                      )}
                     </span>
                     <span className="text-primary-400 hover:text-primary-500 font-medium">
                       Lasīt vairāk →

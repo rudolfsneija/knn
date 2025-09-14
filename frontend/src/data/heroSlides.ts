@@ -1,26 +1,6 @@
 import type { HeroSlide } from '../components/HeroSlideshow';
 
 export const heroSlides: HeroSlide[] = [
-//   {
-//     id: 'welcome',
-//     title: 'Laipni lūgti KNN Serviss mājaslapā',
-//     subtitle: 'Mūsu darbs - Jūsu drošība',
-//     backgroundColor: '#1e40af',
-//     textColor: 'white',
-//     overlay: false,
-//     buttons: [
-//       {
-//         text: 'Uzzināt vairāk',
-//         href: '/pakalpojumi',
-//         variant: 'primary',
-//       },
-//       {
-//         text: 'Sazināties',
-//         href: '/sazinai',
-//         variant: 'secondary',
-//       },
-//     ],
-//   },
   {
     id: 'configurators',
     title: 'Videonovērošanas konfigurators',
@@ -101,27 +81,6 @@ export const heroSlides: HeroSlide[] = [
 //       {
 //         text: 'Konfigurēt',
 //         href: '/konfiguratori',
-//         variant: 'secondary',
-//       },
-//     ],
-//   },
-//   {
-//     id: 'video-surveillance',
-//     title: 'Videonovērošanas sistēmas',
-//     subtitle: 'Drošība 24/7',
-//     description: 'Videonovērošanas sistēmu projektēšana, uzstādīšana un noma dažāda veida objektiem.',
-//     backgroundColor: '#ea580c',
-//     textColor: 'white',
-//     overlay: false,
-//     buttons: [
-//       {
-//         text: 'Uzzināt vairāk',
-//         href: '/pakalpojumi/videonovero-sistemas',
-//         variant: 'primary',
-//       },
-//       {
-//         text: 'Konsultācija',
-//         href: '/sazinai',
 //         variant: 'secondary',
 //       },
 //     ],

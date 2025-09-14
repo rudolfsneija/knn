@@ -8,49 +8,38 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Primary brand colors (madder - for main site - buttons, highlights)
+        // ===== BRAND COLORS =====
+        // Primary brand colors (madder red - for main site buttons, highlights)
         primary: {
           50: '#f3cad0',
           100: '#e896a2',
           200: '#dc6173',
           300: '#cf2e46',
           400: '#9d2235',
-          500: '#9d2235',
+          500: '#9d2235', // Main brand color
           600: '#7c1b2a',
           700: '#5d141f',
           800: '#3e0e15',
           900: '#1f070a',
           950: '#1f070a',
         },
+        
         // Secondary colors (earth yellow - for footer, complementary elements)
         secondary: {
-          50: '#fbf9f6ff',
+          50: '#fdfbf9ff',
           100: '#ecdcc3',
           200: '#e2cba4',
           300: '#d9b986',
           400: '#cfa768',
-          500: '#cfa768',
+          500: '#b7945cff', // Main secondary color
           600: '#bd8c3c',
           700: '#8e692d',
           800: '#5f461e',
           900: '#2f230f',
           950: '#2f230f',
         },
-        // Accent colors (for highlights, CTAs)
-        accent: {
-          50: '#fdf4ff',
-          100: '#fae8ff',
-          200: '#f5d0fe',
-          300: '#f0abfc',
-          400: '#e879f9',
-          500: '#d946ef',
-          600: '#c026d3',
-          700: '#a21caf',
-          800: '#86198f',
-          900: '#701a75',
-          950: '#4a044e',
-        },
-        // Status colors
+
+        // ===== STATUS COLORS =====
         success: {
           50: '#f0fdf4',
           100: '#dcfce7',
@@ -90,7 +79,21 @@ export default {
           900: '#7f1d1d',
           950: '#450a0a',
         },
-        // Admin dashboard dark theme colors
+        info: {
+          50: '#eff6ff',
+          100: '#dbeafe',
+          200: '#bfdbfe',
+          300: '#93c5fd',
+          400: '#60a5fa',
+          500: '#3b82f6',
+          600: '#2563eb',
+          700: '#1d4ed8',
+          800: '#1e40af',
+          900: '#1e3a8a',
+          950: '#172554',
+        },
+
+        // ===== ADMIN THEME COLORS =====
         admin: {
           // Dark backgrounds
           'bg-primary': '#0a0a0b',     // Almost black background
@@ -98,7 +101,7 @@ export default {
           'bg-tertiary': '#1a1a1d',    // Card/panel backgrounds
           'bg-hover': '#222225',       // Hover states
           
-          // Dark surfaces
+          // Dark surfaces (elevated elements)
           'surface-100': '#2a2a2f',    // Elevated surfaces
           'surface-200': '#35353a',    // Higher elevation
           'surface-300': '#404045',    // Highest elevation

@@ -112,9 +112,6 @@ export function Preces() {
           )} */}
         </div>
 
-        {/* Alnet Configurator Banner */}
-        <AlnetConfiguratorBanner className="mb-8" />
-
         {/* Show categories if no category is selected */}
         {!selectedCategory && categories.length > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -122,9 +119,9 @@ export function Preces() {
               <button
                 key={category}
                 onClick={() => handleCategoryClick(category)}
-                className="bg-white border-2 border-secondary-200 hover:border-primary-800 rounded-lg p-8 text-center transition-all duration-200 hover:shadow-lg group"
+                className="bg-white border-2 border-secondary-600 hover:border-secondary-700 rounded-lg p-8 text-center transition-all duration-200 hover:shadow-lg group"
               >
-                <div className="text-2xl font-bold text-gray-900 group-hover:text-primary-800 transition-colors">
+                <div className="text-2xl font-bold text-gray-900  transition-colors">
                   {category}
                 </div>
                 <div className="mt-2 text-gray-600 group-hover:text-primary-700">
@@ -142,12 +139,23 @@ export function Preces() {
             <div className="mb-8">
               <button
                 onClick={handleBackToCategories}
-                className="inline-flex items-center text-primary-800 hover:text-primary-900 font-medium mb-4"
+                className="inline-flex items-center text-primary-400 hover:text-primary-500 font-medium mb-4"
               >
                 ← Atpakaļ uz kategorijām
               </button>
               <h2 className="text-2xl font-bold text-gray-900">{selectedCategory}</h2>
             </div>
+
+            {/* Alnet Configurator Banner - only for video surveillance categories */}
+            {(() => {
+              console.log("Selected category:", selectedCategory);
+              return (selectedCategory?.toLowerCase().includes("video") || 
+                selectedCategory?.toLowerCase().includes("novero") ||
+                selectedCategory === "Videonoverosanas sistemas" ||
+                selectedCategory === "Videonovērošanas sistēmas");
+            })() && (
+              <AlnetConfiguratorBanner className="mb-8" />
+            )}
 
             {/* Loading state for products */}
             {loading && (
@@ -209,11 +217,11 @@ export function Preces() {
 
                       <div className="mt-auto">
                         <div className="flex items-end justify-between">
-                          <span className="text-sm text-primary-800 hover:text-primary-900 font-medium">
+                          <span className="text-sm text-primary-400 hover:text-primary-500 font-medium">
                             Skatīt preci →
                           </span>
                           {prece.price !== undefined && prece.price !== null && (
-                            <span className="text-2xl font-bold text-primary-800">
+                            <span className="text-2xl font-bold text-primary-400">
                               €{prece.price.toFixed(2)}
                             </span>
                           )}

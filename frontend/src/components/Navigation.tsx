@@ -37,8 +37,8 @@ export function Navigation() {
                 to={item.href}
                 className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                   location.pathname === item.href
-                    ? 'text-primary-800 bg-primary-50'
-                    : 'text-gray-700 hover:text-primary-800 hover:bg-gray-50'
+                    ? 'text-white bg-primary-600'
+                    : 'text-gray-700 hover:text-primary-400 hover:bg-gray-50'
                 }`}
               >
                 {item.name}
@@ -54,7 +54,7 @@ export function Navigation() {
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center">
             <button 
-              className="text-gray-700 hover:text-primary-800"
+              className="text-gray-700 hover:text-primary-400"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               {isMobileMenuOpen ? (
@@ -82,8 +82,8 @@ export function Navigation() {
                   onClick={() => setIsMobileMenuOpen(false)}
                   className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
                     location.pathname === item.href
-                      ? 'text-primary-800 bg-primary-50'
-                      : 'text-gray-700 hover:text-primary-800 hover:bg-gray-50'
+                      ? 'text-primary-400 bg-primary-50'
+                      : 'text-gray-700 hover:text-primary-400 hover:bg-gray-50'
                   }`}
                 >
                   {item.name}

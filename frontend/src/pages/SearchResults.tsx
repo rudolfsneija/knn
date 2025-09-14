@@ -40,11 +40,11 @@ export function SearchResults() {
   const getCategoryIcon = (category: string) => {
     switch (category) {
       case 'aktualitates':
-        return <Newspaper className="w-6 h-6 text-secondary-700" />;
+        return <Newspaper className="w-6 h-6 text-secondary-500" />;
       case 'services':
-        return <Settings className="w-6 h-6 text-secondary-700" />;
+        return <Settings className="w-6 h-6 text-secondary-500" />;
       case 'preces':
-        return <Package className="w-6 h-6 text-secondary-700" />;
+        return <Package className="w-6 h-6 text-secondary-500" />;
       default:
         return <SearchIcon className="w-6 h-6 text-gray-600" />;
     }
@@ -80,7 +80,7 @@ export function SearchResults() {
         <div className="mb-8">
           <Link
             to="/"
-            className="inline-flex items-center text-primary-800 hover:text-primary-900 mb-6"
+            className="inline-flex items-center text-primary-400 hover:text-primary-500 mb-6"
           >
             <ArrowLeft className="w-5 h-5 mr-2" />
             Atgriezties uz sākumlapu
@@ -104,7 +104,7 @@ export function SearchResults() {
         {/* Results */}
         {loading ? (
           <div className="text-center py-12">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-800 mx-auto mb-4"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500 mx-auto mb-4"></div>
             <p className="text-gray-600">Ielādē rezultātus...</p>
           </div>
         ) : !query ? (
@@ -150,11 +150,11 @@ export function SearchResults() {
                       <Link
                         key={item.id}
                         to={item.url}
-                        className="block bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md hover:border-primary-700 transition-all duration-200 group"
+                        className="block bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md hover:border-primary-600 transition-all duration-200 group"
                       >
                         <div className="flex items-start justify-between mb-3">
                           <div className="flex-1">
-                            <h3 className="text-xl font-semibold text-primary-800 group-hover:text-primary-900">
+                            <h3 className="text-xl font-semibold text-primary-400 group-hover:text-primary-500">
                               {item.title}
                             </h3>
                             <div className="flex items-center mt-2 space-x-4">

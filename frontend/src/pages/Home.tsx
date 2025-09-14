@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { FileText, GraduationCap, Wifi, Cctv } from "lucide-react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { HeroSlideshow } from "../components/HeroSlideshow";
+import { heroSlides } from "../data/heroSlides";
 
 interface Aktualitate {
   id: number;
@@ -61,33 +63,15 @@ export function Home() {
   };
   return (
     <div className="bg-white">
-      {/* Hero Section */}
-      <div className="relative bg-gradient-to-br from-primary-800 to-primary-900 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="text-center">
-            <h1 className="text-2xl md:text-4xl font-bold mb-6">
-              Laipni lūgti KNN Serviss mājaslapā
-            </h1>
-            <p className="text-xl md:text-2xl mb-6">
-              Mūsu darbs - Jūsu drošība
-            </p>
-            <div className="space-x-4">
-              <a
-                href="/pakalpojumi"
-                className="bg-white text-primary-800 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-block"
-              >
-                Uzzināt vairāk
-              </a>
-              <a
-                href="/sazinai"
-                className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary-800 transition-colors inline-block"
-              >
-                Sazināties
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
+      {/* Hero Slideshow */}
+      <HeroSlideshow
+        slides={heroSlides}
+        autoAdvance={true}
+        autoAdvanceInterval={6000}
+        showIndicators={true}
+        showNavigation={true}
+        className="min-h-[500px]"
+      />
 
       {/* Pakalpojumi Section */}
       <div className="py-8">
@@ -101,9 +85,9 @@ export function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <Link
               to="/pakalpojumi/nkl-prasibu-realizesana"
-              className="text-center p-6 bg-secondary-100 rounded-lg hover:shadow-lg transition-all duration-300 block"
+              className="text-center p-6 bg-secondary-50 rounded-lg hover:shadow-lg transition-all duration-300 block"
             >
-              <div className="w-16 h-16 bg-primary-800 rounded-full mx-auto mb-4 flex items-center justify-center">
+              <div className="w-16 h-16 bg-primary-600 rounded-full mx-auto mb-4 flex items-center justify-center">
                 <FileText className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-xl font-semibold mb-2">
@@ -114,7 +98,7 @@ export function Home() {
                 dokumentu kārtošanu visu veidu uzņēmumos.
               </p>
               <div className="text-right">
-                <span className="text-primary-800 hover:text-primary-900 font-medium">
+                <span className="text-primary-400 hover:text-primary-500 font-medium">
                   Uzzināt vairāk →
                 </span>
               </div>
@@ -122,9 +106,9 @@ export function Home() {
 
             <Link
               to="/pakalpojumi/it-drosibas-apmacibas"
-              className="text-center p-6 bg-secondary-100 rounded-lg hover:shadow-lg transition-all duration-300 block"
+              className="text-center p-6 bg-secondary-50 rounded-lg hover:shadow-lg transition-all duration-300 block"
             >
-              <div className="w-16 h-16 bg-primary-800 rounded-full mx-auto mb-4 flex items-center justify-center">
+              <div className="w-16 h-16 bg-primary-600 rounded-full mx-auto mb-4 flex items-center justify-center">
                 <GraduationCap className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-xl font-semibold mb-2">
@@ -135,7 +119,7 @@ export function Home() {
                 uz svarīgākajiem mūsdienu kiberdrošības aspektiem.
               </p>
               <div className="text-right">
-                <span className="text-primary-800 hover:text-primary-900 font-medium">
+                <span className="text-primary-400 hover:text-primary-500 font-medium">
                   Uzzināt vairāk →
                 </span>
               </div>
@@ -143,9 +127,9 @@ export function Home() {
 
             <Link
               to="/pakalpojumi/bezvadu-wifi-risinajumi"
-              className="text-center p-6 bg-secondary-100 rounded-lg hover:shadow-lg transition-all duration-300 block"
+              className="text-center p-6 bg-secondary-50 rounded-lg hover:shadow-lg transition-all duration-300 block"
             >
-              <div className="w-16 h-16 bg-primary-800 rounded-full mx-auto mb-4 flex items-center justify-center">
+              <div className="w-16 h-16 bg-primary-600 rounded-full mx-auto mb-4 flex items-center justify-center">
                 <Wifi className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-xl font-semibold mb-2">
@@ -156,7 +140,7 @@ export function Home() {
                 aptver dažādas funkcijas plašam klientu lokam.
               </p>
               <div className="text-right">
-                <span className="text-primary-800 hover:text-primary-900 font-medium">
+                <span className="text-primary-400 hover:text-primary-500 font-medium">
                   Uzzināt vairāk →
                 </span>
               </div>
@@ -164,9 +148,9 @@ export function Home() {
 
             <Link
               to="/pakalpojumi/videonovero-sistemas"
-              className="text-center p-6 bg-secondary-100 rounded-lg hover:shadow-lg transition-all duration-300 block"
+              className="text-center p-6 bg-secondary-50 rounded-lg hover:shadow-lg transition-all duration-300 block"
             >
-              <div className="w-16 h-16 bg-primary-800 rounded-full mx-auto mb-4 flex items-center justify-center">
+              <div className="w-16 h-16 bg-primary-600 rounded-full mx-auto mb-4 flex items-center justify-center">
                 <Cctv className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-xl font-semibold mb-2">
@@ -178,7 +162,7 @@ export function Home() {
               </p>
 
               <div className="text-right">
-                <span className="text-primary-800 hover:text-primary-900 font-medium">
+                <span className="text-primary-400 hover:text-primary-500 font-medium">
                   Uzzināt vairāk →
                 </span>
               </div>
@@ -214,7 +198,7 @@ export function Home() {
                   <a
                     key={aktualitate.id}
                     href={`/aktualitates/${aktualitate.id}`}
-                    className="bg-secondary-100 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer block"
+                    className="bg-secondary-50 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer block"
                   >
                     {(aktualitate.main_image?.url || aktualitate.image_url) && (
                       <img
@@ -241,7 +225,7 @@ export function Home() {
                             "lv-LV"
                           )}
                         </span>
-                        <span className="text-primary-800 hover:text-primary-900 font-medium">
+                        <span className="text-primary-400 hover:text-primary-500 font-medium">
                           Lasīt vairāk →
                         </span>
                       </div>
@@ -253,7 +237,7 @@ export function Home() {
               {/* <div className="text-center">
                 <a
                   href="/aktualitates"
-                  className="bg-primary-800 text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary-900 transition-colors inline-flex items-center"
+                  className="bg-primary-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary-600 transition-colors inline-flex items-center"
                 >
                   Skatīt visas aktualitātes
                   <ArrowRight className="w-5 h-5 ml-2" />
@@ -265,7 +249,7 @@ export function Home() {
       </div>
 
       {/* CTA Section */}
-      <div className="bg-secondary-100 py-16">
+      <div className="bg-secondary-50 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">
             Gatavi uzsākt sadarbību?
@@ -276,7 +260,7 @@ export function Home() {
           </p>
           <a
             href="/sazinai"
-            className="bg-primary-800 text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary-900 transition-colors inline-block"
+            className="bg-primary-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary-600 transition-colors inline-block"
           >
             Sazināties ar mums
           </a>

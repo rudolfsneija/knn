@@ -410,7 +410,7 @@ export function AlnetKonfigurators() {
         <div className="flex flex-col sm:flex-row gap-4">
           <button
             onClick={handleComplete}
-            className="flex-1 bg-primary-800 hover:bg-primary-900 text-white font-medium py-4 px-6 rounded-lg transition-colors flex items-center justify-center text-lg"
+            className="flex-1 bg-primary-600 hover:bg-primary-600 text-white font-medium py-4 px-6 rounded-lg transition-colors flex items-center justify-center text-lg"
           >
             <Send className="w-6 h-6 mr-3" />
             Pieprasīt detalizētu piedāvājumu
@@ -453,7 +453,7 @@ export function AlnetKonfigurators() {
         {!state.result && (
           <div className="text-center mb-12">
             <div className="flex items-center justify-center mb-6">
-              <Cctv className="w-12 h-12 text-primary-800 mr-4" />
+              <Cctv className="w-12 h-12 text-primary-400 mr-4" />
               <h1 className="text-4xl font-bold text-gray-900">
                 Alnet sistēmas konfigurators
               </h1>
@@ -477,7 +477,7 @@ export function AlnetKonfigurators() {
             </div>
             <div className="bg-gray-200 rounded-full h-3">
               <div 
-                className="bg-primary-800 rounded-full h-3 transition-all duration-300"
+                className="bg-primary-600 rounded-full h-3 transition-all duration-300"
                 style={{ width: `${((state.step - 1) / (totalSteps - 1)) * 100}%` }}
               />
             </div>
@@ -504,7 +504,7 @@ export function AlnetKonfigurators() {
             <button
               onClick={nextStep}
               disabled={!canProceed()}
-              className="flex items-center px-8 py-3 bg-primary-800 text-white rounded-lg hover:bg-primary-900 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex items-center px-8 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {currentQuestionIndex === visibleQuestions.length - 1 ? 'Pabeigt' : 'Tālāk'}
               <ChevronRight className="w-5 h-5 ml-2" />

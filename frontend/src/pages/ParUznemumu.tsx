@@ -72,17 +72,17 @@ export function ParUznemumu() {
         {/* Mūsu pieredze */}
         <div className="mb-16">
           <div className="text-center mb-8">
-            <BicepsFlexed className="w-12 h-12 text-primary-800 mx-auto mb-4" />
+            <BicepsFlexed className="w-12 h-12 text-primary-400 mx-auto mb-4" />
             <h2 className="text-3xl font-bold text-gray-900">Mūsu pieredze</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {musuPieredze.map((item, index) => (
               <div 
                 key={index}
-                className="bg-secondary-100 p-4 rounded-lg shadow-sm"
+                className="bg-secondary-50 p-4 rounded-lg shadow-sm"
               >
                 <div className="flex items-start">
-                  <Check className="w-5 h-5 text-primary-800 mr-3 mt-0.5 flex-shrink-0" />
+                  <Check className="w-5 h-5 text-primary-400 mr-3 mt-0.5 flex-shrink-0" />
                   <span className="text-gray-700 text-sm leading-relaxed">{item}</span>
                 </div>
               </div>
@@ -93,10 +93,10 @@ export function ParUznemumu() {
         {/* Sertifikāti */}
         <div className="mb-16">
           <div className="text-center mb-8">
-            <Award className="w-12 h-12 text-primary-800 mx-auto mb-4" />
+            <Award className="w-12 h-12 text-primary-400 mx-auto mb-4" />
             <h2 className="text-3xl font-bold text-gray-900">Sertifikāti</h2>
           </div>
-          <div className="bg-secondary-100 p-6 rounded-lg">
+          <div className="bg-secondary-50 p-6 rounded-lg">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {sertifikati.map((sertifikats, index) => (
                 <div 
@@ -122,14 +122,14 @@ export function ParUznemumu() {
         {/* Sadarbības partneri */}
         <div className="mb-16">
           <div className="text-center mb-8">
-            <Users className="w-12 h-12 text-primary-800 mx-auto mb-4" />
+            <Users className="w-12 h-12 text-primary-400 mx-auto mb-4" />
             <h2 className="text-3xl font-bold text-gray-900">Sadarbības partneri</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {sadarbribasPartneri.map((partneris, index) => (
               <div 
                 key={index}
-                className="bg-secondary-100 p-6 rounded-lg shadow-sm text-center"
+                className="bg-secondary-50 p-6 rounded-lg shadow-sm text-center"
               >
                 <div className="w-32 h-32 mx-auto mb-4 flex items-center justify-center">
                   <img 

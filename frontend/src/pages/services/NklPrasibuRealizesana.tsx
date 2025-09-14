@@ -33,7 +33,7 @@ export function NklPrasibuRealizesana() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Hero Section */}
         <div className="text-center mb-16">
-          <div className="w-24 h-24 bg-primary-800 rounded-full mx-auto mb-6 flex items-center justify-center">
+          <div className="w-24 h-24 bg-primary-600 rounded-full mx-auto mb-6 flex items-center justify-center">
             <Scale className="w-12 h-12 text-white" />
           </div>
           <h1 className="text-4xl font-bold text-gray-900 mb-4">NKDL prasību realizēšana</h1>
@@ -47,9 +47,9 @@ export function NklPrasibuRealizesana() {
           <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Likuma mērķis</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {features.map((feature, index) => (
-              <div key={index} className="bg-secondary-100 p-6 rounded-lg shadow-sm">
+              <div key={index} className="bg-secondary-50 p-6 rounded-lg shadow-sm">
                 <div className="flex items-center">
-                  <Check className="w-6 h-6 text-primary-800 mr-4 flex-shrink-0" />
+                  <Check className="w-6 h-6 text-primary-400 mr-4 flex-shrink-0" />
                   <span className="text-gray-900 font-medium">{feature}</span>
                 </div>
               </div>
@@ -66,9 +66,9 @@ export function NklPrasibuRealizesana() {
             {processSteps.map((step, index) => {
               const IconComponent = step.icon;
               return (
-                <div key={index} className="bg-secondary-100 p-6 rounded-lg shadow-sm">
+                <div key={index} className="bg-secondary-50 p-6 rounded-lg shadow-sm">
                   <div className="flex items-start">
-                    <div className="w-12 h-12 bg-primary-800 rounded-full mr-4 flex items-center justify-center flex-shrink-0">
+                    <div className="w-12 h-12 bg-primary-600 rounded-full mr-4 flex items-center justify-center flex-shrink-0">
                       <IconComponent className="w-6 h-6 text-white" />
                     </div>
                     <div>
@@ -83,21 +83,21 @@ export function NklPrasibuRealizesana() {
         </div>
 
         {/* Why Choose Us */}
-        <div className="mb-16 bg-secondary-100 rounded-lg p-8">
+        <div className="mb-16 bg-secondary-50 rounded-lg p-8">
           <h2 className="text-3xl font-bold text-gray-900 mb-10 text-center">Kāpēc izvēlēties mūs?</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="text-center">
-              <Star className="w-12 h-12 text-primary-800 mx-auto mb-4" />
+              <Star className="w-12 h-12 text-primary-400 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-gray-900 mb-2">Kvalitāte</h3>
               <p className="text-gray-700">Efektīva procesa organizācija un daudzpusīga pieredze</p>
             </div>
             <div className="text-center">
-              <ListCheck className="w-12 h-12 text-primary-800 mx-auto mb-4" />
+              <ListCheck className="w-12 h-12 text-primary-400 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-gray-900 mb-2">Pilna atbilstība</h3>
               <p className="text-gray-700">Garantējam atbilstību visām NKDL prasībām un standartiem</p>
             </div>
             <div className="text-center">
-              <PencilRuler className="w-12 h-12 text-primary-800 mx-auto mb-4" />
+              <PencilRuler className="w-12 h-12 text-primary-400 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-gray-900 mb-2">Personalizēta pieeja</h3>
               <p className="text-gray-700">Pielāgojam risinājumus jūsu specifiskajām vajadzībām</p>
             </div>
@@ -108,28 +108,28 @@ export function NklPrasibuRealizesana() {
         <div className="mb-16">
           <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Cenrādis</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            <div className="bg-secondary-100 p-6 rounded-lg shadow-sm text-center">
-              <Euro className="w-12 h-12 text-primary-800 mx-auto mb-4" />
+            <div className="bg-secondary-50 p-6 rounded-lg shadow-sm text-center">
+              <Euro className="w-12 h-12 text-primary-400 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-gray-900 mb-2">Kiberdrošības prasību ieviešana</h3>
-              <p className="text-3xl font-bold text-primary-800 mb-2">no 40 EUR</p>
+              <p className="text-3xl font-bold text-primary-400 mb-2">no 40 EUR</p>
               <p className="text-gray-700">Vienreizēja maksa par pilnu prasību ieviešanu</p>
             </div>
-            <div className="bg-secondary-100 p-6 rounded-lg shadow-sm text-center">
-              <Euro className="w-12 h-12 text-primary-800 mx-auto mb-4" />
+            <div className="bg-secondary-50 p-6 rounded-lg shadow-sm text-center">
+              <Euro className="w-12 h-12 text-primary-400 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-gray-900 mb-2">Kiberdrošības prasību uzturēšana</h3>
-              <p className="text-3xl font-bold text-primary-800 mb-2">no 10 EUR/mēn.</p>
+              <p className="text-3xl font-bold text-primary-400 mb-2">no 10 EUR/mēn.</p>
               <p className="text-gray-700">Nepārtraukta atbilstības nodrošināšana</p>
             </div>
           </div>
         </div>
 
         {/* CTA */}
-        <div className="bg-primary-800 rounded-lg p-8 text-center text-white">
+        <div className="bg-primary-600 rounded-lg p-8 text-center text-white">
           <h2 className="text-2xl font-bold mb-4">Gatavi sākt?</h2>
           <p className="mb-6">Sazinieties ar mums, lai uzsāktu NKDL prasību ieviešanu jūsu uzņēmumā</p>
           <a
             href="/sazinai?topic=nkl-prasibu-realizesana"
-            className="bg-white text-primary-800 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-block"
+            className="bg-white text-primary-400 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-block"
           >
             Sazināties ar mums
           </a>

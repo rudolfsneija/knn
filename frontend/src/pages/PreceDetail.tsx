@@ -81,7 +81,7 @@ export function PreceDetail() {
           <h1 className="text-2xl font-bold text-gray-900 mb-4">Prece netika atrasta</h1>
           <Link
             to="/preces"
-            className="text-primary-800 hover:text-primary-900 font-medium"
+            className="text-primary-400 hover:text-primary-500 font-medium"
           >
             ← Atgriezties pie precēm
           </Link>
@@ -95,7 +95,7 @@ export function PreceDetail() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <Link
           to="/preces"
-          className="inline-flex items-center text-primary-800 hover:text-primary-900 mb-8"
+          className="inline-flex items-center text-primary-400 hover:text-primary-500 mb-8"
         >
           <ChevronLeft className="w-5 h-5 mr-2" />
           Atgriezties pie precēm
@@ -144,7 +144,7 @@ export function PreceDetail() {
 
             {prece.price !== undefined && prece.price !== null && (
               <div className="mb-8">
-                <span className="text-4xl font-bold text-primary-800">
+                <span className="text-4xl font-bold text-primary-400">
                   €{prece.price.toFixed(2)}
                 </span>
               </div>
@@ -163,7 +163,7 @@ export function PreceDetail() {
                 href="/sazinai?topic=preces"
                 className={`block w-full py-3 px-6 rounded-lg font-semibold transition-colors text-center ${
                   prece.available 
-                    ? 'bg-primary-800 text-white hover:bg-primary-900' 
+                    ? 'bg-primary-600 text-white hover:bg-primary-600' 
                     : 'bg-gray-400 text-gray-700 cursor-not-allowed'
                 }`}
                 {...(!prece.available && { 

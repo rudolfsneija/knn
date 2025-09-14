@@ -88,7 +88,7 @@ export function Aktualitates() {
               <Link
                 key={aktualitate.id}
                 to={`/aktualitates/${aktualitate.id}`}
-                className="bg-secondary-100 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer block"
+                className="bg-secondary-50 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer block"
               >
                 {(aktualitate.main_image?.url || aktualitate.image_url) && (
                   <img
@@ -110,7 +110,7 @@ export function Aktualitates() {
                     <span className="text-sm text-gray-500">
                       {new Date(aktualitate.created_at).toLocaleDateString('lv-LV')}
                     </span>
-                    <span className="text-primary-800 hover:text-primary-900 font-medium">
+                    <span className="text-primary-400 hover:text-primary-500 font-medium">
                       Lasīt vairāk →
                     </span>
                   </div>

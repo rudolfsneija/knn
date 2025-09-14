@@ -8,33 +8,33 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Primary brand colors (for main site - buttons, highlights)
+        // Primary brand colors (madder - for main site - buttons, highlights)
         primary: {
-          50: '#fef2f3',
-          100: '#fde6e8',
-          200: '#fbd0d5',
-          300: '#f7aab2',
-          400: '#f27a88',
-          500: '#ea5a6b',
-          600: '#d63851',
-          700: '#b42a41',
-          800: '#9d2235',
-          900: '#8a1e30',
-          950: '#4c0d17',
+          50: '#f3cad0',
+          100: '#e896a2',
+          200: '#dc6173',
+          300: '#cf2e46',
+          400: '#9d2235',
+          500: '#9d2235',
+          600: '#7c1b2a',
+          700: '#5d141f',
+          800: '#3e0e15',
+          900: '#1f070a',
+          950: '#1f070a',
         },
-        // Secondary colors (for footer, complementary elements)
+        // Secondary colors (earth yellow - for footer, complementary elements)
         secondary: {
-          50: '#fdfcf9',
-          100: '#fbf8f1',
-          200: '#f6efe1',
-          300: '#efe2ca',
-          400: '#e6d1aa',
-          500: '#dbbf88',
-          600: '#cfa768',
-          700: '#b8934f',
-          800: '#967643',
-          900: '#7a6139',
-          950: '#41331c',
+          50: '#fbf9f6ff',
+          100: '#ecdcc3',
+          200: '#e2cba4',
+          300: '#d9b986',
+          400: '#cfa768',
+          500: '#cfa768',
+          600: '#bd8c3c',
+          700: '#8e692d',
+          800: '#5f461e',
+          900: '#2f230f',
+          950: '#2f230f',
         },
         // Accent colors (for highlights, CTAs)
         accent: {

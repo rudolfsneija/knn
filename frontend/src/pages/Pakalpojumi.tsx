@@ -67,9 +67,9 @@ export function Pakalpojumi() {
               <Link 
                 key={index} 
                 to={service.path}
-                className="bg-secondary-100 rounded-lg shadow-lg p-8 hover:shadow-xl transition-all duration-200 block"
+                className="bg-secondary-50 rounded-lg shadow-lg p-8 hover:shadow-xl transition-all duration-200 block"
               >
-                <div className="w-16 h-16 bg-primary-800 rounded-full mx-auto mb-6 flex items-center justify-center">
+                <div className="w-16 h-16 bg-primary-600 rounded-full mx-auto mb-6 flex items-center justify-center">
                   <IconComponent className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-2xl font-semibold text-gray-900 mb-4 text-center">{service.title}</h3>
@@ -77,13 +77,13 @@ export function Pakalpojumi() {
                 <ul className="space-y-2">
                   {service.features.map((feature, featureIndex) => (
                     <li key={featureIndex} className="flex items-center text-gray-700">
-                      <Check className="w-5 h-5 text-primary-800 mr-3 flex-shrink-0" />
+                      <Check className="w-5 h-5 text-primary-400 mr-3 flex-shrink-0" />
                       {feature}
                     </li>
                   ))}
                 </ul>
                               <div className="text-right">
-                <span className="text-primary-800 hover:text-primary-900 font-medium">
+                <span className="text-primary-400 hover:text-primary-500 font-medium">
                   Uzzināt vairāk →
                 </span>
               </div>
@@ -92,7 +92,7 @@ export function Pakalpojumi() {
           })}
         </div>
 
-        <div className="bg-secondary-100 rounded-lg p-8 text-center">
+        <div className="bg-secondary-50 rounded-lg p-8 text-center">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">
             Nepieciešama individuāla konsultācija?
           </h2>
@@ -101,7 +101,7 @@ export function Pakalpojumi() {
           </p>
           <a
             href="/sazinai?topic=konsultacijas"
-            className="bg-primary-800 text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary-900 transition-colors inline-block"
+            className="bg-primary-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary-600 transition-colors inline-block"
           >
             Pieprasīt konsultāciju
           </a>

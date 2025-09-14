@@ -78,7 +78,7 @@ export function AktualitateDetail() {
           <h1 className="text-2xl font-bold text-gray-900 mb-4">Aktualitāte netika atrasta</h1>
           <Link
             to="/aktualitates"
-            className="text-primary-800 hover:text-primary-900 font-medium"
+            className="text-primary-400 hover:text-primary-500 font-medium"
           >
             ← Atgriezties pie aktualitātēm
           </Link>
@@ -92,7 +92,7 @@ export function AktualitateDetail() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <Link
           to="/aktualitates"
-          className="inline-flex items-center text-primary-800 hover:text-primary-900 mb-8"
+          className="inline-flex items-center text-primary-400 hover:text-primary-500 mb-8"
         >
           <ChevronLeft className="w-5 h-5 mr-2" />
           Atgriezties pie aktualitātēm

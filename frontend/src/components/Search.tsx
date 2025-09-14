@@ -175,7 +175,7 @@ export function Search({ isMobile = false, onNavigate }: SearchProps) {
                       setIsExpanded(false);
                       onNavigate?.();
                     }}
-                    className="block px-3 py-2 text-center text-primary-800 hover:text-primary-900 font-medium text-sm hover:bg-primary-50 rounded transition-colors"
+                    className="block px-3 py-2 text-center text-primary-400 hover:text-primary-500 font-medium text-sm hover:bg-primary-50 rounded transition-colors"
                   >
                     Skatīt visus rezultātus ({results.total})
                   </Link>

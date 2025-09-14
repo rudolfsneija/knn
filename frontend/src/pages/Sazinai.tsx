@@ -203,7 +203,7 @@ export function Sazinai() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-primary-800 text-white py-3 px-6 rounded-lg font-semibold hover:bg-primary-900 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center"
+                className="w-full bg-primary-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-primary-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center"
               >
                 {isSubmitting ? "Sūta..." : "Sūtīt ziņojumu"}
                 {!isSubmitting && <Send className="w-5 h-5 ml-2" />}
@@ -219,7 +219,7 @@ export function Sazinai() {
 
             <div className="space-y-6">
               <div className="flex items-start">
-                <Mail className="w-6 h-6 text-primary-800 mr-4 mt-1" />
+                <Mail className="w-6 h-6 text-primary-400 mr-4 mt-1" />
                 <div>
                   <h3 className="font-semibold text-gray-900 mb-1">E-pasts</h3>
                   <p className="text-gray-600">info@knn.lv</p>
@@ -236,10 +236,10 @@ export function Sazinai() {
                 rel="noopener noreferrer"
                 className="flex items-start group cursor-pointer"
               >
-                <Facebook className="w-6 h-6 text-primary-800 group-hover:text-primary-900 mr-4 mt-1 transition-colors" />
+                <Facebook className="w-6 h-6 text-primary-400 group-hover:text-primary-500 mr-4 mt-1 transition-colors" />
                 <div>
-                  <h3 className="font-semibold text-gray-900 group-hover:text-primary-800 mb-1 transition-colors">Facebook</h3>
-                  <p className="text-gray-600 group-hover:text-primary-800 transition-colors">
+                  <h3 className="font-semibold text-gray-900 group-hover:text-primary-400 mb-1 transition-colors">Facebook</h3>
+                  <p className="text-gray-600 group-hover:text-primary-400 transition-colors">
                     KNN Serviss
                   </p>
                 </div>
@@ -251,10 +251,10 @@ export function Sazinai() {
                 rel="noopener noreferrer"
                 className="flex items-start group cursor-pointer"
               >
-                <Youtube className="w-6 h-6 text-primary-800 group-hover:text-primary-900 mr-4 mt-1 transition-colors" />
+                <Youtube className="w-6 h-6 text-primary-400 group-hover:text-primary-500 mr-4 mt-1 transition-colors" />
                 <div>
-                  <h3 className="font-semibold text-gray-900 group-hover:text-primary-800 mb-1 transition-colors">YouTube</h3>
-                  <p className="text-gray-600 group-hover:text-primary-800 transition-colors">
+                  <h3 className="font-semibold text-gray-900 group-hover:text-primary-400 mb-1 transition-colors">YouTube</h3>
+                  <p className="text-gray-600 group-hover:text-primary-400 transition-colors">
                     @KNNServiss
                   </p>
                 </div>

@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+frontend_dist/
+dist/
+build/
+
+# Logs
+logs/
+*.log
+
+# Database
+*.sqlite
+*.db
+
+# Environment files
+.env
+.env.local
+
+# Generated files
+*.generated.*
+
+# Images and uploads
+uploads/
+screenshots/
+
+# OS files
+.DS_Store
+Thumbs.db

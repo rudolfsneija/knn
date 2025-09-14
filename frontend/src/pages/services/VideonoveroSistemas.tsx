@@ -2,51 +2,51 @@ import { Cctv, Check, Eye, Shield, Monitor, Clock } from 'lucide-react';
 
 export function VideonoveroSistemas() {
   // const features = [
-  //   "Videonovērošanas sistēmu projektēšana", 
-  //   "Profesionāla uzstādīšana un konfigurācija", 
-  //   "Attālā piekļuve un monitorings", 
+  //   "Videonovērošanas sistēmu projektēšana",
+  //   "Profesionāla uzstādīšana un konfigurācija",
+  //   "Attālā piekļuve un monitorings",
   //   "Aprīkojuma noma un tehniskais atbalsts"
   // ];
 
   const solutions = [
     {
       icon: Eye,
-      title: "HD/4K kameras",
-      description: "Augstas izšķirtspējas kameras ar nakts redzamību un inteliģentām funkcijām"
+      title: 'HD/4K kameras',
+      description: 'Augstas izšķirtspējas kameras ar nakts redzamību un inteliģentām funkcijām',
     },
     {
       icon: Shield,
-      title: "Drošības risinājumi",
-      description: "Kustības noteikšana, sejas atpazīšana un automātiska brīdinājumu sūtīšana"
+      title: 'Drošības risinājumi',
+      description: 'Kustības noteikšana, sejas atpazīšana un automātiska brīdinājumu sūtīšana',
     },
     {
       icon: Monitor,
-      title: "Centralizēta pārvaldība",
-      description: "Vienota sistēma visu kameru pārvaldībai un ierakstu uzglabāšanai"
+      title: 'Centralizēta pārvaldība',
+      description: 'Vienota sistēma visu kameru pārvaldībai un ierakstu uzglabāšanai',
     },
     {
       icon: Clock,
-      title: "24/7 uzraudzība",
-      description: "Nepārtraukta sistēmas darbības nodrošināšana un tehniskais atbalsts"
-    }
+      title: '24/7 uzraudzība',
+      description: 'Nepārtraukta sistēmas darbības nodrošināšana un tehniskais atbalsts',
+    },
   ];
 
   const benefits = [
-    "Uzlabota objekta drošība",
-    "Attālā piekļuve no jebkuras vietas",
-    "Automātiski brīdinājumi",
-    "Pierādījumi incidentu gadījumā",
-    "Darbinieku drošības uzraudzība",
-    "Profesionāla uzstādīšana"
+    'Uzlabota objekta drošība',
+    'Attālā piekļuve no jebkuras vietas',
+    'Automātiski brīdinājumi',
+    'Pierādījumi incidentu gadījumā',
+    'Darbinieku drošības uzraudzība',
+    'Profesionāla uzstādīšana',
   ];
 
   const industries = [
-    "Biroju ēkas un uzņēmumi",
-    "Rūpniecības objekti",
-    "Tirdzniecības centri",
-    "Noliktavas un logistikas centri",
-    "Privātmājas un dzīvokļi",
-    "Izglītības iestādes"
+    'Biroju ēkas un uzņēmumi',
+    'Rūpniecības objekti',
+    'Tirdzniecības centri',
+    'Noliktavas un logistikas centri',
+    'Privātmājas un dzīvokļi',
+    'Izglītības iestādes',
   ];
 
   return (
@@ -59,7 +59,8 @@ export function VideonoveroSistemas() {
           </div>
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Videonovērošanas sistēmas</h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Nodarbojamies ar videonovērošanas sistēmu izplatīšanu, uzstādīšanu un nomu dažāda veida objektiem
+            Nodarbojamies ar videonovērošanas sistēmu izplatīšanu, uzstādīšanu un nomu dažāda veida
+            objektiem
           </p>
         </div>
 
@@ -118,7 +119,9 @@ export function VideonoveroSistemas() {
 
         {/* Process */}
         <div className="mb-24">
-          <h2 className="text-3xl font-bold text-gray-900 mb-16 text-center">Uzstādīšanas process</h2>
+          <h2 className="text-3xl font-bold text-gray-900 mb-16 text-center">
+            Uzstādīšanas process
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             <div className="text-center">
               <div className="w-16 h-16 bg-primary-600 rounded-full mx-auto mb-4 flex items-center justify-center">
@@ -132,7 +135,9 @@ export function VideonoveroSistemas() {
                 <span className="text-white font-bold text-xl">2</span>
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Projektēšana</h3>
-              <p className="text-gray-600 text-sm">Izveidojam sistēmas plānu un izvēlamies kameras</p>
+              <p className="text-gray-600 text-sm">
+                Izveidojam sistēmas plānu un izvēlamies kameras
+              </p>
             </div>
             <div className="text-center">
               <div className="w-16 h-16 bg-primary-600 rounded-full mx-auto mb-4 flex items-center justify-center">

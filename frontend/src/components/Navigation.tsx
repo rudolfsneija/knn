@@ -6,7 +6,7 @@ import { Search } from './Search';
 export function Navigation() {
   const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  
+
   const navigation = [
     { name: 'Aktualitātes', href: '/aktualitates' },
     { name: 'Pakalpojumi', href: '/pakalpojumi' },
@@ -21,15 +21,15 @@ export function Navigation() {
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <Link to="/" className="flex items-center cursor-pointer select-none">
-              <img 
-                src="/logo/knn-small-logo-red.svg" 
-                alt="KNN Logo" 
+              <img
+                src="/logo/knn-small-logo-red.svg"
+                alt="KNN Logo"
                 className="h-24 w-24 select-none pointer-events-none"
                 draggable="false"
               />
             </Link>
           </div>
-          
+
           <div className="hidden md:flex items-center space-x-8">
             {navigation.map((item) => (
               <Link
@@ -53,15 +53,11 @@ export function Navigation() {
 
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center">
-            <button 
+            <button
               className="text-gray-700 hover:text-primary-400"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
-              {isMobileMenuOpen ? (
-                <X className="h-6 w-6" />
-              ) : (
-                <Menu className="h-6 w-6" />
-              )}
+              {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
           </div>
         </div>
@@ -74,7 +70,7 @@ export function Navigation() {
               <div className="px-3 py-2">
                 <Search isMobile={true} onNavigate={() => setIsMobileMenuOpen(false)} />
               </div>
-              
+
               {navigation.map((item) => (
                 <Link
                   key={item.name}

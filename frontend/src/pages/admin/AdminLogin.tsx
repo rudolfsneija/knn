@@ -6,7 +6,7 @@ import { useTheme } from '../../contexts/ThemeContext';
 export function AdminLogin() {
   const [formData, setFormData] = useState({
     username: '',
-    password: ''
+    password: '',
   });
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -22,7 +22,7 @@ export function AdminLogin() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -36,7 +36,7 @@ export function AdminLogin() {
       if (success) {
         navigate('/admin');
       } else {
-        setError('Nepareizs lietotājvārds vai parole'); 
+        setError('Nepareizs lietotājvārds vai parole');
       }
     } catch (error) {
       setError('Pieslēgšanās kļūda. Lūdzu mēģiniet vēlreiz.');
@@ -56,11 +56,14 @@ export function AdminLogin() {
             Pieslēdzieties sistēmas administrēšanai
           </p>
         </div>
-        
+
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="rounded-md shadow-sm space-y-4">
             <div>
-              <label htmlFor="username" className="block text-sm font-medium text-admin-text-secondary mb-2">
+              <label
+                htmlFor="username"
+                className="block text-sm font-medium text-admin-text-secondary mb-2"
+              >
                 Lietotājvārds
               </label>
               <input
@@ -75,7 +78,10 @@ export function AdminLogin() {
               />
             </div>
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-admin-text-secondary mb-2">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-admin-text-secondary mb-2"
+              >
                 Parole
               </label>
               <input
@@ -98,20 +104,13 @@ export function AdminLogin() {
           )}
 
           <div>
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="admin-button-primary w-full"
-            >
+            <button type="submit" disabled={isLoading} className="admin-button-primary w-full">
               {isLoading ? 'Pieslēdzas...' : 'Pieslēgties'}
             </button>
           </div>
 
           <div className="text-center">
-            <a
-              href="/"
-              className="text-sm text-admin-accent-primary hover:text-blue-400"
-            >
+            <a href="/" className="text-sm text-admin-accent-primary hover:text-blue-400">
               ← Atgriezties uz galveno lapu
             </a>
           </div>

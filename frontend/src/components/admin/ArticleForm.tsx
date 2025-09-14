@@ -20,12 +20,12 @@ export function ArticleForm({
   editingArticle,
   onSubmit,
   onCancel,
-  isSubmitting = false
+  isSubmitting = false,
 }: ArticleFormProps) {
   const isEditing = !!editingArticle;
 
   const handleFormDataChange = (field: keyof ArticleFormData, value: string | boolean) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
   return (
@@ -105,9 +105,7 @@ export function ArticleForm({
                 className="mr-2 h-4 w-4"
                 disabled={isSubmitting}
               />
-              <span className="text-sm font-medium text-admin-text-secondary">
-                Publicēts
-              </span>
+              <span className="text-sm font-medium text-admin-text-secondary">Publicēts</span>
             </label>
           </div>
 
@@ -118,7 +116,7 @@ export function ArticleForm({
               disabled={isSubmitting}
               className="bg-green-600 hover:bg-green-700 disabled:bg-gray-400 text-white px-4 py-2 rounded-lg font-medium transition-colors"
             >
-              {isSubmitting ? 'Saglabā...' : (isEditing ? 'Atjaunināt' : 'Pievienot')}
+              {isSubmitting ? 'Saglabā...' : isEditing ? 'Atjaunināt' : 'Pievienot'}
             </button>
             <button
               type="button"

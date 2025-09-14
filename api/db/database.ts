@@ -29,7 +29,7 @@ export async function initDatabase(): Promise<DatabaseMethods> {
         return;
       }
       console.log(`Connected to SQLite database at ${DB_PATH}`);
-      
+
       // Create tables
       createTables()
         .then(() => {
@@ -46,7 +46,7 @@ function createDatabaseMethods(): DatabaseMethods {
   return {
     run: (sql: string, params?: any[]) => {
       return new Promise<sqlite3.RunResult>((resolve, reject) => {
-        db.run(sql, params || [], function(this: sqlite3.RunResult, err: Error | null) {
+        db.run(sql, params || [], function (this: sqlite3.RunResult, err: Error | null) {
           if (err) reject(err);
           else resolve({ lastID: this.lastID, changes: this.changes } as sqlite3.RunResult);
         });
@@ -75,7 +75,7 @@ function createDatabaseMethods(): DatabaseMethods {
           else resolve();
         });
       });
-    }
+    },
   };
 }
 
@@ -161,10 +161,16 @@ async function createTables(): Promise<void> {
     await runAsync(`ALTER TABLE produkti ADD COLUMN sub_category VARCHAR(100)`);
     console.log('Added sub_category column to produkti table');
   } catch (error: any) {
-    if (error.message && (error.message.includes('duplicate column') || error.message.includes('already exists'))) {
+    if (
+      error.message &&
+      (error.message.includes('duplicate column') || error.message.includes('already exists'))
+    ) {
       console.log('sub_category column already exists in produkti table');
     } else {
-      console.warn('Error adding sub_category column (this is normal if column already exists):', error.message);
+      console.warn(
+        'Error adding sub_category column (this is normal if column already exists):',
+        error.message
+      );
     }
   }
 
@@ -172,7 +178,9 @@ async function createTables(): Promise<void> {
   await runAsync(`CREATE INDEX IF NOT EXISTS idx_users_email ON users(email)`);
   await runAsync(`CREATE INDEX IF NOT EXISTS idx_users_username ON users(username)`);
   await runAsync(`CREATE INDEX IF NOT EXISTS idx_aktualitates_admin_id ON aktualitates(admin_id)`);
-  await runAsync(`CREATE INDEX IF NOT EXISTS idx_aktualitates_published ON aktualitates(published)`);
+  await runAsync(
+    `CREATE INDEX IF NOT EXISTS idx_aktualitates_published ON aktualitates(published)`
+  );
   await runAsync(`CREATE INDEX IF NOT EXISTS idx_produkti_admin_id ON produkti(admin_id)`);
   await runAsync(`CREATE INDEX IF NOT EXISTS idx_produkti_available ON produkti(available)`);
   await runAsync(`CREATE INDEX IF NOT EXISTS idx_produkti_featured ON produkti(featured)`);
@@ -233,14 +241,14 @@ export async function queryAll(sql: string, params: any[] = []): Promise<any[]> 
 // Database run helper for INSERT, UPDATE, DELETE
 export async function run(sql: string, params: any[] = []): Promise<sqlite3.RunResult> {
   return new Promise((resolve, reject) => {
-    db.run(sql, params, function(this: sqlite3.RunResult, err: Error | null) {
+    db.run(sql, params, function (this: sqlite3.RunResult, err: Error | null) {
       if (err) {
         console.error('Database run error:', err);
         reject(err);
       } else {
         resolve({
           lastID: this.lastID,
-          changes: this.changes
+          changes: this.changes,
         } as sqlite3.RunResult);
       }
     });

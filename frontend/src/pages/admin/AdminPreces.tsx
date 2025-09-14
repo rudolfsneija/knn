@@ -10,7 +10,7 @@ export function AdminPreces() {
   const { user, logout } = useAuth();
   const { setTheme } = useTheme();
   const navigate = useNavigate();
-  
+
   // Product operations hook
   const {
     products,
@@ -25,7 +25,7 @@ export function AdminPreces() {
     fetchProducts,
     saveProduct,
     deleteProduct,
-    setError
+    setError,
   } = useProductOperations();
 
   // Category and form state
@@ -41,7 +41,7 @@ export function AdminPreces() {
     sub_category: '',
     specifications: {},
     available: true,
-    featured: false
+    featured: false,
   });
   const [selectedImages, setSelectedImages] = useState<FileList | null>(null);
 
@@ -67,11 +67,11 @@ export function AdminPreces() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     try {
       await saveProduct(formData, selectedImages, editingProduct?.id);
       resetForm();
-      
+
       // If we're in a category view, refresh the products for that category
       if (selectedCategory) {
         fetchProducts(selectedCategory);
@@ -93,7 +93,7 @@ export function AdminPreces() {
       sub_category: product.sub_category || '',
       specifications: product.specifications || {},
       available: product.available,
-      featured: product.featured
+      featured: product.featured,
     });
     setEditingProduct(product);
     setShowForm(true);
@@ -102,7 +102,7 @@ export function AdminPreces() {
   const handleDelete = async (id: number) => {
     try {
       await deleteProduct(id);
-      
+
       // Always refresh the current view
       if (selectedCategory) {
         // Stay in the selected category and refresh its products
@@ -126,7 +126,7 @@ export function AdminPreces() {
       sub_category: '',
       specifications: {},
       available: true,
-      featured: false
+      featured: false,
     });
     setSelectedImages(null);
     setEditingProduct(null);
@@ -200,10 +200,7 @@ export function AdminPreces() {
           <div>
             <div className="flex justify-between items-center mb-8">
               <h2 className="text-2xl font-bold text-admin-text-primary">Izvēlieties kategoriju</h2>
-              <button
-                onClick={() => setShowForm(true)}
-                className="admin-button-primary"
-              >
+              <button onClick={() => setShowForm(true)} className="admin-button-primary">
                 Pievienot jaunu produktu
               </button>
             </div>

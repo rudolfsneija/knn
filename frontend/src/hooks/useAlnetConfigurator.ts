@@ -25,34 +25,25 @@ export function useAlnetConfigurator() {
     currentQuestionId: ALNET_QUESTIONS[0].id,
   });
   const [isSubmittingResults, setIsSubmittingResults] = useState(false);
-  const [submitMessage, setSubmitMessage] = useState("");
+  const [submitMessage, setSubmitMessage] = useState('');
   const [showContactForm, setShowContactForm] = useState(false);
   const [contactInfo, setContactInfo] = useState<ContactInfo>({
-    name: "",
-    email: "",
-    phone: "",
+    name: '',
+    email: '',
+    phone: '',
   });
 
   // Get visible questions based on current answers
   const getVisibleQuestions = (): Question[] => {
-    return ALNET_QUESTIONS.filter((question) =>
-      shouldShowQuestion(question, state.answers)
-    );
+    return ALNET_QUESTIONS.filter((question) => shouldShowQuestion(question, state.answers));
   };
 
   const visibleQuestions = getVisibleQuestions();
-  const currentQuestion = visibleQuestions.find(
-    (q) => q.id === state.currentQuestionId
-  );
-  const currentQuestionIndex = visibleQuestions.findIndex(
-    (q) => q.id === state.currentQuestionId
-  );
+  const currentQuestion = visibleQuestions.find((q) => q.id === state.currentQuestionId);
+  const currentQuestionIndex = visibleQuestions.findIndex((q) => q.id === state.currentQuestionId);
   const totalSteps = visibleQuestions.length;
 
-  const updateAnswer = (
-    questionId: string,
-    value: string | number | boolean | string[]
-  ) => {
+  const updateAnswer = (questionId: string, value: string | number | boolean | string[]) => {
     setState((prev) => ({
       ...prev,
       answers: {
@@ -103,16 +94,15 @@ export function useAlnetConfigurator() {
     }
 
     setIsSubmittingResults(true);
-    setSubmitMessage("");
+    setSubmitMessage('');
 
     try {
-      const totalPrice =
-        state.result?.reduce((sum, item) => sum + item.totalPrice, 0) || 0;
+      const totalPrice = state.result?.reduce((sum, item) => sum + item.totalPrice, 0) || 0;
 
-      const response = await fetch("/api/configurator", {
-        method: "POST",
+      const response = await fetch('/api/configurator', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           userAnswers: state.answers,
@@ -134,9 +124,9 @@ export function useAlnetConfigurator() {
         setSubmitMessage(`Kļūda: ${data.error}`);
       }
     } catch (error) {
-      console.error("Error submitting configurator results:", error);
+      console.error('Error submitting configurator results:', error);
       setSubmitMessage(
-        "Neizdevās nosūtīt konfigurācijas rezultātus. Lūdzu, mēģiniet vēlāk vai sazinieties ar mums tieši pa e-pastu info@knn.lv"
+        'Neizdevās nosūtīt konfigurācijas rezultātus. Lūdzu, mēģiniet vēlāk vai sazinieties ar mums tieši pa e-pastu info@knn.lv'
       );
     } finally {
       setIsSubmittingResults(false);
@@ -151,13 +141,13 @@ export function useAlnetConfigurator() {
     const value = state.answers[currentQuestion.id];
     if (
       currentQuestion.validation.required &&
-      (value === undefined || value === null || value === "")
+      (value === undefined || value === null || value === '')
     ) {
       return false;
     }
     if (
       currentQuestion.validation.min !== undefined &&
-      typeof value === "number" &&
+      typeof value === 'number' &&
       value < currentQuestion.validation.min
     ) {
       return false;
@@ -183,7 +173,7 @@ export function useAlnetConfigurator() {
     submitMessage,
     showContactForm,
     contactInfo,
-    
+
     // Actions
     updateAnswer,
     prevStep,

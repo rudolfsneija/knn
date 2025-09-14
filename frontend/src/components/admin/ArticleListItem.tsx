@@ -26,7 +26,7 @@ export function ArticleListItem({ article, onEdit, onDelete }: ArticleListItemPr
             />
           </div>
         )}
-        
+
         {/* Article Details */}
         <div className="flex-1 min-w-0">
           <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-4">
@@ -36,7 +36,7 @@ export function ArticleListItem({ article, onEdit, onDelete }: ArticleListItemPr
                   {article.title}
                 </h4>
               </div>
-              
+
               <div className="flex flex-wrap gap-2 mb-3">
                 {article.published ? (
                   <span className="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full font-medium">
@@ -49,7 +49,7 @@ export function ArticleListItem({ article, onEdit, onDelete }: ArticleListItemPr
                 )}
               </div>
             </div>
-            
+
             {/* Action Buttons */}
             <div className="flex space-x-3 flex-shrink-0">
               <button
@@ -66,18 +66,17 @@ export function ArticleListItem({ article, onEdit, onDelete }: ArticleListItemPr
               </button>
             </div>
           </div>
-          
+
           <div className="space-y-3">
             <p className="text-admin-text-secondary leading-relaxed">
-              {article.excerpt || (article.content.length > 300
-                ? `${article.content.substring(0, 200)}...`
-                : article.content)}
+              {article.excerpt ||
+                (article.content.length > 300
+                  ? `${article.content.substring(0, 200)}...`
+                  : article.content)}
             </p>
-            
+
             <div className="flex flex-wrap items-center gap-4 text-sm text-admin-text-secondary">
-              <span>
-                {new Date(article.created_at).toLocaleDateString('lv-LV')}
-              </span>
+              <span>{new Date(article.created_at).toLocaleDateString('lv-LV')}</span>
               {article.images && article.images.length > 0 && (
                 <span>
                   {article.images.length} attēl{article.images.length === 1 ? 's' : 'i'}

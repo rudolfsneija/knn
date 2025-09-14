@@ -15,57 +15,69 @@ export function SpecificationsEditor({
   subCategory,
   onSpecificationsChange,
   onSubCategoryChange,
-  disabled = false
+  disabled = false,
 }: SpecificationsEditorProps) {
   const [newSpecKey, setNewSpecKey] = useState('');
   const [newSpecValue, setNewSpecValue] = useState('');
 
-  const handleSpecificationChange = useCallback((key: string, value: string) => {
-    const updatedSpecs = { ...specifications };
-    if (value.trim() === '') {
-      delete updatedSpecs[key];
-    } else {
-      updatedSpecs[key] = value;
-    }
-    onSpecificationsChange(updatedSpecs);
-  }, [specifications, onSpecificationsChange]);
+  const handleSpecificationChange = useCallback(
+    (key: string, value: string) => {
+      const updatedSpecs = { ...specifications };
+      if (value.trim() === '') {
+        delete updatedSpecs[key];
+      } else {
+        updatedSpecs[key] = value;
+      }
+      onSpecificationsChange(updatedSpecs);
+    },
+    [specifications, onSpecificationsChange]
+  );
 
-  const handleKeyChange = useCallback((oldKey: string, newKey: string) => {
-    if (oldKey === newKey || newKey.trim() === '') return;
-    
-    const updatedSpecs = { ...specifications };
-    const value = updatedSpecs[oldKey] || '';
-    delete updatedSpecs[oldKey];
-    updatedSpecs[newKey.trim()] = value;
-    onSpecificationsChange(updatedSpecs);
-  }, [specifications, onSpecificationsChange]);
+  const handleKeyChange = useCallback(
+    (oldKey: string, newKey: string) => {
+      if (oldKey === newKey || newKey.trim() === '') return;
+
+      const updatedSpecs = { ...specifications };
+      const value = updatedSpecs[oldKey] || '';
+      delete updatedSpecs[oldKey];
+      updatedSpecs[newKey.trim()] = value;
+      onSpecificationsChange(updatedSpecs);
+    },
+    [specifications, onSpecificationsChange]
+  );
 
   const addNewSpecification = useCallback(() => {
     if (newSpecKey.trim() === '') return;
-    
+
     const updatedSpecs = { ...specifications };
     updatedSpecs[newSpecKey.trim()] = newSpecValue.trim();
     onSpecificationsChange(updatedSpecs);
-    
+
     // Clear the form
     setNewSpecKey('');
     setNewSpecValue('');
   }, [specifications, newSpecKey, newSpecValue, onSpecificationsChange]);
 
-  const addFromExisting = useCallback((existingKey: string) => {
-    const updatedSpecs = { ...specifications };
-    updatedSpecs[existingKey] = '';
-    onSpecificationsChange(updatedSpecs);
-  }, [specifications, onSpecificationsChange]);
+  const addFromExisting = useCallback(
+    (existingKey: string) => {
+      const updatedSpecs = { ...specifications };
+      updatedSpecs[existingKey] = '';
+      onSpecificationsChange(updatedSpecs);
+    },
+    [specifications, onSpecificationsChange]
+  );
 
-  const removeSpecification = useCallback((key: string) => {
-    const updatedSpecs = { ...specifications };
-    delete updatedSpecs[key];
-    onSpecificationsChange(updatedSpecs);
-  }, [specifications, onSpecificationsChange]);
+  const removeSpecification = useCallback(
+    (key: string) => {
+      const updatedSpecs = { ...specifications };
+      delete updatedSpecs[key];
+      onSpecificationsChange(updatedSpecs);
+    },
+    [specifications, onSpecificationsChange]
+  );
 
   const specificationEntries = Object.entries(specifications);
-  const availableExistingKeys = existingKeys.filter(key => !(key in specifications));
+  const availableExistingKeys = existingKeys.filter((key) => !(key in specifications));
 
   return (
     <div className="space-y-4">
@@ -92,7 +104,7 @@ export function SpecificationsEditor({
         {/* Add new specification form */}
         <div className="bg-admin-bg-secondary p-4 rounded-lg mb-4">
           <h4 className="text-sm font-medium text-admin-text-primary mb-3">Jauna specifikāciju</h4>
-          
+
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div>
               <input
@@ -106,12 +118,12 @@ export function SpecificationsEditor({
               />
               {/* Datalist for suggestions */}
               <datalist id="existing-spec-keys">
-                {availableExistingKeys.map(key => (
+                {availableExistingKeys.map((key) => (
                   <option key={key} value={key} />
                 ))}
               </datalist>
             </div>
-            
+
             <div>
               <input
                 type="text"
@@ -122,7 +134,7 @@ export function SpecificationsEditor({
                 disabled={disabled}
               />
             </div>
-            
+
             <div>
               <button
                 type="button"
@@ -140,7 +152,7 @@ export function SpecificationsEditor({
             <div className="mt-3">
               <p className="text-xs text-admin-text-secondary mb-2">Vai izvēlieties no esošajām:</p>
               <div className="flex flex-wrap gap-2">
-                {availableExistingKeys.slice(0, 8).map(key => (
+                {availableExistingKeys.slice(0, 8).map((key) => (
                   <button
                     key={key}
                     type="button"
@@ -160,7 +172,10 @@ export function SpecificationsEditor({
         {specificationEntries.length > 0 && (
           <div className="space-y-3">
             {specificationEntries.map(([key, value], index) => (
-              <div key={`spec-${index}`} className="grid grid-cols-1 sm:grid-cols-5 gap-2 items-start p-3 rounded">
+              <div
+                key={`spec-${index}`}
+                className="grid grid-cols-1 sm:grid-cols-5 gap-2 items-start p-3 rounded"
+              >
                 {/* Specification Key Field */}
                 <div className="sm:col-span-2">
                   <input

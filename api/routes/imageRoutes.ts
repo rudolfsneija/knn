@@ -1,14 +1,14 @@
 import express from 'express';
 import { requireAuth } from '../middleware/auth';
-import { 
-  upload, 
-  processAndSaveImage, 
-  saveImageToDatabase, 
-  getEntityImages, 
-  deleteImage, 
+import {
+  upload,
+  processAndSaveImage,
+  saveImageToDatabase,
+  getEntityImages,
+  deleteImage,
   setMainImage,
   getImageUrl,
-  createImageServingMiddleware
+  createImageServingMiddleware,
 } from '../utils/imageUpload';
 import { query } from '../db/database';
 import { ImageUploadResponse } from '../types';
@@ -29,37 +29,34 @@ router.post('/produkti/:id/images', requireAuth, upload.single('image'), async (
     if (!file) {
       return res.status(400).json({
         success: false,
-        error: 'No image file provided'
+        error: 'No image file provided',
       });
     }
 
     // Verify that the product exists and belongs to the admin
-    const product = await query(
-      'SELECT admin_id FROM produkti WHERE id = ?',
-      [produktId]
-    );
+    const product = await query('SELECT admin_id FROM produkti WHERE id = ?', [produktId]);
 
     if (!product) {
       return res.status(404).json({
         success: false,
-        error: 'Product not found'
+        error: 'Product not found',
       });
     }
 
     if (product.admin_id !== admin.userId) {
       return res.status(403).json({
         success: false,
-        error: 'Access denied: You can only upload images to your own products'
+        error: 'Access denied: You can only upload images to your own products',
       });
     }
 
     // Process and save the image
     const imageData = await processAndSaveImage(file, 'produkti', produktId);
     const imageId = await saveImageToDatabase(
-      imageData, 
-      'produkti', 
-      produktId, 
-      admin.userId, 
+      imageData,
+      'produkti',
+      produktId,
+      admin.userId,
       isMain
     );
 
@@ -74,7 +71,7 @@ router.post('/produkti/:id/images', requireAuth, upload.single('image'), async (
         width: imageData.width,
         height: imageData.height,
         is_main: isMain,
-      }
+      },
     };
 
     res.status(201).json(response);
@@ -82,7 +79,7 @@ router.post('/produkti/:id/images', requireAuth, upload.single('image'), async (
     console.error('Error uploading product image:', error);
     res.status(500).json({
       success: false,
-      error: 'Failed to upload image'
+      error: 'Failed to upload image',
     });
   }
 });
@@ -98,37 +95,36 @@ router.post('/aktualitates/:id/images', requireAuth, upload.single('image'), asy
     if (!file) {
       return res.status(400).json({
         success: false,
-        error: 'No image file provided'
+        error: 'No image file provided',
       });
     }
 
     // Verify that the aktualitate exists and belongs to the admin
-    const aktualitate = await query(
-      'SELECT admin_id FROM aktualitates WHERE id = ?',
-      [aktualitateId]
-    );
+    const aktualitate = await query('SELECT admin_id FROM aktualitates WHERE id = ?', [
+      aktualitateId,
+    ]);
 
     if (!aktualitate) {
       return res.status(404).json({
         success: false,
-        error: 'Aktualitate not found'
+        error: 'Aktualitate not found',
       });
     }
 
     if (aktualitate.admin_id !== admin.userId) {
       return res.status(403).json({
         success: false,
-        error: 'Access denied: You can only upload images to your own aktualitates'
+        error: 'Access denied: You can only upload images to your own aktualitates',
       });
     }
 
     // Process and save the image
     const imageData = await processAndSaveImage(file, 'aktualitates', aktualitateId);
     const imageId = await saveImageToDatabase(
-      imageData, 
-      'aktualitates', 
-      aktualitateId, 
-      admin.userId, 
+      imageData,
+      'aktualitates',
+      aktualitateId,
+      admin.userId,
       isMain
     );
 
@@ -143,7 +139,7 @@ router.post('/aktualitates/:id/images', requireAuth, upload.single('image'), asy
         width: imageData.width,
         height: imageData.height,
         is_main: isMain,
-      }
+      },
     };
 
     res.status(201).json(response);
@@ -151,7 +147,7 @@ router.post('/aktualitates/:id/images', requireAuth, upload.single('image'), asy
     console.error('Error uploading aktualitate image:', error);
     res.status(500).json({
       success: false,
-      error: 'Failed to upload image'
+      error: 'Failed to upload image',
     });
   }
 });
@@ -160,10 +156,10 @@ router.post('/aktualitates/:id/images', requireAuth, upload.single('image'), asy
 router.get('/produkti/:id/images', async (req, res) => {
   try {
     const produktId = parseInt(req.params.id!);
-    
+
     const images = await getEntityImages('produkti', produktId);
-    
-    const formattedImages = images.map(img => ({
+
+    const formattedImages = images.map((img) => ({
       id: img.id,
       uuid: img.uuid,
       url: getImageUrl(img.file_path),
@@ -177,13 +173,13 @@ router.get('/produkti/:id/images', async (req, res) => {
 
     res.json({
       success: true,
-      data: formattedImages
+      data: formattedImages,
     });
   } catch (error) {
     console.error('Error fetching product images:', error);
     res.status(500).json({
       success: false,
-      error: 'Failed to fetch images'
+      error: 'Failed to fetch images',
     });
   }
 });
@@ -192,10 +188,10 @@ router.get('/produkti/:id/images', async (req, res) => {
 router.get('/aktualitates/:id/images', async (req, res) => {
   try {
     const aktualitateId = parseInt(req.params.id!);
-    
+
     const images = await getEntityImages('aktualitates', aktualitateId);
-    
-    const formattedImages = images.map(img => ({
+
+    const formattedImages = images.map((img) => ({
       id: img.id,
       uuid: img.uuid,
       url: getImageUrl(img.file_path),
@@ -209,13 +205,13 @@ router.get('/aktualitates/:id/images', async (req, res) => {
 
     res.json({
       success: true,
-      data: formattedImages
+      data: formattedImages,
     });
   } catch (error) {
     console.error('Error fetching aktualitate images:', error);
     res.status(500).json({
       success: false,
-      error: 'Failed to fetch images'
+      error: 'Failed to fetch images',
     });
   }
 });
@@ -231,19 +227,19 @@ router.delete('/images/:id', requireAuth, async (req, res) => {
     if (!success) {
       return res.status(404).json({
         success: false,
-        error: 'Image not found or access denied'
+        error: 'Image not found or access denied',
       });
     }
 
     res.json({
       success: true,
-      message: 'Image deleted successfully'
+      message: 'Image deleted successfully',
     });
   } catch (error) {
     console.error('Error deleting image:', error);
     res.status(500).json({
       success: false,
-      error: 'Failed to delete image'
+      error: 'Failed to delete image',
     });
   }
 });
@@ -258,14 +254,14 @@ router.put('/images/:id/main', requireAuth, async (req, res) => {
     if (!entityType || !entityId) {
       return res.status(400).json({
         success: false,
-        error: 'entityType and entityId are required'
+        error: 'entityType and entityId are required',
       });
     }
 
     if (!['produkti', 'aktualitates'].includes(entityType)) {
       return res.status(400).json({
         success: false,
-        error: 'Invalid entityType. Must be "produkti" or "aktualitates"'
+        error: 'Invalid entityType. Must be "produkti" or "aktualitates"',
       });
     }
 
@@ -274,19 +270,19 @@ router.put('/images/:id/main', requireAuth, async (req, res) => {
     if (!success) {
       return res.status(404).json({
         success: false,
-        error: 'Image not found or access denied'
+        error: 'Image not found or access denied',
       });
     }
 
     res.json({
       success: true,
-      message: 'Main image updated successfully'
+      message: 'Main image updated successfully',
     });
   } catch (error) {
     console.error('Error setting main image:', error);
     res.status(500).json({
       success: false,
-      error: 'Failed to set main image'
+      error: 'Failed to set main image',
     });
   }
 });

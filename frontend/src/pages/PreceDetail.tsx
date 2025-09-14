@@ -79,10 +79,7 @@ export function PreceDetail() {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-gray-900 mb-4">Prece netika atrasta</h1>
-          <Link
-            to="/preces"
-            className="text-primary-400 hover:text-primary-500 font-medium"
-          >
+          <Link to="/preces" className="text-primary-400 hover:text-primary-500 font-medium">
             ← Atgriezties pie precēm
           </Link>
         </div>
@@ -122,11 +119,9 @@ export function PreceDetail() {
                 </span>
               </div>
             )}
-            
+
             <div className="flex items-start justify-between mb-6">
-              <h1 className="text-3xl md:text-4xl font-bold text-gray-900 flex-1">
-                {prece.name}
-              </h1>
+              <h1 className="text-3xl md:text-4xl font-bold text-gray-900 flex-1">{prece.name}</h1>
               {!prece.available && !(prece.main_image?.url || prece.image_url) && (
                 <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium ml-4 flex-shrink-0">
                   Nav pieejams
@@ -137,7 +132,8 @@ export function PreceDetail() {
             {!prece.available && (
               <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
                 <p className="text-red-800 font-medium">
-                  Šis produkts pašlaik nav pieejams. Lūdzu, sazinieties ar mums, lai uzzinātu par pieejamību.
+                  Šis produkts pašlaik nav pieejams. Lūdzu, sazinieties ar mums, lai uzzinātu par
+                  pieejamību.
                 </p>
               </div>
             )}
@@ -162,13 +158,13 @@ export function PreceDetail() {
               <a
                 href="/sazinai?topic=preces"
                 className={`block w-full py-3 px-6 rounded-lg font-semibold transition-colors text-center ${
-                  prece.available 
-                    ? 'bg-primary-600 text-white hover:bg-primary-600' 
+                  prece.available
+                    ? 'bg-primary-600 text-white hover:bg-primary-600'
                     : 'bg-gray-400 text-gray-700 cursor-not-allowed'
                 }`}
-                {...(!prece.available && { 
+                {...(!prece.available && {
                   onClick: (e) => e.preventDefault(),
-                  'aria-disabled': true 
+                  'aria-disabled': true,
                 })}
               >
                 {prece.available ? 'Pieprasīt piedāvājumu' : 'Nav pieejams'}

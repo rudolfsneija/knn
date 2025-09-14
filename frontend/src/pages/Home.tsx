@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
-import { FileText, GraduationCap, Wifi, Cctv } from "lucide-react";
-import { Link } from "react-router-dom";
-import axios from "axios";
-import { HeroSlideshow } from "../components/HeroSlideshow";
-import { heroSlides } from "../data/heroSlides";
+import { useState, useEffect } from 'react';
+import { FileText, GraduationCap, Wifi, Cctv } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { HeroSlideshow } from '../components/HeroSlideshow';
+import { heroSlides } from '../data/heroSlides';
 
 interface Aktualitate {
   id: number;
@@ -45,7 +45,7 @@ export function Home() {
 
   const fetchRecentAktualitates = async () => {
     try {
-      const response = await axios.get("/api/aktualitates");
+      const response = await axios.get('/api/aktualitates');
       if (response.data.success) {
         // Filter to only show published articles and take the 3 most recent
         const publishedAktualitates = response.data.data
@@ -53,10 +53,10 @@ export function Home() {
           .slice(0, 3);
         setAktualitates(publishedAktualitates);
       } else {
-        console.error("API Error:", response.data.error);
+        console.error('API Error:', response.data.error);
       }
     } catch (error) {
-      console.error("Error fetching aktualitātes:", error);
+      console.error('Error fetching aktualitātes:', error);
     } finally {
       setLoading(false);
     }
@@ -77,9 +77,7 @@ export function Home() {
       <div className="py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Mūsu pakalpojumi
-            </h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Mūsu pakalpojumi</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -90,12 +88,10 @@ export function Home() {
               <div className="w-16 h-16 bg-primary-600 rounded-full mx-auto mb-4 flex items-center justify-center">
                 <FileText className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">
-                NKDL prasību realizēšana
-              </h3>
+              <h3 className="text-xl font-semibold mb-2">NKDL prasību realizēšana</h3>
               <p className="text-gray-600 mb-4">
-                Nodrošinām obligāto minimālo kiberdrošības prasību ieviešanu un
-                dokumentu kārtošanu visu veidu uzņēmumos.
+                Nodrošinām obligāto minimālo kiberdrošības prasību ieviešanu un dokumentu kārtošanu
+                visu veidu uzņēmumos.
               </p>
               <div className="text-right">
                 <span className="text-primary-400 hover:text-primary-500 font-medium">
@@ -111,12 +107,10 @@ export function Home() {
               <div className="w-16 h-16 bg-primary-600 rounded-full mx-auto mb-4 flex items-center justify-center">
                 <GraduationCap className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">
-                IT drošības apmācības
-              </h3>
+              <h3 className="text-xl font-semibold mb-2">IT drošības apmācības</h3>
               <p className="text-gray-600 mb-4">
-                Nodrošinām IT drošības apmācības darbiniekiem un IT personālam, koncentrējoties
-                uz svarīgākajiem mūsdienu kiberdrošības aspektiem.
+                Nodrošinām IT drošības apmācības darbiniekiem un IT personālam, koncentrējoties uz
+                svarīgākajiem mūsdienu kiberdrošības aspektiem.
               </p>
               <div className="text-right">
                 <span className="text-primary-400 hover:text-primary-500 font-medium">
@@ -132,12 +126,10 @@ export function Home() {
               <div className="w-16 h-16 bg-primary-600 rounded-full mx-auto mb-4 flex items-center justify-center">
                 <Wifi className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">
-                Wi-Fi risinājumi
-              </h3>
+              <h3 className="text-xl font-semibold mb-2">Wi-Fi risinājumi</h3>
               <p className="text-gray-600 mb-4">
-                Piedāvājam modernu industrijas bezvada tīkla risinājumu, kurš
-                aptver dažādas funkcijas plašam klientu lokam.
+                Piedāvājam modernu industrijas bezvada tīkla risinājumu, kurš aptver dažādas
+                funkcijas plašam klientu lokam.
               </p>
               <div className="text-right">
                 <span className="text-primary-400 hover:text-primary-500 font-medium">
@@ -153,12 +145,9 @@ export function Home() {
               <div className="w-16 h-16 bg-primary-600 rounded-full mx-auto mb-4 flex items-center justify-center">
                 <Cctv className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">
-                Videonovērošanas sistēmas
-              </h3>
+              <h3 className="text-xl font-semibold mb-2">Videonovērošanas sistēmas</h3>
               <p className="text-gray-600 mb-4">
-                Videonovērošanas sistēmu izplatīšana, uzstādīšana un noma dažāda
-                veida objektiem. 
+                Videonovērošanas sistēmu izplatīšana, uzstādīšana un noma dažāda veida objektiem.
               </p>
 
               <div className="text-right">
@@ -175,9 +164,7 @@ export function Home() {
       <div className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Jaunākās aktualitātes
-            </h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Jaunākās aktualitātes</h2>
           </div>
 
           {loading ? (
@@ -187,9 +174,7 @@ export function Home() {
             </div>
           ) : aktualitates.length === 0 ? (
             <div className="text-center py-12">
-              <p className="text-gray-600 text-lg">
-                Pašlaik nav pieejamas aktualitātes.
-              </p>
+              <p className="text-gray-600 text-lg">Pašlaik nav pieejamas aktualitātes.</p>
             </div>
           ) : (
             <>
@@ -202,9 +187,7 @@ export function Home() {
                   >
                     {(aktualitate.main_image?.url || aktualitate.image_url) && (
                       <img
-                        src={
-                          aktualitate.main_image?.url || aktualitate.image_url
-                        }
+                        src={aktualitate.main_image?.url || aktualitate.image_url}
                         alt={aktualitate.title}
                         className="w-full h-48 object-cover"
                       />
@@ -221,9 +204,7 @@ export function Home() {
                       </p>
                       <div className="flex justify-between items-center">
                         <span className="text-sm text-gray-500">
-                          {new Date(aktualitate.created_at).toLocaleDateString(
-                            "lv-LV"
-                          )}
+                          {new Date(aktualitate.created_at).toLocaleDateString('lv-LV')}
                         </span>
                         <span className="text-primary-400 hover:text-primary-500 font-medium">
                           Lasīt vairāk →
@@ -251,12 +232,9 @@ export function Home() {
       {/* CTA Section */}
       <div className="bg-secondary-50 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
-            Gatavi uzsākt sadarbību?
-          </h2>
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">Gatavi uzsākt sadarbību?</h2>
           <p className="text-lg text-gray-600 mb-8">
-            Sazinieties ar mums jau šodien un uzziniet vairāk par mūsu
-            pakalpojumiem
+            Sazinieties ar mums jau šodien un uzziniet vairāk par mūsu pakalpojumiem
           </p>
           <a
             href="/sazinai"

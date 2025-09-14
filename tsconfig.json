@@ -37,15 +37,8 @@
     "isolatedModules": true,
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",
-    "skipLibCheck": true,
+    "skipLibCheck": true
   },
-  "include": [
-    "api/**/*"
-  ],
-  "exclude": [
-    "frontend/**/*",
-    "frontend_dist/**/*",
-    "node_modules",
-    "dist"
-  ]
+  "include": ["api/**/*"],
+  "exclude": ["frontend/**/*", "frontend_dist/**/*", "node_modules", "dist"]
 }

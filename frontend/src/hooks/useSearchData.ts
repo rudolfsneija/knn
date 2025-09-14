@@ -29,11 +29,11 @@ export function useSearchData() {
   const fetchSearchData = useCallback(async () => {
     try {
       setLoading(true);
-      
+
       // Fetch dynamic data from your APIs
       const [aktualitatesResponse, precesResponse] = await Promise.all([
         axios.get('/api/aktualitates').catch(() => ({ data: { success: false, data: [] } })),
-        axios.get('/api/produkti').catch(() => ({ data: { success: false, data: [] } }))
+        axios.get('/api/produkti').catch(() => ({ data: { success: false, data: [] } })),
       ]);
 
       const searchItems: SearchItem[] = [
@@ -41,37 +41,41 @@ export function useSearchData() {
         ...staticServicesData,
 
         // Dynamic aktualitātes
-        ...(aktualitatesResponse.data.success && aktualitatesResponse.data.data ? 
-          aktualitatesResponse.data.data.map((item: AktualitateItem) => ({
-            id: `akt-${item.id}`,
-            title: item.title || 'Bez nosaukuma',
-            description: item.short_description || item.content || 'Nav apraksta',
-            category: 'aktualitates' as const,
-            url: `/aktualitates/${item.id}`,
-            keywords: [
-              ...(item.tags ? item.tags.split(',').map((tag: string) => tag.trim()) : []),
-              'aktualitātes', 'jaunumi', 'ziņas'
-            ].filter(Boolean)
-          })) : []
-        ),
+        ...(aktualitatesResponse.data.success && aktualitatesResponse.data.data
+          ? aktualitatesResponse.data.data.map((item: AktualitateItem) => ({
+              id: `akt-${item.id}`,
+              title: item.title || 'Bez nosaukuma',
+              description: item.short_description || item.content || 'Nav apraksta',
+              category: 'aktualitates' as const,
+              url: `/aktualitates/${item.id}`,
+              keywords: [
+                ...(item.tags ? item.tags.split(',').map((tag: string) => tag.trim()) : []),
+                'aktualitātes',
+                'jaunumi',
+                'ziņas',
+              ].filter(Boolean),
+            }))
+          : []),
 
         // Dynamic preces from database
-        ...(precesResponse.data.success && precesResponse.data.data ? 
-          precesResponse.data.data.map((item: PreceItem) => ({
-            id: `prece-${item.id}`,
-            title: item.name || 'Bez nosaukuma',
-            description: item.description || 'Nav apraksta',
-            category: 'preces' as const,
-            url: `/preces/${item.id}`,
-            keywords: [
-              item.category || '',
-              ...(item.tags ? item.tags.split(',').map((tag: string) => tag.trim()) : []),
-              item.available ? 'pieejams' : 'nav pieejams',
-              item.price ? 'ar cenu' : 'bez cenas',
-              'prece', 'produkts', 'preces'
-            ].filter(Boolean)
-          })) : []
-        )
+        ...(precesResponse.data.success && precesResponse.data.data
+          ? precesResponse.data.data.map((item: PreceItem) => ({
+              id: `prece-${item.id}`,
+              title: item.name || 'Bez nosaukuma',
+              description: item.description || 'Nav apraksta',
+              category: 'preces' as const,
+              url: `/preces/${item.id}`,
+              keywords: [
+                item.category || '',
+                ...(item.tags ? item.tags.split(',').map((tag: string) => tag.trim()) : []),
+                item.available ? 'pieejams' : 'nav pieejams',
+                item.price ? 'ar cenu' : 'bez cenas',
+                'prece',
+                'produkts',
+                'preces',
+              ].filter(Boolean),
+            }))
+          : []),
       ];
 
       setSearchData(searchItems);

@@ -26,7 +26,7 @@ export function ProductListItem({ product, onEdit, onDelete }: ProductListItemPr
             />
           </div>
         )}
-        
+
         {/* Product Details */}
         <div className="flex-1 min-w-0">
           <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-4">
@@ -41,7 +41,7 @@ export function ProductListItem({ product, onEdit, onDelete }: ProductListItemPr
                   </span>
                 )}
               </div>
-              
+
               <div className="flex flex-wrap gap-2 mb-3">
                 {product.available ? (
                   <span className="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full font-medium">
@@ -69,7 +69,7 @@ export function ProductListItem({ product, onEdit, onDelete }: ProductListItemPr
                 )}
               </div>
             </div>
-            
+
             {/* Action Buttons */}
             <div className="flex space-x-3 flex-shrink-0">
               <button
@@ -86,14 +86,14 @@ export function ProductListItem({ product, onEdit, onDelete }: ProductListItemPr
               </button>
             </div>
           </div>
-          
+
           <div className="space-y-3">
             <p className="text-admin-text-secondary leading-relaxed">
               {product.description.length > 300
                 ? `${product.description.substring(0, 200)}...`
                 : product.description}
             </p>
-            
+
             {/* Specifications */}
             {product.specifications && Object.keys(product.specifications).length > 0 && (
               <div className="bg-admin-bg-secondary p-4 rounded-lg border border-admin-border">
@@ -101,18 +101,18 @@ export function ProductListItem({ product, onEdit, onDelete }: ProductListItemPr
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
                   {Object.entries(product.specifications).map(([key, value]) => (
                     <div key={key} className="flex items-start gap-2">
-                      <span className="text-admin-text-secondary font-medium min-w-0 shrink-0">{key}:</span>
+                      <span className="text-admin-text-secondary font-medium min-w-0 shrink-0">
+                        {key}:
+                      </span>
                       <span className="text-admin-text-primary min-w-0 break-words">{value}</span>
                     </div>
                   ))}
                 </div>
               </div>
             )}
-            
+
             <div className="flex flex-wrap items-center gap-4 text-sm text-admin-text-secondary">
-              <span>
-                {new Date(product.created_at).toLocaleDateString('lv-LV')}
-              </span>
+              <span>{new Date(product.created_at).toLocaleDateString('lv-LV')}</span>
               {product.images && product.images.length > 0 && (
                 <span>
                   {product.images.length} attēl{product.images.length === 1 ? 's' : 'i'}
@@ -120,7 +120,8 @@ export function ProductListItem({ product, onEdit, onDelete }: ProductListItemPr
               )}
               {product.specifications && Object.keys(product.specifications).length > 0 && (
                 <span>
-                  {Object.keys(product.specifications).length} specifikācij{Object.keys(product.specifications).length === 1 ? 'a' : 'as'}
+                  {Object.keys(product.specifications).length} specifikācij
+                  {Object.keys(product.specifications).length === 1 ? 'a' : 'as'}
                 </span>
               )}
             </div>

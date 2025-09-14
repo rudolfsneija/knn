@@ -16,19 +16,19 @@ router.get('/categories', async (req, res) => {
         AND category != ''
       ORDER BY category ASC
     `);
-    
-    const categoryList = categories.map(row => row.category);
-    
+
+    const categoryList = categories.map((row) => row.category);
+
     res.json({
       success: true,
       count: categoryList.length,
-      data: categoryList
+      data: categoryList,
     });
   } catch (error) {
     console.error('Error fetching categories:', error);
     res.status(500).json({
       success: false,
-      error: 'Failed to fetch categories'
+      error: 'Failed to fetch categories',
     });
   }
 });
@@ -43,15 +43,15 @@ router.get('/specification-keys', requireAuth, async (req, res) => {
         AND specifications != ''
         AND specifications != '{}'
     `);
-    
+
     const allKeys = new Set<string>();
-    
+
     // Extract all specification keys from all products
-    products.forEach(product => {
+    products.forEach((product) => {
       try {
         const specs = JSON.parse(product.specifications);
         if (specs && typeof specs === 'object') {
-          Object.keys(specs).forEach(key => {
+          Object.keys(specs).forEach((key) => {
             if (key && key.trim() !== '') {
               allKeys.add(key.trim());
             }
@@ -61,19 +61,19 @@ router.get('/specification-keys', requireAuth, async (req, res) => {
         console.warn('Failed to parse specifications for product:', error);
       }
     });
-    
+
     const keysList = Array.from(allKeys).sort();
-    
+
     res.json({
       success: true,
       count: keysList.length,
-      data: keysList
+      data: keysList,
     });
   } catch (error) {
     console.error('Error fetching specification keys:', error);
     res.status(500).json({
       success: false,
-      error: 'Failed to fetch specification keys'
+      error: 'Failed to fetch specification keys',
     });
   }
 });
@@ -82,7 +82,7 @@ router.get('/specification-keys', requireAuth, async (req, res) => {
 router.get('/', async (req, res) => {
   try {
     const { available, featured, category } = req.query;
-    
+
     let sql = `
       SELECT p.*, u.username as admin_username 
       FROM produkti p 
@@ -116,42 +116,44 @@ router.get('/', async (req, res) => {
     sql += ' ORDER BY p.featured DESC, p.created_at DESC';
 
     const produkti = await queryAll(sql, params);
-    
-    // Parse JSON fields and add images
-    const parsedProdukti = await Promise.all(produkti.map(async product => {
-      const images = await getEntityImages('produkti', product.id);
-      const formattedImages = images.map(img => ({
-        id: img.id,
-        uuid: img.uuid,
-        url: getImageUrl(img.file_path),
-        original_name: img.original_name,
-        file_size: img.file_size,
-        width: img.width,
-        height: img.height,
-        is_main: Boolean(img.is_main),
-      }));
 
-      return {
-        ...product,
-        available: Boolean(product.available),
-        featured: Boolean(product.featured),
-        gallery_urls: product.gallery_urls ? JSON.parse(product.gallery_urls) : [],
-        specifications: product.specifications ? JSON.parse(product.specifications) : {},
-        images: formattedImages,
-        main_image: formattedImages.find(img => img.is_main) || formattedImages[0] || null,
-      };
-    }));
-    
+    // Parse JSON fields and add images
+    const parsedProdukti = await Promise.all(
+      produkti.map(async (product) => {
+        const images = await getEntityImages('produkti', product.id);
+        const formattedImages = images.map((img) => ({
+          id: img.id,
+          uuid: img.uuid,
+          url: getImageUrl(img.file_path),
+          original_name: img.original_name,
+          file_size: img.file_size,
+          width: img.width,
+          height: img.height,
+          is_main: Boolean(img.is_main),
+        }));
+
+        return {
+          ...product,
+          available: Boolean(product.available),
+          featured: Boolean(product.featured),
+          gallery_urls: product.gallery_urls ? JSON.parse(product.gallery_urls) : [],
+          specifications: product.specifications ? JSON.parse(product.specifications) : {},
+          images: formattedImages,
+          main_image: formattedImages.find((img) => img.is_main) || formattedImages[0] || null,
+        };
+      })
+    );
+
     res.json({
       success: true,
       count: parsedProdukti.length,
-      data: parsedProdukti
+      data: parsedProdukti,
     });
   } catch (error) {
     console.error('Error fetching produkti:', error);
     res.status(500).json({
       success: false,
-      error: 'Failed to fetch produkti'
+      error: 'Failed to fetch produkti',
     });
   }
 });
@@ -160,23 +162,26 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const product = await query(`
+    const product = await query(
+      `
       SELECT p.*, u.username as admin_username 
       FROM produkti p 
       LEFT JOIN users u ON p.admin_id = u.id 
       WHERE p.id = ?
-    `, [id]);
-    
+    `,
+      [id]
+    );
+
     if (!product) {
       return res.status(404).json({
         success: false,
-        error: 'Product not found'
+        error: 'Product not found',
       });
     }
 
     // Get images for this product
     const images = await getEntityImages('produkti', product.id);
-    const formattedImages = images.map(img => ({
+    const formattedImages = images.map((img) => ({
       id: img.id,
       uuid: img.uuid,
       url: getImageUrl(img.file_path),
@@ -193,18 +198,18 @@ router.get('/:id', async (req, res) => {
       gallery_urls: product.gallery_urls ? JSON.parse(product.gallery_urls) : [],
       specifications: product.specifications ? JSON.parse(product.specifications) : {},
       images: formattedImages,
-      main_image: formattedImages.find(img => img.is_main) || formattedImages[0] || null,
+      main_image: formattedImages.find((img) => img.is_main) || formattedImages[0] || null,
     };
 
     res.json({
       success: true,
-      data: parsedProduct
+      data: parsedProduct,
     });
   } catch (error) {
     console.error('Error fetching product:', error);
     res.status(500).json({
       success: false,
-      error: 'Failed to fetch product'
+      error: 'Failed to fetch product',
     });
   }
 });
@@ -213,60 +218,73 @@ router.get('/:id', async (req, res) => {
 router.post('/', requireAuth, async (req, res) => {
   try {
     const admin = (req as any).user;
-    const { 
-      name, description, price, category, image_url, 
-      gallery_urls, specifications, available, featured 
+    const {
+      name,
+      description,
+      price,
+      category,
+      image_url,
+      gallery_urls,
+      specifications,
+      available,
+      featured,
     }: CreateProduktsRequest = req.body;
 
     if (!name) {
       return res.status(400).json({
         success: false,
-        error: 'Product name is required'
+        error: 'Product name is required',
       });
     }
 
-    const result = await run(`
+    const result = await run(
+      `
       INSERT INTO produkti (
         name, description, price, category, image_url, 
         gallery_urls, specifications, available, featured, admin_id
       ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    `, [
-      name, 
-      description || null, 
-      price || null, 
-      category || null, 
-      image_url || null,
-      gallery_urls ? JSON.stringify(gallery_urls) : null,
-      specifications ? JSON.stringify(specifications) : null,
-      available !== undefined ? (available ? 1 : 0) : 1,
-      featured !== undefined ? (featured ? 1 : 0) : 0,
-      admin.userId
-    ]);
+    `,
+      [
+        name,
+        description || null,
+        price || null,
+        category || null,
+        image_url || null,
+        gallery_urls ? JSON.stringify(gallery_urls) : null,
+        specifications ? JSON.stringify(specifications) : null,
+        available !== undefined ? (available ? 1 : 0) : 1,
+        featured !== undefined ? (featured ? 1 : 0) : 0,
+        admin.userId,
+      ]
+    );
 
-    const newProduct = await query(`
+    const newProduct = await query(
+      `
       SELECT p.*, u.username as admin_username 
       FROM produkti p 
       LEFT JOIN users u ON p.admin_id = u.id 
       WHERE p.id = ?
-    `, [result.lastID]);
+    `,
+      [result.lastID]
+    );
 
     // Parse JSON fields for response
     const parsedProduct = {
       ...newProduct,
       gallery_urls: newProduct.gallery_urls ? JSON.parse(newProduct.gallery_urls) : [],
-      specifications: newProduct.specifications ? JSON.parse(newProduct.specifications) : {}
+      specifications: newProduct.specifications ? JSON.parse(newProduct.specifications) : {},
     };
 
     res.status(201).json({
       success: true,
       message: 'Product created successfully',
-      data: parsedProduct
+      data: parsedProduct,
     });
   } catch (error) {
     console.error('Error creating product:', error);
     res.status(500).json({
       success: false,
-      error: 'Failed to create product'
+      error: 'Failed to create product',
     });
   }
 });
@@ -276,32 +294,38 @@ router.put('/:id', requireAuth, async (req, res) => {
   try {
     const admin = (req as any).user;
     const { id } = req.params;
-    const { 
-      name, description, price, category, sub_category, image_url, 
-      gallery_urls, specifications, available, featured 
+    const {
+      name,
+      description,
+      price,
+      category,
+      sub_category,
+      image_url,
+      gallery_urls,
+      specifications,
+      available,
+      featured,
     }: UpdateProduktsRequest = req.body;
 
     // Check if product exists and belongs to admin
-    const existingProduct = await query(
-      'SELECT admin_id FROM produkti WHERE id = ?', 
-      [id]
-    );
-    
+    const existingProduct = await query('SELECT admin_id FROM produkti WHERE id = ?', [id]);
+
     if (!existingProduct) {
       return res.status(404).json({
         success: false,
-        error: 'Product not found'
+        error: 'Product not found',
       });
     }
 
     if (existingProduct.admin_id !== admin.userId) {
       return res.status(403).json({
         success: false,
-        error: 'Access denied: You can only edit your own products'
+        error: 'Access denied: You can only edit your own products',
       });
     }
 
-    await run(`
+    await run(
+      `
       UPDATE produkti 
       SET name = COALESCE(?, name),
           description = COALESCE(?, description),
@@ -315,41 +339,49 @@ router.put('/:id', requireAuth, async (req, res) => {
           featured = COALESCE(?, featured),
           updated_at = CURRENT_TIMESTAMP
       WHERE id = ?
-    `, [
-      name, 
-      description, 
-      price !== undefined ? price : null,
-      category,
-      sub_category, 
-      image_url,
-      gallery_urls ? JSON.stringify(gallery_urls) : null,
-      specifications ? JSON.stringify(specifications) : null,
-      available !== undefined ? (available ? 1 : 0) : null,
-      featured !== undefined ? (featured ? 1 : 0) : null,
-      id
-    ]);    const updatedProduct = await query(`
+    `,
+      [
+        name,
+        description,
+        price !== undefined ? price : null,
+        category,
+        sub_category,
+        image_url,
+        gallery_urls ? JSON.stringify(gallery_urls) : null,
+        specifications ? JSON.stringify(specifications) : null,
+        available !== undefined ? (available ? 1 : 0) : null,
+        featured !== undefined ? (featured ? 1 : 0) : null,
+        id,
+      ]
+    );
+    const updatedProduct = await query(
+      `
       SELECT p.*, u.username as admin_username 
       FROM produkti p 
       LEFT JOIN users u ON p.admin_id = u.id 
       WHERE p.id = ?
-    `, [id]);
+    `,
+      [id]
+    );
 
     // Parse JSON fields for response
     const parsedProduct = {
       ...updatedProduct,
       gallery_urls: updatedProduct.gallery_urls ? JSON.parse(updatedProduct.gallery_urls) : [],
-      specifications: updatedProduct.specifications ? JSON.parse(updatedProduct.specifications) : {}
+      specifications: updatedProduct.specifications
+        ? JSON.parse(updatedProduct.specifications)
+        : {},
     };
 
     res.json({
       success: true,
-      data: parsedProduct
+      data: parsedProduct,
     });
   } catch (error) {
     console.error('Error updating product:', error);
     res.status(500).json({
       success: false,
-      error: 'Failed to update product'
+      error: 'Failed to update product',
     });
   }
 });
@@ -361,22 +393,19 @@ router.delete('/:id', requireAuth, async (req, res) => {
     const { id } = req.params;
 
     // Check if product exists and belongs to admin
-    const existingProduct = await query(
-      'SELECT admin_id FROM produkti WHERE id = ?', 
-      [id]
-    );
-    
+    const existingProduct = await query('SELECT admin_id FROM produkti WHERE id = ?', [id]);
+
     if (!existingProduct) {
       return res.status(404).json({
         success: false,
-        error: 'Product not found'
+        error: 'Product not found',
       });
     }
 
     if (existingProduct.admin_id !== admin.userId) {
       return res.status(403).json({
         success: false,
-        error: 'Access denied: You can only delete your own products'
+        error: 'Access denied: You can only delete your own products',
       });
     }
 
@@ -384,13 +413,13 @@ router.delete('/:id', requireAuth, async (req, res) => {
 
     res.json({
       success: true,
-      message: 'Product deleted successfully'
+      message: 'Product deleted successfully',
     });
   } catch (error) {
     console.error('Error deleting product:', error);
     res.status(500).json({
       success: false,
-      error: 'Failed to delete product'
+      error: 'Failed to delete product',
     });
   }
 });

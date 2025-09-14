@@ -2,51 +2,55 @@ import { Wifi, Check, Headset, Wrench, RadioReceiver, BookOpen } from 'lucide-re
 
 export function BezvaduWifiRisinajumi() {
   const features = [
-    "Visaptverošas konsultācijas un Wi-Fi risinājumu plānošana", 
-    "Ruckus aprīkojuma pārdošana un piegāde", 
-    "Profesionāla montāža un optimāla uzstādīšana", 
-    "Detalizēta apmācība par iekārtu izmantošanu un uzturēšanu"
+    'Visaptverošas konsultācijas un Wi-Fi risinājumu plānošana',
+    'Ruckus aprīkojuma pārdošana un piegāde',
+    'Profesionāla montāža un optimāla uzstādīšana',
+    'Detalizēta apmācība par iekārtu izmantošanu un uzturēšanu',
   ];
 
   const solutions = [
     {
       icon: Headset,
-      title: "Konsultācijas un plānošana",
-      description: "Konsultanti un inženieri palīdz klientam izstrādāt piemērotu Wi-Fi risinājumu atbilstoši viņu vajadzībām un videi"
+      title: 'Konsultācijas un plānošana',
+      description:
+        'Konsultanti un inženieri palīdz klientam izstrādāt piemērotu Wi-Fi risinājumu atbilstoši viņu vajadzībām un videi',
     },
     {
       icon: RadioReceiver,
-      title: "Pārdošana un iekārtu piegāde",
-      description: "Ruckus aprīkojuma pārdošana, nodrošinot visus nepieciešamos maršrutētājus, piekļuves punktus un citus komponentus"
+      title: 'Pārdošana un iekārtu piegāde',
+      description:
+        'Ruckus aprīkojuma pārdošana, nodrošinot visus nepieciešamos maršrutētājus, piekļuves punktus un citus komponentus',
     },
     {
       icon: Wrench,
-      title: "Montāža un uzstādīšana",
-      description: "Profesionāla montāža un uzstādīšana, lai nodrošinātu optimālu efektivitāti un segumu klienta telpās vai teritorijā"
+      title: 'Montāža un uzstādīšana',
+      description:
+        'Profesionāla montāža un uzstādīšana, lai nodrošinātu optimālu efektivitāti un segumu klienta telpās vai teritorijā',
     },
     {
       icon: BookOpen,
-      title: "Apmācība un atbalsts",
-      description: "Apmācība par Ruckus iekārtu konfigurēšanu, uzturēšanu un problēmu novēršanu, kā arī nepārtraukts tehniskais atbalsts"
-    }
+      title: 'Apmācība un atbalsts',
+      description:
+        'Apmācība par Ruckus iekārtu konfigurēšanu, uzturēšanu un problēmu novēršanu, kā arī nepārtraukts tehniskais atbalsts',
+    },
   ];
 
   const technologies = [
-    "Ruckus Access Points un maršrutētāji",
-    "Augstas kvalitātes Wi-Fi risinājumi", 
-    "Stabils savienojums un liela jauda",
-    "Uzņēmuma līmeņa drošība",
-    "Profesionāla montāža un uzstādīšana",
-    "Iekārtu īres pakalpojumi"
+    'Ruckus Access Points un maršrutētāji',
+    'Augstas kvalitātes Wi-Fi risinājumi',
+    'Stabils savienojums un liela jauda',
+    'Uzņēmuma līmeņa drošība',
+    'Profesionāla montāža un uzstādīšana',
+    'Iekārtu īres pakalpojumi',
   ];
 
   const benefits = [
-    "Augstas kvalitātes un uzticami bezvadu interneta savienojumi",
-    "Stabils savienojums ar lielu jaudu un drošību",
-    "Piemēroti dažādām nozarēm un dzīves situācijām",
-    "Iekārtu īres iespējas kā alternatīva iegādei",
-    "Tehniskā un uzņēmējdarbības ekspertīze",
-    "Visaptverošs un efektīvs risinājums klientiem"
+    'Augstas kvalitātes un uzticami bezvadu interneta savienojumi',
+    'Stabils savienojums ar lielu jaudu un drošību',
+    'Piemēroti dažādām nozarēm un dzīves situācijām',
+    'Iekārtu īres iespējas kā alternatīva iegādei',
+    'Tehniskā un uzņēmējdarbības ekspertīze',
+    'Visaptverošs un efektīvs risinājums klientiem',
   ];
 
   return (
@@ -59,13 +63,17 @@ export function BezvaduWifiRisinajumi() {
           </div>
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Wi-Fi risinājumi</h1>
           <p className="text-xl text-gray-600 max-w-4xl mx-auto">
-            Bezvadu tīkla nodrošināšana ar Ruckus tehnoloģiju ir lieliska iespēja uzlabot klientu vai uzņēmuma bezvadu interneta pieredzi. Ruckus ir pazīstams ar savām augstas kvalitātes Wi-Fi risinājumiem, kas nodrošina stabilu savienojumu, lielu jaudu un drošību.
+            Bezvadu tīkla nodrošināšana ar Ruckus tehnoloģiju ir lieliska iespēja uzlabot klientu
+            vai uzņēmuma bezvadu interneta pieredzi. Ruckus ir pazīstams ar savām augstas kvalitātes
+            Wi-Fi risinājumiem, kas nodrošina stabilu savienojumu, lielu jaudu un drošību.
           </p>
         </div>
 
         {/* Ruckus video */}
         <div className="mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Ruckus stāsts Dziesmu un Deju svētkos</h2>
+          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+            Ruckus stāsts Dziesmu un Deju svētkos
+          </h2>
           <div className="mx-auto">
             <div className="relative w-full h-0 pb-[52.75%] rounded-lg overflow-hidden shadow-lg">
               <iframe
@@ -83,7 +91,6 @@ export function BezvaduWifiRisinajumi() {
         {/* Ruckus Wi-Fi risinājumi */}
         <div className="mb-16 bg-secondary-50 rounded-lg p-8">
           <div className="text-center mb-8">
-
             <h2 className="text-3xl font-bold text-gray-900">Ruckus Wi-Fi risinājumi</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -100,7 +107,9 @@ export function BezvaduWifiRisinajumi() {
 
         {/* Solutions */}
         <div className="mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Pakalpojuma galvenās darbības</h2>
+          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+            Pakalpojuma galvenās darbības
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {solutions.map((solution, index) => {
               const IconComponent = solution.icon;
@@ -123,7 +132,9 @@ export function BezvaduWifiRisinajumi() {
 
         {/* Features */}
         <div className="mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Ko iekļauj mūsu pakalpojums</h2>
+          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+            Ko iekļauj mūsu pakalpojums
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {features.map((feature, index) => (
               <div key={index} className="bg-secondary-50 p-4 rounded-lg shadow-sm">
@@ -138,18 +149,23 @@ export function BezvaduWifiRisinajumi() {
 
         {/* Iekārtu īres pakalpojums */}
         <div className="mb-16 bg-secondary-50 rounded-lg p-8">
-          <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">Iekārtu īres pakalpojums</h2>
+          <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">
+            Iekārtu īres pakalpojums
+          </h2>
           <div className="max-w-4xl mx-auto text-center">
             <p className="text-gray-600">
-              Piedāvājam iespēju klientiem izmantot augstas kvalitātes Ruckus aprīkojumu bez lieliem sākotnējiem ieguldījumiem, 
-              nodrošinot elastīgumu un rentablu risinājumu dažādām vajadzībām.
+              Piedāvājam iespēju klientiem izmantot augstas kvalitātes Ruckus aprīkojumu bez lieliem
+              sākotnējiem ieguldījumiem, nodrošinot elastīgumu un rentablu risinājumu dažādām
+              vajadzībām.
             </p>
           </div>
         </div>
 
         {/* Kāpēc izvēlēties mūsu risinājumus */}
         <div className="mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Kāpēc izvēlēties mūsu risinājumus</h2>
+          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+            Kāpēc izvēlēties mūsu risinājumus
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {benefits.map((benefit, index) => (
               <div key={index} className="bg-white border border-gray-200 p-4 rounded-lg shadow-sm">
@@ -164,8 +180,13 @@ export function BezvaduWifiRisinajumi() {
 
         {/* CTA */}
         <div className="bg-primary-600 rounded-lg p-8 text-center text-white">
-          <h2 className="text-2xl font-bold mb-4">Gatavi uzlabot savu Wi-Fi pieredzi ar Ruckus tehnoloģiju?</h2>
-          <p className="mb-6">Sazinieties ar mums bezmaksas konsultācijai par Ruckus risinājumiem un to, kā mēs varam nodrošināt augstas kvalitātes bezvadu interneta savienojumu jūsu vajadzībām</p>
+          <h2 className="text-2xl font-bold mb-4">
+            Gatavi uzlabot savu Wi-Fi pieredzi ar Ruckus tehnoloģiju?
+          </h2>
+          <p className="mb-6">
+            Sazinieties ar mums bezmaksas konsultācijai par Ruckus risinājumiem un to, kā mēs varam
+            nodrošināt augstas kvalitātes bezvadu interneta savienojumu jūsu vajadzībām
+          </p>
           <a
             href="/sazinai?topic=bezvadu-wifi-risinajumi"
             className="bg-white text-primary-400 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-block"

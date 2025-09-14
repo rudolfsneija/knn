@@ -18,11 +18,11 @@ export async function comparePassword(password: string, hash: string): Promise<b
 // Generate JWT token
 export function generateToken(userId: number, username: string): string {
   return jwt.sign(
-    { 
-      userId, 
+    {
+      userId,
       username,
       iat: Math.floor(Date.now() / 1000),
-      exp: Math.floor(Date.now() / 1000) + (24 * 60 * 60) // 24 hours
+      exp: Math.floor(Date.now() / 1000) + 24 * 60 * 60, // 24 hours
     },
     JWT_SECRET
   );
@@ -45,7 +45,7 @@ export function authenticateToken(req: Request, res: Response, next: NextFunctio
   if (!token) {
     return res.status(401).json({
       success: false,
-      error: 'Access token required'
+      error: 'Access token required',
     });
   }
 
@@ -53,7 +53,7 @@ export function authenticateToken(req: Request, res: Response, next: NextFunctio
   if (!decoded) {
     return res.status(403).json({
       success: false,
-      error: 'Invalid or expired token'
+      error: 'Invalid or expired token',
     });
   }
 

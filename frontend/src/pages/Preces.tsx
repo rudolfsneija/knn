@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import axios from "axios";
-import { AlnetConfiguratorBanner } from "../components/AlnetConfiguratorBanner";
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { AlnetConfiguratorBanner } from '../components/AlnetConfiguratorBanner';
 
 interface Prece {
   id: number;
@@ -62,22 +62,24 @@ export function Preces() {
         const products = response.data.data;
         setAllPreces(products); // Store all products
         setPreces(products); // Display all products initially
-        
+
         // Extract unique subcategories from the products
-        const uniqueSubcategories = [...new Set(
-          products
-            .map((product: Prece) => product.sub_category)
-            .filter((subcat: string | undefined) => subcat && subcat.trim() !== '')
-        )].sort() as string[];
+        const uniqueSubcategories = [
+          ...new Set(
+            products
+              .map((product: Prece) => product.sub_category)
+              .filter((subcat: string | undefined) => subcat && subcat.trim() !== '')
+          ),
+        ].sort() as string[];
         setSubcategories(uniqueSubcategories);
       } else {
-        console.error("API Error:", response.data.error);
+        console.error('API Error:', response.data.error);
         setPreces([]);
         setAllPreces([]);
         setSubcategories([]);
       }
     } catch (error) {
-      console.error("Error fetching preces:", error);
+      console.error('Error fetching preces:', error);
       setPreces([]);
       setAllPreces([]);
       setSubcategories([]);
@@ -90,12 +92,12 @@ export function Preces() {
     try {
       setLoadingCategories(true);
       // Fetch categories from the dedicated endpoint
-      const response = await axios.get("/api/produkti/categories");
+      const response = await axios.get('/api/produkti/categories');
       if (response.data.success) {
         setCategories(response.data.data);
       }
     } catch (error) {
-      console.error("Error fetching categories:", error);
+      console.error('Error fetching categories:', error);
     } finally {
       setLoadingCategories(false);
     }
@@ -118,13 +120,13 @@ export function Preces() {
 
   const handleSubcategoryFilter = (subcategory: string | null) => {
     setSelectedSubcategory(subcategory);
-    
+
     if (subcategory === null) {
       // Show all products in the category
       setPreces(allPreces);
     } else {
       // Filter products by subcategory
-      const filteredProducts = allPreces.filter(product => product.sub_category === subcategory);
+      const filteredProducts = allPreces.filter((product) => product.sub_category === subcategory);
       setPreces(filteredProducts);
     }
   };
@@ -186,14 +188,14 @@ export function Preces() {
 
             {/* Alnet Configurator Banner - only for video surveillance categories */}
             {(() => {
-              console.log("Selected category:", selectedCategory);
-              return (selectedCategory?.toLowerCase().includes("video") || 
-                selectedCategory?.toLowerCase().includes("novero") ||
-                selectedCategory === "Videonoverosanas sistemas" ||
-                selectedCategory === "Videonovērošanas sistēmas");
-            })() && (
-              <AlnetConfiguratorBanner className="mb-8" />
-            )}
+              console.log('Selected category:', selectedCategory);
+              return (
+                selectedCategory?.toLowerCase().includes('video') ||
+                selectedCategory?.toLowerCase().includes('novero') ||
+                selectedCategory === 'Videonoverosanas sistemas' ||
+                selectedCategory === 'Videonovērošanas sistēmas'
+              );
+            })() && <AlnetConfiguratorBanner className="mb-8" />}
 
             {/* Loading state for products */}
             {loading && (
@@ -226,7 +228,9 @@ export function Preces() {
                         Viss <span className="text-gray-400">({allPreces.length})</span>
                       </button>
                       {subcategories.map((subcategory) => {
-                        const count = allPreces.filter(p => p.sub_category === subcategory).length;
+                        const count = allPreces.filter(
+                          (p) => p.sub_category === subcategory
+                        ).length;
                         return (
                           <button
                             key={subcategory}
@@ -251,10 +255,9 @@ export function Preces() {
                 {!loading && preces.length === 0 && (
                   <div className="text-center py-12">
                     <p className="text-gray-600 text-lg">
-                      {selectedSubcategory 
+                      {selectedSubcategory
                         ? `Nav pieejamas preces apakškategorijā "${selectedSubcategory}".`
-                        : `Nav pieejamas preces kategorijā "${selectedCategory}".`
-                      }
+                        : `Nav pieejamas preces kategorijā "${selectedCategory}".`}
                     </p>
                   </div>
                 )}
@@ -262,56 +265,55 @@ export function Preces() {
                 {!loading && preces.length > 0 && (
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     {preces.map((prece) => (
-                  <Link
-                    key={prece.id}
-                    to={`/preces/${prece.id}`}
-                    className={`bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow block flex flex-col h-full ${
-                      !prece.available ? "opacity-75" : ""
-                    }`}
-                  >
-                    {(prece.main_image?.url || prece.image_url) && (
-                      <div className="relative">
-                        <img
-                          src={prece.main_image?.url || prece.image_url}
-                          alt={prece.name}
-                          className="w-full object-contain"
-                        />
-                        {!prece.available && (
-                          <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-                            <span className="bg-red-600 text-white px-3 py-1 rounded-full text-sm font-medium">
-                              Nav pieejams
-                            </span>
+                      <Link
+                        key={prece.id}
+                        to={`/preces/${prece.id}`}
+                        className={`bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow block flex flex-col h-full ${
+                          !prece.available ? 'opacity-75' : ''
+                        }`}
+                      >
+                        {(prece.main_image?.url || prece.image_url) && (
+                          <div className="relative">
+                            <img
+                              src={prece.main_image?.url || prece.image_url}
+                              alt={prece.name}
+                              className="w-full object-contain"
+                            />
+                            {!prece.available && (
+                              <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                                <span className="bg-red-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                                  Nav pieejams
+                                </span>
+                              </div>
+                            )}
                           </div>
                         )}
-                      </div>
-                    )}
-                    <div className="p-6 flex flex-col h-full">
-                      <div className="flex items-start justify-between">
-                        <h2 className="text-xl font-semibold text-gray-900 flex-1 min-h-[3rem] leading-6 mb-2">
-                          {prece.name}
-                        </h2>
-                        {!prece.available &&
-                          !(prece.main_image?.url || prece.image_url) && (
-                            <span className="bg-red-100 text-red-800 text-xs px-2 py-1 rounded-full font-medium ml-2 flex-shrink-0">
-                              Nav pieejams
-                            </span>
-                          )}
-                      </div>
+                        <div className="p-6 flex flex-col h-full">
+                          <div className="flex items-start justify-between">
+                            <h2 className="text-xl font-semibold text-gray-900 flex-1 min-h-[3rem] leading-6 mb-2">
+                              {prece.name}
+                            </h2>
+                            {!prece.available && !(prece.main_image?.url || prece.image_url) && (
+                              <span className="bg-red-100 text-red-800 text-xs px-2 py-1 rounded-full font-medium ml-2 flex-shrink-0">
+                                Nav pieejams
+                              </span>
+                            )}
+                          </div>
 
-                      <div className="mt-auto">
-                        <div className="flex items-end justify-between">
-                          <span className="text-sm text-primary-400 hover:text-primary-500 font-medium">
-                            Skatīt →
-                          </span>
-                          {prece.price !== undefined && prece.price !== null && (
-                            <span className="text-2xl font-bold text-primary-400">
-                              €{prece.price.toFixed(2)}
-                            </span>
-                          )}
+                          <div className="mt-auto">
+                            <div className="flex items-end justify-between">
+                              <span className="text-sm text-primary-400 hover:text-primary-500 font-medium">
+                                Skatīt →
+                              </span>
+                              {prece.price !== undefined && prece.price !== null && (
+                                <span className="text-2xl font-bold text-primary-400">
+                                  €{prece.price.toFixed(2)}
+                                </span>
+                              )}
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    </div>
-                  </Link>
+                      </Link>
                     ))}
                   </div>
                 )}
@@ -323,9 +325,7 @@ export function Preces() {
         {/* Show message if no categories exist */}
         {!selectedCategory && categories.length === 0 && (
           <div className="text-center py-12">
-            <p className="text-gray-600 text-lg">
-              Pašlaik nav pieejamas produktu kategorijas.
-            </p>
+            <p className="text-gray-600 text-lg">Pašlaik nav pieejamas produktu kategorijas.</p>
           </div>
         )}
       </div>

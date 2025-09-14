@@ -101,9 +101,7 @@ export function HeroSlideshow({
             }`}
             style={{
               backgroundColor: slide.backgroundColor || 'transparent',
-              backgroundImage: slide.backgroundImage
-                ? `url(${slide.backgroundImage})`
-                : undefined,
+              backgroundImage: slide.backgroundImage ? `url(${slide.backgroundImage})` : undefined,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
             }}
@@ -123,7 +121,7 @@ export function HeroSlideshow({
                 >
                   {slide.title}
                 </h1>
-                
+
                 {slide.subtitle && (
                   <p
                     className="text-xl md:text-2xl lg:text-3xl mb-6"
@@ -184,7 +182,7 @@ export function HeroSlideshow({
           >
             <ChevronRight className="w-5 h-5" />
           </button>
-          
+
           {/* Desktop arrows - positioned at center */}
           <button
             onClick={prevSlide}

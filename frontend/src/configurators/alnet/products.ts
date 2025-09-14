@@ -12,7 +12,7 @@ export const ALNET_NETSTATION: LicenseProduct[] = [
     licenseType: 'base',
     channelsIncluded: 4,
     maxIOLines: 0,
-    requirements: ['basic_video_surveillance']
+    requirements: ['basic_video_surveillance'],
   },
   {
     id: 'ns4_channel_addon',
@@ -23,7 +23,7 @@ export const ALNET_NETSTATION: LicenseProduct[] = [
     category: 'license',
     licenseType: 'addon',
     channelsIncluded: 1,
-    requirements: ['additional_channels']
+    requirements: ['additional_channels'],
   },
   {
     id: 'cms_hub_256',
@@ -34,7 +34,7 @@ export const ALNET_NETSTATION: LicenseProduct[] = [
     category: 'license',
     licenseType: 'addon',
     channelsIncluded: 256,
-    requirements: ['cms_management']
+    requirements: ['cms_management'],
   },
   {
     id: 'net_pos',
@@ -44,7 +44,7 @@ export const ALNET_NETSTATION: LicenseProduct[] = [
     currency: 'EUR',
     category: 'license',
     licenseType: 'per_unit',
-    requirements: ['pos_system']
+    requirements: ['pos_system'],
   },
   {
     id: 'net_access',
@@ -54,8 +54,8 @@ export const ALNET_NETSTATION: LicenseProduct[] = [
     currency: 'EUR',
     category: 'license',
     licenseType: 'per_unit',
-    requirements: ['access_control']
-  }
+    requirements: ['access_control'],
+  },
 ];
 
 // NetStation Enterprise Licenses
@@ -70,7 +70,7 @@ export const ALNET_NETSTATION_ENTERPRISE: LicenseProduct[] = [
     licenseType: 'base',
     channelsIncluded: 4,
     maxIOLines: 128,
-    requirements: ['enterprise_integrations']
+    requirements: ['enterprise_integrations'],
   },
   {
     id: 'ns_enterprise_channel_addon',
@@ -81,7 +81,7 @@ export const ALNET_NETSTATION_ENTERPRISE: LicenseProduct[] = [
     category: 'license',
     licenseType: 'addon',
     channelsIncluded: 1,
-    requirements: ['additional_channels']
+    requirements: ['additional_channels'],
   },
   {
     id: 'ns_io_256',
@@ -92,7 +92,7 @@ export const ALNET_NETSTATION_ENTERPRISE: LicenseProduct[] = [
     category: 'license',
     licenseType: 'addon',
     maxIOLines: 256,
-    requirements: ['high_io_count']
+    requirements: ['high_io_count'],
   },
   {
     id: 'ns_io_128',
@@ -103,7 +103,7 @@ export const ALNET_NETSTATION_ENTERPRISE: LicenseProduct[] = [
     category: 'license',
     licenseType: 'addon',
     maxIOLines: 128,
-    requirements: ['additional_io']
+    requirements: ['additional_io'],
   },
   {
     id: 'cms_hub_512',
@@ -114,7 +114,7 @@ export const ALNET_NETSTATION_ENTERPRISE: LicenseProduct[] = [
     category: 'license',
     licenseType: 'addon',
     channelsIncluded: 512,
-    requirements: ['large_camera_count']
+    requirements: ['large_camera_count'],
   },
   {
     id: 'cms_hub_1024',
@@ -125,7 +125,7 @@ export const ALNET_NETSTATION_ENTERPRISE: LicenseProduct[] = [
     category: 'license',
     licenseType: 'addon',
     channelsIncluded: 1024,
-    requirements: ['very_large_camera_count']
+    requirements: ['very_large_camera_count'],
   },
   {
     id: 'cms_hub_ul',
@@ -136,8 +136,8 @@ export const ALNET_NETSTATION_ENTERPRISE: LicenseProduct[] = [
     category: 'license',
     licenseType: 'addon',
     channelsIncluded: 999999,
-    requirements: ['unlimited_cameras']
-  }
+    requirements: ['unlimited_cameras'],
+  },
 ];
 
 // VCA Pro AI Server Options
@@ -151,7 +151,7 @@ export const ALNET_VCA_PRO: LicenseProduct[] = [
     category: 'license',
     licenseType: 'addon',
     channelsIncluded: 1,
-    requirements: ['video_analytics']
+    requirements: ['video_analytics'],
   },
   {
     id: 'vca_pro_2ch',
@@ -162,7 +162,7 @@ export const ALNET_VCA_PRO: LicenseProduct[] = [
     category: 'license',
     licenseType: 'addon',
     channelsIncluded: 2,
-    requirements: ['video_analytics']
+    requirements: ['video_analytics'],
   },
   {
     id: 'vca_pro_4ch',
@@ -173,7 +173,7 @@ export const ALNET_VCA_PRO: LicenseProduct[] = [
     category: 'license',
     licenseType: 'addon',
     channelsIncluded: 4,
-    requirements: ['video_analytics']
+    requirements: ['video_analytics'],
   },
   {
     id: 'vca_pro_8ch',
@@ -184,7 +184,7 @@ export const ALNET_VCA_PRO: LicenseProduct[] = [
     category: 'license',
     licenseType: 'addon',
     channelsIncluded: 8,
-    requirements: ['video_analytics']
+    requirements: ['video_analytics'],
   },
   {
     id: 'vca_pro_16ch',
@@ -195,8 +195,8 @@ export const ALNET_VCA_PRO: LicenseProduct[] = [
     category: 'license',
     licenseType: 'addon',
     channelsIncluded: 16,
-    requirements: ['video_analytics']
-  }
+    requirements: ['video_analytics'],
+  },
 ];
 
 // Camera Products
@@ -208,7 +208,7 @@ export const ALNET_CAMERAS: CameraProduct[] = [
     basePrice: 0,
     currency: 'EUR',
     category: 'camera',
-    cameraType: 'fixed_outdoor'
+    cameraType: 'fixed_outdoor',
   },
   {
     id: 'ptz_camera_100m',
@@ -218,7 +218,7 @@ export const ALNET_CAMERAS: CameraProduct[] = [
     currency: 'EUR',
     category: 'camera',
     cameraType: 'ptz_outdoor',
-    maxDistance: 100
+    maxDistance: 100,
   },
   {
     id: 'ptz_camera_180m',
@@ -228,7 +228,7 @@ export const ALNET_CAMERAS: CameraProduct[] = [
     currency: 'EUR',
     category: 'camera',
     cameraType: 'ptz_outdoor',
-    maxDistance: 180
+    maxDistance: 180,
   },
   {
     id: 'indoor_fixed_camera',
@@ -237,7 +237,7 @@ export const ALNET_CAMERAS: CameraProduct[] = [
     basePrice: 0,
     currency: 'EUR',
     category: 'camera',
-    cameraType: 'fixed_indoor'
+    cameraType: 'fixed_indoor',
   },
   {
     id: 'panorama_camera',
@@ -246,8 +246,8 @@ export const ALNET_CAMERAS: CameraProduct[] = [
     basePrice: 0,
     currency: 'EUR',
     category: 'camera',
-    cameraType: 'panorama'
-  }
+    cameraType: 'panorama',
+  },
 ];
 
 // Combined product catalog
@@ -255,14 +255,14 @@ export const ALNET_PRODUCTS = {
   netstation: ALNET_NETSTATION,
   enterprise: ALNET_NETSTATION_ENTERPRISE,
   vcaPro: ALNET_VCA_PRO,
-  cameras: ALNET_CAMERAS
+  cameras: ALNET_CAMERAS,
 };
 
 // All licenses combined
 export const ALL_ALNET_LICENSES = [
   ...ALNET_NETSTATION,
   ...ALNET_NETSTATION_ENTERPRISE,
-  ...ALNET_VCA_PRO
+  ...ALNET_VCA_PRO,
 ];
 
 // Helper functions
@@ -271,9 +271,9 @@ export const getProductById = (id: string): Product | undefined => {
     ...ALNET_NETSTATION,
     ...ALNET_NETSTATION_ENTERPRISE,
     ...ALNET_VCA_PRO,
-    ...ALNET_CAMERAS
+    ...ALNET_CAMERAS,
   ];
-  return allProducts.find(product => product.id === id);
+  return allProducts.find((product) => product.id === id);
 };
 
 export const getProductsByCategory = (category: Product['category']): Product[] => {
@@ -281,17 +281,17 @@ export const getProductsByCategory = (category: Product['category']): Product[] 
     ...ALNET_NETSTATION,
     ...ALNET_NETSTATION_ENTERPRISE,
     ...ALNET_VCA_PRO,
-    ...ALNET_CAMERAS
+    ...ALNET_CAMERAS,
   ];
-  return allProducts.filter(product => product.category === category);
+  return allProducts.filter((product) => product.category === category);
 };
 
 export const getLicensesByType = (licenseType: LicenseProduct['licenseType']): LicenseProduct[] => {
-  return ALL_ALNET_LICENSES.filter(license => license.licenseType === licenseType);
+  return ALL_ALNET_LICENSES.filter((license) => license.licenseType === licenseType);
 };
 
 export const getCamerasByType = (cameraType: CameraProduct['cameraType']): CameraProduct[] => {
-  return ALNET_CAMERAS.filter(camera => camera.cameraType === cameraType);
+  return ALNET_CAMERAS.filter((camera) => camera.cameraType === cameraType);
 };
 
 // Helper to get VCA Pro license based on channel count
@@ -301,7 +301,7 @@ export const getVcaProForChannels = (channels: number): LicenseProduct | undefin
   if (channels <= 4) return getProductById('vca_pro_4ch') as LicenseProduct;
   if (channels <= 8) return getProductById('vca_pro_8ch') as LicenseProduct;
   if (channels <= 16) return getProductById('vca_pro_16ch') as LicenseProduct;
-  
+
   // For more than 16 channels, calculate multiple licenses
   return getProductById('vca_pro_16ch') as LicenseProduct;
 };

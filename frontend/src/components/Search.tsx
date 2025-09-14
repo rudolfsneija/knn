@@ -77,7 +77,7 @@ export function Search({ isMobile = false, onNavigate }: SearchProps) {
   const categoryLabels = {
     aktualitates: 'Aktualitātes',
     services: 'Pakalpojumi',
-    preces: 'Preces'
+    preces: 'Preces',
   };
 
   return (
@@ -97,16 +97,18 @@ export function Search({ isMobile = false, onNavigate }: SearchProps) {
         )}
 
         {/* Search Input */}
-        <div className={`relative overflow-hidden transition-all duration-100 ease-in-out ${
-          isExpanded || isMobile 
-            ? 'w-full md:w-80 opacity-100' 
-            : 'w-0 opacity-0 pointer-events-none'
-        }`}>
+        <div
+          className={`relative overflow-hidden transition-all duration-100 ease-in-out ${
+            isExpanded || isMobile
+              ? 'w-full md:w-80 opacity-100'
+              : 'w-0 opacity-0 pointer-events-none'
+          }`}
+        >
           <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
           <input
             ref={inputRef}
             type="text"
-            placeholder={loading ? "Ielādē..." : "Meklēt..."}
+            placeholder={loading ? 'Ielādē...' : 'Meklēt...'}
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onFocus={handleInputFocus}
@@ -135,7 +137,7 @@ export function Search({ isMobile = false, onNavigate }: SearchProps) {
             <div className="p-2">
               {Object.entries(results.grouped).map(([category, items]) => {
                 if (items.length === 0) return null;
-                
+
                 return (
                   <div key={category} className="mb-4 last:mb-0">
                     <div className="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wide border-b border-gray-100">
@@ -164,7 +166,7 @@ export function Search({ isMobile = false, onNavigate }: SearchProps) {
                   </div>
                 );
               })}
-              
+
               {/* View All Results Link */}
               {results.total > 0 && (
                 <div className="border-t border-gray-200 mt-2 pt-2">

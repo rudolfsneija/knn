@@ -12,10 +12,11 @@ export const staticServicesData: SearchItem[] = [
   {
     id: 'service-nkl',
     title: 'NKDL prasību realizēšana',
-    description: 'Palīdzam uzņēmumiem izpildīt Nacionālā kiberdrošības likuma prasības un standartus',
+    description:
+      'Palīdzam uzņēmumiem izpildīt Nacionālā kiberdrošības likuma prasības un standartus',
     category: 'services',
     url: '/pakalpojumi/nkl-prasibu-realizesana',
-    keywords: ['NKL', 'NKDL', 'prasības','kiberdrosība', 'likums', 'nacionālais', 'kiberdrošība']
+    keywords: ['NKL', 'NKDL', 'prasības', 'kiberdrosība', 'likums', 'nacionālais', 'kiberdrošība'],
   },
   {
     id: 'service-wifi',
@@ -23,7 +24,18 @@ export const staticServicesData: SearchItem[] = [
     description: 'Uzticami bezvadu interneta risinājumi uzņēmumiem ar modernām drošības iespējām',
     category: 'services',
     url: '/pakalpojumi/bezvadu-wifi-risinajumi',
-    keywords: ['WiFi', 'Ruckus', 'Mikrotik', 'access point', 'AP', 'bezvadu', 'internets', 'tīkls', 'wireless', 'noma']
+    keywords: [
+      'WiFi',
+      'Ruckus',
+      'Mikrotik',
+      'access point',
+      'AP',
+      'bezvadu',
+      'internets',
+      'tīkls',
+      'wireless',
+      'noma',
+    ],
   },
   {
     id: 'service-video',
@@ -31,14 +43,15 @@ export const staticServicesData: SearchItem[] = [
     description: 'Profesionālas videonovērošanas sistēmas uzstādīšana, konfigurācija un noma',
     category: 'services',
     url: '/pakalpojumi/videonovero-sistemas',
-    keywords: ['video', 'Alnet', 'Milesight', 'novērošana', 'drošība', 'kameras', 'CCTV', 'noma']
+    keywords: ['video', 'Alnet', 'Milesight', 'novērošana', 'drošība', 'kameras', 'CCTV', 'noma'],
   },
   {
     id: 'service-training',
     title: 'IT drošības apmācības',
-    description: 'Profesionālas IT drošības apmācības darbiniekiem par kiberdroš ību un drošām praksēm',
+    description:
+      'Profesionālas IT drošības apmācības darbiniekiem par kiberdroš ību un drošām praksēm',
     category: 'services',
     url: '/pakalpojumi/it-drosibas-apmacibas',
-    keywords: ['apmācības', 'drošība', 'IT', 'lekcijas', 'personāls', 'darbinieki']
+    keywords: ['apmācības', 'drošība', 'IT', 'lekcijas', 'personāls', 'darbinieki'],
   },
 ];

@@ -12,23 +12,23 @@ router.get('/me', requireAuth, async (req, res) => {
       'SELECT id, username, email, first_name, last_name, created_at, updated_at FROM users WHERE id = ?',
       [user.userId]
     );
-    
+
     if (!currentUser) {
       return res.status(404).json({
         success: false,
-        error: 'User not found'
+        error: 'User not found',
       });
     }
 
     res.json({
       success: true,
-      data: currentUser
+      data: currentUser,
     });
   } catch (error) {
     console.error('Error fetching current user:', error);
     res.status(500).json({
       success: false,
-      error: 'Failed to fetch user profile'
+      error: 'Failed to fetch user profile',
     });
   }
 });
@@ -51,21 +51,21 @@ router.put('/me', requireAuth, async (req, res) => {
 
     res.json({
       success: true,
-      data: updatedUser
+      data: updatedUser,
     });
   } catch (error: any) {
     console.error('Error updating user:', error);
-    
+
     if (error.message.includes('UNIQUE constraint failed')) {
       return res.status(400).json({
         success: false,
-        error: 'Username or email already exists'
+        error: 'Username or email already exists',
       });
     }
 
     res.status(500).json({
       success: false,
-      error: 'Failed to update user'
+      error: 'Failed to update user',
     });
   }
 });

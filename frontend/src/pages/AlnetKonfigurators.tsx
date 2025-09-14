@@ -1,4 +1,4 @@
-import { ChevronLeft, ChevronRight, Cctv } from "lucide-react";
+import { ChevronLeft, ChevronRight, Cctv } from 'lucide-react';
 import { useAlnetConfigurator } from '../hooks/useAlnetConfigurator';
 import {
   MultiSelectQuestion,
@@ -59,37 +59,37 @@ export function AlnetKonfigurators() {
 
   const renderQuestion = () => {
     if (!currentQuestion) return null;
-    
+
     switch (currentQuestion.type) {
-      case "multiselect":
+      case 'multiselect':
         return (
-          <MultiSelectQuestion 
-            question={currentQuestion} 
+          <MultiSelectQuestion
+            question={currentQuestion}
             currentValue={(state.answers[currentQuestion.id] as string[]) || []}
             updateAnswer={updateAnswer}
           />
         );
-      case "number":
+      case 'number':
         return (
-          <NumberQuestion 
-            question={currentQuestion} 
-            currentValue={(state.answers[currentQuestion.id] as number) || ""}
+          <NumberQuestion
+            question={currentQuestion}
+            currentValue={(state.answers[currentQuestion.id] as number) || ''}
             updateAnswer={updateAnswer}
             canProceed={canProceed}
           />
         );
-      case "dual-number":
+      case 'dual-number':
         return (
-          <DualNumberQuestion 
-            question={currentQuestion} 
+          <DualNumberQuestion
+            question={currentQuestion}
             answers={state.answers}
             updateAnswer={updateAnswer}
           />
         );
-      case "yesno":
+      case 'yesno':
         return (
-          <YesNoQuestion 
-            question={currentQuestion} 
+          <YesNoQuestion
+            question={currentQuestion}
             currentValue={state.answers[currentQuestion.id] as boolean | undefined}
             updateAnswer={updateAnswer}
           />
@@ -107,9 +107,7 @@ export function AlnetKonfigurators() {
           <div className="text-center mb-12">
             <div className="flex items-center justify-center mb-6">
               <Cctv className="w-16 h-16 text-primary-600 mr-4" />
-              <h1 className="text-4xl font-bold text-gray-900">
-                ALNET Konfigurators
-              </h1>
+              <h1 className="text-4xl font-bold text-gray-900">ALNET Konfigurators</h1>
             </div>
             <p className="text-xl text-gray-600">
               Atrodiet ideālo videonovērošanas risinājumu jūsu vajadzībām
@@ -117,15 +115,10 @@ export function AlnetKonfigurators() {
           </div>
 
           {/* Progress bar */}
-          <ProgressIndicator 
-            currentStep={state.step}
-            totalSteps={totalSteps}
-          />
+          <ProgressIndicator currentStep={state.step} totalSteps={totalSteps} />
 
           {/* Question content */}
-          <div className="bg-secondary-50 rounded-2xl shadow-xl p-8 mb-8">
-            {renderQuestion()}
-          </div>
+          <div className="bg-secondary-50 rounded-2xl shadow-xl p-8 mb-8">{renderQuestion()}</div>
 
           {/* Navigation buttons */}
           <div className="flex justify-between">
@@ -143,9 +136,7 @@ export function AlnetKonfigurators() {
               disabled={!canProceed()}
               className="flex items-center px-8 py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
-              {currentQuestionIndex === visibleQuestions.length - 1
-                ? "Pabeigt"
-                : "Nākamais"}
+              {currentQuestionIndex === visibleQuestions.length - 1 ? 'Pabeigt' : 'Nākamais'}
               <ChevronRight className="w-5 h-5 ml-2" />
             </button>
           </div>

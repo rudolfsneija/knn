@@ -12,7 +12,7 @@ router.post('/', async (req, res) => {
     if (!name || !email || !subject || !message) {
       return res.status(400).json({
         success: false,
-        error: 'Visi obligātie lauki ir jāaizpilda (vārds, e-pasts, tēma, ziņojums)'
+        error: 'Visi obligātie lauki ir jāaizpilda (vārds, e-pasts, tēma, ziņojums)',
       });
     }
 
@@ -21,7 +21,7 @@ router.post('/', async (req, res) => {
     if (!emailRegex.test(email)) {
       return res.status(400).json({
         success: false,
-        error: 'Nederīga e-pasta adrese'
+        error: 'Nederīga e-pasta adrese',
       });
     }
 
@@ -61,14 +61,18 @@ router.post('/', async (req, res) => {
                 <span style="color: #4b5563; font-size: 16px;">${email}</span>
               </div>
             </div>
-            ${phone ? `
+            ${
+              phone
+                ? `
               <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
                 <div>
                   <strong style="color: #1f2937;">Tālrunis:</strong><br>
                   <span style="color: #4b5563; font-size: 16px;">${phone}</span>
                 </div>
               </div>
-            ` : ''}
+            `
+                : ''
+            }
           </div>
 
           <div style="background: #fef3c7; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #f59e0b;">
@@ -109,14 +113,14 @@ router.post('/', async (req, res) => {
 
     res.json({
       success: true,
-      message: 'Ziņojums ir veiksmīgi nosūtīts! Mēs sazināsimies ar jums drīzumā.'
+      message: 'Ziņojums ir veiksmīgi nosūtīts! Mēs sazināsimies ar jums drīzumā.',
     });
-
   } catch (error) {
     console.error('Error sending contact email:', error);
     res.status(500).json({
       success: false,
-      error: 'Neizdevās nosūtīt ziņojumu. Lūdzu, mēģiniet vēlāk vai sazinieties ar mums tieši pa e-pastu.'
+      error:
+        'Neizdevās nosūtīt ziņojumu. Lūdzu, mēģiniet vēlāk vai sazinieties ar mums tieši pa e-pastu.',
     });
   }
 });

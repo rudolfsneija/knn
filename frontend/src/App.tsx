@@ -36,9 +36,15 @@ function App() {
               <Route path="aktualitates" element={<Aktualitates />} />
               <Route path="aktualitates/:id" element={<AktualitateDetail />} />
               <Route path="pakalpojumi" element={<Pakalpojumi />} />
-              <Route path="pakalpojumi/nkl-prasibu-realizesana" element={<NklPrasibuRealizesana />} />
+              <Route
+                path="pakalpojumi/nkl-prasibu-realizesana"
+                element={<NklPrasibuRealizesana />}
+              />
               <Route path="pakalpojumi/it-drosibas-apmacibas" element={<ItDrosibasApmacibas />} />
-              <Route path="pakalpojumi/bezvadu-wifi-risinajumi" element={<BezvaduWifiRisinajumi />} />
+              <Route
+                path="pakalpojumi/bezvadu-wifi-risinajumi"
+                element={<BezvaduWifiRisinajumi />}
+              />
               <Route path="pakalpojumi/videonovero-sistemas" element={<VideonoveroSistemas />} />
               <Route path="preces" element={<Preces />} />
               <Route path="preces/:id" element={<PreceDetail />} />
@@ -50,21 +56,30 @@ function App() {
 
             {/* Admin routes */}
             <Route path="/admin/login" element={<AdminLogin />} />
-            <Route path="/admin" element={
-              <ProtectedRoute>
-                <AdminDashboard />
-              </ProtectedRoute>
-            } />
-            <Route path="/admin/aktualitates" element={
-              <ProtectedRoute>
-                <AdminAktualitates />
-              </ProtectedRoute>
-            } />
-            <Route path="/admin/preces" element={
-              <ProtectedRoute>
-                <AdminPreces />
-              </ProtectedRoute>
-            } />
+            <Route
+              path="/admin"
+              element={
+                <ProtectedRoute>
+                  <AdminDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/aktualitates"
+              element={
+                <ProtectedRoute>
+                  <AdminAktualitates />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/preces"
+              element={
+                <ProtectedRoute>
+                  <AdminPreces />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
         </Router>
       </AuthProvider>

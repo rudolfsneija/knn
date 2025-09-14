@@ -33,7 +33,7 @@ app.use(helmet()); // Security headers
 const corsOptions = {
   origin: process.env.ALLOWED_ORIGINS?.split(',') || ['http://localhost:3000'],
   credentials: true,
-  optionsSuccessStatus: 200
+  optionsSuccessStatus: 200,
 };
 app.use(cors(corsOptions)); // Enable CORS with domain config
 app.use(morgan('combined')); // Logging
@@ -42,10 +42,10 @@ app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
 
 // Health check endpoint
 app.get('/health', (req, res) => {
-  res.status(200).json({ 
-    status: 'OK', 
+  res.status(200).json({
+    status: 'OK',
     timestamp: new Date().toISOString(),
-    uptime: process.uptime()
+    uptime: process.uptime(),
   });
 });
 
@@ -65,9 +65,9 @@ app.use('/api', imageRoutes);
 
 // 404 handler - use a more specific pattern instead of *
 app.all('*', (req, res) => {
-  res.status(404).json({ 
+  res.status(404).json({
     error: 'Route not found',
-    path: req.originalUrl 
+    path: req.originalUrl,
   });
 });
 
@@ -79,7 +79,7 @@ async function startServer() {
   try {
     await initDatabase();
     console.log('Database initialized successfully');
-    
+
     app.listen(PORT, '0.0.0.0', () => {
       console.log(`Server is running on port ${PORT}`);
       console.log(`Health check available at http://localhost:${PORT}/health`);

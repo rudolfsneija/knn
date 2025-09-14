@@ -1,9 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   darkMode: 'class', // Enable class-based dark mode
   theme: {
     extend: {
@@ -23,7 +20,7 @@ export default {
           900: '#1f070a',
           950: '#1f070a',
         },
-        
+
         // Secondary colors (earth yellow - for footer, complementary elements)
         secondary: {
           50: '#fdfbf9ff',
@@ -96,33 +93,33 @@ export default {
         // ===== ADMIN THEME COLORS =====
         admin: {
           // Dark backgrounds
-          'bg-primary': '#0a0a0b',     // Almost black background
-          'bg-secondary': '#111113',   // Slightly lighter background
-          'bg-tertiary': '#1a1a1d',    // Card/panel backgrounds
-          'bg-hover': '#222225',       // Hover states
-          
+          'bg-primary': '#0a0a0b', // Almost black background
+          'bg-secondary': '#111113', // Slightly lighter background
+          'bg-tertiary': '#1a1a1d', // Card/panel backgrounds
+          'bg-hover': '#222225', // Hover states
+
           // Dark surfaces (elevated elements)
-          'surface-100': '#2a2a2f',    // Elevated surfaces
-          'surface-200': '#35353a',    // Higher elevation
-          'surface-300': '#404045',    // Highest elevation
-          
+          'surface-100': '#2a2a2f', // Elevated surfaces
+          'surface-200': '#35353a', // Higher elevation
+          'surface-300': '#404045', // Highest elevation
+
           // Text colors for dark theme
-          'text-primary': '#ffffff',   // Primary text (white)
+          'text-primary': '#ffffff', // Primary text (white)
           'text-secondary': '#d1d5db', // Secondary text (light gray)
-          'text-tertiary': '#9ca3af',  // Tertiary text (medium gray)
-          'text-muted': '#6b7280',     // Muted text (darker gray)
-          
+          'text-tertiary': '#9ca3af', // Tertiary text (medium gray)
+          'text-muted': '#6b7280', // Muted text (darker gray)
+
           // Borders and dividers
           'border-primary': '#374151', // Main borders
           'border-secondary': '#4b5563', // Lighter borders
-          'border-focus': '#3b82f6',   // Focus states
-          
+          'border-focus': '#3b82f6', // Focus states
+
           // Admin accent colors (for the dark theme)
           'accent-primary': '#3b82f6', // Blue accent
           'accent-secondary': '#8b5cf6', // Purple accent
-          'accent-success': '#10b981',  // Green accent
-          'accent-warning': '#f59e0b',  // Orange accent
-          'accent-danger': '#ef4444',   // Red accent
+          'accent-success': '#10b981', // Green accent
+          'accent-warning': '#f59e0b', // Orange accent
+          'accent-danger': '#ef4444', // Red accent
         },
       },
       fontFamily: {
@@ -130,32 +127,30 @@ export default {
         mono: ['Fira Code', 'Monaco', 'Consolas', 'monospace'],
       },
       fontSize: {
-        'xs': ['0.75rem', { lineHeight: '1rem' }],
-        'sm': ['0.875rem', { lineHeight: '1.25rem' }],
-        'base': ['1rem', { lineHeight: '1.5rem' }],
-        'lg': ['1.125rem', { lineHeight: '1.75rem' }],
-        'xl': ['1.25rem', { lineHeight: '1.75rem' }],
+        xs: ['0.75rem', { lineHeight: '1rem' }],
+        sm: ['0.875rem', { lineHeight: '1.25rem' }],
+        base: ['1rem', { lineHeight: '1.5rem' }],
+        lg: ['1.125rem', { lineHeight: '1.75rem' }],
+        xl: ['1.25rem', { lineHeight: '1.75rem' }],
         '2xl': ['1.5rem', { lineHeight: '2rem' }],
         '3xl': ['1.875rem', { lineHeight: '2.25rem' }],
         '4xl': ['2.25rem', { lineHeight: '2.5rem' }],
         '5xl': ['3rem', { lineHeight: '1' }],
       },
       spacing: {
-        '18': '4.5rem',
-        '88': '22rem',
-        '128': '32rem',
+        18: '4.5rem',
+        88: '22rem',
+        128: '32rem',
       },
       borderRadius: {
-        'xl': '1rem',
+        xl: '1rem',
         '2xl': '1.5rem',
       },
       boxShadow: {
-        'admin': '0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2)',
+        admin: '0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2)',
         'admin-lg': '0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2)',
-      }
+      },
     },
   },
-  plugins: [
-    require('@tailwindcss/forms'),
-  ],
-}
+  plugins: [require('@tailwindcss/forms')],
+};

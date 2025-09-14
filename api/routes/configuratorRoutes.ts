@@ -6,20 +6,13 @@ const router = express.Router();
 // POST /api/configurator - Send configurator results email
 router.post('/', async (req, res) => {
   try {
-    const { 
-      userAnswers, 
-      recommendations, 
-      totalPrice, 
-      userEmail, 
-      userName, 
-      userPhone 
-    } = req.body;
+    const { userAnswers, recommendations, totalPrice, userEmail, userName, userPhone } = req.body;
 
     // Validate required fields
     if (!recommendations || !Array.isArray(recommendations)) {
       return res.status(400).json({
         success: false,
-        error: 'Konfigurācijas rezultāti ir nepieciešami'
+        error: 'Konfigurācijas rezultāti ir nepieciešami',
       });
     }
 
@@ -35,21 +28,27 @@ router.post('/', async (req, res) => {
     });
 
     // Process recommendations for email
-    const netstationLicenses = recommendations.filter((r: any) => 
+    const netstationLicenses = recommendations.filter((r: any) =>
       ['netstation_4', 'netstation_enterprise_4'].includes(r.product.id)
     );
-    
-    const addons = recommendations.filter((r: any) => 
-      r.product.category === 'license' && 
-      !['netstation_4', 'netstation_enterprise_4'].includes(r.product.id)
+
+    const addons = recommendations.filter(
+      (r: any) =>
+        r.product.category === 'license' &&
+        !['netstation_4', 'netstation_enterprise_4'].includes(r.product.id)
     );
 
-    const totalNetstationLicenses = netstationLicenses.reduce((sum: number, license: any) => sum + license.quantity, 0);
+    const totalNetstationLicenses = netstationLicenses.reduce(
+      (sum: number, license: any) => sum + license.quantity,
+      0
+    );
 
     // Format user answers for email
-    const answersText = userAnswers ? Object.entries(userAnswers)
-      .map(([key, value]) => `${key}: ${Array.isArray(value) ? value.join(', ') : value}`)
-      .join('\n') : 'Nav pieejami';
+    const answersText = userAnswers
+      ? Object.entries(userAnswers)
+          .map(([key, value]) => `${key}: ${Array.isArray(value) ? value.join(', ') : value}`)
+          .join('\n')
+      : 'Nav pieejami';
 
     // Format recommendations for email
     let recommendationsHtml = '';
@@ -58,8 +57,11 @@ router.post('/', async (req, res) => {
     // Base licenses
     if (netstationLicenses.length > 0) {
       const primaryNetstation = netstationLicenses[0];
-      const licensePrice = netstationLicenses.reduce((sum: number, license: any) => sum + license.totalPrice, 0);
-      
+      const licensePrice = netstationLicenses.reduce(
+        (sum: number, license: any) => sum + license.totalPrice,
+        0
+      );
+
       recommendationsHtml += `
         <h4 style="color: #92400e; margin-top: 15px; margin-bottom: 10px;">Pamata licence${totalNetstationLicenses > 1 ? 's' : ''}</h4>
         <div style="background: #ffffff; padding: 15px; border-radius: 6px; border: 1px solid #fed7aa; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center;">
@@ -67,9 +69,10 @@ router.post('/', async (req, res) => {
             <strong style="color: #451a03;">${totalNetstationLicenses > 1 ? `${totalNetstationLicenses}x ` : ''}${primaryNetstation.product.name}</strong><br>
             <span style="color: #78716c;">${primaryNetstation.product.description}</span><br>
             <span style="color: #92400e; font-size: 14px;">
-              ${totalNetstationLicenses > 1 
-                ? `${totalNetstationLicenses} licences nepieciešamas lielajam kameru skaitam`
-                : primaryNetstation.reason
+              ${
+                totalNetstationLicenses > 1
+                  ? `${totalNetstationLicenses} licences nepieciešamas lielajam kameru skaitam`
+                  : primaryNetstation.reason
               }
             </span>
           </div>
@@ -121,35 +124,51 @@ router.post('/', async (req, res) => {
             Jauns videonovērošanas konfigurācijas pieprasījums
           </h2>
           
-          ${userName || userEmail || userPhone ? `
+          ${
+            userName || userEmail || userPhone
+              ? `
             <div style="background: #f8fafc; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #dc2626;">
               <h3 style="color: #374151; margin-top: 0; margin-bottom: 15px;">Klienta informācija:</h3>
-              ${userName ? `
+              ${
+                userName
+                  ? `
                 <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
                   <div>
                     <strong style="color: #1f2937;">Vārds:</strong><br>
                     <span style="color: #4b5563; font-size: 16px;">${userName}</span>
                   </div>
                 </div>
-              ` : ''}
-              ${userEmail ? `
+              `
+                  : ''
+              }
+              ${
+                userEmail
+                  ? `
                 <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
                   <div>
                     <strong style="color: #1f2937;">E-pasts:</strong><br>
                     <span style="color: #4b5563; font-size: 16px;">${userEmail}</span>
                   </div>
                 </div>
-              ` : ''}
-              ${userPhone ? `
+              `
+                  : ''
+              }
+              ${
+                userPhone
+                  ? `
                 <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
                   <div>
                     <strong style="color: #1f2937;">Tālrunis:</strong><br>
                     <span style="color: #4b5563; font-size: 16px;">${userPhone}</span>
                   </div>
                 </div>
-              ` : ''}
+              `
+                  : ''
+              }
             </div>
-          ` : ''}
+          `
+              : ''
+          }
 
           <div style="background: #fef3c7; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #f59e0b;">
             <h3 style="color: #92400e; margin-top: 0; margin-bottom: 15px;">Konfigurācijas rezultāti:</h3>
@@ -179,10 +198,14 @@ router.post('/', async (req, res) => {
       text: `
         Jauns videonovērošanas konfigurācijas pieprasījums
 
-        ${userName || userEmail || userPhone ? `
+        ${
+          userName || userEmail || userPhone
+            ? `
 Klienta informācija:
 ${userName ? `Vārds: ${userName}\n` : ''}${userEmail ? `E-pasts: ${userEmail}\n` : ''}${userPhone ? `Tālrunis: ${userPhone}\n` : ''}
-        ` : ''}
+        `
+            : ''
+        }
 
 Konfigurācijas rezultāti:
 ${recommendationsText}
@@ -203,14 +226,15 @@ ${answersText}
 
     res.json({
       success: true,
-      message: 'Konfigurācijas rezultāti ir veiksmīgi nosūtīti! Mēs sazināsimies ar jums drīzumā ar detalizētu piedāvājumu.'
+      message:
+        'Konfigurācijas rezultāti ir veiksmīgi nosūtīti! Mēs sazināsimies ar jums drīzumā ar detalizētu piedāvājumu.',
     });
-
   } catch (error) {
     console.error('Error sending configurator email:', error);
     res.status(500).json({
       success: false,
-      error: 'Neizdevās nosūtīt konfigurācijas rezultātus. Lūdzu, mēģiniet vēlāk vai sazinieties ar mums tieši pa e-pastu.'
+      error:
+        'Neizdevās nosūtīt konfigurācijas rezultātus. Lūdzu, mēģiniet vēlāk vai sazinieties ar mums tieši pa e-pastu.',
     });
   }
 });

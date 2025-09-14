@@ -12,20 +12,20 @@
   --color-bg-primary: #ffffff;
   --color-bg-secondary: #f9fafb;
   --color-bg-tertiary: #f3f4f6;
-  
+
   --color-text-primary: #111827;
   --color-text-secondary: #374151;
   --color-text-tertiary: #6b7280;
-  
+
   --color-border: #e5e7eb;
   --color-border-focus: #9d2235;
-  
+
   /* Brand colors - Dark Red and Golden */
-  --color-primary: #9d2235;        /* Dark red for buttons/highlights */
-  --color-primary-hover: #8a1e30;  /* Darker red for hover */
-  --color-secondary: #cfa768;      /* Golden for secondary elements */
+  --color-primary: #9d2235; /* Dark red for buttons/highlights */
+  --color-primary-hover: #8a1e30; /* Darker red for hover */
+  --color-secondary: #cfa768; /* Golden for secondary elements */
   --color-secondary-hover: #b8934f; /* Darker golden for hover */
-  --color-accent: #d946ef;         /* Keep purple accent for special cases */
+  --color-accent: #d946ef; /* Keep purple accent for special cases */
 }
 
 /* Admin Dark Theme */
@@ -34,20 +34,20 @@
   --color-bg-secondary: #111113;
   --color-bg-tertiary: #1a1a1d;
   --color-bg-hover: #222225;
-  
+
   --color-surface-100: #2a2a2f;
   --color-surface-200: #35353a;
   --color-surface-300: #404045;
-  
+
   --color-text-primary: #ffffff;
   --color-text-secondary: #d1d5db;
   --color-text-tertiary: #9ca3af;
   --color-text-muted: #6b7280;
-  
+
   --color-border: #374151;
   --color-border-secondary: #4b5563;
   --color-border-focus: #3b82f6;
-  
+
   --color-admin-accent: #3b82f6;
   --color-admin-success: #10b981;
   --color-admin-warning: #f59e0b;
@@ -57,12 +57,17 @@
 @layer base {
   body {
     font-family: 'Inter', sans-serif;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
   }
-  
+
   /* Smooth transitions for theme switching */
   * {
-    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    transition:
+      background-color 0.2s ease,
+      border-color 0.2s ease,
+      color 0.2s ease;
   }
 }
 
@@ -71,58 +76,58 @@
   .admin-card {
     @apply bg-admin-bg-tertiary border border-admin-border-primary rounded-xl shadow-admin;
   }
-  
+
   .admin-button-primary {
     @apply bg-admin-accent-primary hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200;
   }
-  
+
   .admin-button-secondary {
     @apply bg-admin-surface-200 hover:bg-admin-surface-300 text-admin-text-primary border border-admin-border-primary font-medium py-2 px-4 rounded-lg transition-colors duration-200;
   }
-  
+
   .admin-button-danger {
     @apply bg-admin-accent-danger hover:bg-red-600 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200;
   }
-  
+
   .admin-input {
     @apply bg-admin-surface-100 border border-admin-border-primary text-admin-text-primary placeholder-admin-text-muted rounded-lg px-3 py-2 focus:border-admin-border-focus focus:ring-1 focus:ring-admin-border-focus;
   }
-  
+
   .admin-textarea {
     @apply bg-admin-surface-100 border border-admin-border-primary text-admin-text-primary placeholder-admin-text-muted rounded-lg px-3 py-2 focus:border-admin-border-focus focus:ring-1 focus:ring-admin-border-focus resize-none;
   }
-  
+
   .admin-select {
     @apply bg-admin-surface-100 border border-admin-border-primary text-admin-text-primary rounded-lg px-3 py-2 focus:border-admin-border-focus focus:ring-1 focus:ring-admin-border-focus;
   }
-  
+
   /* Main Site Components */
   .site-card {
     @apply bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200;
   }
-  
+
   .site-button-primary {
     @apply bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200;
   }
-  
+
   .site-button-secondary {
     @apply bg-secondary-600 hover:bg-secondary-700 text-white border border-secondary-700 font-medium py-2 px-4 rounded-lg transition-colors duration-200;
   }
-  
+
   /* Navigation styles */
   .nav-link {
     @apply text-gray-600 hover:text-primary-800 font-medium transition-colors duration-200;
   }
-  
+
   .nav-link-active {
     @apply text-primary-800 font-semibold;
   }
-  
+
   /* Admin navigation */
   .admin-nav-link {
     @apply text-admin-text-secondary hover:text-admin-text-primary font-medium transition-colors duration-200;
   }
-  
+
   .admin-nav-link-active {
     @apply text-admin-accent-primary font-semibold;
   }
@@ -134,20 +139,20 @@
     scrollbar-width: thin;
     scrollbar-color: var(--color-border) var(--color-bg-secondary);
   }
-  
+
   .admin-scrollbar::-webkit-scrollbar {
     width: 6px;
   }
-  
+
   .admin-scrollbar::-webkit-scrollbar-track {
     background: var(--color-bg-secondary);
   }
-  
+
   .admin-scrollbar::-webkit-scrollbar-thumb {
     background: var(--color-border);
     border-radius: 3px;
   }
-  
+
   .admin-scrollbar::-webkit-scrollbar-thumb:hover {
     background: var(--color-border-secondary);
   }

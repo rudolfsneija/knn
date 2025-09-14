@@ -3,56 +3,58 @@ import type { Question, Answers } from './types';
 export const ALNET_QUESTIONS: Question[] = [
   {
     id: 'system_functions',
-    title: 'Kādas sistēmas funkcionalitātes Jums ir nepieciešamas papildus videonovērošanas pamatfunkcijām?',
+    title:
+      'Kādas sistēmas funkcionalitātes Jums ir nepieciešamas papildus videonovērošanas pamatfunkcijām?',
     description: 'Izvēlieties papildu funkcionalitātes',
     type: 'multiselect',
     options: [
       {
         id: 'access_control',
         label: 'Piekļuves kontroles sistēmas',
-        value: 'access_control'
+        value: 'access_control',
       },
       {
         id: 'pos_system',
         label: 'Kases aparātu sistēma (POS)',
-        value: 'pos_system'
+        value: 'pos_system',
       },
       {
         id: 'io_control',
         label: 'Ievad-izvad ierīču pārvaldība',
         value: 'io_control',
-        tooltip: 'I/O analoga vai digitālā tipa ierīces, kuras var sasaistīt ar VN sistēmu, lai reaģētu uz notikumiem, vai reģistrēt tos kā notikumus. Tie varētu būt signāli no analoga sensoriem, digitālām kamerām.'
+        tooltip:
+          'I/O analoga vai digitālā tipa ierīces, kuras var sasaistīt ar VN sistēmu, lai reaģētu uz notikumiem, vai reģistrēt tos kā notikumus. Tie varētu būt signāli no analoga sensoriem, digitālām kamerām.',
       },
       {
         id: 'building_management',
         label: 'Ēkas vadības sistēma',
-        value: 'building_management'
+        value: 'building_management',
       },
       {
         id: 'external_logs',
         label: 'Žurnālietrakstu ārējā pārvalde',
-        value: 'external_logs'
+        value: 'external_logs',
       },
       {
         id: 'plate_recognition',
         label: 'Numurzīmes atpazīšanu/nolasīšanu',
-        value: 'plate_recognition'
+        value: 'plate_recognition',
       },
       {
         id: 'centralized_management',
         label: 'Centralizēta lietotāju/serveru pārvaldība un autentifikācija',
-        value: 'centralized_management'
+        value: 'centralized_management',
       },
       {
         id: 'video_analytics',
         label: 'Videoanalītikas funkcionalitāte',
-        value: 'video_analytics'
-      }
+        value: 'video_analytics',
+      },
     ],
     validation: {
       required: false,
-      message: 'Izvēlieties papildu funkcionalitātes'
-    }
+      message: 'Izvēlieties papildu funkcionalitātes',
+    },
   },
   {
     id: 'doors_quantity',
@@ -67,8 +69,8 @@ export const ALNET_QUESTIONS: Question[] = [
     validation: {
       required: true,
       min: 1,
-      message: 'Lūdzu norādiet durvju skaitu'
-    }
+      message: 'Lūdzu norādiet durvju skaitu',
+    },
   },
   {
     id: 'cash_registers_quantity',
@@ -83,8 +85,8 @@ export const ALNET_QUESTIONS: Question[] = [
     validation: {
       required: true,
       min: 1,
-      message: 'Lūdzu norādiet kases aparātu skaitu'
-    }
+      message: 'Lūdzu norādiet kases aparātu skaitu',
+    },
   },
   {
     id: 'io_devices_quantity',
@@ -99,8 +101,8 @@ export const ALNET_QUESTIONS: Question[] = [
     validation: {
       required: true,
       min: 1,
-      message: 'Lūdzu norādiet ievad-izvad ierīču skaitu'
-    }
+      message: 'Lūdzu norādiet ievad-izvad ierīču skaitu',
+    },
   },
 
   {
@@ -112,35 +114,35 @@ export const ALNET_QUESTIONS: Question[] = [
       {
         id: 'fixed',
         label: 'Stacionārās',
-        value: 'fixed'
+        value: 'fixed',
       },
       {
         id: 'ptz_100m',
         label: 'Āra grozāmās (PTZ) (līdz 100m)',
-        value: 'ptz_100m'
+        value: 'ptz_100m',
       },
       {
         id: 'ptz_180m',
         label: 'Āra grozāmās (PTZ) (līdz 180m)',
-        value: 'ptz_180m'
+        value: 'ptz_180m',
       },
       {
         id: 'indoor_fixed',
         label: 'Iekšā stacionārās',
-        value: 'indoor_fixed'
+        value: 'indoor_fixed',
       },
       {
         id: 'panorama',
         label: 'Iekšā/āra panorāmas',
-        value: 'panorama'
-      }
+        value: 'panorama',
+      },
     ],
     validation: {
       required: false,
-      message: 'Izvēlieties kameru veidus, ja nepieciešamas kameras'
-    }
+      message: 'Izvēlieties kameru veidus, ja nepieciešamas kameras',
+    },
   },
-  
+
   // Fixed cameras
   {
     id: 'fixed_cameras',
@@ -161,8 +163,8 @@ export const ALNET_QUESTIONS: Question[] = [
         validation: {
           required: true,
           min: 0,
-          message: 'Norādiet stacionāro kameru skaitu'
-        }
+          message: 'Norādiet stacionāro kameru skaitu',
+        },
       },
       {
         id: 'fixed_cameras_analytics_quantity',
@@ -171,12 +173,12 @@ export const ALNET_QUESTIONS: Question[] = [
         validation: {
           required: true,
           min: 0,
-          message: 'Norādiet kameru ar analītiku skaitu'
-        }
-      }
-    ]
+          message: 'Norādiet kameru ar analītiku skaitu',
+        },
+      },
+    ],
   },
-  
+
   // Indoor fixed cameras
   {
     id: 'indoor_fixed_cameras',
@@ -197,8 +199,8 @@ export const ALNET_QUESTIONS: Question[] = [
         validation: {
           required: true,
           min: 0,
-          message: 'Norādiet stacionāro kameru skaitu'
-        }
+          message: 'Norādiet stacionāro kameru skaitu',
+        },
       },
       {
         id: 'indoor_fixed_cameras_analytics_quantity',
@@ -207,12 +209,12 @@ export const ALNET_QUESTIONS: Question[] = [
         validation: {
           required: true,
           min: 0,
-          message: 'Norādiet kameru ar analītiku skaitu'
-        }
-      }
-    ]
+          message: 'Norādiet kameru ar analītiku skaitu',
+        },
+      },
+    ],
   },
-  
+
   // PTZ 100m cameras
   {
     id: 'ptz_100m_cameras',
@@ -233,8 +235,8 @@ export const ALNET_QUESTIONS: Question[] = [
         validation: {
           required: true,
           min: 0,
-          message: 'Norādiet parasto PTZ kameru skaitu'
-        }
+          message: 'Norādiet parasto PTZ kameru skaitu',
+        },
       },
       {
         id: 'ptz_100m_cameras_analytics_quantity',
@@ -243,12 +245,12 @@ export const ALNET_QUESTIONS: Question[] = [
         validation: {
           required: true,
           min: 0,
-          message: 'Norādiet PTZ kameru ar analītiku skaitu'
-        }
-      }
-    ]
+          message: 'Norādiet PTZ kameru ar analītiku skaitu',
+        },
+      },
+    ],
   },
-  
+
   // PTZ 180m cameras
   {
     id: 'ptz_180m_cameras',
@@ -269,8 +271,8 @@ export const ALNET_QUESTIONS: Question[] = [
         validation: {
           required: true,
           min: 0,
-          message: 'Norādiet parasto PTZ kameru skaitu'
-        }
+          message: 'Norādiet parasto PTZ kameru skaitu',
+        },
       },
       {
         id: 'ptz_180m_cameras_analytics_quantity',
@@ -279,12 +281,12 @@ export const ALNET_QUESTIONS: Question[] = [
         validation: {
           required: true,
           min: 0,
-          message: 'Norādiet PTZ kameru ar analītiku skaitu'
-        }
-      }
-    ]
+          message: 'Norādiet PTZ kameru ar analītiku skaitu',
+        },
+      },
+    ],
   },
-  
+
   // Panorama cameras
   {
     id: 'panorama_cameras',
@@ -305,8 +307,8 @@ export const ALNET_QUESTIONS: Question[] = [
         validation: {
           required: true,
           min: 0,
-          message: 'Norādiet panorāmas kameru skaitu'
-        }
+          message: 'Norādiet panorāmas kameru skaitu',
+        },
       },
       {
         id: 'panorama_cameras_analytics_quantity',
@@ -315,39 +317,42 @@ export const ALNET_QUESTIONS: Question[] = [
         validation: {
           required: true,
           min: 0,
-          message: 'Norādiet panorāmas kameru ar analītiku skaitu'
-        }
-      }
-    ]
+          message: 'Norādiet panorāmas kameru ar analītiku skaitu',
+        },
+      },
+    ],
   },
-  
+
   {
     id: 'has_existing_server',
     title: 'Vai Jums jau ir savs videonovērošanas serveris?',
     type: 'yesno',
     validation: {
       required: true,
-      message: 'Lūdzu norādiet, vai jums ir serveris'
-    }
-  }
+      message: 'Lūdzu norādiet, vai jums ir serveris',
+    },
+  },
 ];
 
 export const getQuestionById = (id: string): Question | undefined => {
-  return ALNET_QUESTIONS.find(q => q.id === id);
+  return ALNET_QUESTIONS.find((q) => q.id === id);
 };
 
-export const getNextQuestion = (currentQuestionId: string, answers: Answers): Question | undefined => {
-  const currentIndex = ALNET_QUESTIONS.findIndex(q => q.id === currentQuestionId);
-  
+export const getNextQuestion = (
+  currentQuestionId: string,
+  answers: Answers
+): Question | undefined => {
+  const currentIndex = ALNET_QUESTIONS.findIndex((q) => q.id === currentQuestionId);
+
   for (let i = currentIndex + 1; i < ALNET_QUESTIONS.length; i++) {
     const question = ALNET_QUESTIONS[i];
-    
+
     // Check if question should be shown based on dependencies and conditions
     if (!question.showCondition || question.showCondition(answers)) {
       return question;
     }
   }
-  
+
   return undefined;
 };
 

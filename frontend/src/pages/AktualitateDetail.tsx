@@ -76,10 +76,7 @@ export function AktualitateDetail() {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-gray-900 mb-4">Aktualitāte netika atrasta</h1>
-          <Link
-            to="/aktualitates"
-            className="text-primary-400 hover:text-primary-500 font-medium"
-          >
+          <Link to="/aktualitates" className="text-primary-400 hover:text-primary-500 font-medium">
             ← Atgriezties pie aktualitātēm
           </Link>
         </div>
@@ -112,10 +109,11 @@ export function AktualitateDetail() {
               {aktualitate.title}
             </h1>
             <p className="text-gray-600">
-              Publicēts: {new Date(aktualitate.created_at).toLocaleDateString('lv-LV', {
+              Publicēts:{' '}
+              {new Date(aktualitate.created_at).toLocaleDateString('lv-LV', {
                 year: 'numeric',
                 month: 'long',
-                day: 'numeric'
+                day: 'numeric',
               })}
             </p>
           </header>

@@ -1,12 +1,5 @@
-import {
-  Check,
-  AlertCircle,
-  Send,
-  Home,
-  ShieldCheck,
-  Plus,
-} from "lucide-react";
-import type { RecommendationItem } from "../../configurators/alnet/types";
+import { Check, AlertCircle, Send, Home, ShieldCheck, Plus } from 'lucide-react';
+import type { RecommendationItem } from '../../configurators/alnet/types';
 
 interface ResultsPageProps {
   result: RecommendationItem[];
@@ -36,12 +29,12 @@ export function ResultsPage({
   navigate,
 }: ResultsPageProps) {
   const formatPrice = (price: number): string => {
-    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
   };
 
   // Process the recommendations array
   const netstationLicenses = result.filter((r) =>
-    ["netstation_4", "netstation_enterprise_4"].includes(r.product.id)
+    ['netstation_4', 'netstation_enterprise_4'].includes(r.product.id)
   );
 
   // Calculate total NetStation licenses
@@ -53,26 +46,23 @@ export function ResultsPage({
 
   const addons = result.filter(
     (r) =>
-      r.product.category === "license" &&
-      !["netstation_4", "netstation_enterprise_4"].includes(r.product.id)
+      r.product.category === 'license' &&
+      !['netstation_4', 'netstation_enterprise_4'].includes(r.product.id)
   );
 
   const totalPrice = result.reduce((sum, item) => sum + item.totalPrice, 0);
   const notes = [
-    "Cenas ir orientējošas un attiecas tikai uz licencēm",
-    "Cena neietver kameras, serverus un uzstādīšanas darbus",
+    'Cenas ir orientējošas un attiecas tikai uz licencēm',
+    'Cena neietver kameras, serverus un uzstādīšanas darbus',
   ];
 
   return (
     <div className="space-y-8">
       <div className="text-center">
         <Check className="w-20 h-20 text-success-700 mx-auto mb-6" />
-        <h3 className="text-3xl font-semibold text-gray-900 mb-4">
-          Konfiguratora rezultāti
-        </h3>
+        <h3 className="text-3xl font-semibold text-gray-900 mb-4">Konfiguratora rezultāti</h3>
         <p className="text-xl text-gray-600 mb-12">
-          Mūsu sistēma ir analizējusi jūsu vajadzības un sagatavoja
-          personalizētu risinājumu.
+          Mūsu sistēma ir analizējusi jūsu vajadzības un sagatavoja personalizētu risinājumu.
         </p>
       </div>
 
@@ -81,20 +71,16 @@ export function ResultsPage({
         <div>
           <h4 className="font-semibold text-secondary-900 mb-4 ml-2 text-lg flex items-center">
             <ShieldCheck className="w-5 h-5 mr-2" />
-            Pamata licence{totalNetstationLicenses > 1 ? "s" : ""}
+            Pamata licence{totalNetstationLicenses > 1 ? 's' : ''}
           </h4>
           <div className="bg-white rounded-lg p-4">
             <div className="flex justify-between items-start">
               <div>
                 <h5 className="font-medium text-gray-900">
-                  {totalNetstationLicenses > 1
-                    ? `${totalNetstationLicenses}x `
-                    : ""}
+                  {totalNetstationLicenses > 1 ? `${totalNetstationLicenses}x ` : ''}
                   {primaryNetstation.product.name}
                 </h5>
-                <p className="text-gray-600 text-sm">
-                  {primaryNetstation.product.description}
-                </p>
+                <p className="text-gray-600 text-sm">{primaryNetstation.product.description}</p>
                 <p className="text-blue-600 text-sm mt-1">
                   {totalNetstationLicenses > 1
                     ? `${totalNetstationLicenses} licences nepieciešamas lielajam kameru skaitam`
@@ -102,8 +88,8 @@ export function ResultsPage({
                 </p>
                 {totalNetstationLicenses > 1 && (
                   <p className="text-gray-500 text-sm mt-1">
-                    Katrai licencei ir 4 pamata kanāli (kopā{" "}
-                    {totalNetstationLicenses * 4} pamata kanāli)
+                    Katrai licencei ir 4 pamata kanāli (kopā {totalNetstationLicenses * 4} pamata
+                    kanāli)
                   </p>
                 )}
               </div>
@@ -111,16 +97,12 @@ export function ResultsPage({
                 <p className="font-medium text-gray-900">
                   €
                   {formatPrice(
-                    netstationLicenses.reduce(
-                      (sum, license) => sum + license.totalPrice,
-                      0
-                    )
+                    netstationLicenses.reduce((sum, license) => sum + license.totalPrice, 0)
                   )}
                 </p>
                 {totalNetstationLicenses > 1 && (
                   <p className="text-xs text-gray-500">
-                    €{formatPrice(primaryNetstation.product.basePrice)} ×{" "}
-                    {totalNetstationLicenses}
+                    €{formatPrice(primaryNetstation.product.basePrice)} × {totalNetstationLicenses}
                   </p>
                 )}
               </div>
@@ -141,24 +123,15 @@ export function ResultsPage({
               <div key={index} className="bg-white rounded-lg p-4">
                 <div className="flex justify-between items-start">
                   <div>
-                    <h5 className="font-medium text-gray-900">
-                      {addon.product.name}
-                    </h5>
-                    <p className="text-gray-600 text-sm">
-                      {addon.product.description}
-                    </p>
-                    <p className="text-green-600 text-sm mt-1">
-                      {addon.reason}
-                    </p>
+                    <h5 className="font-medium text-gray-900">{addon.product.name}</h5>
+                    <p className="text-gray-600 text-sm">{addon.product.description}</p>
+                    <p className="text-green-600 text-sm mt-1">{addon.reason}</p>
                   </div>
                   <div className="text-right">
-                    <p className="font-medium text-gray-900">
-                      €{formatPrice(addon.totalPrice)}
-                    </p>
+                    <p className="font-medium text-gray-900">€{formatPrice(addon.totalPrice)}</p>
                     {addon.quantity > 1 && (
                       <p className="text-xs text-gray-500">
-                        €{formatPrice(addon.product.basePrice)} ×{" "}
-                        {addon.quantity}
+                        €{formatPrice(addon.product.basePrice)} × {addon.quantity}
                       </p>
                     )}
                   </div>
@@ -172,12 +145,8 @@ export function ResultsPage({
       {/* Total Price */}
       <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
         <div className="flex justify-between items-center">
-          <h4 className="font-semibold text-gray-900 text-lg">
-            Orientējošā cena (licences)
-          </h4>
-          <p className="font-bold text-2xl text-gray-900">
-            €{formatPrice(totalPrice)}
-          </p>
+          <h4 className="font-semibold text-gray-900 text-lg">Orientējošā cena (licences)</h4>
+          <p className="font-bold text-2xl text-gray-900">€{formatPrice(totalPrice)}</p>
         </div>
       </div>
 
@@ -204,18 +173,16 @@ export function ResultsPage({
       {submitMessage && (
         <div
           className={`rounded-lg p-4 mb-6 ${
-            submitMessage.includes("Kļūda:") ||
-            submitMessage.includes("Neizdevās")
-              ? "bg-red-50 border border-red-200"
-              : "bg-green-50 border border-green-200"
+            submitMessage.includes('Kļūda:') || submitMessage.includes('Neizdevās')
+              ? 'bg-red-50 border border-red-200'
+              : 'bg-green-50 border border-green-200'
           }`}
         >
           <p
             className={
-              submitMessage.includes("Kļūda:") ||
-              submitMessage.includes("Neizdevās")
-                ? "text-red-800"
-                : "text-green-800"
+              submitMessage.includes('Kļūda:') || submitMessage.includes('Neizdevās')
+                ? 'text-red-800'
+                : 'text-green-800'
             }
           >
             {submitMessage}
@@ -226,19 +193,14 @@ export function ResultsPage({
       {/* Contact form */}
       {showContactForm && (
         <div className="bg-info-50 border border-info-200 rounded-lg p-6">
-          <h4 className="font-semibold text-info-900 mb-4 text-lg">
-            Jūsu kontaktinformācija
-          </h4>
+          <h4 className="font-semibold text-info-900 mb-4 text-lg">Jūsu kontaktinformācija</h4>
           <p className="text-info-800 mb-6 text-sm">
-            Lūdzu, ievadiet savus kontaktdatus, lai mēs varētu sazināties ar
-            jums par detalizētu piedāvājumu.
+            Lūdzu, ievadiet savus kontaktdatus, lai mēs varētu sazināties ar jums par detalizētu
+            piedāvājumu.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
-              <label
-                htmlFor="name"
-                className="block text-sm font-medium text-gray-700 mb-2"
-              >
+              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
                 Vārds, uzvārds *
               </label>
               <input
@@ -251,10 +213,7 @@ export function ResultsPage({
               />
             </div>
             <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-gray-700 mb-2"
-              >
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
                 E-pasts *
               </label>
               <input
@@ -267,10 +226,7 @@ export function ResultsPage({
               />
             </div>
             <div>
-              <label
-                htmlFor="phone"
-                className="block text-sm font-medium text-gray-700 mb-2"
-              >
+              <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
                 Telefons
               </label>
               <input
@@ -288,7 +244,7 @@ export function ResultsPage({
       {/* Action buttons */}
       <div className="flex flex-col sm:flex-row gap-4">
         <button
-          onClick={() => navigate("/preces")}
+          onClick={() => navigate('/preces')}
           className="flex-1 bg-gray-600 hover:bg-gray-700 text-white font-medium py-4 px-6 rounded-lg transition-colors flex items-center justify-center text-lg"
         >
           <Home className="w-6 h-6 mr-3" />
@@ -306,8 +262,7 @@ export function ResultsPage({
           onClick={handleComplete}
           disabled={
             isSubmittingResults ||
-            (showContactForm &&
-              (!contactInfo.name.trim() || !contactInfo.email.trim()))
+            (showContactForm && (!contactInfo.name.trim() || !contactInfo.email.trim()))
           }
           className="flex-1 bg-primary-600 hover:bg-primary-700 text-white font-medium py-4 px-6 rounded-lg transition-colors flex items-center justify-center text-lg disabled:opacity-50 disabled:cursor-not-allowed"
         >

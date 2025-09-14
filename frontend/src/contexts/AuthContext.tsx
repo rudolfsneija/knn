@@ -22,7 +22,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const token = localStorage.getItem('admin-token');
     const userData = localStorage.getItem('admin-user');
-    
+
     if (token && userData) {
       try {
         const parsedUser = JSON.parse(userData);
@@ -40,10 +40,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const login = async (username: string, password: string): Promise<boolean> => {
     try {
       const response = await axios.post('/api/auth/login', { username, password });
-      
+
       if (response.data.success) {
         const { token, user } = response.data.data;
-        
+
         localStorage.setItem('admin-token', token);
         localStorage.setItem('admin-user', JSON.stringify(user));
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;

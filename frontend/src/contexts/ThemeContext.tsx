@@ -25,9 +25,9 @@ interface ThemeProviderProps {
   defaultTheme?: Theme;
 }
 
-export const ThemeProvider: React.FC<ThemeProviderProps> = ({ 
-  children, 
-  defaultTheme = 'light' 
+export const ThemeProvider: React.FC<ThemeProviderProps> = ({
+  children,
+  defaultTheme = 'light',
 }) => {
   const [theme, setTheme] = useState<Theme>(() => {
     // Check if we're in admin route to auto-set admin theme
@@ -36,7 +36,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
       if (path.startsWith('/admin')) {
         return 'admin';
       }
-      
+
       // Check localStorage for saved theme
       const saved = localStorage.getItem('theme') as Theme;
       return saved || defaultTheme;
@@ -57,10 +57,10 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
 
   useEffect(() => {
     const root = window.document.documentElement;
-    
+
     // Remove previous theme classes
     root.classList.remove('light', 'dark', 'admin-theme');
-    
+
     // Add current theme class
     if (theme === 'admin') {
       root.classList.add('admin-theme');
@@ -72,7 +72,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
       root.classList.add('light');
       document.body.style.backgroundColor = '#ffffff';
     }
-    
+
     // Save theme to localStorage (except admin theme which is route-based)
     if (theme !== 'admin') {
       localStorage.setItem('theme', theme);
@@ -94,10 +94,10 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
 
     // Listen for route changes
     window.addEventListener('popstate', handleLocationChange);
-    
+
     // Check initial route
     handleLocationChange();
-    
+
     return () => {
       window.removeEventListener('popstate', handleLocationChange);
     };
@@ -111,11 +111,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
     toggleTheme,
   };
 
-  return (
-    <ThemeContext.Provider value={value}>
-      {children}
-    </ThemeContext.Provider>
-  );
+  return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
 };
 
 export default ThemeContext;

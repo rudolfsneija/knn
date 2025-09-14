@@ -1,42 +1,54 @@
-import { GraduationCap, Check, Monitor, GitFork, Shield, Brain, MonitorCog, Building } from 'lucide-react';
+import {
+  GraduationCap,
+  Check,
+  Monitor,
+  GitFork,
+  Shield,
+  Brain,
+  MonitorCog,
+  Building,
+} from 'lucide-react';
 
 export function ItDrosibasApmacibas() {
   const features = [
-    "Kas ir kiberdrošība un kāpēc tā ir svarīga",
-    "Biežākie kiberdrošības draudi (piemēram, phishing, malware, ransomware)",
-    "Kā izveidot un uzturēt drošas paroles",
-    "Sociālās inženierijas uzbrukumi un kā no tiem izvairīties",
-    "Droša interneta pārlūkošana un datu šifrēšana",
-    "Mobilā drošība un attālinātā darba drošība",
-    "Ko darīt, ja notiek drošības incidents",
-    "Kā ziņot par drošības pārkāpumiem un incidentiem"
+    'Kas ir kiberdrošība un kāpēc tā ir svarīga',
+    'Biežākie kiberdrošības draudi (piemēram, phishing, malware, ransomware)',
+    'Kā izveidot un uzturēt drošas paroles',
+    'Sociālās inženierijas uzbrukumi un kā no tiem izvairīties',
+    'Droša interneta pārlūkošana un datu šifrēšana',
+    'Mobilā drošība un attālinātā darba drošība',
+    'Ko darīt, ja notiek drošības incidents',
+    'Kā ziņot par drošības pārkāpumiem un incidentiem',
   ];
 
   const trainingModules = [
     {
       icon: Brain,
-      title: "Izpratnes veicināšana",
-      description: "Sniegt darbiniekiem zināšanas par jaunākajiem kiberdrošības draudiem un riskiem. Izglītot par datu aizsardzības un privātuma jautājumiem, ievērojot normatīvos aktus un labākās prakses."
+      title: 'Izpratnes veicināšana',
+      description:
+        'Sniegt darbiniekiem zināšanas par jaunākajiem kiberdrošības draudiem un riskiem. Izglītot par datu aizsardzības un privātuma jautājumiem, ievērojot normatīvos aktus un labākās prakses.',
     },
     {
       icon: MonitorCog,
-      title: "Praktiskas zināšanas",
-      description: "Nodrošināt praktiskas iemaņas, kā atpazīt un novērst drošības incidentus. Mācīt pareizu tehnoloģiju un programmatūras lietošanu, lai nodrošinātu drošu darba vidi."
+      title: 'Praktiskas zināšanas',
+      description:
+        'Nodrošināt praktiskas iemaņas, kā atpazīt un novērst drošības incidentus. Mācīt pareizu tehnoloģiju un programmatūras lietošanu, lai nodrošinātu drošu darba vidi.',
     },
     {
       icon: Shield,
-      title: "Sistēmu aizsardzība",
-      description: "Apmācīt par efektīvu paroļu pārvaldību un divu faktoru autentifikācijas izmantošanu. Informēt par drošības protokoliem un procedūrām, kas nepieciešamas uzņēmuma IT infrastruktūras aizsardzībai."
-    }
+      title: 'Sistēmu aizsardzība',
+      description:
+        'Apmācīt par efektīvu paroļu pārvaldību un divu faktoru autentifikācijas izmantošanu. Informēt par drošības protokoliem un procedūrām, kas nepieciešamas uzņēmuma IT infrastruktūras aizsardzībai.',
+    },
   ];
 
   const benefits = [
-    "Pieredzējoši instruktori - IT drošības eksperti ar plašu pieredzi",
-    "Praktiskas nodarbības - teorētiskā un praktiskā daļa reālajam darbam",
-    "Pielāgojams saturs - programmas pielāgotas uzņēmuma vajadzībām",
-    "Aktuāls saturs - balstīts uz CERT.LV informāciju",
-    "Samazina kiberdrošības riskus uzņēmumā",
-    "Palielina darbinieku informētību par draudiem"
+    'Pieredzējoši instruktori - IT drošības eksperti ar plašu pieredzi',
+    'Praktiskas nodarbības - teorētiskā un praktiskā daļa reālajam darbam',
+    'Pielāgojams saturs - programmas pielāgotas uzņēmuma vajadzībām',
+    'Aktuāls saturs - balstīts uz CERT.LV informāciju',
+    'Samazina kiberdrošības riskus uzņēmumā',
+    'Palielina darbinieku informētību par draudiem',
   ];
 
   return (
@@ -49,7 +61,9 @@ export function ItDrosibasApmacibas() {
           </div>
           <h1 className="text-4xl font-bold text-gray-900 mb-4">IT drošības apmācības</h1>
           <p className="text-xl text-gray-600 max-w-4xl mx-auto">
-            Piedāvājam augstas kvalitātes IT drošības apmācības, kas ir paredzētas, lai paaugstinātu Jūsu uzņēmuma darbinieku izpratni par aktuālajiem drošības jautājumiem un jaunāko tehnoloģiju izmantošanu drošā veidā.
+            Piedāvājam augstas kvalitātes IT drošības apmācības, kas ir paredzētas, lai paaugstinātu
+            Jūsu uzņēmuma darbinieku izpratni par aktuālajiem drošības jautājumiem un jaunāko
+            tehnoloģiju izmantošanu drošā veidā.
           </p>
         </div>
 
@@ -83,12 +97,16 @@ export function ItDrosibasApmacibas() {
             <div className="text-center bg-secondary-50 p-6 rounded-lg shadow-sm">
               <Building className="w-12 h-12 text-primary-400 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-gray-900 mb-2">Klātienes apmācības</h3>
-              <p className="text-gray-600">Interaktīvas apmācības jūsu uzņēmuma telpās ar praktiskiem piemēriem</p>
+              <p className="text-gray-600">
+                Interaktīvas apmācības jūsu uzņēmuma telpās ar praktiskiem piemēriem
+              </p>
             </div>
             <div className="text-center bg-secondary-50 p-6 rounded-lg shadow-sm">
               <Monitor className="w-12 h-12 text-primary-400 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-gray-900 mb-2">Online apmācības</h3>
-              <p className="text-gray-600">Attālinātās apmācības ar interaktīviem materiāliem un testiem</p>
+              <p className="text-gray-600">
+                Attālinātās apmācības ar interaktīviem materiāliem un testiem
+              </p>
             </div>
             <div className="text-center bg-secondary-50 p-6 rounded-lg shadow-sm">
               <GitFork className="w-12 h-12 text-primary-400 mx-auto mb-4" />
@@ -118,11 +136,11 @@ export function ItDrosibasApmacibas() {
           <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">Apmācību avoti</h2>
           <div className="max-w-4xl mx-auto text-center">
             <p className="text-lg text-gray-700 mb-4">
-              Apmācību saturs ir izstrādāts, balstoties uz jaunāko informāciju no <strong>CERT.LV</strong> mājaslapas, 
-              kas ir Latvijas valsts kiberdrošības eksperti.
+              Apmācību saturs ir izstrādāts, balstoties uz jaunāko informāciju no{' '}
+              <strong>CERT.LV</strong> mājaslapas, kas ir Latvijas valsts kiberdrošības eksperti.
             </p>
             <p className="text-gray-600">
-              Tas nodrošina, ka mūsu piedāvātās apmācības ir balstītas uz aktuālākajām zināšanām un 
+              Tas nodrošina, ka mūsu piedāvātās apmācības ir balstītas uz aktuālākajām zināšanām un
               labāko praksi šajā jomā.
             </p>
           </div>
@@ -130,7 +148,9 @@ export function ItDrosibasApmacibas() {
 
         {/* Benefits */}
         <div className="mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-10 text-center">Kāpēc izvēlēties mūsu apmācības?</h2>
+          <h2 className="text-3xl font-bold text-gray-900 mb-10 text-center">
+            Kāpēc izvēlēties mūsu apmācības?
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {benefits.map((benefit, index) => (
               <div key={index} className="bg-white border border-gray-200 p-4 rounded-lg shadow-sm">
@@ -145,8 +165,13 @@ export function ItDrosibasApmacibas() {
 
         {/* CTA */}
         <div className="bg-primary-600 rounded-lg p-8 text-center text-white">
-          <h2 className="text-2xl font-bold mb-4">Gatavi uzlabot savu komandas kiberdrošības zināšanas?</h2>
-          <p className="mb-6">Sazinieties ar mums, lai uzzinātu vairāk par mūsu piedāvātajām IT drošības apmācībām un kā mēs varam palīdzēt Jūsu uzņēmumam nodrošināt drošāku darba vidi.</p>
+          <h2 className="text-2xl font-bold mb-4">
+            Gatavi uzlabot savu komandas kiberdrošības zināšanas?
+          </h2>
+          <p className="mb-6">
+            Sazinieties ar mums, lai uzzinātu vairāk par mūsu piedāvātajām IT drošības apmācībām un
+            kā mēs varam palīdzēt Jūsu uzņēmumam nodrošināt drošāku darba vidi.
+          </p>
           <a
             href="/sazinai?topic=it-drosibas-apmacibas"
             className="bg-white text-primary-400 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-block"

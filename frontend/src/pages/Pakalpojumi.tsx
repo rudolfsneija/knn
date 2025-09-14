@@ -4,53 +4,57 @@ import { Link } from 'react-router-dom';
 export function Pakalpojumi() {
   const services = [
     {
-      title: "NKDL prasību realizēšana",
-      description: "Nodrošinām obligāto minimālo kiberdrošības prasību ieviešanu un dokumentu kārtošanu visu veidu uzņēmumos",
+      title: 'NKDL prasību realizēšana',
+      description:
+        'Nodrošinām obligāto minimālo kiberdrošības prasību ieviešanu un dokumentu kārtošanu visu veidu uzņēmumos',
       icon: FileText,
-      path: "/pakalpojumi/nkl-prasibu-realizesana",
+      path: '/pakalpojumi/nkl-prasibu-realizesana',
       features: [
-        "Kiberdrošības politiku izstrāde", 
-        "Riska novērtējuma dokumentācija", 
-        "Atbilstības audits", 
-        "Dokumentu kārtošana un uzturēšana"
-      ]
+        'Kiberdrošības politiku izstrāde',
+        'Riska novērtējuma dokumentācija',
+        'Atbilstības audits',
+        'Dokumentu kārtošana un uzturēšana',
+      ],
     },
     {
-      title: "IT drošības apmācības",
-      description: "Nodrošinām IT drošības apmācības darbiniekiem, koncentrējoties uz svarīgākajiem mūsdienu kiberdrošības aspektiem",
+      title: 'IT drošības apmācības',
+      description:
+        'Nodrošinām IT drošības apmācības darbiniekiem, koncentrējoties uz svarīgākajiem mūsdienu kiberdrošības aspektiem',
       icon: GraduationCap,
-      path: "/pakalpojumi/it-drosibas-apmacibas",
+      path: '/pakalpojumi/it-drosibas-apmacibas',
       features: [
-        "Darbinieku kiberdrošības apmācības", 
-        "Phishing un sociālās inženierijas izglītība", 
-        "Drošas paroles un autentifikācijas prakses", 
-        "Incidentu reaģēšanas procedūras"
-      ]
+        'Darbinieku kiberdrošības apmācības',
+        'Phishing un sociālās inženierijas izglītība',
+        'Drošas paroles un autentifikācijas prakses',
+        'Incidentu reaģēšanas procedūras',
+      ],
     },
     {
-      title: "Wi-Fi risinājumi",
-      description: "Piedāvājam modernu industrijas bezvada tīkla risinājumu, kurš aptver vairākas drošības iespējas un aktuālākās tehniskās iespējas plašam klientu lokam",
+      title: 'Wi-Fi risinājumi',
+      description:
+        'Piedāvājam modernu industrijas bezvada tīkla risinājumu, kurš aptver vairākas drošības iespējas un aktuālākās tehniskās iespējas plašam klientu lokam',
       icon: Wifi,
-      path: "/pakalpojumi/bezvadu-wifi-risinajumi",
+      path: '/pakalpojumi/bezvadu-wifi-risinajumi',
       features: [
-        "Uzņēmuma Wi-Fi tīklu projektēšana", 
-        "Drošu bezvadu tīklu ieviešana", 
-        "Tīkla veiktspējas optimizācija", 
-        "Tehniskais atbalsts un uzturēšana"
-      ]
+        'Uzņēmuma Wi-Fi tīklu projektēšana',
+        'Drošu bezvadu tīklu ieviešana',
+        'Tīkla veiktspējas optimizācija',
+        'Tehniskais atbalsts un uzturēšana',
+      ],
     },
     {
-      title: "Videonovērošanas sistēmas",
-      description: "Nodarbojamies ar videonovērošanas sistēmu izplatīšanu, uzstādīšanu un nomu dažāda veida objektiem",
+      title: 'Videonovērošanas sistēmas',
+      description:
+        'Nodarbojamies ar videonovērošanas sistēmu izplatīšanu, uzstādīšanu un nomu dažāda veida objektiem',
       icon: Cctv,
-      path: "/pakalpojumi/videonovero-sistemas",
+      path: '/pakalpojumi/videonovero-sistemas',
       features: [
-        "Videonovērošanas sistēmu projektēšana", 
-        "Profesionāla uzstādīšana un konfigurācija", 
-        "Attālā piekļuve un monitorings", 
-        "Aprīkojuma noma un tehniskais atbalsts"
-      ]
-    }
+        'Videonovērošanas sistēmu projektēšana',
+        'Profesionāla uzstādīšana un konfigurācija',
+        'Attālā piekļuve un monitorings',
+        'Aprīkojuma noma un tehniskais atbalsts',
+      ],
+    },
   ];
 
   return (
@@ -64,15 +68,17 @@ export function Pakalpojumi() {
           {services.map((service, index) => {
             const IconComponent = service.icon;
             return (
-              <Link 
-                key={index} 
+              <Link
+                key={index}
                 to={service.path}
                 className="bg-secondary-50 rounded-lg shadow-lg p-8 hover:shadow-xl transition-all duration-200 block"
               >
                 <div className="w-16 h-16 bg-primary-600 rounded-full mx-auto mb-6 flex items-center justify-center">
                   <IconComponent className="w-8 h-8 text-white" />
                 </div>
-                <h3 className="text-2xl font-semibold text-gray-900 mb-4 text-center">{service.title}</h3>
+                <h3 className="text-2xl font-semibold text-gray-900 mb-4 text-center">
+                  {service.title}
+                </h3>
                 <p className="text-gray-600 mb-6 text-center">{service.description}</p>
                 <ul className="space-y-2">
                   {service.features.map((feature, featureIndex) => (
@@ -82,11 +88,11 @@ export function Pakalpojumi() {
                     </li>
                   ))}
                 </ul>
-                              <div className="text-right">
-                <span className="text-primary-400 hover:text-primary-500 font-medium">
-                  Uzzināt vairāk →
-                </span>
-              </div>
+                <div className="text-right">
+                  <span className="text-primary-400 hover:text-primary-500 font-medium">
+                    Uzzināt vairāk →
+                  </span>
+                </div>
               </Link>
             );
           })}

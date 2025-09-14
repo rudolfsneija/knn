@@ -9,12 +9,18 @@ interface ImagePreviewProps {
   onImageChange?: (files: FileList | null) => void;
 }
 
-export function ImagePreview({ selectedImages, existingImages, legacyImageUrl, isEditing, onImageChange }: ImagePreviewProps) {
+export function ImagePreview({
+  selectedImages,
+  existingImages,
+  legacyImageUrl,
+  isEditing,
+  onImageChange,
+}: ImagePreviewProps) {
   // Cleanup object URLs to prevent memory leaks
   useEffect(() => {
     return () => {
       if (selectedImages) {
-        Array.from(selectedImages).forEach(file => {
+        Array.from(selectedImages).forEach((file) => {
           URL.revokeObjectURL(URL.createObjectURL(file));
         });
       }
@@ -25,9 +31,7 @@ export function ImagePreview({ selectedImages, existingImages, legacyImageUrl, i
     <div className="space-y-6">
       {/* File Input */}
       <div>
-        <label className="block text-sm font-medium text-admin-text-secondary mb-2">
-          Attēli
-        </label>
+        <label className="block text-sm font-medium text-admin-text-secondary mb-2">Attēli</label>
         <input
           type="file"
           multiple
@@ -39,13 +43,11 @@ export function ImagePreview({ selectedImages, existingImages, legacyImageUrl, i
           Var izvēlēties vairākus attēlus. Pirmais būs galvenais attēls.
         </p>
       </div>
-      
+
       {/* Selected Images Preview */}
       {selectedImages && selectedImages.length > 0 && (
         <div>
-          <h4 className="text-sm font-medium text-admin-text-secondary mb-3">
-            Izvēlētie attēli:
-          </h4>
+          <h4 className="text-sm font-medium text-admin-text-secondary mb-3">Izvēlētie attēli:</h4>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {Array.from(selectedImages).map((file, index) => (
               <div key={index} className="relative group">
@@ -61,9 +63,7 @@ export function ImagePreview({ selectedImages, existingImages, legacyImageUrl, i
                     Galvenais
                   </span>
                 )}
-                <p className="text-xs text-admin-text-secondary mt-2 truncate px-1">
-                  {file.name}
-                </p>
+                <p className="text-xs text-admin-text-secondary mt-2 truncate px-1">{file.name}</p>
               </div>
             ))}
           </div>
@@ -73,9 +73,7 @@ export function ImagePreview({ selectedImages, existingImages, legacyImageUrl, i
       {/* Existing Images Preview for Edit Mode */}
       {isEditing && existingImages && existingImages.length > 0 && (
         <div>
-          <h4 className="text-sm font-medium text-admin-text-secondary mb-3">
-            Esošie attēli:
-          </h4>
+          <h4 className="text-sm font-medium text-admin-text-secondary mb-3">Esošie attēli:</h4>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {existingImages.map((image, index) => (
               <div key={image.id} className="relative group">
@@ -107,11 +105,7 @@ export function ImagePreview({ selectedImages, existingImages, legacyImageUrl, i
             Esošais attēls (legacy):
           </h4>
           <div className="aspect-square rounded-lg overflow-hidden border-2 border-admin-border max-w-xs">
-            <img
-              src={legacyImageUrl}
-              alt="Legacy image"
-              className="w-full h-full object-cover"
-            />
+            <img src={legacyImageUrl} alt="Legacy image" className="w-full h-full object-cover" />
           </div>
         </div>
       )}

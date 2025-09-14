@@ -34,7 +34,7 @@ export function SearchResults() {
   const categoryLabels = {
     aktualitates: 'Aktualitātes',
     services: 'Pakalpojumi',
-    preces: 'Preces'
+    preces: 'Preces',
   };
 
   const getCategoryIcon = (category: string) => {
@@ -60,16 +60,16 @@ export function SearchResults() {
 
   const truncateDescription = (description: string, maxLength: number = 200) => {
     if (description.length <= maxLength) return description;
-    
+
     // Find the last space before the max length
     const truncated = description.substring(0, maxLength);
     const lastSpaceIndex = truncated.lastIndexOf(' ');
-    
+
     // If we found a space, cut at that point, otherwise use the original truncation
     if (lastSpaceIndex > 0) {
       return description.substring(0, lastSpaceIndex).trim() + '...';
     }
-    
+
     return truncated.trim() + '...';
   };
 
@@ -85,9 +85,9 @@ export function SearchResults() {
             <ArrowLeft className="w-5 h-5 mr-2" />
             Atgriezties uz sākumlapu
           </Link>
-          
+
           <h1 className="text-3xl font-bold text-gray-900 mb-6">Meklēšanas rezultāti</h1>
-          
+
           {/* Search Input */}
           <div className="relative max-w-2xl">
             <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -129,7 +129,8 @@ export function SearchResults() {
             {/* Results Summary */}
             <div className="mb-8 p-4 bg-gray-50 rounded-lg">
               <p className="text-gray-700">
-                Atrasti <strong>{results.total}</strong> rezultāti meklējumam "<strong>{query}</strong>"
+                Atrasti <strong>{results.total}</strong> rezultāti meklējumam "
+                <strong>{query}</strong>"
               </p>
             </div>
 
@@ -162,14 +163,16 @@ export function SearchResults() {
                                 {categoryLabels[category as keyof typeof categoryLabels]}
                               </span>
                               {item.score !== undefined && (
-                                <span className={`text-sm font-medium ${getRelevanceColor(item.score)}`}>
+                                <span
+                                  className={`text-sm font-medium ${getRelevanceColor(item.score)}`}
+                                >
                                   Atbilstība: {Math.round((1 - item.score) * 100)}%
                                 </span>
                               )}
                             </div>
                           </div>
                         </div>
-                        
+
                         <p className="text-gray-600 leading-relaxed mb-4">
                           {truncateDescription(item.description)}
                         </p>

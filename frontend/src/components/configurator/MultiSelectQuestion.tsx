@@ -7,15 +7,15 @@ interface MultiSelectQuestionProps {
   updateAnswer: (questionId: string, value: string[]) => void;
 }
 
-export function MultiSelectQuestion({ question, currentValue, updateAnswer }: MultiSelectQuestionProps) {
+export function MultiSelectQuestion({
+  question,
+  currentValue,
+  updateAnswer,
+}: MultiSelectQuestionProps) {
   return (
     <div className="space-y-6">
-      <h3 className="text-2xl font-semibold text-gray-900 mb-6">
-        {question.title}
-      </h3>
-      {question.description && (
-        <p className="text-gray-600 mb-6">{question.description}</p>
-      )}
+      <h3 className="text-2xl font-semibold text-gray-900 mb-6">{question.title}</h3>
+      {question.description && <p className="text-gray-600 mb-6">{question.description}</p>}
       <div className="space-y-3">
         {question.options?.map((option) => {
           const isSelected = currentValue.includes(option.value);
@@ -30,20 +30,18 @@ export function MultiSelectQuestion({ question, currentValue, updateAnswer }: Mu
               }}
               className={`w-full p-4 text-left rounded-lg border-2 transition-colors ${
                 isSelected
-                  ? "border-primary-600 bg-primary-50 text-primary-900"
-                  : "border-gray-200 hover:border-gray-300"
+                  ? 'border-primary-600 bg-primary-50 text-primary-900'
+                  : 'border-gray-200 hover:border-gray-300'
               }`}
             >
               <div className="flex items-start justify-between">
                 <div className="flex items-start">
                   <CheckCircle
                     className={`w-5 h-5 mr-3 flex-shrink-0 mt-0.5 ${
-                      isSelected ? "text-primary-600" : "text-gray-400"
+                      isSelected ? 'text-primary-600' : 'text-gray-400'
                     }`}
                   />
-                  <span className="font-medium leading-relaxed">
-                    {option.label}
-                  </span>
+                  <span className="font-medium leading-relaxed">{option.label}</span>
                 </div>
                 {option.tooltip && (
                   <div className="relative group ml-2">

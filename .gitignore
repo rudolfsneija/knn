@@ -30,3 +30,6 @@ pids
 
 # ESLint cache
 .eslintcache
+
+# vscode settings
+.vscode/

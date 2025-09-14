@@ -18,7 +18,8 @@ export function AlnetConfiguratorBanner({ className = '' }: AlnetConfiguratorBan
               Nepieciešama videonovērošanas sistēma?
             </h2>
             <p className="text-gray-100 text-sm md:text-base lg:text-lg leading-relaxed">
-              Izmantojiet mūsu konfigurātoru, lai ātri un precīzi noteiktu ideālo videonovērošanas sistēmas licenci jūsu vajadzībām.
+              Izmantojiet mūsu konfigurātoru, lai ātri un precīzi noteiktu ideālo videonovērošanas
+              sistēmas licenci jūsu vajadzībām.
             </p>
           </div>
         </div>

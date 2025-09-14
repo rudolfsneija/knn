@@ -31,9 +31,7 @@ export function CategorySelector({ value, existingCategories, onChange }: Catego
 
   return (
     <div>
-      <label className="block text-sm font-medium text-admin-text-secondary mb-2">
-        Kategorija
-      </label>
+      <label className="block text-sm font-medium text-admin-text-secondary mb-2">Kategorija</label>
       {existingCategories.length > 0 ? (
         <div className="space-y-2">
           <select

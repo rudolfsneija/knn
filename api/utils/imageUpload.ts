@@ -30,7 +30,7 @@ export async function ensureUploadsDir(): Promise<void> {
   } catch {
     await mkdir(UPLOADS_DIR, { recursive: true });
   }
-  
+
   try {
     await access(IMAGES_DIR);
   } catch {
@@ -70,11 +70,11 @@ export async function processAndSaveImage(
   entityId: number
 ): Promise<ProcessedImage> {
   await ensureUploadsDir();
-  
+
   const imageUuid = uuidv4();
   const fileName = `${imageUuid}.${IMAGE_CONFIG.format}`;
   const filePath = path.join(IMAGES_DIR, fileName);
-  
+
   // Process image with sharp
   const processedImage = await sharp(file.buffer)
     .resize(IMAGE_CONFIG.maxWidth, IMAGE_CONFIG.maxHeight, {
@@ -86,7 +86,7 @@ export async function processAndSaveImage(
 
   // Get metadata
   const metadata = await sharp(filePath).metadata();
-  
+
   return {
     uuid: imageUuid,
     originalName: file.originalname,
@@ -106,26 +106,29 @@ export async function saveImageToDatabase(
   adminId: number,
   isMain: boolean = false
 ): Promise<number> {
-  const result = await run(`
+  const result = await run(
+    `
     INSERT INTO images (
       uuid, original_name, file_name, file_path, file_size, 
       mime_type, width, height, entity_type, entity_id, 
       is_main, admin_id
     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-  `, [
-    imageData.uuid,
-    imageData.originalName,
-    imageData.fileName,
-    imageData.filePath,
-    imageData.fileSize,
-    imageData.mimeType,
-    imageData.width,
-    imageData.height,
-    entityType,
-    entityId,
-    isMain ? 1 : 0,
-    adminId,
-  ]);
+  `,
+    [
+      imageData.uuid,
+      imageData.originalName,
+      imageData.fileName,
+      imageData.filePath,
+      imageData.fileSize,
+      imageData.mimeType,
+      imageData.width,
+      imageData.height,
+      entityType,
+      entityId,
+      isMain ? 1 : 0,
+      adminId,
+    ]
+  );
 
   return result.lastID!;
 }
@@ -134,20 +137,23 @@ export async function getEntityImages(
   entityType: 'produkti' | 'aktualitates',
   entityId: number
 ): Promise<any[]> {
-  return await queryAll(`
+  return await queryAll(
+    `
     SELECT * FROM images 
     WHERE entity_type = ? AND entity_id = ? 
     ORDER BY is_main DESC, created_at ASC
-  `, [entityType, entityId]);
+  `,
+    [entityType, entityId]
+  );
 }
 
 export async function deleteImage(imageId: number, adminId: number): Promise<boolean> {
   // Get image info first
-  const image = await query(
-    'SELECT * FROM images WHERE id = ? AND admin_id = ?',
-    [imageId, adminId]
-  );
-  
+  const image = await query('SELECT * FROM images WHERE id = ? AND admin_id = ?', [
+    imageId,
+    adminId,
+  ]);
+
   if (!image) {
     return false;
   }
@@ -161,10 +167,7 @@ export async function deleteImage(imageId: number, adminId: number): Promise<boo
   }
 
   // Delete from database
-  const result = await run(
-    'DELETE FROM images WHERE id = ? AND admin_id = ?',
-    [imageId, adminId]
-  );
+  const result = await run('DELETE FROM images WHERE id = ? AND admin_id = ?', [imageId, adminId]);
 
   return result.changes > 0;
 }
@@ -176,18 +179,24 @@ export async function setMainImage(
   adminId: number
 ): Promise<boolean> {
   // First, unset all main images for this entity
-  await run(`
+  await run(
+    `
     UPDATE images 
     SET is_main = 0 
     WHERE entity_type = ? AND entity_id = ?
-  `, [entityType, entityId]);
+  `,
+    [entityType, entityId]
+  );
 
   // Set the specified image as main
-  const result = await run(`
+  const result = await run(
+    `
     UPDATE images 
     SET is_main = 1 
     WHERE id = ? AND admin_id = ? AND entity_type = ? AND entity_id = ?
-  `, [imageId, adminId, entityType, entityId]);
+  `,
+    [imageId, adminId, entityType, entityId]
+  );
 
   return result.changes > 0;
 }
@@ -204,11 +213,11 @@ export function createImageServingMiddleware() {
     try {
       const imagePath = req.params[0]; // Capture the full path
       const fullPath = path.join(IMAGES_DIR, imagePath);
-      
+
       // Security check - ensure path is within images directory
       const resolvedPath = path.resolve(fullPath);
       const resolvedImagesDir = path.resolve(IMAGES_DIR);
-      
+
       if (!resolvedPath.startsWith(resolvedImagesDir)) {
         return res.status(403).json({ error: 'Access denied' });
       }
@@ -223,11 +232,10 @@ export function createImageServingMiddleware() {
       // Set appropriate headers
       res.setHeader('Content-Type', 'image/webp');
       res.setHeader('Cache-Control', 'public, max-age=31536000'); // 1 year
-      
+
       // Stream the file
       const fileStream = fs.createReadStream(fullPath);
       fileStream.pipe(res);
-      
     } catch (error) {
       console.error('Error serving image:', error);
       res.status(500).json({ error: 'Internal server error' });

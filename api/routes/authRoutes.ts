@@ -12,7 +12,7 @@ router.post('/login', async (req, res) => {
     if (!username || !password) {
       return res.status(400).json({
         success: false,
-        error: 'Username and password are required'
+        error: 'Username and password are required',
       });
     }
 
@@ -25,17 +25,17 @@ router.post('/login', async (req, res) => {
     if (!user) {
       return res.status(401).json({
         success: false,
-        error: 'Invalid credentials'
+        error: 'Invalid credentials',
       });
     }
 
     // Compare password with stored hash using bcrypt
     const isValidPassword = await comparePassword(password, user.password_hash);
-    
+
     if (!isValidPassword) {
       return res.status(401).json({
         success: false,
-        error: 'Invalid credentials'
+        error: 'Invalid credentials',
       });
     }
 
@@ -50,14 +50,14 @@ router.post('/login', async (req, res) => {
       message: 'Login successful',
       data: {
         user: userWithoutPassword,
-        token: token
-      }
+        token: token,
+      },
     });
   } catch (error) {
     console.error('Error during login:', error);
     res.status(500).json({
       success: false,
-      error: 'Login failed'
+      error: 'Login failed',
     });
   }
 });
@@ -67,7 +67,7 @@ router.post('/logout', (req, res) => {
   // In a real app with JWT, you might blacklist the token
   res.json({
     success: true,
-    message: 'Logout successful'
+    message: 'Logout successful',
   });
 });
 

@@ -20,10 +20,7 @@ export function AdminHeader({ title, onLogout }: AdminHeaderProps) {
             >
               ← Atpakaļ uz paneli
             </Link>
-            <button
-              onClick={onLogout}
-              className="admin-button-danger"
-            >
+            <button onClick={onLogout} className="admin-button-danger">
               Iziet
             </button>
           </div>

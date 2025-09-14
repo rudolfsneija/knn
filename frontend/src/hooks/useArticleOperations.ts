@@ -21,7 +21,7 @@ export function useArticleOperations() {
       console.log('Fetching articles...');
       const token = localStorage.getItem('admin-token');
       console.log('Auth token:', token ? 'Present' : 'Missing');
-      
+
       if (!token) {
         console.error('No authentication token found');
         setError('Nav autentifikācijas atslēgas');
@@ -31,12 +31,12 @@ export function useArticleOperations() {
 
       const response = await axios.get('/api/aktualitates', {
         headers: {
-          Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       });
-      
+
       console.log('API Response:', response.data);
-      
+
       if (response.data.success) {
         setArticles(response.data.data);
         setError(null);
@@ -46,12 +46,16 @@ export function useArticleOperations() {
       }
     } catch (error) {
       console.error('Error fetching articles:', error);
-      if (axios.isAxiosError(error) && (error.response?.status === 401 || error.response?.status === 403)) {
+      if (
+        axios.isAxiosError(error) &&
+        (error.response?.status === 401 || error.response?.status === 403)
+      ) {
         handleAuthError();
       } else {
-        setError(axios.isAxiosError(error) ? 
-          `Kļūda ielādējot aktualitātes: ${error.message}` : 
-          'Nezināma kļūda ielādējot aktualitātes'
+        setError(
+          axios.isAxiosError(error)
+            ? `Kļūda ielādējot aktualitātes: ${error.message}`
+            : 'Nezināma kļūda ielādējot aktualitātes'
         );
       }
     } finally {
@@ -75,15 +79,19 @@ export function useArticleOperations() {
       return axios.post(`/api/aktualitates/${articleId}/images`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
-          Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       });
     });
 
     await Promise.all(uploadPromises);
   };
 
-  const saveArticle = async (formData: ArticleFormData, selectedImages: FileList | null, editingId?: number) => {
+  const saveArticle = async (
+    formData: ArticleFormData,
+    selectedImages: FileList | null,
+    editingId?: number
+  ) => {
     const token = localStorage.getItem('admin-token');
     if (!token) {
       console.error('No authentication token found');
@@ -93,13 +101,13 @@ export function useArticleOperations() {
 
     const headers = {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     };
 
     console.log('Submitting article data:', formData);
-    
+
     let articleId: number;
-    
+
     if (editingId) {
       await axios.put(`/api/aktualitates/${editingId}`, formData, { headers });
       articleId = editingId;
@@ -122,13 +130,16 @@ export function useArticleOperations() {
       const token = localStorage.getItem('admin-token');
       await axios.delete(`/api/aktualitates/${id}`, {
         headers: {
-          Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       });
       fetchArticles();
     } catch (error) {
       console.error('Error deleting article:', error);
-      if (axios.isAxiosError(error) && (error.response?.status === 401 || error.response?.status === 403)) {
+      if (
+        axios.isAxiosError(error) &&
+        (error.response?.status === 401 || error.response?.status === 403)
+      ) {
         handleAuthError();
       } else {
         alert('Kļūda dzēšot aktualitāti');
@@ -143,6 +154,6 @@ export function useArticleOperations() {
     fetchArticles,
     saveArticle,
     deleteArticle,
-    setError
+    setError,
   };
 }

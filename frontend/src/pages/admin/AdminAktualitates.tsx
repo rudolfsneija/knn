@@ -47,7 +47,7 @@ export function AdminAktualitates() {
     content: '',
     excerpt: '',
     created_at: '',
-    published: false
+    published: false,
   });
   const [selectedImages, setSelectedImages] = useState<FileList | null>(null);
 
@@ -55,7 +55,7 @@ export function AdminAktualitates() {
   useEffect(() => {
     return () => {
       if (selectedImages) {
-        Array.from(selectedImages).forEach(file => {
+        Array.from(selectedImages).forEach((file) => {
           URL.revokeObjectURL(URL.createObjectURL(file));
         });
       }
@@ -71,7 +71,7 @@ export function AdminAktualitates() {
     try {
       const token = localStorage.getItem('admin-token');
       console.log('Auth token:', token ? 'Present' : 'Missing');
-      
+
       if (!token) {
         console.error('No authentication token found');
         navigate('/admin/login');
@@ -80,8 +80,8 @@ export function AdminAktualitates() {
 
       const response = await axios.get('/api/aktualitates', {
         headers: {
-          Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       });
       if (response.data.success) {
         setAktualitates(response.data.data);
@@ -90,7 +90,10 @@ export function AdminAktualitates() {
       }
     } catch (error) {
       console.error('Error fetching aktualitātes:', error);
-      if (axios.isAxiosError(error) && (error.response?.status === 401 || error.response?.status === 403)) {
+      if (
+        axios.isAxiosError(error) &&
+        (error.response?.status === 401 || error.response?.status === 403)
+      ) {
         console.error('Authentication failed, removing token and redirecting to login');
         localStorage.removeItem('admin-token');
         localStorage.removeItem('admin-user');
@@ -107,7 +110,8 @@ export function AdminAktualitates() {
       return;
     }
     fetchAktualitates();
-  }, [user, navigate, fetchAktualitates]);  const uploadImages = async (aktualitateId: number, files: FileList) => {
+  }, [user, navigate, fetchAktualitates]);
+  const uploadImages = async (aktualitateId: number, files: FileList) => {
     try {
       const token = localStorage.getItem('admin-token');
       const uploadPromises = Array.from(files).map(async (file, index) => {
@@ -118,8 +122,8 @@ export function AdminAktualitates() {
         return axios.post(`/api/aktualitates/${aktualitateId}/images`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
-            Authorization: `Bearer ${token}`
-          }
+            Authorization: `Bearer ${token}`,
+          },
         });
       });
 
@@ -137,11 +141,11 @@ export function AdminAktualitates() {
       const token = localStorage.getItem('admin-token');
       const headers = {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
       };
 
       let aktualitateId: number;
-      
+
       if (editingId) {
         await axios.put(`/api/aktualitates/${editingId}`, formData, { headers });
         aktualitateId = editingId;
@@ -172,7 +176,7 @@ export function AdminAktualitates() {
       content: aktualitate.content,
       excerpt: aktualitate.excerpt || '',
       created_at: aktualitate.created_at.split('T')[0],
-      published: aktualitate.published
+      published: aktualitate.published,
     });
     setEditingId(aktualitate.id);
     setShowForm(true);
@@ -184,8 +188,8 @@ export function AdminAktualitates() {
         const token = localStorage.getItem('admin-token');
         await axios.delete(`/api/aktualitates/${id}`, {
           headers: {
-            Authorization: `Bearer ${token}`
-          }
+            Authorization: `Bearer ${token}`,
+          },
         });
         fetchAktualitates();
       } catch (error) {
@@ -236,7 +240,7 @@ export function AdminAktualitates() {
         </div>
       </header>
 
-            <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Add/Edit Form */}
         <div className="admin-card p-6 mb-8">
           <div className="flex justify-between items-center">
@@ -244,10 +248,7 @@ export function AdminAktualitates() {
               {editingId ? 'Rediģēt aktualitāti' : 'Pievienot jaunu aktualitāti'}
             </h2>
             {!showForm ? (
-              <button
-                onClick={() => setShowForm(true)}
-                className="admin-button-primary"
-              >
+              <button onClick={() => setShowForm(true)} className="admin-button-primary">
                 Pievienot aktualitāti
               </button>
             ) : (
@@ -255,7 +256,13 @@ export function AdminAktualitates() {
                 onClick={() => {
                   setShowForm(false);
                   setEditingId(null);
-                  setFormData({ title: '', content: '', excerpt: '', created_at: '', published: false });
+                  setFormData({
+                    title: '',
+                    content: '',
+                    excerpt: '',
+                    created_at: '',
+                    published: false,
+                  });
                   setSelectedImages(null);
                 }}
                 className="text-admin-text-secondary hover:text-admin-text-primary transition-colors"
@@ -408,50 +415,56 @@ export function AdminAktualitates() {
                   )}
 
                   {/* Existing Images Preview for Edit Mode */}
-                  {editingId && aktualitates.find(a => a.id === editingId)?.images && aktualitates.find(a => a.id === editingId)!.images!.length > 0 && (
-                    <div>
-                      <h4 className="text-sm font-medium text-admin-text-secondary mb-3">
-                        Esošie attēli:
-                      </h4>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        {aktualitates.find(a => a.id === editingId)!.images!.map((image, index) => (
-                          <div key={image.id} className="relative group">
-                            <div className="aspect-square rounded-lg overflow-hidden border-2 border-admin-border">
-                              <img
-                                src={image.url}
-                                alt={`Existing ${index + 1}`}
-                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
-                              />
-                            </div>
-                            {image.is_main && (
-                              <span className="absolute top-2 left-2 bg-admin-accent-primary text-white text-xs px-2 py-1 rounded-full font-medium">
-                                Galvenais
-                              </span>
-                            )}
-                            <p className="text-xs text-admin-text-secondary mt-2 truncate px-1">
-                              {image.original_name}
-                            </p>
-                          </div>
-                        ))}
+                  {editingId &&
+                    aktualitates.find((a) => a.id === editingId)?.images &&
+                    aktualitates.find((a) => a.id === editingId)!.images!.length > 0 && (
+                      <div>
+                        <h4 className="text-sm font-medium text-admin-text-secondary mb-3">
+                          Esošie attēli:
+                        </h4>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                          {aktualitates
+                            .find((a) => a.id === editingId)!
+                            .images!.map((image, index) => (
+                              <div key={image.id} className="relative group">
+                                <div className="aspect-square rounded-lg overflow-hidden border-2 border-admin-border">
+                                  <img
+                                    src={image.url}
+                                    alt={`Existing ${index + 1}`}
+                                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
+                                  />
+                                </div>
+                                {image.is_main && (
+                                  <span className="absolute top-2 left-2 bg-admin-accent-primary text-white text-xs px-2 py-1 rounded-full font-medium">
+                                    Galvenais
+                                  </span>
+                                )}
+                                <p className="text-xs text-admin-text-secondary mt-2 truncate px-1">
+                                  {image.original_name}
+                                </p>
+                              </div>
+                            ))}
+                        </div>
                       </div>
-                    </div>
-                  )}
+                    )}
 
                   {/* Legacy image_url Preview for Edit Mode */}
-                  {editingId && aktualitates.find(a => a.id === editingId)?.image_url && !aktualitates.find(a => a.id === editingId)?.images?.length && (
-                    <div>
-                      <h4 className="text-sm font-medium text-admin-text-secondary mb-3">
-                        Esošais attēls (legacy):
-                      </h4>
-                      <div className="aspect-square rounded-lg overflow-hidden border-2 border-admin-border max-w-xs">
-                        <img
-                          src={aktualitates.find(a => a.id === editingId)!.image_url}
-                          alt="Legacy image"
-                          className="w-full h-full object-cover"
-                        />
+                  {editingId &&
+                    aktualitates.find((a) => a.id === editingId)?.image_url &&
+                    !aktualitates.find((a) => a.id === editingId)?.images?.length && (
+                      <div>
+                        <h4 className="text-sm font-medium text-admin-text-secondary mb-3">
+                          Esošais attēls (legacy):
+                        </h4>
+                        <div className="aspect-square rounded-lg overflow-hidden border-2 border-admin-border max-w-xs">
+                          <img
+                            src={aktualitates.find((a) => a.id === editingId)!.image_url}
+                            alt="Legacy image"
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
                       </div>
-                    </div>
-                  )}
+                    )}
                 </div>
               </div>
             </form>
@@ -489,7 +502,7 @@ export function AdminAktualitates() {
                         />
                       </div>
                     )}
-                    
+
                     {/* Article Details */}
                     <div className="flex-1 min-w-0">
                       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-4">
@@ -499,7 +512,7 @@ export function AdminAktualitates() {
                               {aktualitate.title}
                             </h4>
                           </div>
-                          
+
                           <div className="flex flex-wrap gap-2 mb-3">
                             {aktualitate.published ? (
                               <span className="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full font-medium">
@@ -512,7 +525,7 @@ export function AdminAktualitates() {
                             )}
                           </div>
                         </div>
-                        
+
                         {/* Action Buttons */}
                         <div className="flex space-x-3 flex-shrink-0">
                           <button
@@ -529,21 +542,23 @@ export function AdminAktualitates() {
                           </button>
                         </div>
                       </div>
-                      
+
                       <div className="space-y-3">
                         <p className="text-admin-text-secondary leading-relaxed">
-                          {aktualitate.excerpt || (aktualitate.content.length > 300
-                            ? `${aktualitate.content.substring(0, 200)}...`
-                            : aktualitate.content)}
+                          {aktualitate.excerpt ||
+                            (aktualitate.content.length > 300
+                              ? `${aktualitate.content.substring(0, 200)}...`
+                              : aktualitate.content)}
                         </p>
-                        
+
                         <div className="flex flex-wrap items-center gap-4 text-sm text-admin-text-secondary">
                           <span>
                             {new Date(aktualitate.created_at).toLocaleDateString('lv-LV')}
                           </span>
                           {aktualitate.images && aktualitate.images.length > 0 && (
                             <span>
-                              {aktualitate.images.length} attēl{aktualitate.images.length === 1 ? 's' : 'i'}
+                              {aktualitate.images.length} attēl
+                              {aktualitate.images.length === 1 ? 's' : 'i'}
                             </span>
                           )}
                         </div>

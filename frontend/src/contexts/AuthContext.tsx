@@ -28,7 +28,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         const parsedUser = JSON.parse(userData);
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         setUser(parsedUser);
-      } catch (error) {
+      } catch {
         localStorage.removeItem('admin-token');
         localStorage.removeItem('admin-user');
         delete axios.defaults.headers.common['Authorization'];
@@ -75,6 +75,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useAuth() {
   const context = useContext(AuthContext);
   if (context === undefined) {

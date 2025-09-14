@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { AlnetConfiguratorBanner } from '../components/AlnetConfiguratorBanner';
+import { ConfiguratorBanner } from '../components/configurator/ConfiguratorBanner';
 
 interface Prece {
   id: number;
@@ -195,7 +195,15 @@ export function Preces() {
                 selectedCategory === 'Videonoverosanas sistemas' ||
                 selectedCategory === 'Videonovērošanas sistēmas'
               );
-            })() && <AlnetConfiguratorBanner className="mb-8" />}
+            })() && (
+              <ConfiguratorBanner
+                title="Nepieciešama videonovērošanas sistēma?"
+                description="Izmantojiet mūsu konfigurātoru, lai ātri un precīzi noteiktu ideālo videonovērošanas sistēmas licenci jūsu vajadzībām."
+                buttonText="Sākt konfigurēt"
+                buttonHref="/alnet-konfigurators"
+                backgroundImage="/images/milesight.jpg"
+              />
+            )}
 
             {/* Loading state for products */}
             {loading && (

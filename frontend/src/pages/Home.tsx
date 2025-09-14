@@ -214,16 +214,6 @@ export function Home() {
                   </a>
                 ))}
               </div>
-
-              {/* <div className="text-center">
-                <a
-                  href="/aktualitates"
-                  className="bg-primary-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary-600 transition-colors inline-flex items-center"
-                >
-                  Skatīt visas aktualitātes
-                  <ArrowRight className="w-5 h-5 ml-2" />
-                </a>
-              </div> */}
             </>
           )}
         </div>
@@ -234,7 +224,7 @@ export function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">Gatavi uzsākt sadarbību?</h2>
           <p className="text-lg text-gray-600 mb-8">
-            Sazinieties ar mums jau šodien un uzziniet vairāk par mūsu pakalpojumiem
+            Sazinieties ar mums un uzziniet vairāk par mūsu pakalpojumiem
           </p>
           <a
             href="/sazinai"

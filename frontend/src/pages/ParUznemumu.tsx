@@ -18,23 +18,23 @@ const musuPieredze = [
 const sertifikati = [
   {
     name: 'Juniper Networks Certified Associate, Junos (JNCIA-Junos)',
-    logo: '/logo/JNCIA-Junos.png',
+    logo: '/logo/par_mums/JNCIA-Junos.png',
   },
   {
     name: 'AWS Certified Cloud Practitioner',
-    logo: '/logo/AWS_Certified_Cloud_Practitioner.png',
+    logo: '/logo/par_mums/AWS_Certified_Cloud_Practitioner.png',
   },
   {
     name: 'CCNA',
-    logo: '/logo/Cisco_CCNA.png',
+    logo: '/logo/par_mums/Cisco_CCNA.png',
   },
   {
     name: 'MikroTik Certified Network Associate (MTCNA)',
-    logo: '/logo/MTCNA.png',
+    logo: '/logo/par_mums/MTCNA.png',
   },
   {
     name: 'MikroTik Certified Routing Engineer (MTCRE)',
-    logo: '/logo/MTCRE.png',
+    logo: '/logo/par_mums/MTCRE.png',
   },
 ];
 
@@ -43,19 +43,19 @@ const sadarbribasPartneri = [
     name: 'NEIJA T',
     description:
       'Neija Racing Quads specializējas motokrosa kvadraciklu būvē, apkopē, detaļu ražošanā un izplatībā. Vairāk nekā 30 gadu pieredze motosportā. Neija Racing Quads būvētie kvadracikli ir guvuši sasniegumus Eiropas mērogā.',
-    logo: '/logo/neija-logo.png',
+    logo: '/logo/par_mums/neija-logo.png',
   },
   {
     name: 'Maksikoms',
     description:
       'SIA Maksikoms tika nodibināta 1998. gadā ar mērķi sniegt augstas kvalitātes IT pakalpojumus korporatīvajiem klientiem. Uzņēmuma veidotie IT risinājumi ļauj mūsu klientiem optimizēt darbu, ietaupīt laiku un līdzekļus dažādu uzdevumu risināšanā.',
-    logo: '/logo/maksikoms.png',
+    logo: '/logo/par_mums/maksikoms.png',
   },
   {
     name: 'FINSEL',
     description:
       'SIA FINSEL ir profesionāls grāmatvedības uzņēmums, kas piedāvā plašu pakalpojumu klāstu, tostarp grāmatvedības uzskaiti, nodokļu konsultācijas un finanšu analīzi. Mūsu komanda apvieno pieredzi un zināšanas, lai nodrošinātu klientiem individuālus risinājumus.',
-    logo: '/logo/finsel.png',
+    logo: '/logo/par_mums/finsel.png',
   },
 ];
 

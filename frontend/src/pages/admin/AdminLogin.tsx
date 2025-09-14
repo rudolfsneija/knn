@@ -38,7 +38,7 @@ export function AdminLogin() {
       } else {
         setError('Nepareizs lietotājvārds vai parole');
       }
-    } catch (error) {
+    } catch {
       setError('Pieslēgšanās kļūda. Lūdzu mēģiniet vēlreiz.');
     } finally {
       setIsLoading(false);

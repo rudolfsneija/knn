@@ -172,7 +172,7 @@ export function Sazinai() {
                 >
                   <option value="">Izvēlēties tēmu</option>
                   <option value="konsultacijas">Konsultācijas</option>
-                  <option value="nkl-prasibu-realizesana">NKL prasību realizēšana</option>
+                  <option value="nkl-prasibu-realizesana">NKDL prasību realizēšana</option>
                   <option value="it-drosibas-apmacibas">IT drošības apmācības</option>
                   <option value="bezvadu-wifi-risinajumi">Wi-Fi risinājumi</option>
                   <option value="videonovero-sistemas">Videonovērošanas sistēmas</option>

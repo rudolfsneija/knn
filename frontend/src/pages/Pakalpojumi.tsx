@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export function Pakalpojumi() {
   const services = [
     {
-      title: "NKL prasību realizēšana",
+      title: "NKDL prasību realizēšana",
       description: "Nodrošinām obligāto minimālo kiberdrošības prasību ieviešanu un dokumentu kārtošanu visu veidu uzņēmumos",
       icon: FileText,
       path: "/pakalpojumi/nkl-prasibu-realizesana",

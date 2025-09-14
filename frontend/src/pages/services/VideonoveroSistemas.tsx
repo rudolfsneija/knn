@@ -27,17 +27,8 @@ export function VideonoveroSistemas() {
     {
       icon: Clock,
       title: "24/7 uzraudzība",
-      description: "Nepārtraukta sistēmas darbības uzraudzība un tehniskais atbalsts"
+      description: "Nepārtraukta sistēmas darbības nodrošināšana un tehniskais atbalsts"
     }
-  ];
-
-  const cameraTypes = [
-    "Dome kameras iekštelpām",
-    "Bullet kameras ārpusē", 
-    "PTZ kameras ar zoom funkciju",
-    "IP kameras ar tīkla savienojumu",
-    "Analītiskās kameras ar AI",
-    "Termālās kameras"
   ];
 
   const benefits = [
@@ -94,36 +85,6 @@ export function VideonoveroSistemas() {
             })}
           </div>
         </div>
-
-        {/* Camera Types */}
-        <div className="mb-16 bg-secondary-100 rounded-lg p-8">
-          <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">Kameru veidi</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {cameraTypes.map((type, index) => (
-              <div key={index} className="bg-white p-4 rounded-lg shadow-sm">
-                <div className="flex items-center">
-                  <Check className="w-5 h-5 text-primary-800 mr-3 flex-shrink-0" />
-                  <span className="text-gray-900 font-medium">{type}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Features */}
-        {/* <div className="mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Ko iekļauj mūsu pakalpojums</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {features.map((feature, index) => (
-              <div key={index} className="bg-white border border-gray-200 p-6 rounded-lg shadow-sm">
-                <div className="flex items-center">
-                  <Check className="w-6 h-6 text-primary-800 mr-4 flex-shrink-0" />
-                  <span className="text-gray-900 font-medium">{feature}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div> */}
 
         {/* Industries */}
         <div className="mb-16">

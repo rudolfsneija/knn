@@ -36,9 +36,9 @@ export function NklPrasibuRealizesana() {
           <div className="w-24 h-24 bg-primary-800 rounded-full mx-auto mb-6 flex items-center justify-center">
             <Scale className="w-12 h-12 text-white" />
           </div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">NKL prasību realizēšana</h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">NKDL prasību realizēšana</h1>
           <p className="text-xl text-gray-700 max-w-4xl mx-auto">
-            KNN Serviss piedāvā uzņēmumiem nodrošināt Nacionālā kiberdrošības likumā (turpmāk - NKL) noteiktās kiberdrošības prasības, kas tiek aprakstītas NKL 18. pantā, 19. pantā un 22. pantā minētajiem pakalpojuma sniedzējiem.
+            KNN Serviss piedāvā uzņēmumiem nodrošināt Nacionālā kiberdrošības likumā (turpmāk - NKDL) noteiktās kiberdrošības prasības, kas tiek aprakstītas NKDL 18. pantā, 19. pantā un 22. pantā minētajiem pakalpojuma sniedzējiem.
           </p>
         </div>
 
@@ -59,7 +59,7 @@ export function NklPrasibuRealizesana() {
 
         {/* Process */}
         <div className="mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Kādiem pakalpojuma sniedzējiem attiecas NKL?</h2>
+          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Kādiem pakalpojuma sniedzējiem attiecas NKDL?</h2>
           
           {/* Three equal columns */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -94,7 +94,7 @@ export function NklPrasibuRealizesana() {
             <div className="text-center">
               <ListCheck className="w-12 h-12 text-primary-800 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-gray-900 mb-2">Pilna atbilstība</h3>
-              <p className="text-gray-700">Garantējam atbilstību visām NKL prasībām un standartiem</p>
+              <p className="text-gray-700">Garantējam atbilstību visām NKDL prasībām un standartiem</p>
             </div>
             <div className="text-center">
               <PencilRuler className="w-12 h-12 text-primary-800 mx-auto mb-4" />
@@ -126,7 +126,7 @@ export function NklPrasibuRealizesana() {
         {/* CTA */}
         <div className="bg-primary-800 rounded-lg p-8 text-center text-white">
           <h2 className="text-2xl font-bold mb-4">Gatavi sākt?</h2>
-          <p className="mb-6">Sazinieties ar mums, lai uzsāktu NKL prasību ieviešanu jūsu uzņēmumā</p>
+          <p className="mb-6">Sazinieties ar mums, lai uzsāktu NKDL prasību ieviešanu jūsu uzņēmumā</p>
           <a
             href="/sazinai?topic=nkl-prasibu-realizesana"
             className="bg-white text-primary-800 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-block"

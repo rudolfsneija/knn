@@ -11,11 +11,11 @@ export interface SearchItem {
 export const staticServicesData: SearchItem[] = [
   {
     id: 'service-nkl',
-    title: 'NKL prasību realizēšana',
+    title: 'NKDL prasību realizēšana',
     description: 'Palīdzam uzņēmumiem izpildīt Nacionālā kiberdrošības likuma prasības un standartus',
     category: 'services',
     url: '/pakalpojumi/nkl-prasibu-realizesana',
-    keywords: ['NKL', 'prasības','kiberdrosība', 'likums', 'nacionālais', 'kiberdrošība']
+    keywords: ['NKL', 'NKDL', 'prasības','kiberdrosība', 'likums', 'nacionālais', 'kiberdrošība']
   },
   {
     id: 'service-wifi',

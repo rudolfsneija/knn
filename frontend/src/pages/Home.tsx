@@ -107,7 +107,7 @@ export function Home() {
                 <FileText className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-xl font-semibold mb-2">
-                NKL prasību realizēšana
+                NKDL prasību realizēšana
               </h3>
               <p className="text-gray-600 mb-4">
                 Nodrošinām obligāto minimālo kiberdrošības prasību ieviešanu un
@@ -131,7 +131,7 @@ export function Home() {
                 IT drošības apmācības
               </h3>
               <p className="text-gray-600 mb-4">
-                Nodrošinām IT drošības apmācības darbiniekiem, koncentrējoties
+                Nodrošinām IT drošības apmācības darbiniekiem un IT personālam, koncentrējoties
                 uz svarīgākajiem mūsdienu kiberdrošības aspektiem.
               </p>
               <div className="text-right">
@@ -153,8 +153,7 @@ export function Home() {
               </h3>
               <p className="text-gray-600 mb-4">
                 Piedāvājam modernu industrijas bezvada tīkla risinājumu, kurš
-                aptver vairākas drošības iespējas un aktuālākās tehniskās
-                iespējas plašam klientu lokam.
+                aptver dažādas funkcijas plašam klientu lokam.
               </p>
               <div className="text-right">
                 <span className="text-primary-800 hover:text-primary-900 font-medium">

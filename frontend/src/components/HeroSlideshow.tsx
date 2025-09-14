@@ -169,16 +169,33 @@ export function HeroSlideshow({
       {/* Navigation arrows */}
       {showNavigation && slides.length > 1 && (
         <>
+          {/* Mobile arrows - positioned at bottom */}
           <button
             onClick={prevSlide}
-            className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black bg-opacity-50 hover:bg-opacity-70 text-white transition-all duration-200 z-20"
+            className="absolute left-2 bottom-16 p-2 rounded-full bg-black bg-opacity-50 hover:bg-opacity-70 text-white transition-all duration-200 z-20 sm:hidden"
+            aria-label="Previous slide"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          <button
+            onClick={nextSlide}
+            className="absolute right-2 bottom-16 p-2 rounded-full bg-black bg-opacity-50 hover:bg-opacity-70 text-white transition-all duration-200 z-20 sm:hidden"
+            aria-label="Next slide"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+          
+          {/* Desktop arrows - positioned at center */}
+          <button
+            onClick={prevSlide}
+            className="hidden sm:block absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black bg-opacity-50 hover:bg-opacity-70 text-white transition-all duration-200 z-20"
             aria-label="Previous slide"
           >
             <ChevronLeft className="w-6 h-6" />
           </button>
           <button
             onClick={nextSlide}
-            className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black bg-opacity-50 hover:bg-opacity-70 text-white transition-all duration-200 z-20"
+            className="hidden sm:block absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black bg-opacity-50 hover:bg-opacity-70 text-white transition-all duration-200 z-20"
             aria-label="Next slide"
           >
             <ChevronRight className="w-6 h-6" />

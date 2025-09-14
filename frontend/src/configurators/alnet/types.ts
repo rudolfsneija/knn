@@ -11,6 +11,7 @@ export interface QuestionOption {
   label: string;
   value: string;
   description?: string;
+  tooltip?: string;
 }
 
 export interface ValidationRule {
@@ -20,12 +21,20 @@ export interface ValidationRule {
   message?: string;
 }
 
+export interface DualNumberField {
+  id: string;
+  label: string;
+  placeholder?: string;
+  validation?: ValidationRule;
+}
+
 export interface Question {
   id: string;
   title: string;
   description?: string;
-  type: 'multiselect' | 'number' | 'yesno';
+  type: 'multiselect' | 'number' | 'yesno' | 'dual-number';
   options?: QuestionOption[];
+  fields?: DualNumberField[]; // For dual-number type
   validation?: ValidationRule;
   dependencies?: string[]; // IDs of questions this depends on
   showCondition?: (answers: Answers) => boolean;

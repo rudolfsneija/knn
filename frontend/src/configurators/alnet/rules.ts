@@ -6,28 +6,63 @@ import type {
 } from './types';
 import { getProductById } from './products';
 
-// Helper function to calculate total cameras
+// Helper function to calculate total cameras (regular + analytics)
 const calculateTotalCameras = (answers: Answers): number => {
   const cameraTypes = answers.camera_types as string[] || [];
   let totalCameras = 0;
   
   if (cameraTypes.includes('fixed')) {
     totalCameras += (answers.fixed_cameras_quantity as number) || 0;
+    totalCameras += (answers.fixed_cameras_analytics_quantity as number) || 0;
   }
   if (cameraTypes.includes('indoor_fixed')) {
     totalCameras += (answers.indoor_fixed_cameras_quantity as number) || 0;
+    totalCameras += (answers.indoor_fixed_cameras_analytics_quantity as number) || 0;
   }
   if (cameraTypes.includes('ptz_100m')) {
-    totalCameras += (answers.ptz_100m_quantity as number) || 0;
+    totalCameras += (answers.ptz_100m_cameras_quantity as number) || 0;
+    totalCameras += (answers.ptz_100m_cameras_analytics_quantity as number) || 0;
   }
   if (cameraTypes.includes('ptz_180m')) {
-    totalCameras += (answers.ptz_180m_quantity as number) || 0;
+    totalCameras += (answers.ptz_180m_cameras_quantity as number) || 0;
+    totalCameras += (answers.ptz_180m_cameras_analytics_quantity as number) || 0;
   }
   if (cameraTypes.includes('panorama')) {
     totalCameras += (answers.panorama_cameras_quantity as number) || 0;
+    totalCameras += (answers.panorama_cameras_analytics_quantity as number) || 0;
   }
   
   return totalCameras;
+};
+
+// Helper function to calculate total analytics cameras
+const calculateTotalAnalyticsCameras = (answers: Answers): number => {
+  const cameraTypes = answers.camera_types as string[] || [];
+  const functions = answers.system_functions as string[] || [];
+  let totalAnalyticsCameras = 0;
+  
+  // Only count analytics cameras if video_analytics is selected
+  if (!functions.includes('video_analytics')) {
+    return 0;
+  }
+  
+  if (cameraTypes.includes('fixed')) {
+    totalAnalyticsCameras += (answers.fixed_cameras_analytics_quantity as number) || 0;
+  }
+  if (cameraTypes.includes('indoor_fixed')) {
+    totalAnalyticsCameras += (answers.indoor_fixed_cameras_analytics_quantity as number) || 0;
+  }
+  if (cameraTypes.includes('ptz_100m')) {
+    totalAnalyticsCameras += (answers.ptz_100m_cameras_analytics_quantity as number) || 0;
+  }
+  if (cameraTypes.includes('ptz_180m')) {
+    totalAnalyticsCameras += (answers.ptz_180m_cameras_analytics_quantity as number) || 0;
+  }
+  if (cameraTypes.includes('panorama')) {
+    totalAnalyticsCameras += (answers.panorama_cameras_analytics_quantity as number) || 0;
+  }
+  
+  return totalAnalyticsCameras;
 };
 
 // Business rules for Alnet system configuration
@@ -374,33 +409,57 @@ export const ALNET_BUSINESS_RULES: BusinessRule[] = [
       return functions.includes('video_analytics');
     },
     action: (answers: Answers): RecommendationItem[] => {
-      const analyticsCameras = answers.analytics_cameras_quantity as number || 0;
+      const analyticsCameras = calculateTotalAnalyticsCameras(answers);
       if (analyticsCameras <= 0) return [];
       
-      // VCA Pro pricing depends on number of cameras
-      let vcaProduct: LicenseProduct;
+      const recommendations: RecommendationItem[] = [];
+      let remainingCameras = analyticsCameras;
       
-      if (analyticsCameras <= 1) {
-        vcaProduct = getProductById('vca_pro_1ch') as LicenseProduct;
-      } else if (analyticsCameras <= 2) {
-        vcaProduct = getProductById('vca_pro_2ch') as LicenseProduct;
-      } else if (analyticsCameras <= 4) {
-        vcaProduct = getProductById('vca_pro_4ch') as LicenseProduct;
-      } else if (analyticsCameras <= 8) {
-        vcaProduct = getProductById('vca_pro_8ch') as LicenseProduct;
-      } else if (analyticsCameras <= 16) {
-        vcaProduct = getProductById('vca_pro_16ch') as LicenseProduct;
-      } else {
-        // For >16 channels, use the largest available and note that multiple may be needed
-        vcaProduct = getProductById('vca_pro_16ch') as LicenseProduct;
+      // For >16 cameras, we need multiple VCA Pro licenses
+      if (analyticsCameras > 16) {
+        // Start with VCA Pro 16CH licenses for every 16 cameras
+        const vca16Licenses = Math.floor(analyticsCameras / 16);
+        const vca16Product = getProductById('vca_pro_16ch') as LicenseProduct;
+        
+        recommendations.push({
+          product: vca16Product,
+          quantity: vca16Licenses,
+          totalPrice: vca16Product.basePrice * vca16Licenses,
+          reason: `${vca16Licenses}x ${vca16Product.name} videoanalītikai (${vca16Licenses * 16} kameras)`
+        });
+        
+        remainingCameras = analyticsCameras % 16;
       }
       
-      return [{
-        product: vcaProduct,
-        quantity: 1,
-        totalPrice: vcaProduct.basePrice,
-        reason: `${vcaProduct.name} videoanalītikai ${analyticsCameras} kamerām`
-      }];
+      // Handle remaining cameras (≤16)
+      if (remainingCameras > 0) {
+        let vcaProduct: LicenseProduct;
+        
+        if (remainingCameras <= 1) {
+          vcaProduct = getProductById('vca_pro_1ch') as LicenseProduct;
+        } else if (remainingCameras <= 2) {
+          vcaProduct = getProductById('vca_pro_2ch') as LicenseProduct;
+        } else if (remainingCameras <= 4) {
+          vcaProduct = getProductById('vca_pro_4ch') as LicenseProduct;
+        } else if (remainingCameras <= 8) {
+          vcaProduct = getProductById('vca_pro_8ch') as LicenseProduct;
+        } else {
+          vcaProduct = getProductById('vca_pro_16ch') as LicenseProduct;
+        }
+        
+        const reasonSuffix = analyticsCameras > 16 
+          ? `papildu ${remainingCameras} kamerām`
+          : `${analyticsCameras} kamerām`;
+        
+        recommendations.push({
+          product: vcaProduct,
+          quantity: 1,
+          totalPrice: vcaProduct.basePrice,
+          reason: `${vcaProduct.name} videoanalītikai ${reasonSuffix}`
+        });
+      }
+      
+      return recommendations;
     }
   }
 ];

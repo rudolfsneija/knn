@@ -3,8 +3,8 @@ import type { Question, Answers } from './types';
 export const ALNET_QUESTIONS: Question[] = [
   {
     id: 'system_functions',
-    title: 'Kādas sistēmas funkcionalitātes Jums ir nepieciešamas ar videonovērošanas pamatfunkcijām?',
-    description: 'Izvēlieties papildu funkcionalitātes (iespējams arī izvēlēties nevienu no šiem)',
+    title: 'Kādas sistēmas funkcionalitātes Jums ir nepieciešamas papildus videonovērošanas pamatfunkcijām?',
+    description: 'Izvēlieties papildu funkcionalitātes',
     type: 'multiselect',
     options: [
       {
@@ -20,7 +20,8 @@ export const ALNET_QUESTIONS: Question[] = [
       {
         id: 'io_control',
         label: 'Ievad-izvad ierīču pārvaldība',
-        value: 'io_control'
+        value: 'io_control',
+        tooltip: 'I/O analoga vai digitālā tipa ierīces, kuras var sasaistīt ar VN sistēmu, lai reaģētu uz notikumiem, vai reģistrēt tos kā notikumus. Tie varētu būt signāli no analoga sensoriem, digitālām kamerām.'
       },
       {
         id: 'building_management',
@@ -101,22 +102,7 @@ export const ALNET_QUESTIONS: Question[] = [
       message: 'Lūdzu norādiet ievad-izvad ierīču skaitu'
     }
   },
-  {
-    id: 'analytics_cameras_quantity',
-    title: 'Cik kamerām iespējot videoanalītikas funkcionalitāti?',
-    type: 'number',
-    dependencies: ['system_functions'],
-    showCondition: (answers) => {
-      const functions = answers.system_functions;
-      if (!Array.isArray(functions)) return false;
-      return functions.includes('video_analytics');
-    },
-    validation: {
-      required: true,
-      min: 1,
-      message: 'Lūdzu norādiet kameru skaitu videoanalītikai'
-    }
-  },
+
   {
     id: 'camera_types',
     title: 'Kādas kameras vēlaties uzstādīt?',
@@ -154,86 +140,187 @@ export const ALNET_QUESTIONS: Question[] = [
       message: 'Izvēlieties kameru veidus, ja nepieciešamas kameras'
     }
   },
+  
+  // Fixed cameras
   {
-    id: 'fixed_cameras_quantity',
-    title: 'Cik stacionāras kameras vēlaties uzstādīt?',
-    type: 'number',
-    dependencies: ['camera_types'],
+    id: 'fixed_cameras',
+    title: 'Stacionārās kameras',
+    description: 'Norādiet stacionāro kameru skaitu',
+    type: 'dual-number',
+    dependencies: ['camera_types', 'system_functions'],
     showCondition: (answers) => {
       const cameraTypes = answers.camera_types;
       if (!Array.isArray(cameraTypes)) return false;
       return cameraTypes.includes('fixed');
     },
-    validation: {
-      required: true,
-      min: 1,
-      message: 'Lūdzu norādiet stacionāro kameru skaitu'
-    }
+    fields: [
+      {
+        id: 'fixed_cameras_quantity',
+        label: 'Stacionārās kameras',
+        placeholder: '0',
+        validation: {
+          required: true,
+          min: 0,
+          message: 'Norādiet stacionāro kameru skaitu'
+        }
+      },
+      {
+        id: 'fixed_cameras_analytics_quantity',
+        label: 'Ar videoanalītiku',
+        placeholder: '0',
+        validation: {
+          required: true,
+          min: 0,
+          message: 'Norādiet kameru ar analītiku skaitu'
+        }
+      }
+    ]
   },
+  
+  // Indoor fixed cameras
   {
-    id: 'indoor_fixed_cameras_quantity',
-    title: 'Cik iekšā stacionāras kameras vēlaties uzstādīt?',
-    type: 'number',
-    dependencies: ['camera_types'],
+    id: 'indoor_fixed_cameras',
+    title: 'Iekštelpu stacionārās kameras',
+    description: 'Norādiet iekštelpu stacionāro kameru skaitu',
+    type: 'dual-number',
+    dependencies: ['camera_types', 'system_functions'],
     showCondition: (answers) => {
       const cameraTypes = answers.camera_types;
       if (!Array.isArray(cameraTypes)) return false;
       return cameraTypes.includes('indoor_fixed');
     },
-    validation: {
-      required: true,
-      min: 1,
-      message: 'Lūdzu norādiet iekštelpu stacionāro kameru skaitu'
-    }
+    fields: [
+      {
+        id: 'indoor_fixed_cameras_quantity',
+        label: 'Stacionārās kameras',
+        placeholder: '0',
+        validation: {
+          required: true,
+          min: 0,
+          message: 'Norādiet stacionāro kameru skaitu'
+        }
+      },
+      {
+        id: 'indoor_fixed_cameras_analytics_quantity',
+        label: 'Ar videoanalītiku',
+        placeholder: '0',
+        validation: {
+          required: true,
+          min: 0,
+          message: 'Norādiet kameru ar analītiku skaitu'
+        }
+      }
+    ]
   },
+  
+  // PTZ 100m cameras
   {
-    id: 'ptz_100m_quantity',
-    title: 'Cik āra grozāmās (PTZ) kameras līdz 100m vēlaties uzstādīt?',
-    type: 'number',
-    dependencies: ['camera_types'],
+    id: 'ptz_100m_cameras',
+    title: 'PTZ kameras (līdz 100m)',
+    description: 'Norādiet PTZ kameru skaitu',
+    type: 'dual-number',
+    dependencies: ['camera_types', 'system_functions'],
     showCondition: (answers) => {
       const cameraTypes = answers.camera_types;
       if (!Array.isArray(cameraTypes)) return false;
       return cameraTypes.includes('ptz_100m');
     },
-    validation: {
-      required: true,
-      min: 1,
-      message: 'Lūdzu norādiet PTZ kameru (līdz 100m) skaitu'
-    }
+    fields: [
+      {
+        id: 'ptz_100m_cameras_quantity',
+        label: 'PTZ kameras',
+        placeholder: '0',
+        validation: {
+          required: true,
+          min: 0,
+          message: 'Norādiet parasto PTZ kameru skaitu'
+        }
+      },
+      {
+        id: 'ptz_100m_cameras_analytics_quantity',
+        label: 'PTZ ar videoanalītiku',
+        placeholder: '0',
+        validation: {
+          required: true,
+          min: 0,
+          message: 'Norādiet PTZ kameru ar analītiku skaitu'
+        }
+      }
+    ]
   },
+  
+  // PTZ 180m cameras
   {
-    id: 'ptz_180m_quantity',
-    title: 'Cik āra grozāmās (PTZ) kameras līdz 180m vēlaties uzstādīt?',
-    type: 'number',
-    dependencies: ['camera_types'],
+    id: 'ptz_180m_cameras',
+    title: 'PTZ kameras (līdz 180m)',
+    description: 'Norādiet PTZ kameru skaitu',
+    type: 'dual-number',
+    dependencies: ['camera_types', 'system_functions'],
     showCondition: (answers) => {
       const cameraTypes = answers.camera_types;
       if (!Array.isArray(cameraTypes)) return false;
       return cameraTypes.includes('ptz_180m');
     },
-    validation: {
-      required: true,
-      min: 1,
-      message: 'Lūdzu norādiet PTZ kameru (līdz 180m) skaitu'
-    }
+    fields: [
+      {
+        id: 'ptz_180m_cameras_quantity',
+        label: 'PTZ kameras',
+        placeholder: '0',
+        validation: {
+          required: true,
+          min: 0,
+          message: 'Norādiet parasto PTZ kameru skaitu'
+        }
+      },
+      {
+        id: 'ptz_180m_cameras_analytics_quantity',
+        label: 'PTZ ar videoanalītiku',
+        placeholder: '0',
+        validation: {
+          required: true,
+          min: 0,
+          message: 'Norādiet PTZ kameru ar analītiku skaitu'
+        }
+      }
+    ]
   },
+  
+  // Panorama cameras
   {
-    id: 'panorama_cameras_quantity',
-    title: 'Cik iekšā/āra panorāmas kameras vēlaties uzstādīt?',
-    type: 'number',
-    dependencies: ['camera_types'],
+    id: 'panorama_cameras',
+    title: 'Panorāmas kameras',
+    description: 'Norādiet panorāmas kameru skaitu',
+    type: 'dual-number',
+    dependencies: ['camera_types', 'system_functions'],
     showCondition: (answers) => {
       const cameraTypes = answers.camera_types;
       if (!Array.isArray(cameraTypes)) return false;
       return cameraTypes.includes('panorama');
     },
-    validation: {
-      required: true,
-      min: 1,
-      message: 'Lūdzu norādiet panorāmas kameru skaitu'
-    }
+    fields: [
+      {
+        id: 'panorama_cameras_quantity',
+        label: 'Panorāmas kameras',
+        placeholder: '0',
+        validation: {
+          required: true,
+          min: 0,
+          message: 'Norādiet panorāmas kameru skaitu'
+        }
+      },
+      {
+        id: 'panorama_cameras_analytics_quantity',
+        label: 'Panorāmas ar videoanalītiku',
+        placeholder: '0',
+        validation: {
+          required: true,
+          min: 0,
+          message: 'Norādiet panorāmas kameru ar analītiku skaitu'
+        }
+      }
+    ]
   },
+  
   {
     id: 'has_existing_server',
     title: 'Vai Jums jau ir savs videonovērošanas serveris?',

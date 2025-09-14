@@ -40,17 +40,53 @@ router.post('/', async (req, res) => {
     const mailOptions = {
       from: process.env.EMAIL_FROM,
       to: process.env.EMAIL_TO,
-      subject: `Jauns ziņojums no mājaslapas: ${subject}`,
+      subject: `knn.lv - ${subject}`,
       html: `
-        <h2>Jauns kontakta forma ziņojums</h2>
-        <p><strong>Vārds, uzvārds:</strong> ${name}</p>
-        <p><strong>E-pasts:</strong> ${email}</p>
-        ${phone ? `<p><strong>Tālrunis:</strong> ${phone}</p>` : ''}
-        <p><strong>Tēma:</strong> ${subject}</p>
-        <p><strong>Ziņojums:</strong></p>
-        <p>${message.replace(/\n/g, '<br>')}</p>
-        <hr>
-        <p><em>Šis ziņojums ir nosūtīts no KNN mājaslapas kontakta formas.</em></p>
+        <div style="font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; background: #ffffff;">
+          <h2 style="color: #1f2937; margin-bottom: 30px; border-bottom: 3px solid #dc2626; padding-bottom: 10px;">
+            Jauns kontakta ziņojums no mājaslapas
+          </h2>
+          
+          <div style="background: #f8fafc; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #dc2626;">
+            <h3 style="color: #374151; margin-top: 0; margin-bottom: 15px;">Klienta informācija:</h3>
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
+              <div>
+                <strong style="color: #1f2937;">Vārds, uzvārds:</strong><br>
+                <span style="color: #4b5563; font-size: 16px;">${name}</span>
+              </div>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
+              <div>
+                <strong style="color: #1f2937;">E-pasts:</strong><br>
+                <span style="color: #4b5563; font-size: 16px;">${email}</span>
+              </div>
+            </div>
+            ${phone ? `
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
+                <div>
+                  <strong style="color: #1f2937;">Tālrunis:</strong><br>
+                  <span style="color: #4b5563; font-size: 16px;">${phone}</span>
+                </div>
+              </div>
+            ` : ''}
+          </div>
+
+          <div style="background: #fef3c7; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #f59e0b;">
+            <h3 style="color: #92400e; margin-top: 0; margin-bottom: 15px;">Ziņojums:</h3>
+            <div style="margin-bottom: 15px;">
+              <strong style="color: #92400e;">Tēma:</strong>
+              <span style="color: #451a03; font-size: 16px; margin-left: 10px;">${subject}</span>
+            </div>
+            <div style="background: #ffffff; padding: 15px; border-radius: 6px; border: 1px solid #fed7aa;">
+              <div style="color: #451a03; line-height: 1.6; white-space: pre-wrap;">${message}</div>
+            </div>
+          </div>
+
+          <hr style="margin: 30px 0; border: none; border-top: 1px solid #e5e7eb;">
+          <p style="color: #6b7280; font-style: italic; text-align: center; margin: 20px 0;">
+            Šis ziņojums ir nosūtīts no KNN mājaslapas kontakta formas.
+          </p>
+        </div>
       `,
       text: `
         Jauns kontakta forma ziņojums

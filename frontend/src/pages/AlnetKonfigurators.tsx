@@ -19,6 +19,14 @@ export function AlnetKonfigurators() {
     answers: {},
     currentQuestionId: ALNET_QUESTIONS[0].id
   });
+  const [isSubmittingResults, setIsSubmittingResults] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState("");
+  const [showContactForm, setShowContactForm] = useState(false);
+  const [contactInfo, setContactInfo] = useState({
+    name: '',
+    email: '',
+    phone: ''
+  });
 
   // Get visible questions based on current answers
   const getVisibleQuestions = (): Question[] => {
@@ -74,10 +82,50 @@ export function AlnetKonfigurators() {
     }));
   };
 
-  const handleComplete = () => {
-    console.log('Konfiguratora rezulāti:', state.result);
-    alert(`TODO: Nosūtīt uz epastu\nKonfiguratora rezulāti: ${JSON.stringify(state.result, null, 2)}`);
-    navigate('/preces');
+  const handleComplete = async () => {
+    if (!showContactForm) {
+      setShowContactForm(true);
+      return;
+    }
+
+    setIsSubmittingResults(true);
+    setSubmitMessage("");
+
+    try {
+      const totalPrice = state.result?.reduce((sum, item) => sum + item.totalPrice, 0) || 0;
+
+      const response = await fetch('/api/configurator', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userAnswers: state.answers,
+          recommendations: state.result,
+          totalPrice: totalPrice,
+          userEmail: contactInfo.email || null,
+          userName: contactInfo.name || null,
+          userPhone: contactInfo.phone || null
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setSubmitMessage(data.message);
+        // Hide contact form after successful submission
+        setShowContactForm(false);
+      } else {
+        setSubmitMessage(`Kļūda: ${data.error}`);
+      }
+    } catch (error) {
+      console.error('Error submitting configurator results:', error);
+      setSubmitMessage(
+        "Neizdevās nosūtīt konfigurācijas rezultātus. Lūdzu, mēģiniet vēlāk vai sazinieties ar mums tieši pa e-pastu info@knn.lv"
+      );
+    } finally {
+      setIsSubmittingResults(false);
+    }
   };
 
   const canProceed = (): boolean => {
@@ -406,15 +454,110 @@ export function AlnetKonfigurators() {
           </div>
         )}
 
+        {/* Submit status message */}
+        {submitMessage && (
+          <div className={`rounded-lg p-4 mb-6 ${
+            submitMessage.includes('Kļūda:') || submitMessage.includes('Neizdevās')
+              ? 'bg-red-50 border border-red-200'
+              : 'bg-green-50 border border-green-200'
+          }`}>
+            <p className={
+              submitMessage.includes('Kļūda:') || submitMessage.includes('Neizdevās')
+                ? 'text-red-800'
+                : 'text-green-800'
+            }>
+              {submitMessage}
+            </p>
+          </div>
+        )}
+
+        {/* Contact form */}
+        {showContactForm && (
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
+            <h4 className="font-semibold text-blue-900 mb-4 text-lg">
+              Jūsu kontaktinformācija
+            </h4>
+            <p className="text-blue-800 mb-6 text-sm">
+              Lūdzu, ievadiet savus kontaktdatus, lai mēs varētu sazināties ar jums par detalizētu piedāvājumu.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                  Vārds, uzvārds *
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  value={contactInfo.name}
+                  onChange={(e) => setContactInfo(prev => ({ ...prev, name: e.target.value }))}
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                  placeholder="Jānis Bērziņš"
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                  E-pasts *
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  value={contactInfo.email}
+                  onChange={(e) => setContactInfo(prev => ({ ...prev, email: e.target.value }))}
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                  placeholder="janis@uznemums.lv"
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+                  Telefons
+                </label>
+                <input
+                  type="tel"
+                  id="phone"
+                  value={contactInfo.phone}
+                  onChange={(e) => setContactInfo(prev => ({ ...prev, phone: e.target.value }))}
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                  placeholder="+371 20000000"
+                />
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Action buttons */}
         <div className="flex flex-col sm:flex-row gap-4">
           <button
             onClick={handleComplete}
-            className="flex-1 bg-primary-600 hover:bg-primary-600 text-white font-medium py-4 px-6 rounded-lg transition-colors flex items-center justify-center text-lg"
+            disabled={isSubmittingResults || (showContactForm && (!contactInfo.name.trim() || !contactInfo.email.trim()))}
+            className="flex-1 bg-primary-600 hover:bg-primary-700 text-white font-medium py-4 px-6 rounded-lg transition-colors flex items-center justify-center text-lg disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            <Send className="w-6 h-6 mr-3" />
-            Pieprasīt detalizētu piedāvājumu
+            {isSubmittingResults ? (
+              <>
+                <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white mr-3"></div>
+                Sūta rezultātus...
+              </>
+            ) : showContactForm ? (
+              <>
+                <Send className="w-6 h-6 mr-3" />
+                Nosūtīt pieprasījumu
+              </>
+            ) : (
+              <>
+                <Send className="w-6 h-6 mr-3" />
+                Pieprasīt detalizētu piedāvājumu
+              </>
+            )}
           </button>
+          {showContactForm && (
+            <button
+              onClick={() => setShowContactForm(false)}
+              className="flex-1 bg-gray-500 hover:bg-gray-600 text-white font-medium py-4 px-6 rounded-lg transition-colors flex items-center justify-center text-lg"
+            >
+              Atcelt
+            </button>
+          )}
           <button
             onClick={() => navigate('/preces')}
             className="flex-1 bg-gray-600 hover:bg-gray-700 text-white font-medium py-4 px-6 rounded-lg transition-colors flex items-center justify-center text-lg"

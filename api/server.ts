@@ -14,6 +14,7 @@ import aktualitatesRoutes from './routes/aktualitatesRoutes';
 import produktiRoutes from './routes/produktiRoutes';
 import imageRoutes from './routes/imageRoutes';
 import contactRoutes from './routes/contactRoutes';
+import configuratorRoutes from './routes/configuratorRoutes';
 
 // Load environment variables
 if (process.env.NODE_ENV === 'development') {
@@ -59,6 +60,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/aktualitates', aktualitatesRoutes);
 app.use('/api/produkti', produktiRoutes);
 app.use('/api/contact', contactRoutes);
+app.use('/api/configurator', configuratorRoutes);
 app.use('/api', imageRoutes);
 
 // 404 handler - use a more specific pattern instead of *

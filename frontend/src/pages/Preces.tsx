@@ -9,6 +9,7 @@ interface Prece {
   description: string;
   price?: number;
   category?: string;
+  sub_category?: string;
   available: boolean;
   image_url?: string;
   created_at: string;
@@ -36,30 +37,50 @@ interface Prece {
 
 export function Preces() {
   const [preces, setPreces] = useState<Prece[]>([]);
+  const [allPreces, setAllPreces] = useState<Prece[]>([]); // Store all products for filtering
   const [loading, setLoading] = useState(false);
   const [loadingCategories, setLoadingCategories] = useState(true);
   const [categories, setCategories] = useState<string[]>([]);
+  const [subcategories, setSubcategories] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [selectedSubcategory, setSelectedSubcategory] = useState<string | null>(null);
 
   useEffect(() => {
     fetchCategories();
   }, []);
 
-  const fetchPreces = async (category: string) => {
+  const fetchPreces = async (category: string, subcategory?: string) => {
     try {
       setLoading(true);
-      const url = `/api/produkti?category=${encodeURIComponent(category)}`;
+      let url = `/api/produkti?category=${encodeURIComponent(category)}`;
+      if (subcategory) {
+        url += `&sub_category=${encodeURIComponent(subcategory)}`;
+      }
 
       const response = await axios.get(url);
       if (response.data.success) {
-        setPreces(response.data.data);
+        const products = response.data.data;
+        setAllPreces(products); // Store all products
+        setPreces(products); // Display all products initially
+        
+        // Extract unique subcategories from the products
+        const uniqueSubcategories = [...new Set(
+          products
+            .map((product: Prece) => product.sub_category)
+            .filter((subcat: string | undefined) => subcat && subcat.trim() !== '')
+        )].sort() as string[];
+        setSubcategories(uniqueSubcategories);
       } else {
         console.error("API Error:", response.data.error);
         setPreces([]);
+        setAllPreces([]);
+        setSubcategories([]);
       }
     } catch (error) {
       console.error("Error fetching preces:", error);
       setPreces([]);
+      setAllPreces([]);
+      setSubcategories([]);
     } finally {
       setLoading(false);
     }
@@ -82,13 +103,30 @@ export function Preces() {
 
   const handleCategoryClick = (category: string) => {
     setSelectedCategory(category);
+    setSelectedSubcategory(null); // Reset subcategory when changing category
     setPreces([]); // Clear previous products
     fetchPreces(category);
   };
 
   const handleBackToCategories = () => {
     setSelectedCategory(null);
+    setSelectedSubcategory(null);
     setPreces([]);
+    setAllPreces([]);
+    setSubcategories([]);
+  };
+
+  const handleSubcategoryFilter = (subcategory: string | null) => {
+    setSelectedSubcategory(subcategory);
+    
+    if (subcategory === null) {
+      // Show all products in the category
+      setPreces(allPreces);
+    } else {
+      // Filter products by subcategory
+      const filteredProducts = allPreces.filter(product => product.sub_category === subcategory);
+      setPreces(filteredProducts);
+    }
   };
 
   if (loadingCategories) {
@@ -119,7 +157,7 @@ export function Preces() {
               <button
                 key={category}
                 onClick={() => handleCategoryClick(category)}
-                className="bg-white border-2 border-secondary-600 hover:border-secondary-700 rounded-lg p-8 text-center transition-all duration-200 hover:shadow-lg group"
+                className="bg-white border-2 border-primary-500 hover:border-primary-600 rounded-lg p-8 text-center transition-all duration-200 hover:shadow-lg group"
               >
                 <div className="text-2xl font-bold text-gray-900  transition-colors">
                   {category}
@@ -167,18 +205,63 @@ export function Preces() {
               </div>
             )}
 
-            {/* Products grid */}
-            {!loading && preces.length === 0 && (
-              <div className="text-center py-12">
-                <p className="text-gray-600 text-lg">
-                  Nav pieejamas preces kategorijā "{selectedCategory}".
-                </p>
-              </div>
-            )}
+            {/* Products section with sidebar */}
+            <div className="flex flex-col lg:flex-row gap-8">
+              {/* Subcategory filter sidebar - only show if subcategories exist */}
+              {subcategories.length > 0 && (
+                <div className="lg:w-56 flex-shrink-0">
+                  <div className="sticky top-4">
+                    <h3 className="text-sm font-medium text-gray-500 uppercase tracking-wide mb-3">
+                      Filtrēt
+                    </h3>
+                    <div className="space-y-1">
+                      <button
+                        onClick={() => handleSubcategoryFilter(null)}
+                        className={`w-full text-left px-2 py-1.5 text-sm rounded transition-colors ${
+                          selectedSubcategory === null
+                            ? 'text-primary-400 bg-secondary-50 font-medium'
+                            : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                        }`}
+                      >
+                        Viss <span className="text-gray-400">({allPreces.length})</span>
+                      </button>
+                      {subcategories.map((subcategory) => {
+                        const count = allPreces.filter(p => p.sub_category === subcategory).length;
+                        return (
+                          <button
+                            key={subcategory}
+                            onClick={() => handleSubcategoryFilter(subcategory)}
+                            className={`w-full text-left px-2 py-1.5 text-sm rounded transition-colors ${
+                              selectedSubcategory === subcategory
+                                ? 'text-primary-400 bg-secondary-50 font-medium'
+                                : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                            }`}
+                          >
+                            {subcategory} <span className="text-gray-400">({count})</span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+              )}
 
-            {!loading && preces.length > 0 && (
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-                {preces.map((prece) => (
+              {/* Products content */}
+              <div className="flex-1">
+                {!loading && preces.length === 0 && (
+                  <div className="text-center py-12">
+                    <p className="text-gray-600 text-lg">
+                      {selectedSubcategory 
+                        ? `Nav pieejamas preces apakškategorijā "${selectedSubcategory}".`
+                        : `Nav pieejamas preces kategorijā "${selectedCategory}".`
+                      }
+                    </p>
+                  </div>
+                )}
+
+                {!loading && preces.length > 0 && (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    {preces.map((prece) => (
                   <Link
                     key={prece.id}
                     to={`/preces/${prece.id}`}
@@ -204,7 +287,7 @@ export function Preces() {
                     )}
                     <div className="p-6 flex flex-col h-full">
                       <div className="flex items-start justify-between">
-                        <h2 className="text-xl font-semibold text-gray-900 flex-1 min-h-[3rem] leading-6">
+                        <h2 className="text-xl font-semibold text-gray-900 flex-1 min-h-[3rem] leading-6 mb-2">
                           {prece.name}
                         </h2>
                         {!prece.available &&
@@ -218,7 +301,7 @@ export function Preces() {
                       <div className="mt-auto">
                         <div className="flex items-end justify-between">
                           <span className="text-sm text-primary-400 hover:text-primary-500 font-medium">
-                            Skatīt preci →
+                            Skatīt →
                           </span>
                           {prece.price !== undefined && prece.price !== null && (
                             <span className="text-2xl font-bold text-primary-400">
@@ -229,9 +312,11 @@ export function Preces() {
                       </div>
                     </div>
                   </Link>
-                ))}
+                    ))}
+                  </div>
+                )}
               </div>
-            )}
+            </div>
           </>
         )}
 

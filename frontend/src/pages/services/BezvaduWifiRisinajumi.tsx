@@ -14,38 +14,38 @@ export function BezvaduWifiRisinajumi() {
   const klienti = [
     {
       name: 'Rīgas Valstspilsēta',
-      logo: '/logo/rigas-valstspilseta.png', // You can add this later
-      website: 'https://riga.lv',
+      logo: '/logo/ruckus_izvelas/rigas_valstspilseta.png',
+      website: 'https://www.riga.lv',
     },
     {
       name: 'Jūrmalas Valstspilsēta',
-      logo: '/logo/jurmalas-valstspilseta.png', // You can add this later
-      website: 'https://jurmala.lv',
+      logo: '/logo/ruckus_izvelas/jurmalas_valstspilseta.jpeg',
+      website: 'https://www.jurmala.lv',
     },
     {
       name: 'RIX',
-      logo: '/logo/rix.png', // You can add this later
-      website: 'https://rix.lv',
+      logo: '/logo/ruckus_izvelas/rix.png',
+      website: 'https://www.riga-airport.com',
     },
     {
       name: 'Latvijas Republikas Saeima',
-      logo: '/logo/latvijas-saeima.png', // You can add this later
-      website: 'https://saeima.lv',
+      logo: '/logo/ruckus_izvelas/saeima.png',
+      website: 'https://www.saeima.lv',
     },
     {
       name: 'LMT',
-      logo: '/logo/lmt.png', // You can add this later
-      website: 'https://lmt.lv',
+      logo: '/logo/ruckus_izvelas/lmt.png',
+      website: 'https://www.lmt.lv',
     },
     {
       name: 'Jelgavas Tehnoloģiju vidusskola',
-      logo: '/logo/jelgavas-tehnologiju-vidusskola.png', // You can add this later
-      website: 'https://jtv.lv',
+      logo: '/logo/ruckus_izvelas/jelgavas_tehnologiju_vidusskola.jpg',
+      website: 'https://www.jtv.lv',
     },
     {
       name: 'Radisson Blu',
-      logo: '/logo/radisson-blu.png', // You can add this later
-      website: 'https://radissonhotels.com',
+      logo: '/logo/ruckus_izvelas/radisson_blu.png',
+      website: 'https://www.radissonhotels.com',
     },
   ];
 
@@ -272,12 +272,18 @@ export function BezvaduWifiRisinajumi() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {klienti.map((klients, index) => (
-              <div key={index} className="bg-white p-6 rounded-lg shadow-sm text-center">
-                <div className="w-24 h-24 mx-auto mb-4 flex items-center justify-center bg-gray-100 rounded-lg">
+              <a
+                key={index}
+                href={klients.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white p-6 rounded-lg text-center hover:shadow-sm transition-shadow cursor-pointer group"
+              >
+                <div className="w-28 h-28 mx-auto mb-4 flex items-center justify-center rounded-lg">
                   <img
                     src={klients.logo}
                     alt={klients.name}
-                    className="max-w-full max-h-full object-contain"
+                    className="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform"
                     onError={(e) => {
                       // Fallback when image is not found
                       e.currentTarget.style.display = 'none';
@@ -285,10 +291,10 @@ export function BezvaduWifiRisinajumi() {
                     }}
                   />
                 </div>
-                <h3 className="text-sm font-semibold text-gray-900 leading-tight">
+                <h3 className="text-sm font-semibold text-gray-900 leading-tight group-hover:text-primary-600 transition-colors">
                   {klients.name}
                 </h3>
-              </div>
+              </a>
             ))}
           </div>
         </div>

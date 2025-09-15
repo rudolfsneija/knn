@@ -1,53 +1,22 @@
-// Core types for Alnet configurator
-export type AnswerValue = string | number | boolean | string[];
+// ALNET-specific types extending shared types
+import type {
+  Product as BaseProduct,
+  Answers,
+  Question,
+  QuestionOption,
+  ValidationRule,
+  DualNumberField,
+} from '../types';
 
-export interface Answers {
-  [questionId: string]: AnswerValue;
-}
+// Re-export shared types for backward compatibility
+export type { Answers, Question, QuestionOption, ValidationRule, DualNumberField };
 
-// Question types
-export interface QuestionOption {
-  id: string;
-  label: string;
-  value: string;
-  description?: string;
-  tooltip?: string;
-}
-
-export interface ValidationRule {
-  required?: boolean;
-  min?: number;
-  max?: number;
-  message?: string;
-}
-
-export interface DualNumberField {
-  id: string;
-  label: string;
-  placeholder?: string;
-  validation?: ValidationRule;
-}
-
-export interface Question {
-  id: string;
-  title: string;
-  description?: string;
-  type: 'multiselect' | 'number' | 'yesno' | 'dual-number';
-  options?: QuestionOption[];
-  fields?: DualNumberField[]; // For dual-number type
-  validation?: ValidationRule;
-  dependencies?: string[]; // IDs of questions this depends on
-  showCondition?: (answers: Answers) => boolean;
-}
+// ALNET-specific product categories
+export type AlnetProductCategory = 'license' | 'camera' | 'server' | 'addon';
 
 // Product types
-export interface Product {
-  id: string;
-  name: string;
-  description: string;
-  basePrice: number;
-  currency: string;
-  category: 'license' | 'camera' | 'server' | 'addon';
+export interface Product extends BaseProduct {
+  category: AlnetProductCategory;
   specifications?: Record<string, string | number>;
   requirements?: string[];
   maxChannels?: number;
@@ -80,7 +49,7 @@ export interface ServerProduct extends Product {
   ramOptions?: number[];
 }
 
-// Recommendation types
+// ALNET-specific recommendation types
 export interface RecommendationItem {
   product: Product;
   quantity: number;

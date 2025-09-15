@@ -64,7 +64,7 @@ export function BezvaduWifiRisinajumi() {
             title="Sakomplektē savu Wi-Fi"
             description="Izmanto mūsu Ruckus konfigururātoru, un sāc izmantort Ruckus"
             buttonText="Sākt konfigurēt"
-            buttonHref="/alnet-konfigurators"
+            buttonHref="/ruckus-konfigurators"
             backgroundColor="bg-primary-600"
             // backgroundImage="/images/ruckus.png"
           />

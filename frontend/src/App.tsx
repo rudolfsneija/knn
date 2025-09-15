@@ -12,6 +12,7 @@ import { ParUznemumu } from './pages/ParUznemumu';
 import { Sazinai } from './pages/Sazinai';
 import { SearchResults } from './pages/SearchResults';
 import { AlnetKonfigurators } from './pages/AlnetKonfigurators';
+import { RuckusKonfigurators } from './pages/RuckusKonfigurators';
 import { AdminLogin } from './pages/admin/AdminLogin';
 import { AdminDashboard } from './pages/admin/AdminDashboard';
 import { AdminAktualitates } from './pages/admin/AdminAktualitates';
@@ -49,6 +50,7 @@ function App() {
               <Route path="preces" element={<Preces />} />
               <Route path="preces/:id" element={<PreceDetail />} />
               <Route path="alnet-konfigurators" element={<AlnetKonfigurators />} />
+              <Route path="ruckus-konfigurators" element={<RuckusKonfigurators />} />
               <Route path="par-uznemumu" element={<ParUznemumu />} />
               <Route path="sazinai" element={<Sazinai />} />
               <Route path="search" element={<SearchResults />} />

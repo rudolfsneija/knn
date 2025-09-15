@@ -58,8 +58,13 @@ export const ALNET_QUESTIONS: Question[] = [
   },
   {
     id: 'doors_quantity',
-    title: 'Cik durvis?',
+    title: 'Cik durvis nepieciešams aprīkot ar piekļuves kontroles sistēmu?',
+    // description: 'Izvēlieties durvju skaitu, kuras būs aprīkotas ar piekļuves kontroles sistēmu',
     type: 'number',
+    // min: 0,
+    // max: 50,
+    // step: 1,
+    // unit: 'm2',
     dependencies: ['system_functions'],
     showCondition: (answers) => {
       const functions = answers.system_functions;

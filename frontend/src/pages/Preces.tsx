@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { ConfiguratorBanner } from '../components/configurator/ConfiguratorBanner';
+// import { ConfiguratorBanner } from '../components/configurator/ConfiguratorBanner';
+import { Slideshow } from '../components/Slideshow';
+import { precesSlides } from '../data/precesSlides';
 
 interface Prece {
   id: number;
@@ -147,24 +149,35 @@ export function Preces() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Preces</h1>
-          {/* {!selectedCategory && (
-            <p className="text-gray-600">Izvēlieties kategoriju, lai skatītu preces</p>
-          )} */}
         </div>
+
+        {/* Slideshow - only show when choosing categories */}
+        {!selectedCategory && (
+          <div className="mb-12">
+            <Slideshow
+              slides={precesSlides}
+              autoAdvance={false}
+              autoAdvanceInterval={15000}
+              showIndicators={true}
+              showNavigation={true}
+              className="rounded-lg overflow-hidden"
+            />
+          </div>
+        )}
 
         {/* Show categories if no category is selected */}
         {!selectedCategory && categories.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div id="categories" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {categories.map((category) => (
               <button
                 key={category}
                 onClick={() => handleCategoryClick(category)}
-                className="bg-white border-2 border-primary-500 hover:border-primary-600 rounded-lg p-8 text-center transition-all duration-200 hover:shadow-lg group"
+                className="bg-secondary-50 shadow-md rounded-lg p-8 text-center transition-all duration-200 hover:shadow-lg group"
               >
-                <div className="text-2xl font-bold text-gray-900  transition-colors">
+                <div className="text-2xl font-bold text-gray-900 group-hover:text-primary-400 transition-colors">
                   {category}
                 </div>
-                <div className="mt-2 text-gray-600 group-hover:text-primary-700">
+                <div className="mt-2 text-gray-600 font-medium group-hover:text-primary-400 ">
                   Skatīt preces →
                 </div>
               </button>
@@ -187,7 +200,7 @@ export function Preces() {
             </div>
 
             {/* Alnet Configurator Banner - only for video surveillance categories */}
-            {(() => {
+            {/* {(() => {
               console.log('Selected category:', selectedCategory);
               return (
                 selectedCategory?.toLowerCase().includes('video') ||
@@ -203,7 +216,7 @@ export function Preces() {
                 buttonHref="/alnet-konfigurators"
                 backgroundImage="/images/milesight.jpg"
               />
-            )}
+            )} */}
 
             {/* Loading state for products */}
             {loading && (

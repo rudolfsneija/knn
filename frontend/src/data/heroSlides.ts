@@ -1,6 +1,6 @@
-import type { HeroSlide } from '../components/HeroSlideshow';
+import type { Slide } from '../components/Slideshow';
 
-export const heroSlides: HeroSlide[] = [
+export const heroSlides: Slide[] = [
   {
     id: 'configurators',
     title: 'Videonovērošanas konfigurators',
@@ -67,6 +67,23 @@ export const heroSlides: HeroSlide[] = [
       },
     ],
   },
+  // {
+  //   id: 'products-overview',
+  //   title: 'Mūsu produktu klāsts',
+  //   subtitle: 'Atklājiet plašu risinājumu spektru jūsu vajadzībām',
+  //   description:
+  //     'Izvēlieties no dažādām kategorijām - videonovērošanas sistēmas, tīkla aprīkojums, IT drošības risinājumi un daudz kas cits.',
+  //   backgroundColor: '#e3e3e3ff',
+  //   textColor: 'black',
+  //   overlay: true,
+  //   buttons: [
+  //     {
+  //       text: 'Skatīt preces',
+  //       href: '#categories',
+  //       variant: 'primary',
+  //     },
+  //   ],
+  // },
   //   {
   //     id: 'wifi-solutions',
   //     title: 'Wi-Fi risinājumi',

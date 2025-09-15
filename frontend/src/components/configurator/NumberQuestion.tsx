@@ -1,4 +1,4 @@
-import type { Question } from '../../configurators/alnet/types';
+import type { Question } from '../../configurators/types';
 
 interface NumberQuestionProps {
   question: Question;

@@ -8,7 +8,7 @@ export interface SlideButton {
   variant: 'primary' | 'secondary';
 }
 
-export interface HeroSlide {
+export interface Slide {
   id: string;
   title: string;
   subtitle?: string;
@@ -20,8 +20,8 @@ export interface HeroSlide {
   overlay?: boolean; // For dark overlay on background images
 }
 
-interface HeroSlideshowProps {
-  slides: HeroSlide[];
+interface SlideshowProps {
+  slides: Slide[];
   autoAdvance?: boolean;
   autoAdvanceInterval?: number;
   showIndicators?: boolean;
@@ -29,14 +29,14 @@ interface HeroSlideshowProps {
   className?: string;
 }
 
-export function HeroSlideshow({
+export function Slideshow({
   slides,
   autoAdvance = true,
-  autoAdvanceInterval = 10000,
+  autoAdvanceInterval = 15000,
   showIndicators = true,
   showNavigation = true,
   className = '',
-}: HeroSlideshowProps) {
+}: SlideshowProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -84,7 +84,7 @@ export function HeroSlideshow({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       role="region"
-      aria-label="Hero slideshow"
+      aria-label="Slideshow"
     >
       {/* Slide container */}
       <div
@@ -150,7 +150,7 @@ export function HeroSlideshow({
                         className={`px-8 py-3 rounded-lg font-semibold transition-colors inline-block ${
                           button.variant === 'primary'
                             ? 'bg-white text-primary-400 hover:bg-gray-100'
-                            : 'border-2 border-white text-white hover:bg-white hover:text-primary-400'
+                            : 'border-2 border-secondary-50 text-white hover:bg-secondary-50 hover:text-gray-900'
                         }`}
                       >
                         {button.text}
@@ -186,14 +186,14 @@ export function HeroSlideshow({
           {/* Desktop arrows - positioned at center */}
           <button
             onClick={prevSlide}
-            className="hidden sm:block absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black bg-opacity-50 hover:bg-opacity-70 text-white transition-all duration-200 z-20"
+            className="hidden sm:block absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black bg-opacity-30 hover:bg-opacity-40 text-white transition-all duration-200 z-20"
             aria-label="Previous slide"
           >
             <ChevronLeft className="w-6 h-6" />
           </button>
           <button
             onClick={nextSlide}
-            className="hidden sm:block absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black bg-opacity-50 hover:bg-opacity-70 text-white transition-all duration-200 z-20"
+            className="hidden sm:block absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black bg-opacity-30 hover:bg-opacity-40 text-white transition-all duration-200 z-20"
             aria-label="Next slide"
           >
             <ChevronRight className="w-6 h-6" />
@@ -211,7 +211,7 @@ export function HeroSlideshow({
               className={`w-3 h-3 rounded-full transition-all duration-200 ${
                 index === currentSlide
                   ? 'bg-white scale-110'
-                  : 'bg-white bg-opacity-50 hover:bg-opacity-75'
+                  : 'bg-white bg-opacity-30 hover:bg-opacity-40'
               }`}
               aria-label={`Go to slide ${index + 1}`}
             />

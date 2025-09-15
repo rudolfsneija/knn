@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { FileText, GraduationCap, Wifi, Cctv } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { HeroSlideshow } from '../components/HeroSlideshow';
+import { Slideshow } from '../components/Slideshow';
 import { heroSlides } from '../data/heroSlides';
 
 interface Aktualitate {
@@ -64,7 +64,7 @@ export function Home() {
   return (
     <div className="bg-white">
       {/* Hero Slideshow */}
-      <HeroSlideshow
+      <Slideshow
         slides={heroSlides}
         autoAdvance={true}
         autoAdvanceInterval={6000}

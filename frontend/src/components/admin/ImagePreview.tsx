@@ -7,6 +7,7 @@ interface ImagePreviewProps {
   legacyImageUrl?: string;
   isEditing: boolean;
   onImageChange?: (files: FileList | null) => void;
+  onRemoveImage?: (imageId: number) => void;
 }
 
 export function ImagePreview({
@@ -15,6 +16,7 @@ export function ImagePreview({
   legacyImageUrl,
   isEditing,
   onImageChange,
+  onRemoveImage,
 }: ImagePreviewProps) {
   // Cleanup object URLs to prevent memory leaks
   useEffect(() => {
@@ -88,6 +90,16 @@ export function ImagePreview({
                   <span className="absolute top-2 left-2 bg-admin-accent-primary text-white text-xs px-2 py-1 rounded-full font-medium">
                     Galvenais
                   </span>
+                )}
+                {onRemoveImage && (
+                  <button
+                    type="button"
+                    onClick={() => onRemoveImage(image.id)}
+                    className="absolute top-2 right-2 bg-red-600 hover:bg-red-700 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                    title="Dzēst attēlu"
+                  >
+                    ×
+                  </button>
                 )}
                 <p className="text-xs text-admin-text-secondary mt-2 truncate px-1">
                   {image.original_name}

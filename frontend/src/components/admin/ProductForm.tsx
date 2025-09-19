@@ -13,6 +13,7 @@ interface ProductFormProps {
   editingProduct?: Product | null;
   onSubmit: (e: React.FormEvent) => void;
   onCancel: () => void;
+  onRemoveImage?: (imageId: number) => void;
   isSubmitting?: boolean;
 }
 
@@ -26,6 +27,7 @@ export function ProductForm({
   editingProduct,
   onSubmit,
   onCancel,
+  onRemoveImage,
   isSubmitting = false,
 }: ProductFormProps) {
   const isEditing = !!editingProduct;
@@ -160,6 +162,7 @@ export function ProductForm({
           legacyImageUrl={editingProduct?.image_url}
           isEditing={isEditing}
           onImageChange={setSelectedImages}
+          onRemoveImage={onRemoveImage}
         />
       </div>
     </form>

@@ -250,6 +250,36 @@ export function useProductOperations() {
     }
   };
 
+  const removeImage = async (imageId: number) => {
+    try {
+      const token = localStorage.getItem('admin-token');
+      if (!token) {
+        console.error('No authentication token found');
+        handleAuthError();
+        return false;
+      }
+
+      await axios.delete(`/api/images/${imageId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      return true;
+    } catch (error) {
+      console.error('Error removing image:', error);
+      if (
+        axios.isAxiosError(error) &&
+        (error.response?.status === 401 || error.response?.status === 403)
+      ) {
+        handleAuthError();
+      } else {
+        alert('Kļūda dzēšot attēlu');
+      }
+      return false;
+    }
+  };
+
   return {
     products,
     categories,
@@ -263,6 +293,7 @@ export function useProductOperations() {
     fetchProducts,
     saveProduct,
     deleteProduct,
+    removeImage,
     setError,
   };
 }

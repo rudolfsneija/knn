@@ -25,6 +25,7 @@ export function AdminPreces() {
     fetchProducts,
     saveProduct,
     deleteProduct,
+    removeImage,
     setError,
   } = useProductOperations();
 
@@ -114,6 +115,37 @@ export function AdminPreces() {
     } catch (error) {
       console.error('Error deleting product:', error);
       alert('Kļūda dzēšot produktu');
+    }
+  };
+
+  const handleRemoveImage = async (imageId: number) => {
+    if (!window.confirm('Vai tiešām vēlaties dzēst šo attēlu?')) {
+      return;
+    }
+
+    const success = await removeImage(imageId);
+    if (success && editingProduct) {
+      try {
+        // Refresh the editing product data to show updated images
+        const token = localStorage.getItem('admin-token');
+        const response = await fetch(`/api/produkti/${editingProduct.id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const data = await response.json();
+
+        if (data.success) {
+          setEditingProduct(data.data);
+        }
+
+        // Also refresh the products list if we're in a category view
+        if (selectedCategory) {
+          fetchProducts(selectedCategory);
+        }
+      } catch (error) {
+        console.error('Error refreshing product data:', error);
+      }
     }
   };
 
@@ -252,7 +284,7 @@ export function AdminPreces() {
                 </h2>
                 <button
                   onClick={() => {
-                    setFormData({ ...formData, category: selectedCategory, sub_category: '' });
+                    setFormData({ ...formData, category: selectedCategory });
                     setShowForm(true);
                   }}
                   className="admin-button-primary"
@@ -299,6 +331,7 @@ export function AdminPreces() {
                   editingProduct={editingProduct}
                   onSubmit={handleSubmit}
                   onCancel={resetForm}
+                  onRemoveImage={handleRemoveImage}
                   isSubmitting={isSubmitting}
                 />
               </div>

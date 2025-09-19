@@ -5,10 +5,10 @@ export function BezvaduWifiRisinajumi() {
   const pielietojumi = [
     'Konferenču zālēs',
     'Birojos un uzņēmumos',
-    'Viesnīcās un restorānos',
+    'Viesnīcās',
     'Tirdzniecības centros',
-    'Parkos un stadionos',
-    'Izlītības iestādēs',
+    'Parkos un publiskās vietās',
+    'Izglītības iestādēs',
   ];
 
   const klienti = [
@@ -47,6 +47,11 @@ export function BezvaduWifiRisinajumi() {
       logo: '/logo/ruckus_izvelas/radisson_blu.png',
       website: 'https://www.radissonhotels.com',
     },
+    {
+      name: 'AR AGRO',
+      logo: '/logo/ruckus_izvelas/ar_agro.jpeg',
+      website: 'https://aragro.lv/',
+    },
   ];
 
   return (
@@ -65,40 +70,15 @@ export function BezvaduWifiRisinajumi() {
             description="Izmanto mūsu Ruckus konfigururātoru, un sāc izmantort Ruckus"
             buttonText="Sākt konfigurēt"
             buttonHref="/ruckus-konfigurators"
-            backgroundColor="bg-primary-600"
-            // backgroundImage="/images/ruckus.png"
+            // backgroundColor="bg-primary-600"
+            backgroundImage="/images/ruckus.png"
           />
-
-          <p className="text-xl text-gray-600 max-w-4xl mx-auto">
-            Bezvadu tīkla nodrošināšana ar Ruckus tehnoloģiju ir lieliska iespēja uzlabot klientu
-            vai uzņēmuma bezvadu interneta pieredzi. Ruckus ir pazīstams ar savām augstas kvalitātes
-            Wi-Fi risinājumiem, kas nodrošina stabilu savienojumu, lielu jaudu un drošību.
-          </p>
-        </div>
-
-        {/* Ruckus video */}
-        <div className="mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
-            Ruckus stāsts Dziesmu un Deju svētkos
-          </h2>
-          <div className="mx-auto">
-            <div className="relative w-full h-0 pb-[52.75%] rounded-lg overflow-hidden shadow-lg">
-              <iframe
-                className="absolute top-0 left-0 w-full h-full"
-                src="https://www.youtube.com/embed/YJdfjW27gbM?rel=0&modestbranding=1&cc_load_policy=1&hl=lv&cc_lang_pref=lv"
-                title="Ruckus stāsts Dziesmu un Deju svētko"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-              ></iframe>
-            </div>
-          </div>
         </div>
 
         {/* Ruckus Wi-Fi risinājumi */}
         <div className="mb-16 bg-secondary-50 rounded-lg p-8">
           <div className="text-center mb-18">
-            <div className="mx-auto flex items-center justify-center mb-6 max-w-xs">
+            <div className="mx-auto flex items-center justify-center mb-6 max-w-48">
               <img
                 src="/logo/ruckus.webp"
                 alt="Ruckus Networks"
@@ -107,9 +87,11 @@ export function BezvaduWifiRisinajumi() {
             </div>
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Kāpēc izvēlēties Ruckus?</h2>
             <p className="text-gray-600">
-              Ruckus ir ar pieredzi Wi-Fi jomā jau vairāk, nekā 20 gadus, kurai pieder vairāki
-              patenti, tai skaitā Wi-Fi tehnoloģijās, kuras veido stabilu un slodzes izturīgu Wi-Fi
-              risinājumu.
+              Ruckus ir vairāk nekā 20 gadu pieredze Wi-Fi jomā, un uzņēmumam pieder vairākipatenti
+              inovatīvās tehnoloģijās. Šīs inovācijas nodrošina stabilus, uzticamus un augstas
+              slodzes izturīgus bezvadu risinājumus dažādām vajadzībām. Ruckus Wi-Fi nodrošina ātru
+              un drošu tīklu pat vietās ar ļoti lielu lietotāju skaitu, un ir pazīstams visā pasaulē
+              kā augstas kvalitātes Wi-Fi standarts.
             </p>
           </div>
 
@@ -122,8 +104,8 @@ export function BezvaduWifiRisinajumi() {
             </div>
             <h3 className="text-2xl font-bold text-gray-900 mb-4">Pielietojums</h3>
             <p className="text-gray-600 mb-8">
-              Ruckus ir ideāli derīgs vietās, kur ir nepieciešams pastāvīgs un stabils signāls,
-              spējīgs izturēt lielu noslodzi. To var pielietot, piemēram:
+              Ruckus ir ideāla izvēle vietās, kur nepieciešams stabils un drošs Wi-Fi, kas spēj
+              izturēt lielu lietotāju skaitu un intensīvu slodzi. To veiksmīgi izmanto:
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {pielietojumi.map((item, index) => (
@@ -148,8 +130,9 @@ export function BezvaduWifiRisinajumi() {
               </span>
             </div>
             <p className="text-gray-600 text-lg text-center mb-8">
-              Adaptīvās antenas, kas spēj pielāgot signālu optimālā virzienā, izvairoties no
-              traucējumiem un uzlabojot signāla stiprumu, neatkarīgi no ierīces novietojuma telpā.
+              Adaptīvo antenau tehnoloģija, kas automātiski pielāgo signālu optimālajā virzienā uz
+              klientu. Tā samazinot traucējumus un uzlabojot signāla stiprumu neatkarīgi no ierīces
+              signāla saņemšanas leņķa.
             </p>
             <div className="flex justify-center mb-16 px-4">
               <img
@@ -165,8 +148,9 @@ export function BezvaduWifiRisinajumi() {
               </span>
             </div>
             <p className="text-gray-600 text-lg text-center mb-8">
-              Dinamiskā kanālu pārvaldība, kas izvēlas mazāk noslogotus kanālus reālajā laikā, lai
-              maksimizētu caurlaidspēju.
+              Dinamiskā kanālu pārvaldības tehnoloģija, kas reālajā laikā izvēlas mazāk noslogotus
+              kanālus, lai nodrošinātu maksimālu tīkla caurlaidspēju un stabilu savienojumu pat
+              intensīvas slodzes apstākļos.
             </p>
             <div className="flex justify-center mb-8 px-4">
               <img
@@ -176,11 +160,18 @@ export function BezvaduWifiRisinajumi() {
               />
             </div>
             <div className="bg-white p-6 rounded-lg shadow-sm">
-              <p className="text-gray-600 text-lg text-center">
-                Atbalsta un darbojās ar jaunākiem standartiem, piemēram, Wi-Fi 6, Wi-Fi 6E un Wi-Fi
-                7, kas nodrošina lielāku datu pārraidi, zemāku aizkaves laiku, plašāku kanālu
-                izmantošanu.
+              <p className="text-gray-600 text-lg text-center mb-6">
+                Atbalsta jaunākos Wi-Fi standartus — Wi-Fi 6, Wi-Fi 6E un Wi-Fi 7, kas nodrošina
+                ātrāku datu pārraidi, zemāku aizturi un plašāku kanālu izmantošanu stabilākam
+                savienojumam.
               </p>
+              <div className="flex justify-center px-4">
+                <img
+                  src="/logo/wifi7.png"
+                  alt="Wi-FI 7 Certified"
+                  className="rounded-lg w-full max-w-48 h-auto object-contain"
+                />
+              </div>
             </div>
           </div>
 
@@ -193,52 +184,60 @@ export function BezvaduWifiRisinajumi() {
             </div>
             <h3 className="text-2xl font-bold text-gray-900 mb-6">Drošība</h3>
             <p className="text-gray-600 text-lg mb-8">
-              Ruckus piedāvā elastīgas drošības iespējas un to pārvaldību, ieskaitot trafika analīzi
-              un izsekošanu, pieslēgšanās mēģinājumus un citas ar drošības jomu saistītas funkcijas.
+              Ruckus piedāvā plašas un elastīgas drošības iespējas, kas aizsargā tīklu, lietotājus
+              un datus.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 text-left">
               <div className="bg-white p-6 rounded-lg shadow-sm">
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                  Trafika analīze un izsekošana
+                </h3>
+                <p className="text-gray-600 text-sm">
+                  Detalizēta pieslēgšanās mēģinājumu un datplūsmas kontrole palīdz ātri atklāt
+                  drošības riskus.
+                </p>
+              </div>
+
+              <div className="bg-white p-6 rounded-lg shadow-sm">
                 <h3 className="text-lg font-semibold text-gray-900 mb-3">SSH šifrēšana</h3>
                 <p className="text-gray-600 text-sm">
-                  Visi dati, ko piekļuves punkts sūta ir šifrēti ar SSH tuneli. Tas ir noderīgi
-                  situācijā, kad izvietot piekļuves punktus dažādos, arī nepārbaudītos vai nedrošos
-                  tīklos, vai veidot pārvaldību caur Ruckus mākoņserveri.
+                  Visi pārvaldības dati starp piekļuves punktiem un mākoņserveri tiek šifrēti ar SSH
+                  tuneli, nodrošinot drošu darbību arī nepārbaudītos vai nedrošos tīklos.
                 </p>
               </div>
 
               <div className="bg-white p-6 rounded-lg shadow-sm">
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">WPA2/WPA3 & 802.1X</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                  WPA2 / WPA3 un 802.1X ar EAP
+                </h3>
                 <p className="text-gray-600 text-sm">
-                  Ruckus pieejamās šifrēšanas un autentifikācijas iespējas pie bezvadu tīkla WPA2 un
-                  WPA3 un 802.1X ar EAP, ar iespēju diagnosticēt savienojuma kļūdas vai neveiksmīgus
-                  savienojumus.
+                  Jaunāko standartu šifrēšana un autentifikācija, ar iespēju diagnosticēt
+                  neveiksmīgus pieslēgšanās mēģinājumus.
                 </p>
               </div>
 
               <div className="bg-white p-6 rounded-lg shadow-sm">
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">Dinamiskā PSK</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">Dynamic PSK (DPSK)</h3>
                 <p className="text-gray-600 text-sm">
-                  Ruckus pieejama arī dinamiskā PSK (Dynamic Pre-Shared Key), kas nodrošina katram
-                  terminētam lietotājam individuālu paroli un sadali pa VLAN.
+                  Katram lietotājam tiek piešķirta individuāla parole, kas var tikt piesaistīta
+                  noteiktam VLAN, nodrošinot papildu drošību un izolāciju.
                 </p>
               </div>
 
               <div className="bg-white p-6 rounded-lg shadow-sm">
                 <h3 className="text-lg font-semibold text-gray-900 mb-3">Viesu tīkla izolācija</h3>
                 <p className="text-gray-600 text-sm">
-                  Viesu tīklā iekārtas ir izolētas viena no otras un nerada iespēju tikt pie
-                  iestādes lokālajiem resursiem.
+                  Viesu ierīces ir nodalītas viena no otras un nevar piekļūt iekšējiem resursiem.
                 </p>
               </div>
 
               <div className="bg-white p-6 rounded-lg shadow-sm">
                 <h3 className="text-lg font-semibold text-gray-900 mb-3">
-                  Ugunsmūris & URL filtrācija
+                  Iebūvēts ugunsmūris un URL filtrācija
                 </h3>
                 <p className="text-gray-600 text-sm">
-                  Ruckus piedāvā savu ugunsmūri un URL filtrācijas iespēju, kas ļauj mazināt arī
-                  lieko vai nevajadzīgo trafiku.
+                  Samazina lieku vai nevēlamu trafiku, uzlabojot tīkla drošību un kvalitāti.
                 </p>
               </div>
 
@@ -247,16 +246,16 @@ export function BezvaduWifiRisinajumi() {
                   Administratīvā pārvaldība
                 </h3>
                 <p className="text-gray-600 text-sm">
-                  Iekārtu administrēšana ir iespējama arī vairākiem cilvēkiem, ar dažādām
-                  privilēģijām, kā arī autorizācijas iespējām (LDAP, SSO) un iespējama MFA.
+                  Vairāku līmeņu piekļuves tiesības, LDAP/SSO integrācija un MFA atbalsts nodrošina
+                  drošu administrāciju.
                 </p>
               </div>
 
               <div className="bg-white p-6 rounded-lg shadow-sm">
                 <h3 className="text-lg font-semibold text-gray-900 mb-3">Drošības atjauninājumi</h3>
                 <p className="text-gray-600 text-sm">
-                  Visas Ruckus tīkla iekārtas saņem jaunākos atjauninājumus drošības jomā, kas
-                  garantē nepārtrauktu un stabilu darbu pret kiberuzbrukuma mēģinājumiem.
+                  Visas Ruckus ierīces regulāri saņem jaunākos drošības uzlabojumus, kas pasargā no
+                  aktuālajiem kiberdraudiem.
                 </p>
               </div>
             </div>
@@ -296,6 +295,25 @@ export function BezvaduWifiRisinajumi() {
                 </h3>
               </a>
             ))}
+          </div>
+        </div>
+
+        {/* Ruckus video */}
+        <div className="mb-16">
+          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+            Ruckus stāsts Dziesmu un Deju svētkos
+          </h2>
+          <div className="mx-auto">
+            <div className="relative w-full h-0 pb-[52.75%] rounded-lg overflow-hidden shadow-lg">
+              <iframe
+                className="absolute top-0 left-0 w-full h-full"
+                src="https://www.youtube.com/embed/YJdfjW27gbM?rel=0&modestbranding=1&cc_load_policy=1&hl=lv&cc_lang_pref=lv"
+                title="Ruckus stāsts Dziesmu un Deju svētko"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              ></iframe>
+            </div>
           </div>
         </div>
 
@@ -350,16 +368,57 @@ export function BezvaduWifiRisinajumi() {
           <div className="text-center mb-8">
             <h2 className="text-3xl font-bold text-gray-900">Aprīkojuma noma</h2>
           </div>
-          <div className="max-w-4xl mx-auto text-center">
+          <div className="max-w-4xl mx-auto text-center mb-8">
             <p className="text-gray-600 text-lg mb-6">
-              Piedāvājam elastīgu Ruckus aprīkojuma nomas risinājumu uzņēmumiem, kas vēlas izmantot
-              augstas kvalitātes Wi-Fi tehnoloģijas bez lieliem sākotnējiem ieguldījumiem.
+              Pasākumi ar simtiem vai pat tūkstošiem viesu prasa īpaši stabilu Wi-Fi. Ar Ruckus
+              aprīkojuma nomu mēs piedāvājam uzticamu risinājumu – profesionāli uzstādītu un
+              pielāgotu tieši jūsu vajadzībām.
             </p>
-            <p className="text-gray-600">
-              Nomas pakalpojums ietver pilnu tehnisko atbalstu un iespēju pielāgot aprīkojumu
-              atbilstoši mainīgajām vajadzībām. Ideāls risinājums īslaicīgiem projektiem, sezonālām
-              vajadzībām vai pakāpeniskai sistēmas izvēršanai.
+            <p className="text-gray-600 text-lg">
+              Mēs piedāvājam Ruckus Wi-Fi aprīkojuma nomu, nodrošinot visu nepieciešamo, lai jūsu
+              pasākuma viesiem būtu uzticams savienojums.
             </p>
+          </div>
+          <div className="bg-white p-6 rounded-lg shadow-sm text-left">
+            <ul className="space-y-4 text-gray-600">
+              <li className="flex items-start">
+                <span className="text-primary-600 font-bold mr-3">•</span>
+                <span>
+                  <strong className="text-gray-900">Profesionāla uzstādīšana</strong> – mūsu
+                  speciālisti veic piekļuves punktu izvietošanu un konfigurēšanu atbilstoši pasākuma
+                  vajadzībām.
+                </span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-primary-600 font-bold mr-3">•</span>
+                <span>
+                  <strong className="text-gray-900">Pilns tehniskais nodrošinājums</strong> –
+                  piegādājam piekļuves punktus, komutatorus un ugunsmūrus, lai tīkls būtu drošs un
+                  slodzei izturīgs.
+                </span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-primary-600 font-bold mr-3">•</span>
+                <span>
+                  <strong className="text-gray-900">Elastība</strong> – aprīkojuma apjomu pielāgojam
+                  pasākuma mērogam – no nelielām konferencēm līdz tūkstošiem dalībnieku.
+                </span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-primary-600 font-bold mr-3">•</span>
+                <span>
+                  <strong className="text-gray-900">Drošība</strong> – viesu tīkli ar izolāciju,
+                  šifrēta datu pārraide un filtrēšana nodrošina drošu lietošanu bez riskiem.
+                </span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-primary-600 font-bold mr-3">•</span>
+                <span>
+                  <strong className="text-gray-900">Atbalsts pasākuma laikā</strong> – pēc
+                  nepieciešamības nodrošinām tehnisko uzraudzību, lai viss darbotos nevainojami.
+                </span>
+              </li>
+            </ul>
           </div>
         </div>
 
@@ -368,15 +427,37 @@ export function BezvaduWifiRisinajumi() {
           <div className="text-center mb-8">
             <h2 className="text-3xl font-bold text-gray-900">Cenrādis</h2>
           </div>
-          <div className="bg-primary-600 border border-primary-200 rounded-lg p-8 text-center">
-            <div className="w-16 h-16 bg-white text-primary-600 rounded-full mx-auto mb-6 flex items-center justify-center">
-              <span className="text-2xl font-bold">€0</span>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="bg-primary-600 border border-primary-200 rounded-lg p-8 text-center">
+              <div className="w-16 h-16 bg-white text-primary-600 rounded-full mx-auto mb-6 flex items-center justify-center">
+                <span className="text-2xl font-bold">€0</span>
+              </div>
+              <h3 className="text-xl font-semibold text-white mb-4">Bezmaksas konsultācija</h3>
+              <p className="text-white text-sm">
+                Piesakiet Ruckus pakalpojuma konsultāciju, lai iepazītu un izmēģinātu Rukus bezvada
+                tīkla risinājumu.
+              </p>
             </div>
-            <h3 className="text-2xl font-semibold text-white mb-4">Bezmaksas konsultācija</h3>
-            <p className="text-white text-lg max-w-3xl mx-auto">
-              Piesakiet Ruckus pakalpojuma konsultāciju, lai iepazītu un izmēģinātu Ruckus bezvadu
-              tīkla risinājumu.
-            </p>
+
+            <div className="bg-secondary-50 border border-secondary-200 rounded-lg p-8 text-center">
+              <div className="w-16 h-16 bg-primary-600 text-white rounded-full mx-auto mb-6 flex items-center justify-center">
+                <span className="text-lg font-bold">7,5€</span>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">Mēneša īre</h3>
+              <p className="text-gray-600 text-sm">
+                Ruckus piekļuves punkta īre ar mākoņpakalpokumu, par vienu AP.
+              </p>
+            </div>
+
+            <div className="bg-secondary-50 border border-secondary-200 rounded-lg p-8 text-center">
+              <div className="w-16 h-16 bg-primary-600 text-white rounded-full mx-auto mb-6 flex items-center justify-center">
+                <span className="text-lg font-bold">40€+</span>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">Uzstādīšana</h3>
+              <p className="text-gray-600 text-sm">
+                No 40 EUR/st – Projektēšanas un uzstādīšanas izmaksas.
+              </p>
+            </div>
           </div>
         </div>
 

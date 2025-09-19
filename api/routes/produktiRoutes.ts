@@ -223,6 +223,7 @@ router.post('/', requireAuth, async (req, res) => {
       description,
       price,
       category,
+      sub_category,
       image_url,
       gallery_urls,
       specifications,
@@ -240,15 +241,16 @@ router.post('/', requireAuth, async (req, res) => {
     const result = await run(
       `
       INSERT INTO produkti (
-        name, description, price, category, image_url, 
+        name, description, price, category, sub_category, image_url, 
         gallery_urls, specifications, available, featured, admin_id
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `,
       [
         name,
         description || null,
         price || null,
         category || null,
+        sub_category || null,
         image_url || null,
         gallery_urls ? JSON.stringify(gallery_urls) : null,
         specifications ? JSON.stringify(specifications) : null,

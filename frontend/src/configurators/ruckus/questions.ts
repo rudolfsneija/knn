@@ -203,7 +203,6 @@ export const RUCKUS_QUESTIONS: Question[] = [
     max: 2000,
     step: 10,
     unit: 'm²',
-    // tickMarks: [0, 500, 1000, 2500, 5000, 10000],
     validation: {
       required: true,
       min: 1,
@@ -219,6 +218,7 @@ export const RUCKUS_QUESTIONS: Question[] = [
     max: 10,
     step: 0.1,
     unit: 'm',
+    // tickMarks: [2, 2.5, 3, 4, 5, 8, 10],
     dependencies: ['building_type'],
     showCondition: (answers) => {
       const buildingType = answers.building_type;
@@ -238,7 +238,13 @@ export const RUCKUS_QUESTIONS: Question[] = [
     min: 1,
     max: 10,
     step: 1,
-    tickMarks: [1, 7, 14, 20],
+    tickMarks: [1, 2, 4, 6, 8, 10],
+    dependencies: ['building_type'],
+    showCondition: (answers) => {
+      const buildingType = answers.building_type;
+      // Only ask about floors for indoor spaces
+      return Array.isArray(buildingType) && !buildingType.includes('outdoor_area');
+    },
     validation: {
       required: true,
       min: 1,
@@ -261,7 +267,7 @@ export const RUCKUS_QUESTIONS: Question[] = [
   },
   {
     id: 'active_devices',
-    title: 'Cik, provizorsiki, tīklā visām ierīcēm, ikdienā aktīvas vienlaikus?',
+    title: 'Cik, provizorsiki, no visām tīkla ierīcēm ir ikdienā aktīvas vienlaikus?',
     type: 'slider',
     min: 0,
     max: 100,
@@ -270,7 +276,7 @@ export const RUCKUS_QUESTIONS: Question[] = [
     // tickMarks: [10, 250, 500, 750, 1000],
     validation: {
       required: true,
-      min: 10,
+      min: 1,
       message: 'Lūdzu, norādiet ierīču skaitu',
     },
   },

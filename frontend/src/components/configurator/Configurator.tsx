@@ -21,6 +21,7 @@ interface ContactInfo {
   name: string;
   email: string;
   phone: string;
+  comment: string;
 }
 
 interface ConfiguratorHook {

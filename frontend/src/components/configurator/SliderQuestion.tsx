@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import Slider from 'rc-slider';
+import 'rc-slider/assets/index.css';
 import type { Question } from '../../configurators/types';
 
 interface SliderQuestionProps {
@@ -24,11 +26,21 @@ export function SliderQuestion({ question, currentValue, updateAnswer }: SliderQ
     setInputValue(defaultValue.toString());
   }, [currentValue, min, question.id]);
 
-  const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = parseFloat(event.target.value);
+  const handleSliderChange = (value: number | number[]) => {
+    const newValue = Array.isArray(value) ? value[0] : value;
     setLocalValue(newValue);
     setInputValue(newValue.toString());
     updateAnswer(question.id, newValue);
+  };
+
+  const handleBeforeChange = () => {
+    // Add class to body to prevent text selection during drag
+    document.body.classList.add('rc-slider-dragging');
+  };
+
+  const handleChangeComplete = () => {
+    // Remove class from body to re-enable text selection
+    document.body.classList.remove('rc-slider-dragging');
   };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,25 +66,30 @@ export function SliderQuestion({ question, currentValue, updateAnswer }: SliderQ
     }
   };
 
-  // Generate tick marks for better visual guidance
-  const generateTicks = () => {
-    // Use custom tick marks if provided
+  // Generate marks for rc-slider
+  const generateMarks = () => {
+    const marks: { [key: number]: string } = {};
+
     if (question.tickMarks && question.tickMarks.length > 0) {
-      return question.tickMarks.filter((tick) => tick >= min && tick <= max).sort((a, b) => a - b);
+      question.tickMarks.forEach((tick) => {
+        if (tick >= min && tick <= max) {
+          marks[tick] = `${tick}${unit}`;
+        }
+      });
+    } else {
+      // Auto-generate 5 marks
+      const tickCount = 5;
+      const range = max - min;
+      const tickStep = range / (tickCount - 1);
+
+      for (let i = 0; i < tickCount; i++) {
+        const value = Math.round(min + i * tickStep);
+        marks[value] = `${value}${unit}`;
+      }
     }
 
-    // Otherwise, generate automatic tick marks
-    const tickCount = 5;
-    const range = max - min;
-    const tickStep = range / (tickCount - 1);
-
-    return Array.from({ length: tickCount }, (_, i) => {
-      const value = min + i * tickStep;
-      return Math.round(value);
-    });
+    return marks;
   };
-
-  const ticks = generateTicks();
 
   return (
     <div className="space-y-6">
@@ -92,35 +109,19 @@ export function SliderQuestion({ question, currentValue, updateAnswer }: SliderQ
           </div>
         </div>
 
-        {/* Slider */}
-        <div className="w-full max-w-3xl mx-auto">
-          <input
-            type="range"
+        {/* RC Slider */}
+        <div className="w-full max-w-3xl mx-auto px-4 select-none">
+          <Slider
             min={min}
             max={max}
             step={step}
             value={localValue}
             onChange={handleSliderChange}
-            className="w-full custom-slider focus:outline-none focus:ring-2 focus:ring-primary-600"
-            style={
-              {
-                '--slider-progress': `${((localValue - min) / (max - min)) * 100}%`,
-              } as React.CSSProperties
-            }
+            onBeforeChange={handleBeforeChange}
+            onChangeComplete={handleChangeComplete}
+            marks={generateMarks()}
+            included={true}
           />
-
-          {/* Tick marks - using flexbox with negative margin to match slider positioning */}
-          <div className="flex justify-between mt-2 text-xs text-gray-500">
-            {ticks.map((tick, index) => (
-              <div key={index} className="flex flex-col items-center">
-                <div className="w-0.5 h-2 bg-gray-400 mb-1"></div>
-                <span className="whitespace-nowrap">
-                  {tick}
-                  {unit && <span className="ml-0.5">{unit}</span>}
-                </span>
-              </div>
-            ))}
-          </div>
         </div>
 
         {/* Manual input */}
@@ -138,7 +139,7 @@ export function SliderQuestion({ question, currentValue, updateAnswer }: SliderQ
               value={inputValue}
               onChange={handleInputChange}
               onBlur={handleInputBlur}
-              className="w-25 px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-center"
+              className="w-25 px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-secondary-500 focus:border-secondary-500 text-center"
             />
             {unit && <span className="text-sm text-gray-500 font-medium">{unit}</span>}
           </div>

@@ -25,6 +25,7 @@
   --color-primary-hover: #8a1e30; /* Darker red for hover */
   --color-secondary: #cfa768; /* Golden for secondary elements */
   --color-secondary-hover: #b8934f; /* Darker golden for hover */
+  --color-secondary-500: 183, 148, 92; /* RGB values for Tailwind secondary-500 (#b7945c) */
   --color-accent: #d946ef; /* Keep purple accent for special cases */
 }
 
@@ -249,3 +250,179 @@
     background: var(--color-border);
   }
 }
+
+/* RC Slider Custom Styling */
+.rc-slider {
+  position: relative;
+  height: 14px;
+  padding: 5px 0;
+  width: 100%;
+  border-radius: 6px;
+  touch-action: none;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.rc-slider-rail {
+  position: absolute;
+  width: 100%;
+  background-color: #e5e7eb;
+  height: 6px;
+  border-radius: 3px;
+}
+
+.rc-slider-track {
+  position: absolute;
+  left: 0;
+  height: 6px;
+  border-radius: 3px;
+  background-color: #b7945c !important; /* Direct hex color */
+  background: #b7945c !important; /* Fallback */
+}
+
+/* Additional specificity to override rc-slider defaults */
+.rc-slider .rc-slider-track {
+  background-color: #b7945c !important;
+  background: #b7945c !important;
+}
+
+.rc-slider-track-1 {
+  background-color: #b7945c !important;
+  background: #b7945c !important;
+}
+
+/* Even more specific targeting */
+div.rc-slider div.rc-slider-track {
+  background-color: #b7945c !important;
+  background: #b7945c !important;
+}
+
+/* Target any potential inline styles */
+.rc-slider-track[style] {
+  background-color: #b7945c !important;
+  background: #b7945c !important;
+}
+
+.rc-slider-handle {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  border-radius: 50%;
+  border: 2px solid #b7945c !important;
+  background-color: #b7945c !important;
+  margin-top: -7px;
+  touch-action: pan-x;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(183, 148, 92, 0.2) !important;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.rc-slider-dot-active {
+  border-color: #b7945c !important;
+}
+
+.rc-slider-handle:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 0 4px rgba(183, 148, 92, 0.3) !important;
+  transition:
+    transform 0.1s ease,
+    box-shadow 0.1s ease;
+}
+
+.rc-slider-handle:focus {
+  box-shadow: 0 0 0 4px rgba(183, 148, 92, 0.4) !important;
+}
+
+.rc-slider-handle-dragging {
+  box-shadow: 0 0 0 6px rgba(183, 148, 92, 0.3) !important;
+  transition: none !important;
+}
+
+/* Prevent text selection during slider dragging */
+.rc-slider-handle-dragging ~ * {
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+}
+
+/* Alternative approach - disable text selection on body when dragging */
+body.rc-slider-dragging {
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+}
+
+.rc-slider-mark {
+  position: absolute;
+  top: 18px;
+  left: 0;
+  width: 100%;
+  font-size: 12px;
+}
+
+.rc-slider-mark-text {
+  position: absolute;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+  cursor: pointer;
+  color: #6b7280;
+  font-weight: 500;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+.rc-slider-mark-text:hover {
+  color: #b7945c !important;
+}
+
+.rc-slider-mark-text-active {
+  color: #b7945c !important;
+  font-weight: 600;
+}
+
+/* Admin theme overrides for rc-slider */
+/* .admin-theme .rc-slider-rail {
+  background-color: var(--color-border);
+}
+
+.admin-theme .rc-slider-track {
+  background-color: var(--color-admin-accent);
+}
+
+.admin-theme .rc-slider-handle {
+  border-color: var(--color-admin-accent);
+  background-color: var(--color-admin-accent);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.admin-theme .rc-slider-handle:hover {
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.3);
+}
+
+.admin-theme .rc-slider-handle:focus {
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.4);
+}
+
+.admin-theme .rc-slider-handle-dragging {
+  box-shadow: 0 0 0 6px rgba(59, 130, 246, 0.3) !important;
+}
+
+.admin-theme .rc-slider-mark-text {
+  color: var(--color-text-tertiary);
+}
+
+.admin-theme .rc-slider-mark-text:hover,
+.admin-theme .rc-slider-mark-text-active {
+  color: var(--color-admin-accent);
+} */

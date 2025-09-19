@@ -8,7 +8,7 @@ export function useAlnetConfigurator() {
     questions: ALNET_QUESTIONS,
     shouldShowQuestion,
     calculateRecommendations,
-    apiEndpoint: '/api/configurator/alnet',
+    apiEndpoint: '/api/configurator',
     resultsProcessor: AlnetResultsProcessor,
     notes: [
       'Cenas ir orientējošas un attiecas tikai uz licencēm',

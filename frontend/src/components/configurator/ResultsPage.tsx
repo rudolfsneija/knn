@@ -9,9 +9,10 @@ interface ResultsPageProps {
     name: string;
     email: string;
     phone: string;
+    comment: string;
   };
   isSubmittingResults: boolean;
-  updateContactInfo: (field: 'name' | 'email' | 'phone', value: string) => void;
+  updateContactInfo: (field: 'name' | 'email' | 'phone' | 'comment', value: string) => void;
   handleComplete: () => void;
   setShowContactForm: (show: boolean) => void;
   navigate: (path: string) => void;
@@ -144,8 +145,7 @@ export function ResultsPage({
         <div className="bg-info-50 border border-info-200 rounded-lg p-6">
           <h4 className="font-semibold text-info-900 mb-4 text-lg">Jūsu kontaktinformācija</h4>
           <p className="text-info-800 mb-6 text-sm">
-            Lūdzu, ievadiet savus kontaktdatus, lai mēs varētu sazināties ar jums par detalizētu
-            piedāvājumu.
+            Lūdzu, ievadiet savus kontaktdatus, lai mēs varētu sazināties ar jums.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
@@ -186,6 +186,18 @@ export function ResultsPage({
                 className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
               />
             </div>
+          </div>
+          <div className="mt-4">
+            <label htmlFor="comment" className="block text-sm font-medium text-gray-700 mb-2">
+              Komentārs
+            </label>
+            <textarea
+              id="comment"
+              value={contactInfo.comment}
+              onChange={(e) => updateContactInfo('comment', e.target.value)}
+              rows={2}
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 resize-none"
+            />
           </div>
         </div>
       )}

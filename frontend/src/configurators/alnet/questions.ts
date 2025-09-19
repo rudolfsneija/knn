@@ -118,8 +118,13 @@ export const ALNET_QUESTIONS: Question[] = [
     options: [
       {
         id: 'fixed',
-        label: 'Stacionārās',
+        label: 'Āra stacionārās',
         value: 'fixed',
+      },
+      {
+        id: 'indoor_fixed',
+        label: 'Iekšā stacionārās',
+        value: 'indoor_fixed',
       },
       {
         id: 'ptz_100m',
@@ -130,11 +135,6 @@ export const ALNET_QUESTIONS: Question[] = [
         id: 'ptz_180m',
         label: 'Āra grozāmās (PTZ) (līdz 180m)',
         value: 'ptz_180m',
-      },
-      {
-        id: 'indoor_fixed',
-        label: 'Iekšā stacionārās',
-        value: 'indoor_fixed',
       },
       {
         id: 'panorama',

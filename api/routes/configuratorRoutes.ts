@@ -6,7 +6,15 @@ const router = express.Router();
 // POST /api/configurator - Send configurator results email
 router.post('/', async (req, res) => {
   try {
-    const { userAnswers, recommendations, totalPrice, userEmail, userName, userPhone } = req.body;
+    const {
+      userAnswers,
+      recommendations,
+      totalPrice,
+      userEmail,
+      userName,
+      userPhone,
+      userComment,
+    } = req.body;
 
     // Validate required fields
     if (!recommendations || !Array.isArray(recommendations)) {
@@ -125,7 +133,7 @@ router.post('/', async (req, res) => {
           </h2>
           
           ${
-            userName || userEmail || userPhone
+            userName || userEmail || userPhone || userComment
               ? `
             <div style="background: #f8fafc; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #dc2626;">
               <h3 style="color: #374151; margin-top: 0; margin-bottom: 15px;">Klienta informācija:</h3>
@@ -165,6 +173,18 @@ router.post('/', async (req, res) => {
               `
                   : ''
               }
+              ${
+                userComment
+                  ? `
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
+                  <div>
+                    <strong style="color: #1f2937;">Komentārs:</strong><br>
+                    <span style="color: #4b5563; font-size: 16px; white-space: pre-wrap;">${userComment}</span>
+                  </div>
+                </div>
+              `
+                  : ''
+              }
             </div>
           `
               : ''
@@ -176,10 +196,7 @@ router.post('/', async (req, res) => {
           </div>
 
           <div style="background: #f0fdf4; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #059669;">
-            <h3 style="color: #059669; margin-top: 0; margin-bottom: 15px;">Orientējošā cena (licences): €${totalPrice || 0}</h3>
-            <p style="color: #065f46; font-size: 14px; margin: 5px 0 0 0;">
-              *Cena attiecas tikai uz licencēm. Kameras un serveri tiks piedāvāti pēc detalizētas specifikācijas.
-            </p>
+            <h3 style="color: #059669; margin-top: 0; margin-bottom: 15px;">Orientējošā cena: €${totalPrice || 0}</h3>
           </div>
 
           <div style="background: #ede9fe; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #8b5cf6;">
@@ -199,10 +216,10 @@ router.post('/', async (req, res) => {
         Jauns videonovērošanas konfigurācijas pieprasījums
 
         ${
-          userName || userEmail || userPhone
+          userName || userEmail || userPhone || userComment
             ? `
 Klienta informācija:
-${userName ? `Vārds: ${userName}\n` : ''}${userEmail ? `E-pasts: ${userEmail}\n` : ''}${userPhone ? `Tālrunis: ${userPhone}\n` : ''}
+${userName ? `Vārds: ${userName}\n` : ''}${userEmail ? `E-pasts: ${userEmail}\n` : ''}${userPhone ? `Tālrunis: ${userPhone}\n` : ''}${userComment ? `Komentārs: ${userComment}\n` : ''}
         `
             : ''
         }
@@ -210,8 +227,7 @@ ${userName ? `Vārds: ${userName}\n` : ''}${userEmail ? `E-pasts: ${userEmail}\n
 Konfigurācijas rezultāti:
 ${recommendationsText}
 
-Orientējošā cena (licences): €${totalPrice || 0}
-*Cena attiecas tikai uz licencēm. Kameras un serveri tiks piedāvāti pēc detalizētas specifikācijas.
+Orientējošā cena: €${totalPrice || 0}
 
 Klienta atbildes uz jautājumiem:
 ${answersText}
@@ -226,8 +242,7 @@ ${answersText}
 
     res.json({
       success: true,
-      message:
-        'Konfigurācijas rezultāti ir veiksmīgi nosūtīti! Mēs sazināsimies ar jums drīzumā ar detalizētu piedāvājumu.',
+      message: 'Konfigurācijas rezultāti ir veiksmīgi nosūtīti! Mēs sazināsimies ar Jums drīzumā.',
     });
   } catch (error) {
     console.error('Error sending configurator email:', error);

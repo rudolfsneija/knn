@@ -18,6 +18,7 @@ interface ContactInfo {
   name: string;
   email: string;
   phone: string;
+  comment: string;
 }
 
 export function useConfigurator(config: ConfiguratorConfig) {
@@ -34,6 +35,7 @@ export function useConfigurator(config: ConfiguratorConfig) {
     name: '',
     email: '',
     phone: '',
+    comment: '',
   });
 
   // Get visible questions based on current answers
@@ -116,6 +118,7 @@ export function useConfigurator(config: ConfiguratorConfig) {
           userEmail: contactInfo.email || null,
           userName: contactInfo.name || null,
           userPhone: contactInfo.phone || null,
+          userComment: contactInfo.comment || null,
         }),
       });
 
